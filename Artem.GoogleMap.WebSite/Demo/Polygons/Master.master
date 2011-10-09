@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Demo/Site.Master" AutoEventWireup="false"
+    CodeBehind="Master.master.cs" Inherits="Artem.Google.Web.Demo.Polygons.Master" %>
+
+<asp:Content ID="menuContent" ContentPlaceHolderID="menu" runat="server">
+    <li><a href="/demo/default.aspx">demo-home</a></li>
+    <li><a href="/demo/maps/default.aspx">maps</a></li>
+    <li><a href="/demo/markers/default.aspx">markers</a></li>
+    <li><a href="/demo/polylines/default.aspx">polylines</a></li>
+    <li class="current"><a href="/demo/polygons/default.aspx">polygons</a></li>
+    <li><a href="/demo/directions/default.aspx">directions</a></li>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Polygons
+    </h3>
+    <ul>
+        <li><a href="/demo/polygons/Default.aspx">&raquo; GooglePolygon</a></li>
+        <li><a href="/demo/polygons/GoogleCirclePolygon.aspx">&raquo; GoogleCirclePolygon</a></li>
+        <li><a href="/demo/polygons/ClientEvents.aspx">&raquo; Client Events</a></li>
+        <li><a href="/demo/polygons/EnableDrawing.aspx">&raquo; Enable Drawing</a></li>
+        <li><a href="/demo/polygons/EnableEditing.aspx">&raquo; Enable Editing</a></li>
+    </ul>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="main" ID="mainContent" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

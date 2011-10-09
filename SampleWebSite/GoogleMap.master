@@ -1,0 +1,128 @@
+﻿<%@ Master Language="C#" AutoEventWireup="false" CodeFile="GoogleMap.master.cs" Inherits="GoogleMap" %>
+
+<%@ Register Src="controls/GoogleTracker.ascx" TagName="GoogleTracker" TagPrefix="site" %>
+<%@ Register Src="controls/SiteFooter.ascx" TagName="SiteFooter" TagPrefix="site" %>
+<%@ Register Src="controls/SiteHeader.ascx" TagName="SiteHeader" TagPrefix="site" %>
+<%@ Register Src="controls/SideAds.ascx" TagName="SideAds" TagPrefix="site" %>
+<%@ Register Src="controls/SideMenu.ascx" TagName="SideMenu" TagPrefix="site" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="phHead" runat="server">
+        <title>GoogleMap Control - Sample Website</title>
+    </asp:ContentPlaceHolder>
+    <script src="/jscripts/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="/jscripts/facebox/facebox.min.js" type="text/javascript"></script>
+    <link href="/jscripts/facebox/facebox.css" rel="stylesheet" type="text/css" />
+    <meta name="verify-v1" content="d/XtSTOIEcU7zo6CaqDgL/4IaCiuWdPBAR2gn0228dk=" />
+    <%--
+        FIX: Wrong latlng value in click handler with IE8 
+        http://googlemap.codeplex.com/Thread/View.aspx?ThreadId=54217
+    --%>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+</head>
+<body>
+    <form id="siteForm" runat="server">
+    <asp:ScriptManager ID="GoogleScriptManager" runat="server" />
+    <site:SiteHeader ID="ctrSiteHeader" runat="server" />
+    <div id="page">
+        <b class="wrapper"><b class="wrapper1"><b></b></b><b class="wrapper2"><b></b></b><b
+            class="wrapper3"></b><b class="wrapper4"></b><b class="wrapper5"></b></b>
+        <div class="wrapperfg clearfix">
+            <div id="left">
+                <div id="left-box">
+                    <a href="/">&raquo; Home</a>
+                    <hr style="visibility: hidden;" />
+                    <site:SideMenu ID="sideMenu" runat="server" />
+                </div>
+            </div>
+            <div id="right">
+                <div id="right-box">
+                    <site:SideAds ID="sideAds" runat="server" />
+                </div>
+            </div>
+            <div id="content">
+                <div id="content-box">
+                    <asp:ContentPlaceHolder ID="phContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <hr style="visibility: hidden;" />
+                    <%-- DESCRIPTION --%>
+                    <asp:Panel ID="description_Header" runat="server" Style="cursor: pointer;">
+                        <div class="panel-heading">
+                            <asp:Image ID="description_ToggleImage" runat="server" ImageUrl="./images/collapse.jpg"
+                                AlternateText="collapse" />
+                            Description
+                        </div>
+                    </asp:Panel>
+                    <asp:Panel ID="description_Content" runat="server" Style="overflow: hidden;" CssClass="panel-content">
+                        <asp:ContentPlaceHolder ID="phDescription" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </asp:Panel>
+                    <%-- PROPERTIES --%>
+                    <asp:Panel ID="properties_Header" runat="server" Style="cursor: pointer;">
+                        <div class="panel-heading">
+                            <asp:Image ID="properties_ToggleImage" runat="server" ImageUrl="./images/collapse.jpg"
+                                AlternateText="collapse" />
+                            Properties
+                        </div>
+                    </asp:Panel>
+                    <asp:Panel ID="properties_Content" runat="server" Style="overflow: hidden;" CssClass="panel-content">
+                        <asp:ContentPlaceHolder ID="phProperties" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </asp:Panel>
+                    <%-- METHODS(ACTIONS) --%>
+                    <asp:Panel ID="actions_Header" runat="server" Style="cursor: pointer;">
+                        <div class="panel-heading">
+                            <asp:Image ID="actions_ToggleImage" runat="server" ImageUrl="./images/collapse.jpg"
+                                AlternateText="collapse" />
+                            Methods(Actions)
+                        </div>
+                    </asp:Panel>
+                    <asp:Panel ID="actions_Content" runat="server" Style="overflow: hidden;" CssClass="panel-content">
+                        <asp:ContentPlaceHolder ID="phActions" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </asp:Panel>
+                    <%-- KNOWN ISSUES --%>
+                    <asp:Panel ID="issues_Header" runat="server" Style="cursor: pointer;">
+                        <div class="panel-heading">
+                            <asp:Image ID="issues_ToggleImage" runat="server" ImageUrl="./images/collapse.jpg"
+                                AlternateText="collapse" />
+                            Known Issues
+                        </div>
+                    </asp:Panel>
+                    <asp:Panel ID="issues_Content" runat="server" Style="overflow: hidden;" CssClass="panel-content">
+                        <asp:ContentPlaceHolder ID="phIssues" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </asp:Panel>
+                    <%-- EXTENDERS --%>
+                    <ajax:CollapsiblePanelExtender ID="cpeDescription" runat="server" CollapsedImage="./images/collapse.jpg"
+                        ExpandedImage="./images/expand.jpg" TargetControlID="description_Content" ExpandControlID="description_Header"
+                        CollapseControlID="description_Header" Collapsed="false" ImageControlID="description_ToggleImage" />
+                    <ajax:CollapsiblePanelExtender ID="cpeProperties" runat="server" CollapsedImage="./images/collapse.jpg"
+                        ExpandedImage="./images/expand.jpg" TargetControlID="properties_Content" ExpandControlID="properties_Header"
+                        CollapseControlID="properties_Header" Collapsed="true" ImageControlID="properties_ToggleImage" />
+                    <ajax:CollapsiblePanelExtender ID="cpeActions" runat="server" CollapsedImage="./images/collapse.jpg"
+                        ExpandedImage="./images/expand.jpg" TargetControlID="actions_Content" ExpandControlID="actions_Header"
+                        CollapseControlID="actions_Header" Collapsed="true" ImageControlID="actions_ToggleImage" />
+                    <ajax:CollapsiblePanelExtender ID="cpeIssues" runat="server" CollapsedImage="./images/collapse.jpg"
+                        ExpandedImage="./images/expand.jpg" TargetControlID="issues_Content" ExpandControlID="issues_Header"
+                        CollapseControlID="issues_Header" Collapsed="true" ImageControlID="issues_ToggleImage" />
+                </div>
+            </div>
+        </div>
+        <b class="wrapper"><b class="wrapper5"></b><b class="wrapper4"></b><b class="wrapper3">
+        </b><b class="wrapper2"><b></b></b><b class="wrapper1"><b></b></b></b>
+        <site:SiteFooter ID="SiteFooter1" runat="server" />
+    </div>
+    </form>
+    <site:GoogleTracker ID="googleTracker" runat="server" />
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("pre").click(function (e) {
+                jQuery.facebox($(e.target).clone());
+            });
+        });
+    </script>
+</body>
+</html>

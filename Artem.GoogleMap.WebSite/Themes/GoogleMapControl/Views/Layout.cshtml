@@ -1,0 +1,93 @@
+﻿@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : ""; }).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+}
+@{
+    /* Global includes for the theme
+    ***************************************************************/
+
+    SetMeta("X-UA-Compatible", "IE=edge,chrome=1");
+    Style.Include("http://fonts.googleapis.com/css?family=Lobster&subset=latin");
+    Style.Include("site.css");
+    Style.Include("grid960.css");
+
+    /* Some useful shortcuts or settings
+    ***************************************************************/
+
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+    /* Inserting some ad hoc shapes
+    ***************************************************************/
+
+    //WorkContext.Layout.Header.Add(New.Branding(), "5"); // Site name and link to the home page
+    WorkContext.Layout.Footer.Add(New.BadgeOfHonor(), "5"); // Powered by Orchard
+    WorkContext.Layout.Footer.Add(New.User(), "10"); // Login and dashboard links
+
+    /* Last bit of code to prep the layout wrapper
+    ***************************************************************/
+
+    Model.Id = "layout-wrapper";
+    var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
+}
+<div id="header">
+    <h1>
+        <a href="@Href("~/")">ASP.NET GoogleMap Control</a>
+    </h1>
+    @if (Model.Navigation != null) {
+        @Zone(Model.Navigation)
+    }
+@*<ul id="menu">
+        <li class="active"><a href="@Href("~/about")">about</a></li>
+        <li><a href="http://googlemap.codeplex.com/">project</a></li>
+        <li><a href="@Href("~/demo")">demo</a></li>
+        <li><a href="@Href("~/docs")">api docs</a></li>
+        <li><a href="@Href("~/donate")">donate</a></li>
+        <li><a href="@Href("~/contact")">contact</a></li>
+    </ul>*@
+</div>
+<div id="teaser">
+    <div class="wrap">
+        <div id="image">
+        </div>
+        <div class="box">
+            <h2>
+                Welcome to <em title="Wraps Google Maps API as ASP.NET custom control">GogleMap Control</em></h2>
+            <p>
+                The GoogleMap Control project wraps Google Maps API as ASP.NET Custom Control, providing
+                an easy and fast way of adding Google Maps in your ASP.NET pages with "Zero-Written-JavaScript"
+                code.<br />
+                GoogleMap Control includes many features (markers, polyline, poligons, directions)
+                and gives you almost all Google Maps API functionality in enjoyable ASP.NET way
+                of coding.
+            </p>
+        </div>
+    </div>
+</div>
+<div id="bar">
+    <div class="wrap">
+        <a class="step" href="http://googlemap.codeplex.com/releases" target="_blank">1<span>download</span></a>
+        <a class="step" href="http://googlemap.codeplex.com/wikipage?title=Installation&referringTitle=Documentation"
+            target="_blank">2 <span>setup</span></a> <a class="step" href="http://googlemap.codeplex.com/documentation"
+                target="_blank">3<span>get started</span></a>
+    </div>
+</div>
+<div class="wrap">
+    @if (Model.Content != null) {
+        <div id="content" class="group">
+            @Zone(Model.Content)
+        </div>
+    }
+</div>
+<div id="footer">
+    <p class="right">
+        Powered by <a href="http://www.orchardproject.net/">Orchard</a>. Design by <a href="http://www.solucija.com/">
+            Luka Cvrk</a>
+    </p>
+    <p>
+        &copy; Copyright @DateTime.Now.Year <a href="http://artembg.com/">Velio Ivanov</a>
+    </p>
+</div>

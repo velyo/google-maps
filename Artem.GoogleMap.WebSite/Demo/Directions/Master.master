@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Demo/Site.Master" AutoEventWireup="false"
+    CodeBehind="Master.master.cs" Inherits="Artem.Google.Web.Demo.Directions.Master" %>
+
+<asp:Content ID="menuContent" ContentPlaceHolderID="menu" runat="server">
+    <li><a href="/demo/default.aspx">demo-home</a></li>
+    <li><a href="/demo/maps/default.aspx">maps</a></li>
+    <li><a href="/demo/markers/default.aspx">markers</a></li>
+    <li><a href="/demo/polylines/default.aspx">polylines</a></li>
+    <li><a href="/demo/polygons/default.aspx">polygons</a></li>
+    <li class="current"><a href="/demo/directions/default.aspx">directions</a></li>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        GoogleDirections
+    </h3>
+    <ul>
+        <li><a href="/demo/directions/Default.aspx">&raquo; GoogleDirection</a></li>
+        <li><a href="/demo/directions/Events.aspx">&raquo; Events</a></li>
+    </ul>
+</asp:Content>
+<asp:Content ID="headContent" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

@@ -1,0 +1,4 @@
+﻿<artem:GoogleMap runat="server" Width="634px" Height="600px" BorderStyle="Solid" BorderColor="#999999" BorderWidth="3" ZoomPanType="Large3D">
+</artem:GoogleMap>
+<artem:GoogleMap SkinID="InTab" runat="server" Width="616px" Height="600px" BorderStyle="Solid" BorderColor="#999999" BorderWidth="3" ZoomPanType="Large3D">
+</artem:GoogleMap>

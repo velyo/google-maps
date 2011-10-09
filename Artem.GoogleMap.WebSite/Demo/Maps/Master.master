@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Demo/Site.Master" AutoEventWireup="false"
+    CodeBehind="Master.master.cs" Inherits="Artem.Google.Web.Demo.Maps.Master" %>
+
+<asp:Content ID="menuContent" ContentPlaceHolderID="menu" runat="server">
+    <li><a href="/demo/default.aspx">demo-home</a></li>
+    <li class="current"><a href="/demo/maps/default.aspx">maps</a></li>
+    <li><a href="/demo/markers/default.aspx">markers</a></li>
+    <li><a href="/demo/polylines/default.aspx">polylines</a></li>
+    <li><a href="/demo/polygons/default.aspx">polygons</a></li>
+    <li><a href="/demo/directions/default.aspx">directions</a></li>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Maps
+    </h3>
+    <ul>
+        <li><a href="/demo/maps/Default.aspx">&raquo; Default</a></li>
+        <li><a href="/demo/maps/Appearance.aspx">&raquo; Appearance</a></li>
+        <li><a href="/demo/maps/Behavior.aspx">&raquo; Behavior</a></li>
+        <li><a href="/demo/maps/ClientEvents.aspx">&raquo; Client Events</a></li>
+        <li><a href="/demo/maps/CaptureClick.aspx">&raquo; Capture Click</a></li>
+        <li><a href="/demo/maps/ClientUpdate.aspx">&raquo; Client Update</a></li>
+        <li><a href="/demo/maps/DataBinding.aspx">&raquo; Data Binding</a></li>
+        <li><a href="/demo/maps/DataBound.aspx">&raquo; Data Bound</a></li>
+        <li><a href="/demo/maps/InTabPanel.aspx">&raquo; Inside TabPanel</a></li>
+        <li><a href="/demo/maps/InUpdatePanel.aspx">&raquo; Inside UpdatePanel</a></li>
+        <li><a href="/demo/maps/ZoomPanType.aspx">&raquo; ZoomPanType</a></li>
+        <li><a href="/demo/maps/StreetView.aspx">&raquo; StreetView</a></li>
+        <li><a href="/demo/maps/PostbackPersistence.aspx">&raquo; Postback Persistence</a></li>
+    </ul>
+</asp:Content>
+<asp:Content ID="headContent" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

@@ -1,0 +1,39 @@
+# Ignore file for Mercurial
+
+# use glob syntax
+syntax: glob
+
+# Ignore files
+*.obj
+*.user
+*.aps
+*.pch
+*.vssscc
+*.vspscc
+*.scc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.lib
+*.srb
+[Bb]in
+[Oo]bj
+[Dd]ebug*/
+[Rr]elease*/
+[Dd]ebug*/*.exe
+[Rr]elease*/*.exe
+[Dd]ebug*/*.dll
+[Rr]elease*/*.dll
+[Dd]ebug*/*.pdb
+[Rr]elease*/*.pdb
+_ReSharper*/
+[Tt]est[Rr]esult*
+[Bb]uild[Ll]og.*
+*.[Pp]ublish.xml
