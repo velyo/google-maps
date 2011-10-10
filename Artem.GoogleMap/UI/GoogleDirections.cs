@@ -17,25 +17,25 @@ namespace Artem.Google.UI {
     [DataContract]
     public class GoogleDirections {
 
-        #region Fields  ///////////////////////////////////////////////////////////////////////////
+        //#region Fields  ///////////////////////////////////////////////////////////////////////////
 
-        IList<string> _actions;
+        //IList<string> _actions;
 
-        #endregion
+        //#endregion
 
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Properties
 
-        /// <summary>
-        /// Gets or sets the actions of the polygon.
-        /// </summary>
-        /// <value>The actions.</value>
-        protected internal IList<string> Actions {
-            get {
-                if (_actions == null)
-                    _actions = new List<string>();
-                return _actions;
-            }
-        }
+        ///// <summary>
+        ///// Gets or sets the actions of the polygon.
+        ///// </summary>
+        ///// <value>The actions.</value>
+        //protected internal IList<string> Actions {
+        //    get {
+        //        if (_actions == null)
+        //            _actions = new List<string>();
+        //        return _actions;
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets a value indicating whether [avoid highways].
@@ -133,7 +133,7 @@ namespace Artem.Google.UI {
 
         #endregion
 
-        #region Construct  //////////////////////////////////////////////////////////////
+        #region Ctor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GoogleDirections"/> class.
@@ -182,9 +182,6 @@ namespace Artem.Google.UI {
         public GoogleDirections()
             : this(null, null, null, false) {
         }
-        #endregion
-
-        #region Methods /////////////////////////////////////////////////////////////////
         #endregion
     }
 }

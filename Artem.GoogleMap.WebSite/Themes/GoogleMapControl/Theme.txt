@@ -1,7 +1,0 @@
-Name: GoogleMapControl
-Author: Velio Ivanov
-Website: http://artembg.com
-Description: Orchard theme for GoogleMap Control website.
-Version: 1.0
-Tags: GoogleMap Control, Velio Ivanov
-Zones: Header, Navigation, Featured, BeforeContent, Content, AfterContent, Footer
