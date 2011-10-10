@@ -1,16 +1,16 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="true"
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="true"
     CodeFile="InTabPanel.aspx.cs" Inherits="map_InTabPanel" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>Inside AJAX TabPanel</title>
     <meta name="description" content="GoogleMap Control inside AJAX TabPanel sample." />
     <meta name="keywords" content="asp.net artem googlemap control ajax tabpanel" />
 </asp:Content>
-<asp:Content ID="cntContent" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         Inside AJAX TabPanel
     </h1>
-    <ajax:TabContainer ID="tabContainer" runat="server" OnClientActiveTabChanged="refreshMap">
+    <%--<ajax:TabContainer ID="tabContainer" runat="server" OnClientActiveTabChanged="refreshMap">
         <ajax:TabPanel ID="tabLorem" runat="server" HeaderText="Text">
             <ContentTemplate>
                 <p>
@@ -87,7 +87,7 @@
                 </div>
             </ContentTemplate>
         </ajax:TabPanel>
-    </ajax:TabContainer>
+    </ajax:TabContainer>--%>
 
     <script type="text/javascript">
         function refreshMap() {

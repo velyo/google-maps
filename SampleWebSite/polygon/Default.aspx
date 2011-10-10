@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false"
     CodeFile="Default.aspx.cs" Inherits="polygon_GooglePolygon" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GooglePolygon</title>
     <meta name="description" content="GoogleMap Control - GooglePolygon sample." />
     <meta name="keywords" content="asp.net artem googlemap control polygon" />
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
 
     <script type="text/javascript">
         var __count = 0;
@@ -40,8 +40,8 @@
     <asp:Button ID="Button1" runat="server" Text="Draw" OnClick="HandleDrawClick" />
     <input id="__points" name="__points" type="hidden" />
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
-        Longitude="24.7879" Zoom="4" OnClientClick="handleMapClick" EnableScrollWheelZoom="true">
-        <PolygonEvents OnClick="HandleClick" />
+        Longitude="24.7879" Zoom="4"><%-- OnClientClick="handleMapClick" EnableScrollWheelZoom="true">--%>
+        <%--<PolygonEvents OnClick="HandleClick" />--%>
         <Polygons>
             <artem:GooglePolygon FillColor="Red" FillOpacity=".8" StrokeColor="Blue" StrokeWeight="2">
                 <artem:GoogleLocation Latitude="37.97918" Longitude="23.716647" />
@@ -59,8 +59,6 @@
         <asp:Literal ID="_ltrInfo" runat="server"></asp:Literal><br />
         <asp:Button ID="Button2" runat="server" Text="Show" OnClick="HandleShowExtraDataClick" />
     </fieldset>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phDescription" runat="server">
     Wraps Google Maps API class GPolygon. This is very similar to a GPolyline, except
     that you can additionally specify a fill color and opacity.
     <p>
@@ -79,8 +77,6 @@
         &lt;/artem:GooglePolygon&gt;
     &lt;/Polygons&gt;
 &lt;/artem:GoogleMap&gt;</pre>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phProperties" runat="server">
     <ul class="props">
         <li><b>Bounds</b> - Gets or sets the bounds of polygon. Have in mind it requires an
             additional post back after polygon is loaded.</li>
@@ -97,8 +93,6 @@
         <li><b>StrokeWeight</b> - Gets or sets the weight of polygon. The weight is the width
             of the line in pixels.</li>
     </ul>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phActions" runat="server">
     <ul class="props">
         <li><b>Hide</b> - Method to fire invokation of hide function of the GPolygon instance
             from the server-side code.</li>

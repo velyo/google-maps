@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/polyline/Polyline.master" AutoEventWireup="false"
     CodeFile="Default.aspx.cs" Inherits="polyline_GooglePolyline" %>
 
-<asp:Content ID="cntHead" ContentPlaceHolderID="phHead" runat="server">
+<asp:Content ID="headContent" ContentPlaceHolderID="head" runat="server">
     <title>GooglePolyline</title>
     <meta name="description" content="GoogleMap Control - GooglePolyline sample." />
     <meta name="keywords" content="asp.net artem googlemap control polyline" />
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
 
     <script type="text/javascript">
         var __count = 0;
@@ -40,8 +40,8 @@
     <asp:Button runat="server" Text="Draw" OnClick="HandleShowPolylineClick" />
     <input id="__points" name="__points" type="hidden" />
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
-        Longitude="24.7879" Zoom="4" OnClientClick="handleMapClick" EnableScrollWheelZoom="true">
-        <PolylineEvents OnClick="HandlePolylineClick" />
+        Longitude="24.7879" Zoom="4"><%-- OnClientClick="handleMapClick" EnableScrollWheelZoom="true">--%>
+        <%--<PolylineEvents OnClick="HandlePolylineClick" />--%>
         <Polylines>
             <artem:GooglePolyline Color="Blue" Weight="2" Opacity="1" IsGeodesic="false">
                 <artem:GoogleLocation Latitude="42.1229" Longitude="24.7879" />
@@ -56,8 +56,6 @@
         <asp:Literal ID="_ltrInfo" runat="server"></asp:Literal><br />
         <asp:Button ID="Button1" runat="server" Text="Show" OnClick="HandleShowExtraDataClick" />
     </fieldset>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phDescription" runat="server">
     Wraps Google Maps API class GPolyline. This is a map overlay that draws a polyline
     on the map, using the vector drawing facilities of the browser if they are available,
     or an image overlay from Google servers otherwise.
@@ -74,8 +72,6 @@
         &lt;/artem:GooglePolyline&gt;
     &lt;/Polylines&gt;
 &lt;/artem:GoogleMap&gt;</pre>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phProperties" runat="server">
     <ul class="props">
         <li><b>Bounds</b> - Gets or sets the bounds of polyline. Have in mind it requires an
             additional post back after polyline is loaded.</li>
@@ -87,13 +83,5 @@
         <li><b>Points</b> - Gets or sets the points of polyline.</li>
         <li><b>Weight</b> - Gets or sets the weight of polyline. The weight is the width of
             the line in pixels.</li>
-    </ul>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phActions" runat="server">
-    <ul class="props">
-        <li><b>Hide</b> - Method to fire invokation of hide function of the GPolyline instance
-            from the server-side code.</li>
-        <li><b>Show</b> - Method to fire invokation of show function of the GPolyline instance
-            from the server-side code.</li>
     </ul>
 </asp:Content>

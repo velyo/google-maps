@@ -30,7 +30,6 @@ namespace Artem.Google.UI {
 
         #region Fields
 
-        IList<string> _actions;
         string _address;
         LatLng _center;
         List<GoogleDirections> _directions;
@@ -38,7 +37,6 @@ namespace Artem.Google.UI {
         string _key;
         bool _loading;
         GoogleMarkerEvents _markerEvents;
-        MarkerManagerOptions _markerManagerOptions;
         List<GoogleMarker> _markers;
         GoogleMarkerStyle _markerStyle;
         GooglePolygonEvents _polygonEvents;
@@ -545,17 +543,17 @@ namespace Artem.Google.UI {
 
         #region Non-Browsable
 
-        /// <summary>
-        /// Gets the actions recorder.
-        /// </summary>
-        /// <value>The actions.</value>
-        protected internal IList<string> Actions {
-            get {
-                if (_actions == null)
-                    _actions = new List<string>();
-                return _actions;
-            }
-        }
+        ///// <summary>
+        ///// Gets the actions recorder.
+        ///// </summary>
+        ///// <value>The actions.</value>
+        //protected internal IList<string> Actions {
+        //    get {
+        //        if (_actions == null)
+        //            _actions = new List<string>();
+        //        return _actions;
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets the bound.
@@ -673,9 +671,6 @@ namespace Artem.Google.UI {
         public GoogleMap() {
 
             this.Draggable = true;
-            //this.DisableDoubleClickZoom = true;
-            //this.EnableInfoWindow = true;
-            //this.EnablePinchToZoom = true;
             this.MapType = MapType.HYBRID;
             this.EnableScrollWheelZoom = true;
             this.ShowMapTypeControl = true;
@@ -721,108 +716,6 @@ namespace Artem.Google.UI {
             this.ClearChildViewState();
         }
 
-        #region - Actions -
-
-        /// <summary>
-        /// Opens a simple info window at the given point. 
-        /// Pans the map such that the opened info window is fully visible. 
-        /// The content of the info window is given as a DOM node.
-        /// </summary>
-        /// <param name="point">The point.</param>
-        /// <param name="node">The node.</param>
-        /// <param name="options">The options.</param>
-        public void OpenInfoWindow(GoogleLocation point, string node, string options) {
-
-            // TODO
-            throw new NotImplementedException();
-            //this.Actions.Add(
-            //    string.Format("{0}.openInfoWindow(new GLatLng({1}, {2}), {3} {4});",
-            //        this.ClientMapID,
-            //        JsUtil.Encode(this.Latitude),
-            //        JsUtil.Encode(this.Longitude),
-            //        JsUtil.Encode(node),
-            //        string.IsNullOrEmpty(options) ? string.Empty : "," + JsUtil.Encode(options)
-            //    )
-            //);
-        }
-
-        /// <summary>
-        /// Opens a simple info window at the given point. 
-        /// Pans the map such that the opened info window is fully visible. 
-        /// The content of the info window is given as HTML text.
-        /// </summary>
-        /// <param name="point">The point.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="options">The options.</param>
-        public void OpenInfoWindowHtml(GoogleLocation point, string text, string options) {
-
-            // TODO
-            throw new NotImplementedException();
-            //this.Actions.Add(
-            //    string.Format("{0}.openInfoWindowHtml(new GLatLng({1}, {2}), {3} {4});",
-            //        this.ClientMapID,
-            //        JsUtil.Encode(this.Latitude),
-            //        JsUtil.Encode(this.Longitude),
-            //        JsUtil.Encode(text),
-            //        string.IsNullOrEmpty(options) ? string.Empty : "," + JsUtil.Encode(options)
-            //    )
-            //);
-        }
-
-        /// <summary>
-        /// Changes the center point of the map to the given point. 
-        /// If the point is already visible in the current map view, change the center in a smooth animation.
-        /// </summary>
-        /// <param name="center">The center.</param>
-        public void PanTo(GoogleLocation center) {
-
-            // TODO
-            throw new NotImplementedException();
-            //this.Actions.Add(
-            //    string.Format("{0}.panTo(new GLatLng({1}, {2}));",
-            //        this.ClientMapID,
-            //        JsUtil.Encode(this.Latitude),
-            //        JsUtil.Encode(this.Longitude)
-            //    )
-            //);
-        }
-
-        /// <summary>
-        /// Starts a pan animation by the given distance in pixels.
-        /// </summary>
-        /// <param name="distance">The distance.</param>
-        public void PanBy(int distance) {
-            this.Actions.Add(
-                string.Format("{0}.panBy({1});", this.ID, distance));
-        }
-
-        /// <summary>
-        /// Starts a pan animation by half the width of the map in the indicated directions. 
-        /// +1 is right and down, -1 is left and up, respectively.
-        /// </summary>
-        /// <param name="dx">The dx.</param>
-        /// <param name="dy">The dy.</param>
-        public void PanDirection(int dx, int dy) {
-            this.Actions.Add(
-                string.Format("{0}.panDirection({1}, {2});", this.ID, dx, dy));
-        }
-
-        /// <summary>
-        /// Increments zoom level by one.
-        /// </summary>
-        public void ZoomIn() {
-            this.Actions.Add(string.Format("{0}.zoomIn();", this.ID));
-        }
-
-        /// <summary>
-        /// Decrements zoom level by one.
-        /// </summary>
-        public void ZoomOut() {
-            this.Actions.Add(string.Format("{0}.zoomOut();", this.ID));
-        }
-        #endregion
-
-        #region - IPostBackEventHandler -
 
         /// <summary>
         /// When implemented by a class, enables a server control to process an event raised when a form is posted to the server.
@@ -860,7 +753,7 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region DataBinding
+        #region DataBinding Methods
 
         /// <summary>
         /// When overridden in a derived class, binds data from the data source to the control.
@@ -919,7 +812,6 @@ namespace Artem.Google.UI {
                 OnDataBinding(EventArgs.Empty);
             PerformDataBinding(retrievedData);
         }
-        #endregion
         #endregion
     }
 }

@@ -11,8 +11,6 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Xml.Linq;
 
-public partial class GoogleMap : System.Web.UI.MasterPage {
+public partial class GoogleMapMaster : MasterPage {
 
-    #region Methods ///////////////////////////////////////////////////////////////////////////
-    #endregion
 }

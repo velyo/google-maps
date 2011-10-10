@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/directions/Directions.master" AutoEventWireup="false"
     CodeFile="Default.aspx.cs" Inherits="direction_GoogleDirection" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleDirection</title>
     <meta name="description" content="GoogleMap Control GoogleDirection class." />
     <meta name="keywords" content="asp.net artem googlemap control directions" />
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         GoogleDirection
     </h1>
@@ -32,8 +32,6 @@
         <asp:Literal ID="_ltrInfo" runat="server"></asp:Literal><br />
         <asp:Button runat="server" Text="PostBack" OnClick="HandleShowExtraData" />
     </fieldset>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phDescription" runat="server">
     Wraps Google Maps API class GDirections. This class is used to obtain driving directions
     results and display them on a map and/or a text panel.
     <p>
@@ -44,8 +42,6 @@
         &lt;artem:GoogleDirection RoutePanelId="route" Query="from: San Francisco, CA to: Mountain View, CA" /&gt;
     &lt;/Directions&gt;
 &lt;/artem:GoogleMap&gt;</pre>
-</asp:Content>
-<asp:Content ContentPlaceHolderID="phProperties" runat="server">
     <ul class="props">
         <li><b>Bounds</b> - Gets or sets the bounds of the GoogleDirection. It is used to get
             the bounding box for the result of this directions query. Have in mind it requires

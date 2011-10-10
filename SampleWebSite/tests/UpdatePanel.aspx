@@ -10,9 +10,9 @@
     <form id="form1" runat="server">
     <asp:ScriptManager ID="smTest" runat="server" />
     <asp:UpdatePanel ID="upTest" runat="server">
-        <contenttemplate>
-    <site:TestControl ID="ctrTest" runat="server" />
-    </contenttemplate>
+        <ContentTemplate>
+            <site:TestControl ID="ctrTest" runat="server" />
+        </ContentTemplate>
     </asp:UpdatePanel>
     </form>
 </body>

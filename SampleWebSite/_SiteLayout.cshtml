@@ -1,10 +1,65 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <title>@Page.Title</title>
-        @RenderSection("head", required: false)
-    </head>
-    <body>
-        @RenderBody()
-    </body>
+<head>
+    <title>@Page.Title</title>
+    <link href="@Href("~/Styles/Site.css")" rel="stylesheet" />
+    <link href="@Href("~/Styles/Grid960.css")" rel="stylesheet"/>
+    <link href="@Href("~/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+    @RenderSection("head", required: false)
+</head>
+<body>
+    <div id="header">
+        <h1>
+            <a href="@Href("~/")">ASP.NET GoogleMap Control</a>
+        </h1>
+        <ul id="menu" class="@Page.CssClass">
+            <li class="home"><a href="@Href("~/")">home</a></li>
+            <li class="project"><a href="http://googlemap.codeplex.com/">project</a></li>
+            <li class="demo"><a href="@Href("~/samples.aspx")">samples</a></li>
+            <li class="docs"><a href="@Href("~/docs")">api docs</a></li>
+            <li class="donate"><a href="@Href("~/donate")">donate</a></li>
+            <li class="contact"><a href="@Href("~/contact")">contact</a></li>
+        </ul>
+    </div>
+    <div id="teaser">
+        <div class="wrap">
+            <div id="image">
+            </div>
+            <div class="box">
+                <h2>
+                    Welcome to <em title="Wraps Google Maps API as ASP.NET custom control">GogleMap Control</em></h2>
+                <p>
+                    The GoogleMap Control project wraps Google Maps API as ASP.NET Custom Control, providing
+                    an easy and fast way of adding Google Maps in your ASP.NET pages with "Zero-Written-JavaScript"
+                    code.<br />
+                    GoogleMap Control includes many features (markers, polyline, poligons, directions)
+                    and gives you almost all Google Maps API functionality in enjoyable ASP.NET way
+                    of coding.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="bar">
+        <div class="wrap">
+            <a class="step" href="http://googlemap.codeplex.com/releases" target="_blank">1<span>download</span></a>
+            <a class="step" href="http://googlemap.codeplex.com/wikipage?title=Installation&referringTitle=Documentation"
+                target="_blank">2 <span>setup</span></a> <a class="step" href="http://googlemap.codeplex.com/documentation"
+                    target="_blank">3<span>get started</span></a>
+        </div>
+    </div>
+    <div class="wrap">
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+    <div id="footer">
+        <p class="right">
+            Powered by <a href="http://www.orchardproject.net/">Orchard</a>. Design by <a href="http://www.solucija.com/">
+                Luka Cvrk</a>
+        </p>
+        <p>
+            &copy; Copyright @DateTime.Now.Year <a href="http://artembg.com/">Velio Ivanov</a>
+        </p>
+    </div>
+</body>
 </html>

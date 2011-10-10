@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
     CodeFile="ClientUpdate.aspx.cs" Inherits="map_ClientUpdate" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>Client Update Sample</title>
     <meta name="description" content="GoogleMap Control client-side update sample." />
     <meta name="keywords" content="asp.net artem googlemap control client-side update" />
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         GoogleMap Client Update Sample</h1>
     <p style="padding-bottom: 10px;">

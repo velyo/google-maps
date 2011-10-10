@@ -19,13 +19,13 @@ namespace Artem.Google.UI {
     /// </summary>
     partial class GoogleMap : IPostBackDataHandler {
 
-        #region Fields  ///////////////////////////////////////////////////////////////////////////
+        #region Fields
 
         JavaScriptSerializer _serializer;
 
         #endregion
 
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Properties
 
         /// <summary>
         /// Gets the client state ID.
@@ -51,7 +51,7 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Methods ///////////////////////////////////////////////////////////////////////////
+        #region Methods
 
         /// <summary>
         /// Loads the state of the google map.
@@ -61,57 +61,45 @@ namespace Artem.Google.UI {
 
             _loading = true;
             try {
-                //dynamic state = this.Serializer.DeserializeObject(viewState);
+                var state = this.Serializer.Deserialize<ViewState>(viewState);
 
-                //this._address = state.Address;
-                //this._center = state.Center;
-                //this.Language = state.Language;
-                //this.Region = state.Region;
-                //this.Zoom = state.Zoom;
-                //this.Bounds = state.Bounds;
-                //this.DefaultAddress = state.DefaultAddress;
-                //this.DisableClear = state.DisableClear;
-                //this.DisableDefaultUI = state.DisableDefaultUI;
-                //this.DisableDoubleClickZoom = state.DisableDoubleClickZoom;
-                //this.DisableKeyboardShortcuts = state.DisableKeyboardShortcuts;
-                //this.Draggable = state.Draggable;
-                //this.DraggableCursor = state.DraggableCursor;
-                //this.DraggingCursor = state.DraggingCursor;
-                //this.EnableReverseGeocoding = state.EnableReverseGeocoding;
-                //this.EnableScrollWheelZoom = state.EnableScrollWheelZoom;
-                //this.MapType = state.MapType;
-                //this.MapTypeControlOptions = state.MapTypeControlOptions;
-                //this.NavigationControlOptions = state.NavigationControlOptions;
-                //this.ScaleControlOptions = state.ScaleControlOptions;
-                //this.ShowMapTypeControl = state.ShowMapTypeControl;
-                //this.ShowNavigationControl = state.ShowNavigationControl;
-                //this.ShowScaleControl = state.ShowScaleControl;
-                //this.ShowStreetViewControl = state.ShowStreetViewControl;
-                //this.ShowTraffic = state.ShowTraffic;
-                //this.StreetView = state.StreetView;
-                //this.Markers = state.Markers;
-                //this.Polygons = state.Polygons;
-                //this.Polylines = state.Polylines;
+                this._address = state.Address;
+                this._center = state.Center;
+                this.Language = state.Language;
+                this.Region = state.Region;
+                this.Zoom = state.Zoom;
+                this.Bounds = state.Bounds;
+                this.DefaultAddress = state.DefaultAddress;
+                this.DisableClear = state.DisableClear;
+                this.DisableDefaultUI = state.DisableDefaultUI;
+                this.DisableDoubleClickZoom = state.DisableDoubleClickZoom;
+                this.DisableKeyboardShortcuts = state.DisableKeyboardShortcuts;
+                this.Draggable = state.Draggable;
+                this.DraggableCursor = state.DraggableCursor;
+                this.DraggingCursor = state.DraggingCursor;
+                this.EnableReverseGeocoding = state.EnableReverseGeocoding;
+                this.EnableScrollWheelZoom = state.EnableScrollWheelZoom;
+                this.MapType = state.MapType;
+                this.MapTypeControlOptions = state.MapTypeControlOptions;
+                this.NavigationControlOptions = state.NavigationControlOptions;
+                this.ScaleControlOptions = state.ScaleControlOptions;
+                this.ShowMapTypeControl = state.ShowMapTypeControl;
+                this.ShowNavigationControl = state.ShowNavigationControl;
+                this.ShowScaleControl = state.ShowScaleControl;
+                this.ShowStreetViewControl = state.ShowStreetViewControl;
+                this.ShowTraffic = state.ShowTraffic;
+                this.StreetView = state.StreetView;
+                this.Markers = state.Markers;
+                this.Polygons = state.Polygons;
+                this.Polylines = state.Polylines;
 
-                //this.Directions = state.Directions;
-                
-                ////this.PolygonEvents = state.PolygonEvents;
-                ////this.PolylineEvents = state.PolylineEvents;
-                //this.Height = state.Height;
-                //this.Width = state.Width;
-
-                var state = this.Serializer.Deserialize<ClientState>(viewState);
-                state.CopyTo(this);
+                this.Directions = state.Directions;
+                //this.PolygonEvents = state.PolygonEvents;
+                //this.PolylineEvents = state.PolylineEvents;
             }
             finally {
                 _loading = false;
             }
-
-            //List<GoogleDirection> dirs = new List<GoogleDirection>();
-            //dirs.Add(new GoogleDirection { Locale = "Test", Bounds = new GoogleBounds { NorthEast = new GoogleLocation { Latitude = 1, Longitude = 2 } } });
-            //string buffer = this.Serializer.Serialize(dirs);
-
-            //List<GoogleDirection> result = this.Serializer.Deserialize<List<GoogleDirection>>(buffer);
         }
 
         /// <summary>
@@ -119,8 +107,7 @@ namespace Artem.Google.UI {
         /// </summary>
         protected virtual string SaveClientState() {
 
-            //ClientState state = new ClientState(this);
-            return this.Serializer.Serialize(new {
+            return this.Serializer.Serialize(new ViewState {
                 Address = this._address,
                 Center = this._center,
                 Language = this.Language,
@@ -151,11 +138,10 @@ namespace Artem.Google.UI {
                 Polygons = this.Polygons,
                 Polylines = this.Polylines,
 
-                Directions = this.Directions,
+                Directions = this.Directions
                 //PolygonEvents = this.PolygonEvents,
                 //PolylineEvents = this.PolylineEvents,
-                Height = this.Height.Value,
-                Width = this.Width.Value
+                
             });
         }
 
@@ -192,16 +178,16 @@ namespace Artem.Google.UI {
         /// 
         /// </summary>
         [DataContract]
-        public class ClientState {
+        public class ViewState {
 
-            #region Properties  ///////////////////////////////////////////////////////////////////////
+            #region Properties
 
             public string Address { get; set; }
             public LatLng Center { get; set; }
             public string Language { get; set; }
             public string Region { get; set; }
             public int Zoom { get; set; }
-
+            //
             public GoogleBounds Bounds { get; set; }
             public string DefaultAddress { get; set; }
             public bool DisableClear { get; set; }
@@ -223,134 +209,14 @@ namespace Artem.Google.UI {
             public bool ShowStreetViewControl { get; set; }
             public bool ShowTraffic { get; set; }
             public StreetViewPanorama StreetView { get; set; }
-
+            // collections
             public List<GoogleMarker> Markers { get; set; }
             public List<GooglePolygon> Polygons { get; set; }
             public List<GooglePolyline> Polylines { get; set; }
 
-
-
-
-
             public List<GoogleDirections> Directions { get; set; }
-            public bool EnableMarkerManager { get; set; }
-            
-            public double Height { get; set; }
-            public bool IsStatic { get; set; }
-            public MarkerManagerOptions MarkerManagerOptions { get; set; }
             //public GooglePolygonEvents PolygonEvents { get; set; }
             //public GooglePolylineEvents PolylineEvents { get; set; }
-            
-            public double Width { get; set; }
-
-            #endregion
-
-            #region Construct /////////////////////////////////////////////////////////////////////////
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ClientState"/> class.
-            /// </summary>
-            /// <param name="map">The map.</param>
-            public ClientState(GoogleMap map) {
-                this.Load(map);
-            }
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="ClientState"/> class.
-            /// </summary>
-            /// <param name="map">The map.</param>
-            public ClientState() {
-            }
-            #endregion
-
-            #region Methods ///////////////////////////////////////////////////////////////////////////
-
-            public void Load(GoogleMap map) {
-
-                this.Address = map._address;
-                this.Center = map._center;
-                this.Language = map.Language;
-                this.Region = map.Region;
-                this.Zoom = map.Zoom;
-
-                this.Bounds = map.Bounds;
-                this.DefaultAddress = map.DefaultAddress;
-                this.DisableClear = map.DisableClear;
-                this.DisableDefaultUI = map.DisableDefaultUI;
-                this.DisableDoubleClickZoom = map.DisableDoubleClickZoom;
-                this.DisableKeyboardShortcuts = map.DisableKeyboardShortcuts;
-                this.Draggable = map.Draggable;
-                this.DraggableCursor = map.DraggableCursor;
-                this.DraggingCursor = map.DraggingCursor;
-                this.EnableReverseGeocoding = map.EnableReverseGeocoding;
-                this.EnableScrollWheelZoom = map.EnableScrollWheelZoom;
-                this.MapType = map.MapType;
-                this.MapTypeControlOptions = map.MapTypeControlOptions;
-                this.NavigationControlOptions = map.NavigationControlOptions;
-                this.ScaleControlOptions = map.ScaleControlOptions;
-                this.ShowMapTypeControl = map.ShowMapTypeControl;
-                this.ShowNavigationControl = map.ShowNavigationControl;
-                this.ShowScaleControl = map.ShowScaleControl;
-                this.ShowStreetViewControl = map.ShowStreetViewControl;
-                this.ShowTraffic = map.ShowTraffic;
-                this.StreetView = map.StreetView;
-
-                this.Markers = map.Markers;
-                this.Polygons = map.Polygons;
-                this.Polylines = map.Polylines;
-                
-                
-                
-                this.Directions = map.Directions;
-                this.Height = map.Height.Value;
-                //this.PolygonEvents = map.PolygonEvents;
-                //this.PolylineEvents = map.PolylineEvents;
-                this.Width = map.Width.Value;
-            }
-
-            public void CopyTo(GoogleMap map) {
-
-                map.Address = this.Address;
-                map.Center = this.Center;
-                map.Language = this.Language;
-                map.Region = this.Region;
-                map.Zoom = this.Zoom;
-
-                map.Bounds = this.Bounds;
-                map.DefaultAddress = this.DefaultAddress;
-                map.DisableClear = this.DisableClear;
-                map.DisableDefaultUI = this.DisableDefaultUI;
-                map.DisableDoubleClickZoom = this.DisableDoubleClickZoom;
-                map.DisableKeyboardShortcuts = this.DisableKeyboardShortcuts;
-                map.Draggable = this.Draggable;
-                map.DraggableCursor = this.DraggableCursor;
-                map.DraggingCursor = this.DraggingCursor;
-                map.EnableReverseGeocoding = this.EnableReverseGeocoding;
-                map.EnableScrollWheelZoom = this.EnableScrollWheelZoom;
-                map.MapType = this.MapType;
-                map.MapTypeControlOptions = this.MapTypeControlOptions;
-                map.NavigationControlOptions = this.NavigationControlOptions;
-                map.ScaleControlOptions = this.ScaleControlOptions;
-                map.ShowMapTypeControl = this.ShowMapTypeControl;
-                map.ShowNavigationControl = this.ShowNavigationControl;
-                map.ShowScaleControl = this.ShowScaleControl;
-                map.ShowStreetViewControl = this.ShowStreetViewControl;
-                map.ShowTraffic = this.ShowTraffic;
-                map.StreetView = this.StreetView;
-
-                map.Markers = this.Markers;
-                map.Polygons = this.Polygons;
-                map.Polylines = this.Polylines;
-                
-                
-                
-                map.Directions = this.Directions;
-                map.Height = new Unit(this.Height, UnitType.Pixel);
-                //map.PolygonEvents = this.PolygonEvents;
-                //map.PolylineEvents = this.PolylineEvents;
-                map.ShowScaleControl = this.ShowScaleControl;
-                map.Width = new Unit(this.Width, UnitType.Pixel);
-            }
             #endregion
         }
         #endregion

@@ -9,13 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding", "Ar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding.Tests", "Artem.GoogleGeocoding.Tests\Artem.GoogleGeocoding.Tests.csproj", "{BE6699E0-260C-49E3-9959-6246D40DBFBE}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SampleWebSite", "SampleWebSite", "{F64D22ED-71BF-42DA-810D-010462E4B23F}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SampleWebSite", "SampleWebSite\", "{F64D22ED-71BF-42DA-810D-010462E4B23F}"
 	ProjectSection(WebsiteProperties) = preProject
 		SccProjectName = "SAK"
 		SccAuxPath = "SAK"
 		SccLocalPath = "SAK"
 		SccProvider = "SAK"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{0660EA3D-B58B-4858-9822-9A6459A4001C}|Artem.Google.dll;{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}|Artem.Google.Extensions.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/SampleWebSite"
 		Debug.AspNetCompiler.PhysicalPath = "SampleWebSite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SampleWebSite\"
@@ -36,56 +37,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SampleWebSite", "SampleWebS
 		StartServerOnDebug = "false"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleMap.WebSite", "Artem.GoogleMap.WebSite\Artem.GoogleMap.WebSite.csproj", "{50B779EA-EC00-4699-84C0-03B395C365D2}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite1", "..\..\..\..\WebSites\WebSite1", "{C632D696-50EF-4B0F-817F-69D27655EFA9}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/WebSite1"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\WebSites\WebSite1\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite1\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/WebSite1"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\WebSites\WebSite1\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite1\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "51854"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Geocoding", "Geocoding", "{60800C2B-E0AE-421F-870B-F4BC715E2FED}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Artem.GoogleMap\\Artem.GoogleMap.csproj
-		SccProjectName1 = Artem.GoogleMap
-		SccLocalPath1 = Artem.GoogleMap
-		SccProjectUniqueName2 = Artem.GoogleMap.Extensions\\Artem.GoogleMap.Extensions.csproj
-		SccProjectName2 = Artem.GoogleMap.Extensions
-		SccLocalPath2 = Artem.GoogleMap.Extensions
-		SccProjectUniqueName3 = Artem.GoogleGeocoding\\Artem.GoogleGeocoding.csproj
-		SccProjectName3 = Artem.GoogleGeocoding
-		SccLocalPath3 = Artem.GoogleGeocoding
-		SccProjectUniqueName4 = Artem.GoogleGeocoding.Tests\\Artem.GoogleGeocoding.Tests.csproj
-		SccProjectName4 = Artem.GoogleGeocoding.Tests
-		SccLocalPath4 = Artem.GoogleGeocoding.Tests
-		SccWebProject5 = true
-		SccProjectUniqueName5 = SampleWebSite
-		SccProjectName5 = SampleWebSite
-		SccLocalPath5 = SampleWebSite
-		SccProjectEnlistmentChoice5 = 2
-		SccProjectUniqueName6 = Artem.GoogleMap.WebSite\\Artem.GoogleMap.WebSite.csproj
-		SccProjectName6 = Artem.GoogleMap.WebSite
-		SccLocalPath6 = Artem.GoogleMap.WebSite
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ArtemGoogle.vsmdi
 	EndGlobalSection
@@ -114,16 +68,12 @@ Global
 		{F64D22ED-71BF-42DA-810D-010462E4B23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F64D22ED-71BF-42DA-810D-010462E4B23F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{F64D22ED-71BF-42DA-810D-010462E4B23F}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{50B779EA-EC00-4699-84C0-03B395C365D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50B779EA-EC00-4699-84C0-03B395C365D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50B779EA-EC00-4699-84C0-03B395C365D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50B779EA-EC00-4699-84C0-03B395C365D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C632D696-50EF-4B0F-817F-69D27655EFA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C632D696-50EF-4B0F-817F-69D27655EFA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C632D696-50EF-4B0F-817F-69D27655EFA9}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{C632D696-50EF-4B0F-817F-69D27655EFA9}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1F0D1656-CF0D-4704-91D4-90A39E91B908} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
+		{BE6699E0-260C-49E3-9959-6246D40DBFBE} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
 	EndGlobalSection
 EndGlobal

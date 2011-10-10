@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
     CodeFile="StreetView.aspx.cs" Inherits="map_StreetView" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>StreetView Mode</title>
     <meta name="description" content="GoogleMap Control StreetView mode sample." />
     <meta name="keywords" content="asp.net artem googlemap control street view" />
 </asp:Content>
-<asp:Content ID="cntContent" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         StreetView Mode
     </h1>
@@ -45,8 +45,6 @@
     </p>
     <div id="pano" style="width: 500px; height: 200px">
     </div>
-</asp:Content>
-<asp:Content ID="cntDescription" ContentPlaceHolderID="phDescription" runat="Server">
     <p>
         This is an example of GoogleMap Control StreetView functionality. It demonstrates
         the different modes of the StreetView supported by GoogleMap Control.
@@ -61,8 +59,6 @@
             </li>
         </ol>
     </p>
-</asp:Content>
-<asp:Content ID="cntPorperties" ContentPlaceHolderID="phProperties" runat="Server">
     <ul class="props">
         <li><b>IsStreetView</b> - switches on/off the StreetView of GoogleMap Control</li>
         <li><b>StreetViewMode</b> - switches between the <b>Panorama</b> and <b>Overlay</b>

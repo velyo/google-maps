@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="true"
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
     CodeFile="ZoomPanType.aspx.cs" Inherits="map_ZoomPanType" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>ZoomPanType Sample</title>
     <meta name="description" content="GoogleMap Control zoom pan type sample." />
     <meta name="keywords" content="asp.net artem googlemap control zoom pan type" />
 </asp:Content>
-<asp:Content ID="cntContent" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         ZoomPanType Sample</h1>
     <p>
@@ -22,6 +22,4 @@
         Longitude="24.7879" Zoom="5" ShowScaleControl="true" EnableMarkerManager="true"
         ZoomPanType="Small">
     </artem:GoogleMap>
-</asp:Content>
-<asp:Content ID="cntDescription" ContentPlaceHolderID="phDescription" runat="Server">
 </asp:Content>

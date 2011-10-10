@@ -1,150 +1,145 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
+///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
 Type.registerNamespace("Artem.Google");
 
-//#> Directions class 
-
-Artem.Google.Directions = function Artem_Google_Directions(map, config) {
+// Directions class 
+Artem.Google.Directions = function (map, config) {
     /// <param name="config" type="Artem.Google.Map"></param>
-    /// <param name="config" type="Artem.Google.Directions"></param>
+    /// <param name="config"></param>
 
-    this.AvoidHighways = config.AvoidHighways;
-    this.GetPolyline = config.GetPolyline;
-    this.GetSteps = config.GetSteps;
-    this.Locale = config.Locale;
-    this.Query = config.Query;
-    this.PreserveViewport = config.PreserveViewport;
-    this.RoutePanelId = config.RoutePanelId;
-    this.TravelMode = config.TravelMode;
-
-    var pane = (this.RoutePanelId) ? $get(this.RoutePanelId) : null;
-    var directions = new GDirections(map.get_map(), pane);
-
-    this.get_map = function () { return map; };
-    this.get_directions = function () { return directions; };
-    this.get_pane = function () { return pane; };
-
-    // load
-    var options = new Object();
-    options.avoidHighways = this.AvoidHighways;
-    if (this.GetPolyline) options.getPolyline = this.GetPolyline;
-    if (this.GetSteps) options.getSteps = this.GetSteps;
-    options.locale = this.Locale;
-    options.preserveViewport = this.PreserveViewport;
-    options.travelMode = ((this.TravelMode == 0) ? G_TRAVEL_MODE_DRIVING : G_TRAVEL_MODE_WALKING);
-
-    this.load(this.Query, options);
+    this.create(map, config);
 };
 
-Artem.Google.Directions.prototype = {
+// Common
+(function (proto) {
 
-    //#region Fields ------------------------------------------------------------------------------
+    // properties
 
-    AvoidHighways: null,
-    Bounds: null,
-    Distance: null,
-    Duration: null,
-    Geocodes: null,
-    GetPolyline: null,
-    GetSteps: null,
-    Locale: null,
-    Query: null,
-    PreserveViewport: null,
-    RoutePanelId: null,
-    TravelMode: null,
-    // TODO
-    //    Polyline: null,
-    //    Markers: null,
-    //    Routes: null,
-    //    Geocodes: null,
+    var map = null;
+    proto.get_map = function () { return map; };
 
-    //#endregion
+    var state = null;
+    proto.get_state = function () { return state; };
+    proto.set_state = function (value) { state = value; };
 
-    //#region Properties --------------------------------------------------------------------------
+    var pane = null;
+    proto.get_pane = function () { return pane; };
 
-    get_directions: null,
-    get_map: null,
-    get_pane: null,
+    // public methods
+    proto.create = function (parent, config) {
 
-    //#endregion
+        map = parent;
+        state = config;
 
-    //#region Methods -----------------------------------------------------------------------------
+        if (state.RoutePanelId)
+            pane = $get(state.RoutePanelId) || null;
+        this.set_gdirections(new GDirections(map.get_map(), pane));
 
-    dispose: function Artem_Google_Directions$dispose() {
-        google.maps.event.clearInstanceListeners(this.get_directions());
+        this.load();
+    };
+
+    proto.dispose = function () {
+        google.maps.event.clearInstanceListeners(this.get_gdirections());
         this.clear();
-    },
+    };
 
-    save: function Artem_Google_Directions$save() {
-        this.Bounds = new Artem.Google.Bounds(this.getBounds());
-        this.Distance = new Artem.Google.Distance(this.getDistance());
-        this.Duration = new Artem.Google.Duration(this.getDuration());
-    },
-    //#endregion
+    proto.save = function () {
 
-    //#region Google Maps API Wrapped -------------------------------------------------------------
+        return {
+            Bounds: new Artem.Google.Bounds(this.getBounds()),
+            Distance: new Artem.Google.Distance(this.getDistance()),
+            Duration: new Artem.Google.Duration(this.getDuration())
+        }
+    };
 
-    clear: function Artem_Google_Directions$clear() {
-        this.get_directions().clear();
-    },
+} (Artem.Google.Directions.prototype));
 
-    getBounds: function Artem_Google_Directions$getBounds() {
-        return this.get_directions().getBounds();
-    },
+// GoogleMaps API Wraps
+(function (proto) {
 
-    getCopyrightsHtml: function Artem_Google_Directions$getCopyrightsHtml() {
-        return this.get_directions().getCopyrightsHtml();
-    },
+    // properties
+    var gdirections;
+    proto.get_gdirections = function () { return gdirections; };
+    proto.set_gdirections = function (value) { gdirections = value; };
 
-    getDistance: function Artem_Google_Directions$getDistance() {
-        return this.get_directions().getDistance();
-    },
+    // public methods
 
-    getDuration: function Artem_Google_Directions$getDuration() {
-        return this.get_directions().getDuration();
-    },
+    proto.clear = function () {
+        gdirections.clear();
+    };
 
-    getGeocode: function Artem_Google_Directions$getGeocode(i) {
-        return this.get_directions().getGeocode(i);
-    },
+    proto.getBounds = function () {
+        return gdirections.getBounds();
+    };
 
-    getMarker: function Artem_Google_Directions$getMarker(i) {
-        return this.get_directions().getMarker(i);
-    },
+    proto.getCopyrightsHtml = function () {
+        return gdirections.getCopyrightsHtml();
+    };
 
-    getNumGeocodes: function Artem_Google_Directions$getNumGeocodes() {
-        return this.get_directions().getNumGeocodes();
-    },
+    proto.getDistance = function () {
+        return gdirections.getDistance();
+    };
 
-    getNumRoutes: function Artem_Google_Directions$getNumRoutes() {
-        return this.get_directions().getNumRoutes();
-    },
+    proto.getDuration = function () {
+        return gdirections.getDuration();
+    };
 
-    getPolyline: function Artem_Google_Directions$getPolyline() {
-        return this.get_directions().getPolyline();
-    },
+    proto.getGeocode = function (i) {
+        return gdirections.getGeocode(i);
+    };
 
-    getRoute: function Artem_Google_Directions$getRoute(i) {
-        return this.get_directions().getRoute(i);
-    },
+    proto.getMarker = function (i) {
+        return gdirections.getMarker(i);
+    };
 
-    getSummaryHtml: function Artem_Google_Directions$getSummaryHtml() {
-        return this.get_directions().getSummaryHtml();
-    },
+    proto.getNumGeocodes = function () {
+        return gdirections.getNumGeocodes();
+    };
 
-    getStatus: function Artem_Google_Directions$getStatus() {
-        return this.get_directions().getStatus();
-    },
+    proto.getNumRoutes = function () {
+        return gdirections.getNumRoutes();
+    };
 
-    load: function Artem_Google_Directions$load(query, options) {
-        this.get_directions().load(query, options);
-    },
+    proto.getPolyline = function () {
+        return gdirections.getPolyline();
+    };
 
-    loadFromWaypoints: function Artem_Google_Directions$loadFromWaypoints(waypoints, options) {
-        this.get_directions().loadFromWaypoints(waypoints, options);
-    }
-    //#endregion
-};
-//#<
+    proto.getRoute = function (i) {
+        return gdirections.getRoute(i);
+    };
+
+    proto.getSummaryHtml = function () {
+        return gdirections.getSummaryHtml();
+    };
+
+    proto.getStatus = function () {
+        return gdirections.getStatus();
+    };
+
+    proto.load = function (query, options) {
+
+        var state = this.get_state();
+
+        if (!query)
+            query = state.Query;
+        if (!options)
+            options = new {};
+        //                avoidHighways: state.AvoidHighways,
+        //                if (this.GetPolyline) state.getPolyline = this.GetPolyline;
+        //                if (this.GetSteps) state.getSteps = this.GetSteps;
+        //                state.locale = this.Locale;
+        //                state.preserveViewport = this.PreserveViewport;
+        //                state.travelMode = ((this.TravelMode == 0) ? G_TRAVEL_MODE_DRIVING : G_TRAVEL_MODE_WALKING);
+        //            };
+
+        gdirections.load(query, options);
+    };
+
+    proto.loadFromWaypoints = function (waypoints, options) {
+        gdirections.loadFromWaypoints(waypoints, options);
+    };
+
+} (Artem.Google.Directions.prototype));
 
 Artem.Google.Directions.registerClass("Artem.Google.Directions");

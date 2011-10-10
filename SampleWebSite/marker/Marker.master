@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/GoogleMap.master" %>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Markers
+    </h3>
+    <ul>
+        <li><a href="/marker/Default.aspx">&raquo; Default</a></li>
+        <li><a href="/marker/GoogleMarkerEvents.aspx">&raquo; Events</a></li>
+        <li><a href="/marker/CustomIcons.aspx">&raquo; Custom Icons</a></li>
+        <li><a href="/marker/InfoContent.aspx">&raquo; InfoContent</a></li>
+        <li><a href="/marker/MarkerStyle.aspx">&raquo; MarkerStyle</a></li>
+        <li><a href="/marker/MarkerManager.aspx">&raquo; MarkerManager</a></li>
+    </ul>
+</asp:Content>

@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="true"
-    CodeFile="ClientEvents.aspx.cs" Inherits="map_ClientEvents" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="true" CodeFile="ClientEvents.aspx.cs"
+    Inherits="map_ClientEvents" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>Client Events</title>
     <meta name="description" content="GoogleMap Control map client events sample." />
     <meta name="keywords" content="asp.net artem googlemap control client events" />
 </asp:Content>
-<asp:Content ID="cntContent" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         Clent Events
     </h1>
@@ -30,7 +30,6 @@
     <div id="info">
     </div>
     <input type="button" value="Clear" onclick="javascript:clearInfo()" />
-
     <script type="text/javascript">
 
         function handleAny(name) {
@@ -44,9 +43,6 @@
             info.innerHTML = "";
         }
     </script>
-
-</asp:Content>
-<asp:Content ID="cntDescription" ContentPlaceHolderID="phDescription" runat="Server">
     <p>
         This sample shows how to handle all GoogleMap Control events on the client-side.
     </p>

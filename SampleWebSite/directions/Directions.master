@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/GoogleMap.master"%>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Directions
+    </h3>
+    <ul>
+        <li><a href="/directions/Default.aspx">&raquo; Default</a></li>
+        <li><a href="/directions/Events.aspx">&raquo; Events</a></li>
+    </ul>
+</asp:Content>

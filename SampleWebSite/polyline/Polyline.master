@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/GoogleMap.master" %>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Polylines
+    </h3>
+    <ul>
+        <li><a href="/polyline/Default.aspx">&raquo; Default</a></li>
+        <li><a href="/polyline/EnableDrawing.aspx">&raquo; Enable Drawing</a></li>
+        <li><a href="/polyline/EnableEditing.aspx">&raquo; Enable Editing</a></li>
+    </ul>
+</asp:Content>

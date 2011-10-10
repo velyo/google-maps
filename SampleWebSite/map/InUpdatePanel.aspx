@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
     CodeFile="InUpdatePanel.aspx.cs" Inherits="map_InUpdatePanel" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>Inside UpdatePanel</title>
     <meta name="description" content="GoogleMap Control inside UpdatePanel sample." />
     <meta name="keywords" content="asp.net artem googlemap control ajax update panel" />
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         Inside UpdatePanel
     </h1>
@@ -22,8 +22,6 @@
             </artem:GoogleMap>
         </ContentTemplate>
     </asp:UpdatePanel>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="phDescription" runat="Server">
     <p>
         A sample of GoogleMap control inside <b>UpdatePanel</b>.
     </p>

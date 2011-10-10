@@ -1,12 +1,12 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
     CodeFile="PostbackPersistence.aspx.cs" Inherits="map_PostbackPersistence" %>
 
-<asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
+<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>Postback Persistence Sample</title>
     <meta name="description" content="GoogleMap Control postback persistene sample." />
     <meta name="keywords" content="asp.net artem googlemap control postback persistence" />
 </asp:Content>
-<asp:Content ID="Content1" ContentPlaceHolderID="phContent" runat="Server">
+<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
         GoogleMap Postback Persistence Sample</h1>
     <p>
