@@ -349,3 +349,28 @@ var GoogleManager = new Artem.Google._Manager();
 Artem.Google.serverHandler = function Artem_Google$serverHandler() { };
 
 //#endregion
+
+(function (log) {
+
+    // methods
+
+    log.dir = function (obj) {
+        if (console && console.dir) console.dir(obj);
+    };
+
+    log.error = function (message) {
+        if (console && console.error)
+            console.error(message);
+        else
+            throw (message);
+    };
+
+    log.info = function (message) {
+        if (console && console.info) console.info(message);
+    };
+
+    log.warn = function (message) {
+        if (console && console.warn) console.warn(message);
+    };
+
+} (Artem.Google.Log = Artem.Google.Log || {}));

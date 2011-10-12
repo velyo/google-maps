@@ -31,7 +31,7 @@ namespace Artem.Google.UI {
         /// will be calculated from the top-center of the anchor's bounds.
         /// </summary>
         /// <value>The pixel offset.</value>
-        public GoogleSize PixelOffset { get; set; }
+        public Size PixelOffset { get; set; }
 
         /// <summary>
         /// All InfoWindows are displayed on the map in order of their zIndex, with higher values displaying 

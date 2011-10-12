@@ -35,7 +35,7 @@ public partial class polyline_GooglePolyline : Page {
             line.Weight = 2;
             string[] points = value.Split(';');
             foreach (string point in points) {
-                line.Points.Add(GoogleLocation.Parse(point));
+                line.Points.Add(LatLng.Parse(point));
             }
             GoogleMap1.Polylines.Clear();
             GoogleMap1.Polylines.Add(line);

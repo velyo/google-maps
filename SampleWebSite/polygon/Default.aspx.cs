@@ -30,12 +30,12 @@ public partial class polygon_GooglePolygon : Page {
             gon.StrokeColor = Color.Blue;
             gon.StrokeWeight = 2;
             string[] points = value.Split(';');
-            GoogleLocation startPoint = null;
+            LatLng startPoint = null;
             foreach (string point in points) {
                 if (startPoint != null)
-                    gon.Points.Add(GoogleLocation.Parse(point));
+                    gon.Points.Add(LatLng.Parse(point));
                 else
-                    gon.Points.Add(startPoint = GoogleLocation.Parse(point));
+                    gon.Points.Add(startPoint = LatLng.Parse(point));
             }
             gon.Points.Add(startPoint);
             GoogleMap1.Polygons.Clear();

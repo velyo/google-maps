@@ -43,7 +43,7 @@ namespace Artem.Google.UI {
         #region Methods /////////////////////////////////////////////////////////////////
 
         /// <summary>
-        /// Indicates whether this instance and a specified object are equal.
+        /// Indicates whether this instance and a specified object ar   e equal.
         /// </summary>
         /// <param name="obj">Another object to compare to.</param>
         /// <returns>

@@ -72,13 +72,13 @@ namespace Artem.Google.UI {
         #region Construct  //////////////////////////////////////////////////////////////
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> class.
+        /// Initializes a new instance of the <see cref="Point"/> class.
         /// </summary>
         public GoogleCirclePolygon() {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> struct.
+        /// Initializes a new instance of the <see cref="Point"/> struct.
         /// </summary>
         /// <param name="lat">The lat.</param>
         /// <param name="lng">The LNG.</param>
@@ -104,16 +104,16 @@ namespace Artem.Google.UI {
                 double lat = ((double)Radius / 3963.0D) * r2d;
                 double lng = lat / Math.Cos(Latitude * d2r);
                 double theta, x, y;
-                GoogleLocation firstPoint = null;
+                LatLng firstPoint = null;
                 for (int i = 0; i < 33; i++) {
                     theta = (double)Math.PI * ((double)i / 16.0D);
                     x = Latitude + (lat * Math.Sin(theta));
                     y = Longitude + (lng * Math.Cos(theta));
                     if (firstPoint != null) {
-                        this.Points.Add(new GoogleLocation(x, y));
+                        this.Points.Add(new LatLng(x, y));
                     }
                     else {
-                        this.Points.Add(firstPoint = new GoogleLocation(x, y));
+                        this.Points.Add(firstPoint = new LatLng(x, y));
                     }
                 }
                 this.Points.Add(firstPoint);

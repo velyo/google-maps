@@ -17,9 +17,9 @@ namespace Artem.Google.UI {
     /// To scale the image, whether sprited or not, set the value of scaledSize to the size of the whole image and set size, 
     /// origin and anchor in scaled values. The MarkerImage cannot be changed once constructed. 
     /// </summary>
-    public class MarkerImage {
+    public class MarkerImage : ISelfConverter {
 
-        #region Static Methods ////////////////////////////////////////////////////////////////////
+        #region Static Methods
 
         /// <summary>
         /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.UI.MarkerImage"/>.
@@ -29,9 +29,13 @@ namespace Artem.Google.UI {
         public static implicit operator MarkerImage(string url) {
             return new MarkerImage { Url = url };
         }
+
+        public static implicit operator string(MarkerImage image) {
+            return (image != null) ? image.Url : null;
+        }
         #endregion
 
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Properties
 
         /// <summary>
         /// Gets or sets the anchor.
@@ -39,7 +43,7 @@ namespace Artem.Google.UI {
         /// <value>The anchor.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GooglePoint Anchor { get; set; }
+        public Point Anchor { get; set; }
 
         /// <summary>
         /// Gets or sets the origin.
@@ -47,7 +51,7 @@ namespace Artem.Google.UI {
         /// <value>The origin.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GooglePoint Origin { get; set; }
+        public Point Origin { get; set; }
 
         /// <summary>
         /// Gets or sets the size of the scaled.
@@ -55,7 +59,7 @@ namespace Artem.Google.UI {
         /// <value>The size of the scaled.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GoogleSize ScaledSize { get; set; }
+        public Size ScaledSize { get; set; }
 
         /// <summary>
         /// Gets or sets the size.
@@ -63,7 +67,7 @@ namespace Artem.Google.UI {
         /// <value>The size.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GoogleSize Size { get; set; }
+        public Size Size { get; set; }
 
         /// <summary>
         /// The URL of the marker image.
@@ -73,11 +77,32 @@ namespace Artem.Google.UI {
 
         #endregion
 
-        #region Construct /////////////////////////////////////////////////////////////////////////
+        #region Ctor
 
         public MarkerImage() {
-            this.Anchor = GooglePoint.DefaultMarkerIconAnchor;
-            this.Size = GoogleSize.DefaultMarkerIconSize;
+            this.Anchor = Point.DefaultMarkerIconAnchor;
+            this.Size = Size.DefaultMarkerIconSize;
+        }
+        #endregion
+
+        #region Methods
+
+        public IDictionary<string, object> ToDictionary() {
+
+            var result = new Dictionary<string, object>();
+
+            if (this.Anchor != null)
+                result["anchor"] = this.Anchor.ToDictionary();
+            if(this.Origin != null)
+                result["origin"] = this.Origin.ToDictionary();
+            if(this.ScaledSize != null)
+                result["scaledSize"] = this.ScaledSize.ToDictionary();
+            if(this.Size != null)
+                result["size"] = this.Size.ToDictionary();
+            if (this.Url != null)
+                result["url"] = this.Url;
+
+            return result;
         }
         #endregion
     }

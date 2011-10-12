@@ -22,7 +22,7 @@ namespace Artem.Google.UI {
         #region Fields  ///////////////////////////////////////////////////////////////////////////
 
         //PolyEditingOptions _editingOptions;
-        List<GoogleLocation> _points;
+        List<LatLng> _points;
 
         #endregion
 
@@ -95,10 +95,10 @@ namespace Artem.Google.UI {
         [Category("Data")]
         [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
         [PersistenceMode(PersistenceMode.InnerDefaultProperty)]
-        public List<GoogleLocation> Points {
+        public List<LatLng> Points {
             get {
                 if (_points == null) {
-                    _points = new List<GoogleLocation>();
+                    _points = new List<LatLng>();
                 }
                 return _points;
             }

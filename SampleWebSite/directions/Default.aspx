@@ -20,9 +20,9 @@
     </div>
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="37.559819"
         Longitude="-122.210540" Zoom="4">
-        <Directions>
+        <%--<Directions>
             <artem:GoogleDirections RoutePanelId="route" Query="from: San Francisco, CA to: Mountain View, CA" />
-        </Directions>
+        </Directions>--%>
     </artem:GoogleMap>
     <div id="route">
     </div>

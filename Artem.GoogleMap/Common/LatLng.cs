@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 
 namespace Artem.Google.UI {
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    public class LatLng {
 
-        #region Static Methods ////////////////////////////////////////////////////////////////////
+    /// <summary>
+    /// LatLng is a point in geographical coordinates, latitude and longitude.
+    /// Notice that although usual map projections associate longitude with the x-coordinate of the map, and latitude with the y-coordinate, the latitude coordinate is always written first, followed by the longitude.
+    /// Notice also that you cannot modify the coordinates of a LatLng. If you want to compute another point, you have to create a new one.
+    /// </summary>
+    public class LatLng : ISelfConverter {
+
+        #region Static Methods
 
         /// <summary>
         /// Parses the specified pair.
@@ -44,63 +46,55 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields  ///////////////////////////////////////////////////////////////////////////
-
-        private double _latitude;
-        private double _longitude;
-
-        #endregion
-
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Properties
 
         /// <summary>
-        /// Gets or sets the latitude.
+        /// Gets or sets the latitude in degrees.
         /// </summary>
         /// <value>The latitude.</value>
-        public double Latitude {
-            get { return _latitude; }
-            set { _latitude = value; }
-        }
+        public double Latitude { get; set; }
 
         /// <summary>
-        /// Gets or sets the longitude.
+        /// Gets or sets the longitude in degrees.
         /// </summary>
         /// <value>The longitude.</value>
-        public double Longitude {
-            get { return _longitude; }
-            set { _longitude = value; }
-        }
+        public double Longitude { get; set; }
+
         #endregion
 
-        #region Construct  ////////////////////////////////////////////////////////////////////////
+        #region Construct
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> class.
+        /// Initializes a new instance of the <see cref="Point"/> class.
         /// </summary>
         public LatLng() {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> struct.
+        /// Initializes a new instance of the <see cref="Point"/> struct.
         /// </summary>
         /// <param name="lat">The lat.</param>
         /// <param name="lng">The LNG.</param>
         public LatLng(double lat, double lng) {
-            _latitude = lat;
-            _longitude = lng;
+            Latitude = lat;
+            Longitude = lng;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> struct.
+        /// Initializes a new instance of the <see cref="Point"/> struct.
         /// </summary>
         /// <param name="source">The source.</param>
         public LatLng(LatLng source) {
-            _latitude = source.Latitude;
-            _longitude = source.Longitude;
+            Latitude = source.Latitude;
+            Longitude = source.Longitude;
         }
         #endregion
 
-        #region Methods ///////////////////////////////////////////////////////////////////////////
+        #region Methods
+
+        public IDictionary<string, object> ToDictionary() {
+            return new Dictionary<string, object> { { "lat", Latitude }, { "lng", Longitude } };
+        }
 
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.

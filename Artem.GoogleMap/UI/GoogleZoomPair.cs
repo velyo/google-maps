@@ -44,7 +44,7 @@ namespace Artem.Google.UI {
         #region Construct  //////////////////////////////////////////////////////////////
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> struct.
+        /// Initializes a new instance of the <see cref="Point"/> struct.
         /// </summary>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>

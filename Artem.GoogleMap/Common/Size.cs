@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Web.UI;
-using System.ComponentModel;
 
 namespace Artem.Google.UI {
 
@@ -12,15 +10,16 @@ namespace Artem.Google.UI {
     /// 
     /// </summary>
     [DataContract]
-    public class GooglePoint {
+    public class Size : ISelfConverter {
 
-        #region Static Fields ///////////////////////////////////////////////////////////
+        #region Static Fields
 
-        public static readonly GooglePoint DefaultMarkerIconAnchor = new GooglePoint(8, 16);
+        public static readonly Size DefaultMarkerIconSize = new Size(16, 16);
+        public static readonly Size DefaultMarkerShadowSize = new Size(16, 16);
 
         #endregion
 
-        #region Static Methods //////////////////////////////////////////////////////////
+        #region Static Methods
 
         /// <summary>
         /// Implements the operator ==.
@@ -28,8 +27,8 @@ namespace Artem.Google.UI {
         /// <param name="a">A.</param>
         /// <param name="b">The b.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator ==(GooglePoint a, GooglePoint b) {
-            return ((a.X == b.X) && (a.Y == b.Y));
+        public static bool operator ==(Size a, Size b) {
+            return ((a.Width == b.Width) && (a.Height == b.Height));
         }
 
         /// <summary>
@@ -38,16 +37,16 @@ namespace Artem.Google.UI {
         /// <param name="a">A.</param>
         /// <param name="b">The b.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator !=(GooglePoint a, GooglePoint b) {
+        public static bool operator !=(Size a, Size b) {
             return !(a == b);
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.UI.GooglePoint"/>.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.UI.Size"/>.
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator GooglePoint(string value) {
+        public static implicit operator Size(string value) {
             return Parse(value);
         }
 
@@ -56,50 +55,55 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns></returns>
-        public static GooglePoint Parse(string value) {
+        public static Size Parse(string value) {
 
-            int x = 0;
-            int y = 0;
+            int width = 0;
+            int height = 0;
 
             if (!string.IsNullOrEmpty(value)) {
                 string[] pair = value.Split(',');
                 if (pair.Length >= 2) {
-                    x = JsUtil.ToInt(pair[0]);
-                    y = JsUtil.ToInt(pair[1]);
+                    width = JsUtil.ToInt(pair[0]);
+                    height = JsUtil.ToInt(pair[1]);
                 }
             }
-            return new GooglePoint(x, y);
+
+            return new Size(width, height);
         }
         #endregion
 
-        #region Properties ////////////////////////////////////////////////////////////////////////
+        #region Fields
 
-        public int X { get; set; }
+        public int Height { get; set; }
 
-        public int Y { get; set; }
+        /// <summary>
+        /// Gets or sets the width.
+        /// </summary>
+        /// <value>The width.</value>
+        public int Width { get; set; }
 
         #endregion
 
-        #region Construct  //////////////////////////////////////////////////////////////
+        #region Ctor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> struct.
+        /// Initializes a new instance of the <see cref="Size"/> struct.
         /// </summary>
-        /// <param name="x">The x.</param>
-        /// <param name="y">The y.</param>
-        public GooglePoint(int x, int y) {
-            this.X = x;
-            this.Y = y;
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public Size(int width, int height) {
+            this.Width = width;
+            this.Height = height;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GooglePoint"/> class.
+        /// Initializes a new instance of the <see cref="Size"/> struct.
         /// </summary>
-        public GooglePoint() { }
+        public Size() { }
 
         #endregion
 
-        #region Methods /////////////////////////////////////////////////////////////////
+        #region Methods
 
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.
@@ -110,9 +114,9 @@ namespace Artem.Google.UI {
         /// </returns>
         public override bool Equals(object obj) {
 
-            if (!(obj is GooglePoint)) return false;
-            GooglePoint point = (GooglePoint)obj;
-            return ((point.X == this.X) && (point.Y == this.Y));
+            if (!(obj is Size)) return false;
+            Size size = (Size)obj;
+            return ((size.Width == this.Width) && (size.Height == this.Height));
         }
 
         /// <summary>
@@ -125,6 +129,10 @@ namespace Artem.Google.UI {
             return base.GetHashCode();
         }
 
+        public IDictionary<string, object> ToDictionary() {
+            return new Dictionary<string, object> { { "width", this.Width }, { "height", this.Height } };
+        }
+
         /// <summary>
         /// Returns the fully qualified type name of this instance.
         /// </summary>
@@ -132,7 +140,7 @@ namespace Artem.Google.UI {
         /// A <see cref="T:System.String"/> containing a fully qualified type name.
         /// </returns>
         public override string ToString() {
-            return string.Format("{0},{1}", X.ToString(), Y.ToString());
+            return string.Format("{0},{1}", Width.ToString(), Height.ToString());
         }
         #endregion
     }

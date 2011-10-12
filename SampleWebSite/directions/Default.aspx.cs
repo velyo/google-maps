@@ -23,12 +23,12 @@ public partial class direction_GoogleDirection : Page {
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void HandleShowDirectionsClick(object sender, EventArgs e) {
 
-        string query = _txtQuery.Text;
-        if (string.IsNullOrEmpty(query))
-            query = "from: San Francisco, CA to: Mountain View, CA";
-        string locale = _txtLocale.Text;
-        GoogleMap1.Directions.Clear();
-        GoogleMap1.Directions.Add(new GoogleDirections(query, "route", locale));
+        //string query = _txtQuery.Text;
+        //if (string.IsNullOrEmpty(query))
+        //    query = "from: San Francisco, CA to: Mountain View, CA";
+        //string locale = _txtLocale.Text;
+        //GoogleMap1.Directions.Clear();
+        //GoogleMap1.Directions.Add(new GoogleDirections(query, "route", locale));
     }
 
     /// <summary>
@@ -38,11 +38,11 @@ public partial class direction_GoogleDirection : Page {
     /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
     protected void HandleShowExtraData(object sender, EventArgs e) {
 
-        if (GoogleMap1.Directions.Count > 0) {
-            GoogleDirections dir = GoogleMap1.Directions[0];
-            _ltrInfo.Text = string.Format("Bounds: {0}<br/>Distance: {1}<br/>Duration: {2}",
-                dir.Bounds.ToString(), dir.Distance.Html, dir.Duration.Html);
-        }
+        //if (GoogleMap1.Directions.Count > 0) {
+        //    GoogleDirections dir = GoogleMap1.Directions[0];
+        //    _ltrInfo.Text = string.Format("Bounds: {0}<br/>Distance: {1}<br/>Duration: {2}",
+        //        dir.Bounds.ToString(), dir.Distance.Html, dir.Duration.Html);
+        //}
     }
 
     protected override void OnPreRender(EventArgs e) {

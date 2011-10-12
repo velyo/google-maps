@@ -26,9 +26,9 @@ namespace Artem.Google.UI {
     /// The shape consists of two properties — type and coord — which define the general type of marker 
     /// and coordinates specific to that type of marker.
     /// </summary>
-    public class MarkerShape {
+    public class MarkerShape : ISelfConverter {
 
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Properties
 
         /// <summary>
         /// The format of this attribute depends on the value of the type and follows the w3 AREA coords 
@@ -48,6 +48,14 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The type.</value>
         public MarkerShapeType Type { get; set; }
+
+        #endregion
+
+        #region Methods
+
+        public IDictionary<string, object> ToDictionary() {
+                return new Dictionary<string, object> { { "coords", Coords }, { "type", Type.ToString().ToLower() } };
+        }
 
         #endregion
     }

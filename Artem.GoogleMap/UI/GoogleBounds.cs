@@ -36,8 +36,8 @@ namespace Artem.Google.UI {
 
         #region Fields  ///////////////////////////////////////////////////////////////////////////
 
-        private GoogleLocation _southWest;
-        private GoogleLocation _northEast;
+        private LatLng _southWest;
+        private LatLng _northEast;
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The south west.</value>
         [DataMember]
-        public GoogleLocation SouthWest {
+        public LatLng SouthWest {
             get { return _southWest; }
             set { _southWest = value; }
         }
@@ -58,7 +58,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The north east.</value>
         [DataMember]
-        public GoogleLocation NorthEast {
+        public LatLng NorthEast {
             get { return _northEast; }
             set { _northEast = value; }
         }

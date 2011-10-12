@@ -14,7 +14,7 @@ namespace Artem.Google {
     /// </summary>
     public static class JsUtil {
 
-        #region Static Fields ///////////////////////////////////////////////////////////
+        #region Static Fields
 
         static NumberFormatInfo _NumberFormat;
         public static readonly RegexOptions DefaultRegexOptions =
@@ -22,7 +22,7 @@ namespace Artem.Google {
 
         #endregion
 
-        #region Static Properties ///////////////////////////////////////////////////////
+        #region Static Properties
 
         /// <summary>
         /// Gets the number format.
@@ -36,7 +36,7 @@ namespace Artem.Google {
         }
         #endregion
 
-        #region Static Methods //////////////////////////////////////////////////////////
+        #region Static Methods
 
         /// <summary>
         /// Creates the serializer.
@@ -153,7 +153,7 @@ namespace Artem.Google {
         /// <returns></returns>
         public static IEnumerable<JavaScriptConverter> GetConverters() {
             yield return new ColorJavaScriptConverter();
-            //yield return new MarkerJavaScriptConverter();
+            yield return new PolylineOptionsConverter();
         }
 
         /// <summary>

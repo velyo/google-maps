@@ -15,9 +15,9 @@
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="37.559819"
         Longitude="-122.210540" Zoom="4">
         <DirectionsEvents OnClientAddOverlay="handleAddOverlay" OnClientError="handleError" OnClientLoad="handleLoad" />
-        <Directions>
-            <artem:GoogleDirections RoutePanelId="route" Query="from: San Francisco, CA to: Mountain View, CA" />
-        </Directions>
+        <%--<Directions>
+            <artem:GoogleDirections Query="from: San Francisco, CA to: Mountain View, CA" />
+        </Directions>--%>
     </artem:GoogleMap>
     <div id="route">
     </div>

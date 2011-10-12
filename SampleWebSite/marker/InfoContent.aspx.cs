@@ -12,7 +12,7 @@ public partial class marker_InfoContent : System.Web.UI.Page {
 
     protected void HandleMapDoubleClick(object sender, GoogleLocationEventArgs e) {
 
-        GoogleMarker marker = new GoogleMarker(e.Location.Latitude, e.Location.Longitude);
+        GoogleMarker marker = new GoogleMarker(e.Location.Point.Latitude, e.Location.Point.Longitude);
         GoogleMap1.Markers.Add(marker);
     }
 

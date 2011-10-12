@@ -329,7 +329,7 @@ namespace Artem.Google.UI {
         [Browsable(false)]
         [Obsolete("Not yet available in GoogleMaps API v3")]
         [ScriptIgnore]
-        public GooglePoint InfoWindowAnchor { get; set; }
+        public Point InfoWindowAnchor { get; set; }
 
         /// <summary>
         /// Gets or sets the max zoom.

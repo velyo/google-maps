@@ -17,12 +17,12 @@
         <Polygons>
             <artem:GooglePolygon FillColor="Red" FillOpacity=".8" StrokeColor="Blue" StrokeWeight="2">
                 <%--EnableEditing="true">--%>
-                <artem:GoogleLocation Latitude="37.97918" Longitude="23.716647" />
-                <artem:GoogleLocation Latitude="41.036501" Longitude="28.984895" />
-                <artem:GoogleLocation Latitude="44.447924" Longitude="26.097879" />
-                <artem:GoogleLocation Latitude="44.802416" Longitude="20.465601" />
-                <artem:GoogleLocation Latitude="42.002411" Longitude="21.436097" />
-                <artem:GoogleLocation Latitude="37.97918" Longitude="23.716647" />
+                <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
+                <artem:LatLng Latitude="41.036501" Longitude="28.984895" />
+                <artem:LatLng Latitude="44.447924" Longitude="26.097879" />
+                <artem:LatLng Latitude="44.802416" Longitude="20.465601" />
+                <artem:LatLng Latitude="42.002411" Longitude="21.436097" />
+                <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
             </artem:GooglePolygon>
         </Polygons>
     </artem:GoogleMap>

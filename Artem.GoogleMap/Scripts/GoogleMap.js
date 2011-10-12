@@ -69,12 +69,12 @@ Artem.Google.Map = function Artem_Google_Map(element) {
     this.get_name = function () { return name; };
     this.set_name = function (value) { name = value; };
 
-//    var partialUpdateDelegate = null;
-//    this.get_partialUpdateDelegate = function (getonly) {
-//        if (!partialUpdateDelegate && !getonly)
-//            partialUpdateDelegate = Function.createDelegate(self, self._onPartialUpdate)
-//        return partialUpdateDelegate;
-//    };
+    //    var partialUpdateDelegate = null;
+    //    this.get_partialUpdateDelegate = function (getonly) {
+    //        if (!partialUpdateDelegate && !getonly)
+    //            partialUpdateDelegate = Function.createDelegate(self, self._onPartialUpdate)
+    //        return partialUpdateDelegate;
+    //    };
 
     var polygonEvents = null;
     this.get_polygonEvents = function (read) {
@@ -97,12 +97,12 @@ Artem.Google.Map = function Artem_Google_Map(element) {
         return raiseServerEventDelegate;
     };
 
-//    var submitDelegate = null;
-//    this.get_submitDelegate = function (getonly) {
-//        if (!submitDelegate && !getonly)
-//            submitDelegate = Function.createDelegate(self, self._onSubmit);
-//        return submitDelegate;
-//    };
+    //    var submitDelegate = null;
+    //    this.get_submitDelegate = function (getonly) {
+    //        if (!submitDelegate && !getonly)
+    //            submitDelegate = Function.createDelegate(self, self._onSubmit);
+    //        return submitDelegate;
+    //    };
 };
 
 Artem.Google.Map.prototype = {
@@ -118,24 +118,24 @@ Artem.Google.Map.prototype = {
     set_markerManager: null,
     get_name: null,
     set_name: null,
-//    get_partialUpdateDelegate: null,
+    //    get_partialUpdateDelegate: null,
     get_polygonEvents: null,
     get_polylineEvents: null,
     get_raiseServerEventDelegate: null,
-//    get_submitDelegate: null,
+    //    get_submitDelegate: null,
 
 
     //#> Private Methods 
 
-//    _onPartialUpdate: function Artem_Google_Map$_onPartialUpdate() {
-//        this.loadState();
-//        return true;
-//    },
+    //    _onPartialUpdate: function Artem_Google_Map$_onPartialUpdate() {
+    //        this.loadState();
+    //        return true;
+    //    },
 
-//    _onSubmit: function Artem_Google_Map$_onSubmit() {
-//        this.saveState();
-//        return true;
-//    },
+    //    _onSubmit: function Artem_Google_Map$_onSubmit() {
+    //        this.saveState();
+    //        return true;
+    //    },
 
     _raiseServerEvent: function Artem_Google_Map$_raiseServerEvent() {
 
@@ -279,8 +279,8 @@ Artem.Google.Map.prototype = {
         var gmap = new google.maps.Map(map.get_element(), options);
         map.set_map(gmap);
 
-        attachEvents(map);
-        render(map);
+//        attachEvents(map);
+//        render(map);
     }
 
     function render(map) {
@@ -344,53 +344,53 @@ Artem.Google.Map.prototype = {
 
     function attachEvents(map) {
 
-//        if (typeof (Sys.WebForms) !== "undefined" && typeof (Sys.WebForms.PageRequestManager) !== "undefined") {
-//            var requestManager = Sys.WebForms.PageRequestManager.getInstance();
-//            if (requestManager) {
-//                Array.add(requestManager._onSubmitStatements, map.get_submitDelegate());
-//                requestManager.add_endRequest(map.get_partialUpdateDelegate());
-//            }
-//        }
-//        else {
-//            $addHandler(document.forms[0], "submit", map.get_submitDelegate());
-//        }
+//        //        if (typeof (Sys.WebForms) !== "undefined" && typeof (Sys.WebForms.PageRequestManager) !== "undefined") {
+//        //            var requestManager = Sys.WebForms.PageRequestManager.getInstance();
+//        //            if (requestManager) {
+//        //                Array.add(requestManager._onSubmitStatements, map.get_submitDelegate());
+//        //                requestManager.add_endRequest(map.get_partialUpdateDelegate());
+//        //            }
+//        //        }
+//        //        else {
+//        //            $addHandler(document.forms[0], "submit", map.get_submitDelegate());
+//        //        }
 
-        // map events
-        var name, handler;
-        var events = map.get_mapEvents();
-        var gmap = map.get_map();
-        for (name in events._list) {
-            handler = events.getHandler(name);
-            google.maps.event.addListener(gmap, name, handler);
-        }
+//        // map events
+//        var name, handler;
+//        var events = map.get_mapEvents();
+//        var gmap = map.get_map();
+//        for (name in events._list) {
+//            handler = events.getHandler(name);
+//            google.maps.event.addListener(gmap, name, handler);
+//        }
     }
 
     function detachEvents(map) {
 
-//        var delegate;
-//        if (typeof (Sys.WebForms) !== "undefined" && typeof (Sys.WebForms.PageRequestManager) !== "undefined") {
-//            var requestManager = Sys.WebForms.PageRequestManager.getInstance();
-//            if (requestManager) {
-//                delegate = map.get_partialUpdateDelegate(true);
-//                if (delegate) {
-//                    requestManager.remove_endRequest(delegate);
-//                }
-//                delegate = map.get_submitDelegate(true);
-//                if (delegate) {
-//                    Array.remove(requestManager._onSubmitStatements, delegate);
-//                }
-//            }
-//        }
-//        else {
-//            delegate = map.get_submitDelegate(true);
-//            if (delegate) {
-//                $removeHandler(document.forms[0], "submit", delegate);
-//            }
-//        }
+//        //        var delegate;
+//        //        if (typeof (Sys.WebForms) !== "undefined" && typeof (Sys.WebForms.PageRequestManager) !== "undefined") {
+//        //            var requestManager = Sys.WebForms.PageRequestManager.getInstance();
+//        //            if (requestManager) {
+//        //                delegate = map.get_partialUpdateDelegate(true);
+//        //                if (delegate) {
+//        //                    requestManager.remove_endRequest(delegate);
+//        //                }
+//        //                delegate = map.get_submitDelegate(true);
+//        //                if (delegate) {
+//        //                    Array.remove(requestManager._onSubmitStatements, delegate);
+//        //                }
+//        //            }
+//        //        }
+//        //        else {
+//        //            delegate = map.get_submitDelegate(true);
+//        //            if (delegate) {
+//        //                $removeHandler(document.forms[0], "submit", delegate);
+//        //            }
+//        //        }
 
-        // remove map event handlers
-        var gmap = map.get_map();
-        if (gmap) google.maps.event.clearInstanceListeners(gmap);
+//        // remove map event handlers
+//        var gmap = map.get_map();
+//        if (gmap) google.maps.event.clearInstanceListeners(gmap);
     }
     //#<
 
@@ -441,7 +441,7 @@ Artem.Google.Map.prototype = {
 
     //#> private method - state
 
-    function loadState () {
+    function loadState() {
 
         if (clientStateID) {
             var stateField = $get(clientStateID);
@@ -453,7 +453,7 @@ Artem.Google.Map.prototype = {
         }
     };
 
-    function saveState () {
+    function saveState() {
 
         if (clientStateID) {
             var stateField = $get(clientStateID);
@@ -1158,6 +1158,8 @@ Artem.Google.Map.prototype = {
     var map = null;
     proto.get_map = function () { return map; };
     proto.set_map = function (value) { map = value; };
+
+    proto.get_gmap = function () { return map; };
 
     // public methods
     proto.fitBounds = function (bounds) {

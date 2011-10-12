@@ -11,6 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using Artem.Google;
 using Artem.Google.UI;
 
 public partial class polygon_GoogleCirclePolygon : Page {
@@ -19,7 +20,7 @@ public partial class polygon_GoogleCirclePolygon : Page {
 
     protected void HandleDrawClick(object sender, EventArgs e) {
 
-        GoogleLocation location = GoogleLocation.Parse(_txtPoint.Text);
+        LatLng location = LatLng.Parse(_txtPoint.Text);
         int radius;
         if (int.TryParse(_txtRadius.Text, out radius)) {
             GoogleMap1.Polygons.Clear();

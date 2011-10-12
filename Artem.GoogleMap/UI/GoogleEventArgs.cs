@@ -93,7 +93,7 @@ namespace Artem.Google.UI {
         /// Gets or sets the location.
         /// </summary>
         /// <value>The location.</value>
-        public GoogleLocation Location { get; set; }
+        public Location Location { get; set; }
 
         #endregion
 
@@ -103,7 +103,7 @@ namespace Artem.Google.UI {
         /// Initializes a new instance of the <see cref="GoogleLocationEventArgs"/> class.
         /// </summary>
         /// <param name="location">The location.</param>
-        public GoogleLocationEventArgs(GoogleLocation location) {
+        public GoogleLocationEventArgs(Location location) {
             this.Location = location;
         }
 
@@ -112,7 +112,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="location">The location.</param>
         public GoogleLocationEventArgs(string location)
-            : this(GoogleLocation.Parse(location)) {
+            : this(Location.Parse(location)) {
         }
 
         /// <summary>

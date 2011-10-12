@@ -21,7 +21,7 @@ public partial class polygon_ClientEvents : Page {
 
     CultureInfo _culture = CultureInfo.GetCultureInfo("en-US");
     int _index;
-    GoogleLocation[] _points; 
+    LatLng[] _points; 
 
     #endregion
 
@@ -31,10 +31,10 @@ public partial class polygon_ClientEvents : Page {
     /// Gets the points.
     /// </summary>
     /// <value>The points.</value>
-    public GoogleLocation[] Points {
+    public LatLng[] Points {
         get {
             if (_points == null)
-                _points = new GoogleLocation[2];
+                _points = new LatLng[2];
             return _points;
         }
     } 
@@ -67,7 +67,7 @@ public partial class polygon_ClientEvents : Page {
         if (!string.IsNullOrEmpty(_lng.Value))
             lng = Convert.ToDouble(_lng.Value, _culture.NumberFormat);
         if (lat > 0 && lng > 0) {
-            Points[_index] = new GoogleLocation(lat, lng);
+            Points[_index] = new LatLng(lat, lng);
             _index = (_index == 0) ? 1 : 0;
         }
         //
@@ -79,9 +79,9 @@ public partial class polygon_ClientEvents : Page {
             polygon.StrokeColor = Color.Blue;
             polygon.StrokeWeight = 1;
             polygon.Points.Add(Points[0]);
-            polygon.Points.Add(new GoogleLocation(Points[0].Latitude, Points[1].Longitude));
+            polygon.Points.Add(new LatLng(Points[0].Latitude, Points[1].Longitude));
             polygon.Points.Add(Points[1]);
-            polygon.Points.Add(new GoogleLocation(Points[1].Latitude, Points[0].Longitude));
+            polygon.Points.Add(new LatLng(Points[1].Latitude, Points[0].Longitude));
             polygon.Points.Add(Points[0]);
             GoogleMap1.Polygons.Add(polygon);
         }
@@ -114,7 +114,7 @@ public partial class polygon_ClientEvents : Page {
                     if (!string.IsNullOrEmpty(pair[1]))
                         lng = Convert.ToDouble(pair[1], _culture.NumberFormat);
                     if (lat > 0 && lng > 0) {
-                        Points[index++] = new GoogleLocation(lat, lng);
+                        Points[index++] = new LatLng(lat, lng);
                     }
                 }
             }
@@ -133,7 +133,7 @@ public partial class polygon_ClientEvents : Page {
     protected override object SaveControlState() {
 
         StringBuilder buff = new StringBuilder();
-        foreach (GoogleLocation point in Points) {
+        foreach (LatLng point in Points) {
             if (point != null)
                 buff.AppendFormat("{0}:{1};",
                     Convert.ToString(point.Latitude, _culture.NumberFormat),

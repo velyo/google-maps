@@ -44,9 +44,9 @@
         <%--<PolylineEvents OnClick="HandlePolylineClick" />--%>
         <Polylines>
             <artem:GooglePolyline Color="Blue" Weight="2" Opacity="1" IsGeodesic="false">
-                <artem:GoogleLocation Latitude="42.1229" Longitude="24.7879" />
-                <artem:GoogleLocation Latitude="51.34433" Longitude="16.17578" />
-                <artem:GoogleLocation Latitude="41.70572" Longitude="12.39257" />
+                <artem:LatLng Latitude="42.1229" Longitude="24.7879" />
+                <artem:LatLng Latitude="51.34433" Longitude="16.17578" />
+                <artem:LatLng Latitude="41.70572" Longitude="12.39257" />
             </artem:GooglePolyline>
         </Polylines>
     </artem:GoogleMap>
