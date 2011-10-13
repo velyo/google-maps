@@ -33,7 +33,6 @@ namespace Artem.Google.UI {
         string _address;
         LatLng _center;
         List<GoogleDirections> _directions;
-        GoogleDirectionsEvents _directionsEvents;
         string _key;
         bool _loading;
         GoogleMarkerEvents _markerEvents;
@@ -41,7 +40,6 @@ namespace Artem.Google.UI {
         GoogleMarkerStyle _markerStyle;
         GooglePolygonEvents _polygonEvents;
         List<GooglePolygon> _polygons;
-        GooglePolylineEvents _polylineEvents;
         List<GooglePolyline> _polylines;
         HtmlGenericControl _templateContainer;
 
@@ -570,21 +568,6 @@ namespace Artem.Google.UI {
 
         #region Not Complete
 
-        [Browsable(true)]
-        [Category("Google")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GoogleDirectionsEvents DirectionsEvents {
-            get {
-                return _directionsEvents ??
-                    (_directionsEvents = new GoogleDirectionsEvents());
-            }
-            protected internal set {
-                _directionsEvents = value;
-            }
-        }
-
         /// <summary>
         /// Gets or sets the marker events.
         /// </summary>
@@ -641,24 +624,6 @@ namespace Artem.Google.UI {
             }
         }
 
-        /// <summary>
-        /// Gets or sets the polyline events.
-        /// </summary>
-        /// <value>The polyline events.</value>
-        [Browsable(true)]
-        [Category("Google")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GooglePolylineEvents PolylineEvents {
-            get {
-                return _polylineEvents ??
-                    (_polylineEvents = new GooglePolylineEvents());
-            }
-            protected internal set {
-                _polylineEvents = value;
-            }
-        }
         #endregion
 
         #endregion
@@ -745,7 +710,7 @@ namespace Artem.Google.UI {
                             PolygonEvents.RaiseEvent(this, key, args);
                             break;
                         case "polyline":
-                            PolylineEvents.RaiseEvent(this, key, args);
+                            //PolylineEvents.RaiseEvent(this, key, args);
                             break;
                     }
                 }

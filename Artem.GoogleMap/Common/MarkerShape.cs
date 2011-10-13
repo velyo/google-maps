@@ -26,7 +26,32 @@ namespace Artem.Google.UI {
     /// The shape consists of two properties — type and coord — which define the general type of marker 
     /// and coordinates specific to that type of marker.
     /// </summary>
-    public class MarkerShape : ISelfConverter {
+    public class MarkerShape : IScriptDataConverter {
+
+        #region Static Methods
+
+        /// <summary>
+        /// Retrieves an instance from script data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static MarkerShape FromScriptData(IDictionary<string, object> data) {
+
+            if (data != null) {
+                var result = new MarkerShape();
+                object value;
+
+                if (data.TryGetValue("coords", out value)) result.Coords = (int[])value;
+                if (data.TryGetValue("type", out value)) {
+                    MarkerShapeType type;
+                    if (Enum.TryParse<MarkerShapeType>((string)value, true, out type)) result.Type = type;
+                }
+
+                return result;
+            }
+            return null;
+        }
+        #endregion
 
         #region Properties
 
@@ -53,10 +78,13 @@ namespace Artem.Google.UI {
 
         #region Methods
 
-        public IDictionary<string, object> ToDictionary() {
-                return new Dictionary<string, object> { { "coords", Coords }, { "type", Type.ToString().ToLower() } };
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
+            return new Dictionary<string, object> { { "coords", Coords }, { "type", Type.ToString().ToLower() } };
         }
-
         #endregion
     }
 }

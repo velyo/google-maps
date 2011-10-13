@@ -11,7 +11,7 @@ namespace Artem.Google.UI {
     /// <summary>
     /// 
     /// </summary>
-    public class Point : ISelfConverter {
+    public class Point : IScriptDataConverter {
 
         #region Static Fields
 
@@ -48,6 +48,25 @@ namespace Artem.Google.UI {
         /// <returns>The result of the conversion.</returns>
         public static implicit operator Point(string value) {
             return Parse(value);
+        }
+
+        /// <summary>
+        /// Retrieves an instance from script data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static Point FromScriptData(IDictionary<string, object> data) {
+
+            if (data != null) {
+                var result = new Point();
+                object value;
+
+                if (data.TryGetValue("x", out value)) result.X = (int)value;
+                if (data.TryGetValue("y", out value)) result.Y = (int)value;
+
+                return result;
+            }
+            return null;
         }
 
         /// <summary>
@@ -124,7 +143,11 @@ namespace Artem.Google.UI {
             return base.GetHashCode();
         }
 
-        public IDictionary<string, object> ToDictionary() {
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
             return new Dictionary<string, object> { { "x", this.X }, { "y", this.Y } };
         }
 

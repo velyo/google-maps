@@ -26,8 +26,13 @@ Artem.Google.PolylineBehavior.prototype = {
     var map;
     proto.get_map = function () { return map; };
 
+    var name;
+    proto.get_name = function () { return name; };
+    proto.set_name = function (value) { name = value; };
+
     var polyline;
     proto.get_polyline = function () { return polyline; };
+
 
     var clickable;
     proto.get_clickable = function () { return clickable; };
@@ -286,34 +291,50 @@ Static server event handler entry points
 */
 Artem.Google.PolylineBehavior.raiseServerClick = function (sender, e) {
     ///<summary>An entry point handler to fire server click event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "click" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerDoubleClick = function (e) {
+Artem.Google.PolylineBehavior.raiseServerDoubleClick = function (sender, e) {
     ///<summary>An entry point handler to fire server double click event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "doubleClick" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerMouseDown = function (e) {
+Artem.Google.PolylineBehavior.raiseServerMouseDown = function (sender, e) {
     ///<summary>An entry point handler to fire server mouse down event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "mouseDown" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerMouseMove = function (e) {
+Artem.Google.PolylineBehavior.raiseServerMouseMove = function (sender, e) {
     ///<summary>An entry point handler to fire server mouse move event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "mouseMove" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerMouseOut = function (e) {
+Artem.Google.PolylineBehavior.raiseServerMouseOut = function (sender, e) {
     ///<summary>An entry point handler to fire server mouse out event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "mouseOut" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerMouseOver = function (e) {
+Artem.Google.PolylineBehavior.raiseServerMouseOver = function (sender, e) {
     ///<summary>An entry point handler to fire server mouse over event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "mouseOver" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerMouseUp = function (e) {
+Artem.Google.PolylineBehavior.raiseServerMouseUp = function (sender, e) {
     ///<summary>An entry point handler to fire server mouse up event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "mouseUp" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.PolylineBehavior.raiseServerRightClick = function (e) {
+Artem.Google.PolylineBehavior.raiseServerRightClick = function (sender, e) {
     ///<summary>An entry point handler to fire server right click event post back.</summary>
+    var args = { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "rightClick" };
+    __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
 Artem.Google.PolylineBehavior.registerClass('Artem.Google.PolylineBehavior', Sys.UI.Behavior);

@@ -7,7 +7,34 @@ using Artem.Google.Serialization;
 
 namespace Artem.Google.UI {
 
-    public class PolylineOptions : ISelfConverter {
+    public class PolylineOptions : IScriptDataConverter {
+
+        #region Static Methods
+
+        /// <summary>
+        /// Retrieves an instance from script data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static PolylineOptions FromScriptData(IDictionary<string, object> data) {
+
+            if (data != null) {
+                var options = new PolylineOptions();
+                object value;
+
+                if (data.TryGetValue("clickable", out value)) options.Clickable = (bool)value;
+                if (data.TryGetValue("geodesic", out value)) options.Geodesic = (bool)value;
+                if (data.TryGetValue("strokeColor", out value)) options.StrokeColor = (string)value;
+                if (data.TryGetValue("strokeOpacity", out value)) options.StrokeOpacity = (float)value;
+                if (data.TryGetValue("strokeWeight", out value)) options.StrokeWeight = (int)value;
+                if (data.TryGetValue("zIndex", out value)) options.ZIndex = (int)value;
+
+                return options;
+            }
+            return null;
+        }
+
+        #endregion
 
         #region Properties
 
@@ -71,7 +98,11 @@ namespace Artem.Google.UI {
 
         #region Methods
 
-        public IDictionary<string, object> ToDictionary() {
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
 
             var result = new Dictionary<string, object>();
 

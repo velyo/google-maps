@@ -368,11 +368,11 @@ namespace Artem.Google.UI {
             descriptor.AddProperty("draggable", this.Draggable);
             descriptor.AddProperty("hideRouteList", this.HideRouteList);
             if (this.MarkerOptions != null)
-                descriptor.AddProperty("markerOptions", this.MarkerOptions.ToDictionary());
+                descriptor.AddProperty("markerOptions", this.MarkerOptions.ToScriptData());
             if (this.PanelID != null)
                 descriptor.AddProperty("panelId", this.PanelID);
-            if (PolylineOptions != null) 
-                descriptor.AddProperty("polylineOptions",  this.PolylineOptions.ToDictionary());
+            if (PolylineOptions != null)
+                descriptor.AddProperty("polylineOptions", this.PolylineOptions.ToScriptData());
             descriptor.AddProperty("preserveViewport", this.PreserveViewport);
             descriptor.AddProperty("routeIndex", this.RouteIndex);
             if (this.SuppressBicyclingLayer.HasValue)
@@ -385,11 +385,10 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("suppressPolylines", this.SuppressPolylines.Value);
 
             // events
-            if (this.OnClientChanged != null)
-                descriptor.AddEvent("changed", this.OnClientChanged);
-            // as added last, the server side event handling will everride the client event handler, if was set
-            if (this.Changed != null) 
+            if (this.Changed != null)
                 descriptor.AddEvent("changed", "Artem.Google.DirectionsBehavior.raiseServerChanged");
+            else if (this.OnClientChanged != null)
+                descriptor.AddEvent("changed", this.OnClientChanged);
 
             yield return descriptor;
         }
@@ -410,6 +409,10 @@ namespace Artem.Google.UI {
 #endif
         }
 
+        /// <summary>
+        /// Raises the <see cref="E:Changed"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.DirectionsChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnChanged(DirectionsChangedEventArgs e) {
             if (this.Changed != null) this.Changed(this, e);
         }
@@ -420,8 +423,8 @@ namespace Artem.Google.UI {
         /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
         public void RaisePostBackEvent(string eventArgument) {
 
-            var serializer = new JavaScriptSerializer();
-            var args = serializer.Deserialize<DirectionsChangedEventArgs>(eventArgument);
+            var ser = new JavaScriptSerializer();    
+            var args = ser.Deserialize<DirectionsChangedEventArgs>(eventArgument);
             this.OnChanged(args);
         }
         #endregion

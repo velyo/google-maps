@@ -10,7 +10,7 @@ namespace Artem.Google.UI {
     /// 
     /// </summary>
     [DataContract]
-    public class Size : ISelfConverter {
+    public class Size : IScriptDataConverter {
 
         #region Static Fields
 
@@ -48,6 +48,25 @@ namespace Artem.Google.UI {
         /// <returns>The result of the conversion.</returns>
         public static implicit operator Size(string value) {
             return Parse(value);
+        }
+
+        /// <summary>
+        /// Retrieves an instance from script data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static Size FromScriptData(IDictionary<string, object> data) {
+
+            if (data != null) {
+                var size = new Size();
+                object value;
+
+                if(data.TryGetValue("width", out value)) size.Width =(int)value;
+                if(data.TryGetValue("height", out value)) size.Height =(int)value;
+
+                return size;
+            }
+            return null;
         }
 
         /// <summary>
@@ -129,7 +148,11 @@ namespace Artem.Google.UI {
             return base.GetHashCode();
         }
 
-        public IDictionary<string, object> ToDictionary() {
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
             return new Dictionary<string, object> { { "width", this.Width }, { "height", this.Height } };
         }
 

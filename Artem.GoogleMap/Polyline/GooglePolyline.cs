@@ -11,6 +11,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Script.Serialization;
 
 [assembly: WebResource("Artem.Google.Polyline.GooglePolylineBehavior.js", "text/javascript")]
 [assembly: WebResource("Artem.Google.Polyline.GooglePolylineBehavior.min.js", "text/javascript")]
@@ -125,7 +126,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired when the DOM click event is fired on the Polyline.
         /// </summary>
-        public event EventHandler Click;
+        public event EventHandler<MouseEventArgs> Click;
         /// <summary>
         /// Gets or sets the on client click handler.
         /// </summary>
@@ -135,7 +136,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired when the DOM dblclick event is fired on the Polyline.
         /// </summary>
-        public event EventHandler DoubleClick;
+        public event EventHandler<MouseEventArgs> DoubleClick;
         /// <summary>
         /// Gets or sets the on client double click handler.
         /// </summary>
@@ -145,7 +146,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired when the DOM mousedown event is fired on the Polyline.
         /// </summary>
-        public event EventHandler MouseDown;
+        public event EventHandler<MouseEventArgs> MouseDown;
         /// <summary>
         /// Gets or sets the on client mouse down handler.
         /// </summary>
@@ -155,7 +156,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired when the DOM mousemove event is fired on the Polyline.
         /// </summary>
-        public event EventHandler MouseMove;
+        public event EventHandler<MouseEventArgs> MouseMove;
         /// <summary>
         /// Gets or sets the on client mouse move handler.
         /// </summary>
@@ -165,7 +166,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired on Polyline mouseout.
         /// </summary>
-        public event EventHandler MouseOut;
+        public event EventHandler<MouseEventArgs> MouseOut;
         /// <summary>
         /// Gets or sets the on client mouse out handler.
         /// </summary>
@@ -175,7 +176,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired on Polyline mouseover.
         /// </summary>
-        public event EventHandler MouseOver;
+        public event EventHandler<MouseEventArgs> MouseOver;
         /// <summary>
         /// Gets or sets the on client mouse over handler.
         /// </summary>
@@ -185,7 +186,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired when the DOM mouseup event is fired on the Polyline.
         /// </summary>
-        public event EventHandler MouseUp;
+        public event EventHandler<MouseEventArgs> MouseUp;
         /// <summary>
         /// Gets or sets the on client mouse up handler.
         /// </summary>
@@ -195,7 +196,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// This event is fired when the Polyline is right-clicked on.
         /// </summary>
-        public event EventHandler RightClick;
+        public event EventHandler<MouseEventArgs> RightClick;
         /// <summary>
         /// Gets or sets the on client right click handler.
         /// </summary>
@@ -231,17 +232,20 @@ namespace Artem.Google.UI {
 
             var descriptor = new ScriptBehaviorDescriptor("Artem.Google.PolylineBehavior", targetControl.ClientID);
 
-            // properties
+            #region properties
             descriptor.AddProperty("clickable", this.Clickable);
             descriptor.AddProperty("geodesic", this.Geodesic);
+            descriptor.AddProperty("name", this.UniqueID);
             descriptor.AddProperty("path",
                 (_path != null) ? _path.Select(p => new { lat = p.Latitude, lng = p.Longitude }).ToArray() : null);
             descriptor.AddProperty("strokeColor", ColorTranslator.ToHtml(this.StrokeColor));
             descriptor.AddProperty("strokeOpacity", this.StrokeOpacity);
             descriptor.AddProperty("strokeWeight", this.StrokeWeight);
             descriptor.AddProperty("zIndex", this.ZIndex);
+            #endregion
 
-            // events
+            #region events
+
             if (this.Click != null)
                 descriptor.AddEvent("click", "Artem.Google.PolylineBehavior.raiseServerClick");
             else if (this.OnClientClick != null)
@@ -281,6 +285,7 @@ namespace Artem.Google.UI {
                 descriptor.AddEvent("rightClick", "Artem.Google.PolylineBehavior.raiseServerRightClick");
             else if (this.OnClientRightClick != null)
                 descriptor.AddEvent("rightClick", this.OnClientRightClick);
+            #endregion
 
             yield return descriptor;
         }
@@ -294,8 +299,108 @@ namespace Artem.Google.UI {
 #endif
         }
 
+        /// <summary>
+        /// Raises the <see cref="E:Click"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnClick(MouseEventArgs e) {
+            if (this.Click != null) this.Click(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DoubleClick"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDoubleClick(MouseEventArgs e) {
+            if (this.DoubleClick != null) this.DoubleClick(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseDown"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseDown(MouseEventArgs e) {
+            if (this.MouseDown != null) this.MouseDown(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseMove"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseMove(MouseEventArgs e) {
+            if (this.MouseMove != null) this.MouseMove(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseOut"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseOut(MouseEventArgs e) {
+            if (this.MouseOut != null) this.MouseOut(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseOver"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseOver(MouseEventArgs e) {
+            if (this.MouseOver != null) this.MouseOver(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseUp"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseUp(MouseEventArgs e) {
+            if (this.MouseUp != null) this.MouseUp(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:RightClick"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnRightClick(MouseEventArgs e) {
+            if (this.RightClick != null) this.RightClick(this, e);
+        }
+
+        /// <summary>
+        /// When implemented by a class, enables a server control to process an event raised when a form is posted to the server.
+        /// </summary>
+        /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
         public void RaisePostBackEvent(string eventArgument) {
-            throw new NotImplementedException();
+
+            var ser = new JavaScriptSerializer();
+            dynamic args = ser.DeserializeObject(eventArgument);
+            if (args != null) {
+                string name = args["name"];
+                var e = MouseEventArgs.FromScriptData(args);
+                switch(name){
+                    case "click":
+                        this.OnClick(e);
+                        break;
+                    case "doubleClick":
+                        this.OnDoubleClick(e);
+                        break;
+                    case "mouseDown":
+                        this.OnMouseDown(e);
+                        break;
+                    case "mouseMove":
+                        this.OnMouseMove(e);
+                        break;
+                    case "mouseOut":
+                        this.OnMouseOut(e);
+                        break;
+                    case "mouseOver":
+                        this.OnMouseOver(e);
+                        break;
+                    case "mouseUp":
+                        this.OnMouseUp(e);
+                        break;
+                    case "rightClick":
+                        this.OnRightClick(e);
+                        break;
+                }
+            }
         }
         #endregion
     }

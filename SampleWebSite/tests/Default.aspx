@@ -39,7 +39,7 @@
             Origin="plovdiv" Destination="sofia" Draggable="true" OnChanged="HandleChanged"
             PanelID="info" >
         </artem:GoogleDirections>--%>
-        <artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5" OnClientMouseOver="test">
+        <artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5" OnRightClick="HandleClick">
             <artem:LatLng Latitude="42.14304" Longitude="24.74967" />
             <artem:LatLng Latitude="42.69649" Longitude="23.32601" />
         </artem:GooglePolyline>
@@ -91,6 +91,10 @@
     }
 
     protected void HandleChanged(object sender, DirectionsChangedEventArgs e) {
+        int i = 0;
+    }
+
+    protected void HandleClick(object sender, MouseEventArgs e) {
         int i = 0;
     }
     #endregion

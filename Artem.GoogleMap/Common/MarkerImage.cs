@@ -17,7 +17,7 @@ namespace Artem.Google.UI {
     /// To scale the image, whether sprited or not, set the value of scaledSize to the size of the whole image and set size, 
     /// origin and anchor in scaled values. The MarkerImage cannot be changed once constructed. 
     /// </summary>
-    public class MarkerImage : ISelfConverter {
+    public class MarkerImage : IScriptDataConverter {
 
         #region Static Methods
 
@@ -30,8 +30,39 @@ namespace Artem.Google.UI {
             return new MarkerImage { Url = url };
         }
 
+        /// <summary>
+        /// Performs an implicit conversion from <see cref="Artem.Google.UI.MarkerImage"/> to <see cref="System.String"/>.
+        /// </summary>
+        /// <param name="image">The image.</param>
+        /// <returns>The result of the conversion.</returns>
         public static implicit operator string(MarkerImage image) {
             return (image != null) ? image.Url : null;
+        }
+
+        /// <summary>
+        /// Retrieves an instance from script data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static MarkerImage FromScriptData(IDictionary<string, object> data) {
+
+            if (data != null) {
+                var result = new MarkerImage();
+                object value;
+
+                if (data.TryGetValue("anchor", out value))
+                    result.Anchor = Point.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("origin", out value))
+                    result.Origin = Point.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("scaledSize", out value))
+                    result.ScaledSize = Size.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("size", out value))
+                    result.Size = Size.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("url", out value)) result.Url = (string)value;
+
+                return result;
+            }
+            return null;
         }
         #endregion
 
@@ -87,18 +118,22 @@ namespace Artem.Google.UI {
 
         #region Methods
 
-        public IDictionary<string, object> ToDictionary() {
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
 
             var result = new Dictionary<string, object>();
 
             if (this.Anchor != null)
-                result["anchor"] = this.Anchor.ToDictionary();
+                result["anchor"] = this.Anchor.ToScriptData();
             if(this.Origin != null)
-                result["origin"] = this.Origin.ToDictionary();
+                result["origin"] = this.Origin.ToScriptData();
             if(this.ScaledSize != null)
-                result["scaledSize"] = this.ScaledSize.ToDictionary();
+                result["scaledSize"] = this.ScaledSize.ToScriptData();
             if(this.Size != null)
-                result["size"] = this.Size.ToDictionary();
+                result["size"] = this.Size.ToScriptData();
             if (this.Url != null)
                 result["url"] = this.Url;
 

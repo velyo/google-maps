@@ -300,21 +300,21 @@ namespace Artem.Google.UI {
                     foreach (var handler in this.MarkerEvents.Registry[name])
                         eventEntries.Add("marker_" + name, handler);
                 }
-                // directions events
-                foreach (var name in this.DirectionsEvents.Registry.Keys) {
-                    foreach (var handler in this.DirectionsEvents.Registry[name])
-                        eventEntries.Add("directions_" + name, handler);
-                }
+                //// directions events
+                //foreach (var name in this.DirectionsEvents.Registry.Keys) {
+                //    foreach (var handler in this.DirectionsEvents.Registry[name])
+                //        eventEntries.Add("directions_" + name, handler);
+                //}
                 // polygon events
                 foreach (var name in this.PolygonEvents.Registry.Keys) {
                     foreach (var handler in this.PolygonEvents.Registry[name])
                         eventEntries.Add("polygon_" + name, handler);
                 }
-                // polyline events
-                foreach (var name in this.PolylineEvents.Registry.Keys) {
-                    foreach (var handler in this.PolylineEvents.Registry[name])
-                        eventEntries.Add("polyline_" + name, handler);
-                }
+                //// polyline events
+                //foreach (var name in this.PolylineEvents.Registry.Keys) {
+                //    foreach (var handler in this.PolylineEvents.Registry[name])
+                //        eventEntries.Add("polyline_" + name, handler);
+                //}
                 string events = this.Serializer.Serialize(eventEntries);
 
                 StringBuilder buffer = new StringBuilder();
@@ -383,21 +383,21 @@ namespace Artem.Google.UI {
                 foreach (var handler in this.MarkerEvents.Registry[name])
                     descriptor.AddEvent("marker_" + name, handler);
             }
-            // directions events
-            foreach (var name in this.DirectionsEvents.Registry.Keys) {
-                foreach (var handler in this.DirectionsEvents.Registry[name])
-                    descriptor.AddEvent("directions_" + name, handler);
-            }
+            //// directions events
+            //foreach (var name in this.DirectionsEvents.Registry.Keys) {
+            //    foreach (var handler in this.DirectionsEvents.Registry[name])
+            //        descriptor.AddEvent("directions_" + name, handler);
+            //}
             // polygon events
             foreach (var name in this.PolygonEvents.Registry.Keys) {
                 foreach (var handler in this.PolygonEvents.Registry[name])
                     descriptor.AddEvent("polygon_" + name, handler);
             }
-            // polyline events
-            foreach (var name in this.PolylineEvents.Registry.Keys) {
-                foreach (var handler in this.PolylineEvents.Registry[name])
-                    descriptor.AddEvent("polyline_" + name, handler);
-            }
+            //// polyline events
+            //foreach (var name in this.PolylineEvents.Registry.Keys) {
+            //    foreach (var handler in this.PolylineEvents.Registry[name])
+            //        descriptor.AddEvent("polyline_" + name, handler);
+            //}
 
             yield return descriptor;
 

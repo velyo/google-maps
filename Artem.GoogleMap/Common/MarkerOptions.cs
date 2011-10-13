@@ -23,7 +23,45 @@ namespace Artem.Google.UI {
         Drop = 2
     }
 
-    public class MarkerOptions : ISelfConverter {
+    public class MarkerOptions : IScriptDataConverter {
+
+        #region Static Methods
+
+        /// <summary>
+        /// Retrieves an instance from script data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
+        public static MarkerOptions FromScriptData(IDictionary<string, object> data) {
+
+            if (data != null) {
+                var result = new MarkerOptions();
+                object value;
+
+                if (data.TryGetValue("animation", out value)) result.Animation = (Animation)(int)value;
+                if (data.TryGetValue("clickable", out value)) result.Clickable = (bool)value;
+                if (data.TryGetValue("cursor", out value)) result.Cursor = (string)value;
+                if (data.TryGetValue("draggable", out value)) result.Draggable = (bool)value;
+                if (data.TryGetValue("flat", out value)) result.Flat = (bool)value;
+                if (data.TryGetValue("icon", out value))
+                    result.Icon = MarkerImage.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("optimized", out value)) result.Optimized = (bool)value;
+                if (data.TryGetValue("position", out value))
+                    result.Position = LatLng.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("raiseOnDrag", out value)) result.RaiseOnDrag = (bool)value;
+                if (data.TryGetValue("shadow", out value))
+                    result.Shadow = MarkerImage.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("shape", out value))
+                    result.Shape = MarkerShape.FromScriptData((IDictionary<string, object>)value);
+                if (data.TryGetValue("title", out value)) result.Title = (string)value;
+                if (data.TryGetValue("visible", out value)) result.Visible = (bool)value;
+                if (data.TryGetValue("zIndex", out value)) result.ZIndex = (int)value;
+
+                return result;
+            }
+            return null;
+        }
+        #endregion
 
         #region Properties
 
@@ -133,7 +171,11 @@ namespace Artem.Google.UI {
 
         #region Methods
 
-        public IDictionary<string, object> ToDictionary() {
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
 
             var result = new Dictionary<string, object>();
 
@@ -144,15 +186,15 @@ namespace Artem.Google.UI {
             result["draggable"] = this.Draggable;
             result["flat"] = this.Flat;
             if (this.Icon != null)
-                result["Icon"] = this.Icon.ToDictionary();
+                result["icon"] = this.Icon.ToScriptData();
             result["optimized"] = this.Optimized;
             if (Position != null)
-                result["position"] = this.Position.ToDictionary();
+                result["position"] = this.Position.ToScriptData();
             result["raiseOnDrag"] = this.RaiseOnDrag;
             if (Shadow != null)
-                result["shadow"] = this.Shadow.ToDictionary();
+                result["shadow"] = this.Shadow.ToScriptData();
             if (Shape != null)
-                result["shadow"] = this.Shape.ToDictionary();
+                result["shape"] = this.Shape.ToScriptData();
             if (Title != null)
                 result["title"] = this.Title;
             result["visible"] = this.Visible;

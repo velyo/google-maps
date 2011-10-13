@@ -14,7 +14,7 @@
     <asp:Button runat="server" Text="Show" OnClick="HandleShowDirectionsClick" />
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="37.559819"
         Longitude="-122.210540" Zoom="4">
-        <DirectionsEvents OnClientAddOverlay="handleAddOverlay" OnClientError="handleError" OnClientLoad="handleLoad" />
+        <%--<DirectionsEvents OnClientAddOverlay="handleAddOverlay" OnClientError="handleError" OnClientLoad="handleLoad" />--%>
         <%--<Directions>
             <artem:GoogleDirections Query="from: San Francisco, CA to: Mountain View, CA" />
         </Directions>--%>
