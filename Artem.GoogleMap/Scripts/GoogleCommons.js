@@ -139,6 +139,20 @@ Artem.Google.Converter = {
         }
     },
 
+    latlngArray: function (points) {
+
+        var result = null;
+
+        if (points) {
+            result = [];
+            for (var i = 0; i < points.length; i++) {
+                result.push(new google.maps.LatLng(points[i].lat, points[i].lng));
+            }
+        }
+
+        return result;
+    },
+
     mapTypeControlOptions: function (value) {
         return {
             mapTypeIds: value.MapTypes,

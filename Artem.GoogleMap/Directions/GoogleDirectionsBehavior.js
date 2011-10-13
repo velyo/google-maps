@@ -277,7 +277,7 @@ Artem.Google.DirectionsBehavior.prototype = {
         }
     };
 
-    // clientChanged
+    // changed
     proto.add_changed = function (handler) {
         this.get_events().addHandler("changed", handler);
         this.registerEvents(null, handler);

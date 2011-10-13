@@ -271,9 +271,12 @@ namespace Artem.Google.UI {
 
         #region Events
 
-        public string OnClientChanged { get; set; }
-
+        [Category("Google")]
+        [Description()]
         public event EventHandler<DirectionsChangedEventArgs> Changed;
+
+        [Category("ClientEvent")]
+        public string OnClientChanged { get; set; }
 
         #endregion
 
@@ -338,7 +341,6 @@ namespace Artem.Google.UI {
         /// An enumeration of <see cref="T:System.Web.UI.ScriptDescriptor"/> objects.
         /// </returns>
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl) {
-
 
             var descriptor = new ScriptBehaviorDescriptor("Artem.Google.DirectionsBehavior", targetControl.ClientID);
 

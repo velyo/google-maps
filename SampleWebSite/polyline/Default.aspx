@@ -42,13 +42,13 @@
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
         Longitude="24.7879" Zoom="4"><%-- OnClientClick="handleMapClick" EnableScrollWheelZoom="true">--%>
         <%--<PolylineEvents OnClick="HandlePolylineClick" />--%>
-        <Polylines>
+        <%--<Polylines>
             <artem:GooglePolyline Color="Blue" Weight="2" Opacity="1" IsGeodesic="false">
                 <artem:LatLng Latitude="42.1229" Longitude="24.7879" />
                 <artem:LatLng Latitude="51.34433" Longitude="16.17578" />
                 <artem:LatLng Latitude="41.70572" Longitude="12.39257" />
             </artem:GooglePolyline>
-        </Polylines>
+        </Polylines>--%>
     </artem:GoogleMap>
     <fieldset>
         <legend>Extra Data</legend>

@@ -35,12 +35,14 @@
         <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="HYBRID" Zoom="8" Latitude="42.1229"
             Longitude="24.7879" CssClass="map" DefaultAddress="sofia">
         </artem:GoogleMap>
-        <artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
+        <%--<artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
             Origin="plovdiv" Destination="sofia" Draggable="true" OnChanged="HandleChanged"
             PanelID="info" >
-            <PolylineOptions StrokeWeight="5"/>
-            <MarkerOptions Draggable="true"/>
-        </artem:GoogleDirections>
+        </artem:GoogleDirections>--%>
+        <artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5" OnClientMouseOver="test">
+            <artem:LatLng Latitude="42.14304" Longitude="24.74967" />
+            <artem:LatLng Latitude="42.69649" Longitude="23.32601" />
+        </artem:GooglePolyline>
     </div>
     <div id="info">
     </div>

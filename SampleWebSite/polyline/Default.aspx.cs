@@ -31,11 +31,11 @@ public partial class polyline_GooglePolyline : Page {
         string value = this.Request["__points"];
         if (!string.IsNullOrEmpty(value)) {
             GooglePolyline line = new GooglePolyline();
-            line.Color = Color.Blue;
-            line.Weight = 2;
+            line.StrokeColor = Color.Blue;
+            line.StrokeWeight = 2;
             string[] points = value.Split(';');
             foreach (string point in points) {
-                line.Points.Add(LatLng.Parse(point));
+                line.Path.Add(LatLng.Parse(point));
             }
             GoogleMap1.Polylines.Clear();
             GoogleMap1.Polylines.Add(line);
