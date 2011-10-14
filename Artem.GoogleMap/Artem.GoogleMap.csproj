@@ -116,8 +116,6 @@
     <Compile Include="UI\GoogleBounds.cs" />
     <Compile Include="UI\GoogleCirclePolygon.cs" />
     <Compile Include="Directions\GoogleDirections.cs" />
-    <Compile Include="UI\GoogleDistance.cs" />
-    <Compile Include="UI\GoogleDuration.cs" />
     <Compile Include="UI\GoogleEventArgs.cs" />
     <Compile Include="UI\GoogleEventList.cs" />
     <Compile Include="UI\GoogleMap.cs" />
@@ -140,8 +138,8 @@
     <Compile Include="UI\GoogleMarkerEvents.cs" />
     <Compile Include="UI\GoogleMarkerStyle.cs" />
     <Compile Include="Common\Point.cs" />
-    <Compile Include="UI\GooglePolygon.cs" />
-    <Compile Include="UI\GooglePolygonEvents.cs" />
+    <Compile Include="Polygon\GooglePolygon.cs" />
+    <Compile Include="Polygon\GooglePolygonEvents.cs" />
     <Compile Include="Polyline\GooglePolyline.cs" />
     <Compile Include="Common\Size.cs" />
     <Compile Include="UI\GoogleZoomPair.cs" />
@@ -216,11 +214,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Markers\" />
-    <Folder Include="Polygon\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
     <EmbeddedResource Include="Polyline\GooglePolylineBehavior.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Polygon\GooglePolygonBehavior.js" />
+    <EmbeddedResource Include="Polygon\GooglePolygonBehavior.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -232,7 +233,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

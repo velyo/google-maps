@@ -11,6 +11,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.min.js", "text/javascript")]
+
 namespace Artem.Google.UI {
 
     /// <summary>
@@ -18,7 +21,10 @@ namespace Artem.Google.UI {
     /// additionally, polygons form a closed loop and define a filled region.
     /// </summary>
     [ParseChildren(true, "Points")]
-    public class GooglePolygon {
+    [PersistChildren(false)]
+    [TargetControlType(typeof(GoogleMap))]
+    [ToolboxData("<{0}:GooglePolygon runat=server></{0}:GooglePolygon>")]
+    public class GooglePolygon : ExtenderControl, IPostBackEventHandler {
 
         #region Fields  ///////////////////////////////////////////////////////////////////////////
 
@@ -197,7 +203,40 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Methods ///////////////////////////////////////////////////////////////////////////
+        #region Methods
+
+        /// <summary>
+        /// When overridden in a derived class, registers the <see cref="T:System.Web.UI.ScriptDescriptor"/> objects for the control.
+        /// </summary>
+        /// <param name="targetControl">The server control to which the extender is associated.</param>
+        /// <returns>
+        /// An enumeration of <see cref="T:System.Web.UI.ScriptDescriptor"/> objects.
+        /// </returns>
+        protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl) {
+
+            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.PolygonBehavior", targetControl.ClientID);
+            yield return descriptor;
+        }
+
+        /// <summary>
+        /// When overridden in a derived class, registers the script libraries for the control.
+        /// </summary>
+        /// <returns>
+        /// An object that implements the <see cref="T:System.Collections.IEnumerable"/> interface and that contains ECMAScript (JavaScript) files that have been registered as embedded resources.
+        /// </returns>
+        protected override IEnumerable<ScriptReference> GetScriptReferences() {
+
+            string assembly = this.GetType().Assembly.FullName;
+#if DEBUG
+            yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.js", assembly);
+#else
+            yield return new ScriptReference("Artem.Google.Polyline.GooglePolygonBehavior.min.js", assembly);
+#endif
+        }
+
+        public void RaisePostBackEvent(string eventArgument) {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

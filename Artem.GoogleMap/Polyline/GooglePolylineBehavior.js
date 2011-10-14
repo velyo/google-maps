@@ -7,7 +7,7 @@ Type.registerNamespace("Artem.Google");
 
 Artem.Google.PolylineBehavior = function (element) {
     Artem.Google.PolylineBehavior.initializeBase(this, [element]);
-}
+};
 
 Artem.Google.PolylineBehavior.prototype = {
     initialize: function () {

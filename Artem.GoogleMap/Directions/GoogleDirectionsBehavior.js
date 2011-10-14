@@ -254,7 +254,7 @@ Artem.Google.DirectionsBehavior.prototype = {
         renderer.setRouteIndex(routeIndex);
     };
 
-}(Artem.Google.DirectionsBehavior.prototype));
+}) (Artem.Google.DirectionsBehavior.prototype);
 
 // Events
 (function (proto) {
@@ -296,12 +296,12 @@ Artem.Google.DirectionsBehavior.prototype = {
         if (handler) handler(this, args);
     }
 
-}(Artem.Google.DirectionsBehavior.prototype));
+}) (Artem.Google.DirectionsBehavior.prototype);
 
 Artem.Google.DirectionsBehavior.raiseServerChanged = function (sender) {
 
     var routes = sender.getDirections().routes;
-    var args = null;
+    var args = { name: "change" };
 
     if (routes && routes.length > 0) {
         var legs = routes[0].legs;
@@ -336,7 +336,7 @@ Artem.Google.DirectionsBehavior.raiseServerChanged = function (sender) {
                     Longitude: route.steps[i].start_location.Na
                 };
             }
-            args = route;
+            args.route = route;
         }
     }
 

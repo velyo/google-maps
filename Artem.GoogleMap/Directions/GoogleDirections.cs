@@ -423,9 +423,19 @@ namespace Artem.Google.UI {
         /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
         public void RaisePostBackEvent(string eventArgument) {
 
-            var ser = new JavaScriptSerializer();    
-            var args = ser.Deserialize<DirectionsChangedEventArgs>(eventArgument);
-            this.OnChanged(args);
+            var ser = new JavaScriptSerializer();
+            dynamic args = ser.DeserializeObject(eventArgument);
+            if (args != null) {
+                string name = args["name"];
+                if (args["route"] != null) {
+                    var e = DirectionsChangedEventArgs.FromScriptData(args["route"]);
+                    switch (name) {
+                        case "change":
+                            this.OnChanged(e);
+                            break;
+                    }
+                }
+            }
         }
         #endregion
     }

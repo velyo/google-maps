@@ -290,7 +290,14 @@ namespace Artem.Google.UI {
             yield return descriptor;
         }
 
+        /// <summary>
+        /// When overridden in a derived class, registers the script libraries for the control.
+        /// </summary>
+        /// <returns>
+        /// An object that implements the <see cref="T:System.Collections.IEnumerable"/> interface and that contains ECMAScript (JavaScript) files that have been registered as embedded resources.
+        /// </returns>
         protected override IEnumerable<ScriptReference> GetScriptReferences() {
+
             string assembly = this.GetType().Assembly.FullName;
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Polyline.GooglePolylineBehavior.js", assembly);
