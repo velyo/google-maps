@@ -33,11 +33,11 @@ public partial class polygon_GooglePolygon : Page {
             LatLng startPoint = null;
             foreach (string point in points) {
                 if (startPoint != null)
-                    gon.Points.Add(LatLng.Parse(point));
+                    gon.Paths.Add(LatLng.Parse(point));
                 else
-                    gon.Points.Add(startPoint = LatLng.Parse(point));
+                    gon.Paths.Add(startPoint = LatLng.Parse(point));
             }
-            gon.Points.Add(startPoint);
+            gon.Paths.Add(startPoint);
             GoogleMap1.Polygons.Clear();
             GoogleMap1.Polygons.Add(gon);
         }
@@ -45,10 +45,10 @@ public partial class polygon_GooglePolygon : Page {
 
     protected void HandleShowExtraDataClick(object sender, EventArgs e) {
 
-        if (GoogleMap1.Polygons.Count > 0) {
-            GooglePolygon gon = GoogleMap1.Polygons[0];
-            _ltrInfo.Text = string.Format("Bounds: {0}", gon.Bounds.ToString());
-        }
+        //if (GoogleMap1.Polygons.Count > 0) {
+        //    GooglePolygon gon = GoogleMap1.Polygons[0];
+        //    _ltrInfo.Text = string.Format("Bounds: {0}", gon.Bounds.ToString());
+        //}
     }
     #endregion
 }

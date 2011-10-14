@@ -271,11 +271,19 @@ namespace Artem.Google.UI {
 
         #region Events
 
+        /// <summary>
+        /// This server-side event is fired when the rendered directions change, either when a new DirectionsResult is set or when the user finishes dragging a change to the directions path.
+        /// </summary>
         [Category("Google")]
-        [Description()]
+        [Description("This event is fired when the rendered directions change, either when a new DirectionsResult is set or when the user finishes dragging a change to the directions path.")]
         public event EventHandler<DirectionsChangedEventArgs> Changed;
 
-        [Category("ClientEvent")]
+        /// <summary>
+        /// Gets or sets the on client changed handler.
+        /// </summary>
+        /// <value>The on client changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side changed handler.")]
         public string OnClientChanged { get; set; }
 
         #endregion

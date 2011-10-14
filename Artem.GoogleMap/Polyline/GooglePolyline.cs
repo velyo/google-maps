@@ -55,7 +55,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value><c>true</c> if geodesic; otherwise, <c>false</c>.</value>
         [Browsable(true)]
-        [Category("Appearance")]
+        [Category("Behavior")]
         [DefaultValue(false)]
         [Description("Render each edge as a geodesic (a segment of a 'great circle'). A geodesic is the shortest path between two points along the surface of the Earth.")]
         public bool Geodesic { get; set; }
@@ -122,85 +122,116 @@ namespace Artem.Google.UI {
 
         #region Events
 
-
         /// <summary>
         /// This event is fired when the DOM click event is fired on the Polyline.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the DOM click event is fired on the Polyline.")]
         public event EventHandler<MouseEventArgs> Click;
         /// <summary>
         /// Gets or sets the on client click handler.
         /// </summary>
         /// <value>The on client click.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side click handler.")]
         public string OnClientClick { get; set; }
 
         /// <summary>
         /// This event is fired when the DOM dblclick event is fired on the Polyline.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the DOM dblclick event is fired on the Polyline.")]
         public event EventHandler<MouseEventArgs> DoubleClick;
         /// <summary>
         /// Gets or sets the on client double click handler.
         /// </summary>
         /// <value>The on client double click.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side double click handler.")]
         public string OnClientDoubleClick { get; set; }
 
         /// <summary>
         /// This event is fired when the DOM mousedown event is fired on the Polyline.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the DOM mousedown event is fired on the Polyline.")]
         public event EventHandler<MouseEventArgs> MouseDown;
         /// <summary>
         /// Gets or sets the on client mouse down handler.
         /// </summary>
         /// <value>The on client mouse down.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side mouse down handler.")]
         public string OnClientMouseDown { get; set; }
 
         /// <summary>
         /// This event is fired when the DOM mousemove event is fired on the Polyline.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the DOM mousemove event is fired on the Polyline.")]
         public event EventHandler<MouseEventArgs> MouseMove;
         /// <summary>
         /// Gets or sets the on client mouse move handler.
         /// </summary>
         /// <value>The on client mouse move.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side mouse move handler.")]
         public string OnClientMouseMove { get; set; }
 
         /// <summary>
         /// This event is fired on Polyline mouseout.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired on Polyline mouseout.")]
         public event EventHandler<MouseEventArgs> MouseOut;
         /// <summary>
         /// Gets or sets the on client mouse out handler.
         /// </summary>
         /// <value>The on client mouse out.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side mouse out handler.")]
         public string OnClientMouseOut { get; set; }
 
         /// <summary>
         /// This event is fired on Polyline mouseover.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired on Polyline mouseover.")]
         public event EventHandler<MouseEventArgs> MouseOver;
         /// <summary>
         /// Gets or sets the on client mouse over handler.
         /// </summary>
         /// <value>The on client mouse over.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side mouse over handler.")]
         public string OnClientMouseOver { get; set; }
 
         /// <summary>
         /// This event is fired when the DOM mouseup event is fired on the Polyline.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the DOM mouseup event is fired on the Polyline.")]
         public event EventHandler<MouseEventArgs> MouseUp;
         /// <summary>
         /// Gets or sets the on client mouse up handler.
         /// </summary>
         /// <value>The on client mouse up.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side mouse up handler.")]
         public string OnClientMouseUp { get; set; }
 
         /// <summary>
         /// This event is fired when the Polyline is right-clicked on.
         /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the Polyline is right-clicked on.")]
         public event EventHandler<MouseEventArgs> RightClick;
         /// <summary>
         /// Gets or sets the on client right click handler.
         /// </summary>
         /// <value>The on client right click.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client-side right click handler.")]
         public string OnClientRightClick { get; set; }
 
         #endregion
@@ -211,6 +242,7 @@ namespace Artem.Google.UI {
         /// Initializes a new instance of the <see cref="GooglePolyline"/> class.
         /// </summary>
         public GooglePolyline() {
+
             this.Clickable = true;
             this.StrokeColor = Color.Blue;
             this.StrokeOpacity = .5F;
@@ -233,6 +265,7 @@ namespace Artem.Google.UI {
             var descriptor = new ScriptBehaviorDescriptor("Artem.Google.PolylineBehavior", targetControl.ClientID);
 
             #region properties
+
             descriptor.AddProperty("clickable", this.Clickable);
             descriptor.AddProperty("geodesic", this.Geodesic);
             descriptor.AddProperty("name", this.UniqueID);
@@ -242,6 +275,7 @@ namespace Artem.Google.UI {
             descriptor.AddProperty("strokeOpacity", this.StrokeOpacity);
             descriptor.AddProperty("strokeWeight", this.StrokeWeight);
             descriptor.AddProperty("zIndex", this.ZIndex);
+
             #endregion
 
             #region events
@@ -285,6 +319,7 @@ namespace Artem.Google.UI {
                 descriptor.AddEvent("rightClick", "Artem.Google.PolylineBehavior.raiseServerRightClick");
             else if (this.OnClientRightClick != null)
                 descriptor.AddEvent("rightClick", this.OnClientRightClick);
+
             #endregion
 
             yield return descriptor;

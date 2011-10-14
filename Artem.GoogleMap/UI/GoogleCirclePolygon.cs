@@ -98,7 +98,7 @@ namespace Artem.Google.UI {
 
             bool canBuild = (Latitude !=0 && Longitude != 0 && Radius != 0);
             if (canBuild) {
-                this.Points.Clear();
+                this.Paths.Clear();
                 double d2r = Math.PI / 180.0D; // degree to radian
                 double r2d = 180.0D / Math.PI;
                 double lat = ((double)Radius / 3963.0D) * r2d;
@@ -110,13 +110,13 @@ namespace Artem.Google.UI {
                     x = Latitude + (lat * Math.Sin(theta));
                     y = Longitude + (lng * Math.Cos(theta));
                     if (firstPoint != null) {
-                        this.Points.Add(new LatLng(x, y));
+                        this.Paths.Add(new LatLng(x, y));
                     }
                     else {
-                        this.Points.Add(firstPoint = new LatLng(x, y));
+                        this.Paths.Add(firstPoint = new LatLng(x, y));
                     }
                 }
-                this.Points.Add(firstPoint);
+                this.Paths.Add(firstPoint);
             }
         }
 

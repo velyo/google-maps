@@ -19,7 +19,7 @@ Artem.Google.DirectionsBehavior.prototype = {
     }
 };
 
-// Common
+// members
 (function (proto) {
 
     // properties
@@ -256,7 +256,7 @@ Artem.Google.DirectionsBehavior.prototype = {
 
 }) (Artem.Google.DirectionsBehavior.prototype);
 
-// Events
+// events
 (function (proto) {
 
     // fields

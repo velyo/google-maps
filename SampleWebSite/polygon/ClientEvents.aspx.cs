@@ -78,11 +78,11 @@ public partial class polygon_ClientEvents : Page {
             polygon.FillOpacity = .8F;
             polygon.StrokeColor = Color.Blue;
             polygon.StrokeWeight = 1;
-            polygon.Points.Add(Points[0]);
-            polygon.Points.Add(new LatLng(Points[0].Latitude, Points[1].Longitude));
-            polygon.Points.Add(Points[1]);
-            polygon.Points.Add(new LatLng(Points[1].Latitude, Points[0].Longitude));
-            polygon.Points.Add(Points[0]);
+            polygon.Paths.Add(Points[0]);
+            polygon.Paths.Add(new LatLng(Points[0].Latitude, Points[1].Longitude));
+            polygon.Paths.Add(Points[1]);
+            polygon.Paths.Add(new LatLng(Points[1].Latitude, Points[0].Longitude));
+            polygon.Paths.Add(Points[0]);
             GoogleMap1.Polygons.Add(polygon);
         }
     }

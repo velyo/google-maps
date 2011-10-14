@@ -14,9 +14,8 @@
     </p>
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
         Longitude="24.7879" Zoom="4" EnableScrollWheelZoom="true">
-        <Polygons>
+        <%--<Polygons>
             <artem:GooglePolygon FillColor="Red" FillOpacity=".8" StrokeColor="Blue" StrokeWeight="2">
-                <%--EnableEditing="true">--%>
                 <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
                 <artem:LatLng Latitude="41.036501" Longitude="28.984895" />
                 <artem:LatLng Latitude="44.447924" Longitude="26.097879" />
@@ -24,6 +23,6 @@
                 <artem:LatLng Latitude="42.002411" Longitude="21.436097" />
                 <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
             </artem:GooglePolygon>
-        </Polygons>
+        </Polygons>--%>
     </artem:GoogleMap>
 </asp:Content>

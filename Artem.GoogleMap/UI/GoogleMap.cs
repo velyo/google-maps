@@ -38,7 +38,7 @@ namespace Artem.Google.UI {
         GoogleMarkerEvents _markerEvents;
         List<GoogleMarker> _markers;
         GoogleMarkerStyle _markerStyle;
-        GooglePolygonEvents _polygonEvents;
+        //GooglePolygonEvents _polygonEvents;
         List<GooglePolygon> _polygons;
         List<GooglePolyline> _polylines;
         HtmlGenericControl _templateContainer;
@@ -605,24 +605,24 @@ namespace Artem.Google.UI {
         //    }
         //}
 
-        /// <summary>
-        /// Gets or sets the polygon events.
-        /// </summary>
-        /// <value>The polygon events.</value>
-        [Browsable(true)]
-        [Category("Google")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public GooglePolygonEvents PolygonEvents {
-            get {
-                return _polygonEvents ??
-                    (_polygonEvents = new GooglePolygonEvents());
-            }
-            protected internal set {
-                _polygonEvents = value;
-            }
-        }
+        ///// <summary>
+        ///// Gets or sets the polygon events.
+        ///// </summary>
+        ///// <value>The polygon events.</value>
+        //[Browsable(true)]
+        //[Category("Google")]
+        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        //[Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        //[PersistenceMode(PersistenceMode.InnerProperty)]
+        //public GooglePolygonEvents PolygonEvents {
+        //    get {
+        //        return _polygonEvents ??
+        //            (_polygonEvents = new GooglePolygonEvents());
+        //    }
+        //    protected internal set {
+        //        _polygonEvents = value;
+        //    }
+        //}
 
         #endregion
 
@@ -707,7 +707,7 @@ namespace Artem.Google.UI {
                             MarkerEvents.RaiseEvent(this, key, args);
                             break;
                         case "polygon":
-                            PolygonEvents.RaiseEvent(this, key, args);
+                            //PolygonEvents.RaiseEvent(this, key, args);
                             break;
                         case "polyline":
                             //PolylineEvents.RaiseEvent(this, key, args);

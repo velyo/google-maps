@@ -30,10 +30,10 @@
     <asp:Button runat="server" Text="Draw" OnClick="HandleDrawClick" />
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
         Longitude="24.7879" Zoom="4" EnableScrollWheelZoom="true" OnClientClick="handleClick">
-        <Polygons>
+        <%--<Polygons>
             <artem:GoogleCirclePolygon Latitude="42.1229" Longitude="24.7879" Radius="400" FillColor="Blue"
                 FillOpacity=".5" StrokeColor="#000080" StrokeOpacity=".75" StrokeWeight="2" />
-        </Polygons>
+        </Polygons>--%>
     </artem:GoogleMap>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="phDescription" runat="server">

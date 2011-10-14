@@ -139,7 +139,6 @@
     <Compile Include="UI\GoogleMarkerStyle.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Polygon\GooglePolygon.cs" />
-    <Compile Include="Polygon\GooglePolygonEvents.cs" />
     <Compile Include="Polyline\GooglePolyline.cs" />
     <Compile Include="Common\Size.cs" />
     <Compile Include="UI\GoogleZoomPair.cs" />
