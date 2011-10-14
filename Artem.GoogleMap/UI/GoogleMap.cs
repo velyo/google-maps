@@ -24,7 +24,7 @@ namespace Artem.Google.UI {
     /// </summary>
     [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    //[Designer(typeof(GoogleMapDesigner))]
+    [Designer(typeof(GoogleMapDesigner))]
     [ToolboxData("<{0}:GoogleMap runat=\"server\"></{0}:GoogleMap>")]
     public partial class GoogleMap : DataBoundControl, INamingContainer, IPostBackEventHandler, IScriptControl {
 
@@ -32,15 +32,15 @@ namespace Artem.Google.UI {
 
         string _address;
         LatLng _center;
-        List<GoogleDirections> _directions;
+        //List<GoogleDirections> _directions;
         string _key;
         bool _loading;
         GoogleMarkerEvents _markerEvents;
         List<GoogleMarker> _markers;
         GoogleMarkerStyle _markerStyle;
         //GooglePolygonEvents _polygonEvents;
-        List<GooglePolygon> _polygons;
-        List<GooglePolyline> _polylines;
+        //List<GooglePolygon> _polygons;
+        //List<GooglePolyline> _polylines;
         HtmlGenericControl _templateContainer;
 
         #endregion
@@ -389,22 +389,22 @@ namespace Artem.Google.UI {
         [Category("Google")]
         public string ApiVersion { get; set; }
 
-        /// <summary>
-        /// Gets the directions.
-        /// </summary>
-        /// <value>The directions.</value>
-        [Category("Google")]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public List<GoogleDirections> Directions {
-            get {
-                return this._directions ??
-                    (_directions = new List<GoogleDirections>());
-            }
-            set {
-                this._directions = value;
-            }
-        }
+        ///// <summary>
+        ///// Gets the directions.
+        ///// </summary>
+        ///// <value>The directions.</value>
+        //[Category("Google")]
+        //[Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        //[PersistenceMode(PersistenceMode.InnerProperty)]
+        //public List<GoogleDirections> Directions {
+        //    get {
+        //        return this._directions ??
+        //            (_directions = new List<GoogleDirections>());
+        //    }
+        //    set {
+        //        this._directions = value;
+        //    }
+        //}
 
         /// <summary>
         /// Gets or sets the client enterprise key.
@@ -490,39 +490,39 @@ namespace Artem.Google.UI {
             }
         }
 
-        /// <summary>
-        /// Gets or sets the polygons.
-        /// </summary>
-        /// <value>The polygons.</value>
-        [Category("Google")]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public List<GooglePolygon> Polygons {
-            get {
-                return this._polygons ??
-                    (this._polygons = new List<GooglePolygon>());
-            }
-            protected internal set {
-                this._polygons = value;
-            }
-        }
+        ///// <summary>
+        ///// Gets or sets the polygons.
+        ///// </summary>
+        ///// <value>The polygons.</value>
+        //[Category("Google")]
+        //[Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        //[PersistenceMode(PersistenceMode.InnerProperty)]
+        //public List<GooglePolygon> Polygons {
+        //    get {
+        //        return this._polygons ??
+        //            (this._polygons = new List<GooglePolygon>());
+        //    }
+        //    protected internal set {
+        //        this._polygons = value;
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets or sets the polylines.
-        /// </summary>
-        /// <value>The polylines.</value>
-        [Category("Google")]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public List<GooglePolyline> Polylines {
-            get {
-                return this._polylines ??
-                    (_polylines = new List<GooglePolyline>());
-            }
-            protected internal set {
-                this._polylines = value;
-            }
-        }
+        ///// <summary>
+        ///// Gets or sets the polylines.
+        ///// </summary>
+        ///// <value>The polylines.</value>
+        //[Category("Google")]
+        //[Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        //[PersistenceMode(PersistenceMode.InnerProperty)]
+        //public List<GooglePolyline> Polylines {
+        //    get {
+        //        return this._polylines ??
+        //            (_polylines = new List<GooglePolyline>());
+        //    }
+        //    protected internal set {
+        //        this._polylines = value;
+        //    }
+        //}
 
         /// <summary>
         /// Scale (zoom) value used to multiply the static map image size to define the output size in pixels.

@@ -90,10 +90,10 @@ namespace Artem.Google.UI {
                 this.ShowTraffic = state.ShowTraffic;
                 this.StreetView = state.StreetView;
                 this.Markers = state.Markers;
-                this.Polygons = state.Polygons;
-                this.Polylines = state.Polylines;
+                //this.Polygons = state.Polygons;
+                //this.Polylines = state.Polylines;
 
-                this.Directions = state.Directions;
+                //this.Directions = state.Directions;
                 //this.PolygonEvents = state.PolygonEvents;
                 //this.PolylineEvents = state.PolylineEvents;
             }
@@ -135,10 +135,10 @@ namespace Artem.Google.UI {
                 ShowTraffic = this.ShowTraffic,
                 StreetView = this.StreetView,
                 Markers = this.Markers,
-                Polygons = this.Polygons,
-                Polylines = this.Polylines,
+                //Polygons = this.Polygons,
+                //Polylines = this.Polylines,
 
-                Directions = this.Directions
+                //Directions = this.Directions
                 //PolygonEvents = this.PolygonEvents,
                 //PolylineEvents = this.PolylineEvents,
                 

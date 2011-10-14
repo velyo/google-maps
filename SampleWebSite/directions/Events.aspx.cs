@@ -21,7 +21,7 @@ public partial class directions_Events : System.Web.UI.Page {
         if (string.IsNullOrEmpty(query))
             query = "from: San Francisco, CA to: Mountain View, CA";
         string locale = _txtLocale.Text;
-        GoogleMap1.Directions.Clear();
+        //GoogleMap1.Directions.Clear();
         //GoogleMap1.Directions.Add(new GoogleDirections(query, "route", locale));
     }
 

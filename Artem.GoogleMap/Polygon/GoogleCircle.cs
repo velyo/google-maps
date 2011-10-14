@@ -1,40 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Text;
-using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
-[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.Polygon.GoogleCircleBehavior.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.Polygon.GoogleCircleBehavior.min.js", "text/javascript")]
 
 namespace Artem.Google.UI {
 
     /// <summary>
-    /// Polygon (like a polyline) defines a series of connected coordinates in an ordered sequence; 
-    /// additionally, polygons form a closed loop and define a filled region.
+    /// A circle on the Earth's surface; also known as a "spherical cap". 
     /// </summary>
-    [ParseChildren(true, "Paths")]
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
-    [ToolboxData("<{0}:GooglePolygon runat=server></{0}:GooglePolygon>")]
-    public class GooglePolygon : ExtenderControl, IPostBackEventHandler {
-
-        #region Fields
-
-        List<LatLng> _paths;
-
-        #endregion
+    [ToolboxData("<{0}:GoogleCircle runat=server></{0}:GoogleCircle>")]
+    public class GoogleCircle : ExtenderControl, IPostBackEventHandler {
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the center.S
+        /// </summary>
+        /// <value>The center.</value>
+        [Browsable(true)]
+        [Category("Appearance")]
+        [Description("Gets or sets the center.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        public LatLng Center { get; set; }
 
         /// <summary>
         /// Indicates whether this Polygon handles click events. Defaults to true.
@@ -80,22 +77,10 @@ namespace Artem.Google.UI {
         [Description("Render each edge as a geodesic (a segment of a great circle''). A geodesic is the shortest path between two points along the surface of the Earth.")]
         public bool Geodesic { get; set; }
 
-        /// <summary>
-        /// Gets or sets the points.
-        /// </summary>
-        /// <value>The points.</value>
         [Browsable(true)]
-        [Category("Data")]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public List<LatLng> Paths {
-            get {
-                return _paths ?? (_paths = new List<LatLng>());
-            }
-            set {
-                _paths = value;
-            }
-        }
+        [Category("Appearance")]
+        [Description("The radius in meters on the Earth's surface")]
+        public int Radius { get; set; }
 
         /// <summary>
         /// The stroke color. All CSS3 colors are supported except for extended named colors.
@@ -258,13 +243,13 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Initializes a new instance of the <see cref="GooglePolygon"/> class.
         /// </summary>
-        public GooglePolygon() {
+        public GoogleCircle() {
 
             this.Clickable = true;
             this.FillColor = Color.Red;
             this.FillOpacity = .5F;
             this.StrokeColor = Color.Blue;
-            this.StrokeOpacity = .5F;
+            this.StrokeOpacity = .5F;   
             this.StrokeWeight = 5;
             this.ZIndex = 1;
         }
@@ -272,26 +257,19 @@ namespace Artem.Google.UI {
 
         #region Methods
 
-        /// <summary>
-        /// When overridden in a derived class, registers the <see cref="T:System.Web.UI.ScriptDescriptor"/> objects for the control.
-        /// </summary>
-        /// <param name="targetControl">The server control to which the extender is associated.</param>
-        /// <returns>
-        /// An enumeration of <see cref="T:System.Web.UI.ScriptDescriptor"/> objects.
-        /// </returns>
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl) {
 
-            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.PolygonBehavior", targetControl.ClientID);
+            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.CircleBehavior", targetControl.ClientID);
 
             #region properties
 
+            descriptor.AddProperty("center", this.Center.ToScriptData());
             descriptor.AddProperty("clickable", this.Clickable);
             descriptor.AddProperty("fillColor", ColorTranslator.ToHtml(this.FillColor));
             descriptor.AddProperty("fillOpacity", this.FillOpacity);
             descriptor.AddProperty("geodesic", this.Geodesic);
             descriptor.AddProperty("name", this.UniqueID);
-            descriptor.AddProperty("paths",
-                (_paths != null) ? _paths.Select(p => new { lat = p.Latitude, lng = p.Longitude }).ToArray() : null);
+            descriptor.AddProperty("radius", this.Radius);
             descriptor.AddProperty("strokeColor", ColorTranslator.ToHtml(this.StrokeColor));
             descriptor.AddProperty("strokeOpacity", this.StrokeOpacity);
             descriptor.AddProperty("strokeWeight", this.StrokeWeight);
@@ -302,42 +280,42 @@ namespace Artem.Google.UI {
             #region events
 
             if (this.Click != null)
-                descriptor.AddEvent("click", "Artem.Google.PolygonBehavior.raiseServerClick");
+                descriptor.AddEvent("click", "Artem.Google.CircleBehavior.raiseServerClick");
             else if (this.OnClientClick != null)
                 descriptor.AddEvent("click", this.OnClientClick);
 
             if (this.DoubleClick != null)
-                descriptor.AddEvent("doubleClick", "Artem.Google.PolygonBehavior.raiseServerDoubleClick");
+                descriptor.AddEvent("doubleClick", "Artem.Google.CircleBehavior.raiseServerDoubleClick");
             else if (this.OnClientDoubleClick != null)
                 descriptor.AddEvent("doubleClick", this.OnClientDoubleClick);
 
             if (this.MouseDown != null)
-                descriptor.AddEvent("mouseDown", "Artem.Google.PolygonBehavior.raiseServerMouseDown");
+                descriptor.AddEvent("mouseDown", "Artem.Google.CircleBehavior.raiseServerMouseDown");
             else if (this.OnClientMouseDown != null)
                 descriptor.AddEvent("mouseDown", this.OnClientMouseDown);
 
             if (this.MouseMove != null)
-                descriptor.AddEvent("mouseMove", "Artem.Google.PolygonBehavior.raiseServerMouseMove");
+                descriptor.AddEvent("mouseMove", "Artem.Google.CircleBehavior.raiseServerMouseMove");
             else if (this.OnClientMouseMove != null)
                 descriptor.AddEvent("mouseMove", this.OnClientMouseMove);
 
             if (this.MouseOut != null)
-                descriptor.AddEvent("mouseOut", "Artem.Google.PolygonBehavior.raiseServerMouseOut");
+                descriptor.AddEvent("mouseOut", "Artem.Google.CircleBehavior.raiseServerMouseOut");
             else if (this.OnClientMouseMove != null)
                 descriptor.AddEvent("mouseOut", this.OnClientMouseOut);
 
             if (this.MouseOver != null)
-                descriptor.AddEvent("mouseOver", "Artem.Google.PolygonBehavior.raiseServerMouseOver");
+                descriptor.AddEvent("mouseOver", "Artem.Google.CircleBehavior.raiseServerMouseOver");
             else if (this.OnClientMouseOver != null)
                 descriptor.AddEvent("mouseOver", this.OnClientMouseOver);
 
             if (this.MouseUp != null)
-                descriptor.AddEvent("mouseUp", "Artem.Google.PolygonBehavior.raiseServerMouseUp");
+                descriptor.AddEvent("mouseUp", "Artem.Google.CircleBehavior.raiseServerMouseUp");
             else if (this.OnClientMouseUp != null)
                 descriptor.AddEvent("mouseUp", this.OnClientMouseUp);
 
             if (this.RightClick != null)
-                descriptor.AddEvent("rightClick", "Artem.Google.PolygonBehavior.raiseServerRightClick");
+                descriptor.AddEvent("rightClick", "Artem.Google.CircleBehavior.raiseServerRightClick");
             else if (this.OnClientRightClick != null)
                 descriptor.AddEvent("rightClick", this.OnClientRightClick);
 
@@ -356,13 +334,13 @@ namespace Artem.Google.UI {
 
             string assembly = this.GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polygon.GoogleCircleBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polyline.GooglePolygonBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polyline.GoogleCircleBehavior.min.js", assembly);
 #endif
         }
 
-        #region Events
+        #region Event Methods
 
         /// <summary>
         /// Raises the <see cref="E:Click"/> event.

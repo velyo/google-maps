@@ -420,14 +420,14 @@ namespace Artem.Google.UI {
             if (_markers.IsNotNullOrEmpty())
                 yield return new ScriptReference("Artem.Google.Scripts.GoogleMarker.js", assembly);
 
-            if (_polygons.IsNotNullOrEmpty())
-                yield return new ScriptReference("Artem.Google.Scripts.GooglePolygon.js", assembly);
+            //if (_polygons.IsNotNullOrEmpty())
+            //    yield return new ScriptReference("Artem.Google.Scripts.GooglePolygon.js", assembly);
 
-            if (_polylines.IsNotNullOrEmpty())
-                yield return new ScriptReference("Artem.Google.Scripts.GooglePolyline.js", assembly);
+            //if (_polylines.IsNotNullOrEmpty())
+            //    yield return new ScriptReference("Artem.Google.Scripts.GooglePolyline.js", assembly);
 
-            if (_directions.IsNotNullOrEmpty())
-                yield return new ScriptReference("Artem.Google.Scripts.GoogleDirections.js", assembly);
+            //if (_directions.IsNotNullOrEmpty())
+            //    yield return new ScriptReference("Artem.Google.Scripts.GoogleDirections.js", assembly);
 #else
             if (this.ScriptManager == null)
                 yield return new ScriptReference("Artem.Google.Scripts.MicrosoftAjax.js", assembly);
@@ -438,14 +438,14 @@ namespace Artem.Google.UI {
             if (_markers.IsNotNullOrEmpty()) 
                 yield return new ScriptReference("Artem.Google.Scripts.GoogleMarker.min.js", assembly);
 
-            if (_polygons.IsNotNullOrEmpty()) 
-                yield return new ScriptReference("Artem.Google.Scripts.GooglePolygon.min.js", assembly);
+            //if (_polygons.IsNotNullOrEmpty()) 
+            //    yield return new ScriptReference("Artem.Google.Scripts.GooglePolygon.min.js", assembly);
 
-            if (_polylines.IsNotNullOrEmpty()) 
-                yield return new ScriptReference("Artem.Google.Scripts.GooglePolyline.min.js", assembly);
+            //if (_polylines.IsNotNullOrEmpty()) 
+            //    yield return new ScriptReference("Artem.Google.Scripts.GooglePolyline.min.js", assembly);
 
-            if (_directions.IsNotNullOrEmpty()) 
-                yield return new ScriptReference("Artem.Google.Scripts.GoogleDirections.min.js", assembly);
+            //if (_directions.IsNotNullOrEmpty()) 
+            //    yield return new ScriptReference("Artem.Google.Scripts.GoogleDirections.min.js", assembly);
 #endif
         }
         #endregion

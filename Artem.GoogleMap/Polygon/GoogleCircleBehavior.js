@@ -5,18 +5,18 @@
 
 Type.registerNamespace("Artem.Google");
 
-Artem.Google.PolygonBehavior = function (element) {
-    Artem.Google.PolygonBehavior.initializeBase(this, [element]);
+Artem.Google.CircleBehavior = function (element) {
+    Artem.Google.CircleBehavior.initializeBase(this, [element]);
 };
 
-Artem.Google.PolygonBehavior.prototype = {
+Artem.Google.CircleBehavior.prototype = {
     initialize: function () {
-        Artem.Google.PolygonBehavior.callBaseMethod(this, 'initialize');
+        Artem.Google.CircleBehavior.callBaseMethod(this, 'initialize');
         this.create();
     },
     dispose: function () {
         this.detachEvents();
-        Artem.Google.PolygonBehavior.callBaseMethod(this, 'dispose');
+        Artem.Google.CircleBehavior.callBaseMethod(this, 'dispose');
     }
 };
 
@@ -28,10 +28,14 @@ Artem.Google.PolygonBehavior.prototype = {
     var map;
     proto.get_map = function () { return map; };
 
-    var polygon
-    proto.get_polygon = function () { return polygon; };
+    var circle
+    proto.get_circle = function () { return circle; };
 
     // properties
+
+    var center;
+    proto.get_center = function () { return center; };
+    proto.set_center = function (value) { center = value; };
 
     var clickable;
     proto.get_clickable = function () { return clickable; };
@@ -53,9 +57,9 @@ Artem.Google.PolygonBehavior.prototype = {
     proto.get_name = function () { return name; };
     proto.set_name = function (value) { name = value; };
 
-    var paths;
-    proto.get_paths = function () { return paths; };
-    proto.set_paths = function (value) { paths = value; };
+    var radius;
+    proto.get_radius = function () { return radius; };
+    proto.set_radius = function (value) { radius = value; };
 
     var strokeColor;
     proto.get_strokeColor = function () { return strokeColor; };
@@ -78,62 +82,67 @@ Artem.Google.PolygonBehavior.prototype = {
     proto.create = function () {
         map = $find(this.get_element().id);
 
-        var points = Artem.Google.Converter.latlngArray(paths);
         var options = {
+            center: new google.maps.LatLng(center.lat, center.lng),
             clickable: clickable,
             fillColor: fillColor,
             fillOpacity: fillOpacity,
             geodesic: geodesic,
             map: map.get_map(),
-            paths: points,
+            radius: radius,
             strokeColor: strokeColor,
             strokeOpacity: strokeOpacity,
             strokeWeight: strokeWeight,
             zIndex: zIndex
         };
 
-        polygon = new google.maps.Polygon(options);
+        circle = new google.maps.Circle(options);
         this.composeEvents();
     };
 
     // GoogleMaps API
 
+    proto.getBounds = function () {
+        ///<summary>Gets the LatLngBounds of this Circle.</summary>
+        return circle.getBounds();
+    };
+
+    proto.getCenter = function () {
+        ///<summary>Returns the center of this circle.</summary>
+        return circle.getCenter();
+    };
+
     proto.getMap = function () {
         ///<summary>Returns the map on which this poly is attached.</summary>
-        return polygon.getMap();
+        return circle.getMap();
     };
 
-    proto.getPath = function () {
-        ///<summary>Retrieves the first path.</summary>        
-        return polygon.getPath();
+    proto.getRadius = function () {
+        ///<summary>Returns the radius of this circle (in meters).</summary>
+        return circle.getRadius();
     };
 
-    proto.getPaths = function () {
-        ///<summary>Retrieves the paths for this Polygon.</summary>
-        return polygon.getPaths()
+    proto.setCenter = function (value) {
+        ///<summary>Sets the center of this circle.</summary>
+        circle.setCenter(value);
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        polygon.setMap(map);
+        circle.setMap(map);
     };
 
     proto.setOptions = function (options) {
         ///<summary></summary>
-        polygon.setOptions(options);
+        circle.setOptions(options);
     };
 
-    proto.setPath = function (path) {
-        ///<summary>Sets the first path. See PolylineOptions for more details.</summary>
-        polygon.setPath(path);
+    proto.setRadius = function (value) {
+        ///<summary>Sets the radius of this circle (in meters).</summary>
+        circle.setRadius(value);
     };
 
-    proto.setPaths = function (paths) {
-        ///<summary>Sets the path for this Polygon.</summary>
-        polygon.setPaths(paths);
-    };
-
-})(Artem.Google.PolygonBehavior.prototype);
+})(Artem.Google.CircleBehavior.prototype);
 
 // events
 (function (proto) {
@@ -174,15 +183,15 @@ Artem.Google.PolygonBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        var polygon = this.get_polygon();
-        if (polygon) {
+        var circle = this.get_circle();
+        if (circle) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
                     if (!listeners[name]) {
                         if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(polygon, name, delegates[name]);
+                        listeners[name] = google.maps.event.addListener(circle, name, delegates[name]);
                     }
                 }
                 else if (listeners[name]) {
@@ -193,7 +202,7 @@ Artem.Google.PolygonBehavior.prototype = {
     };
 
     proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_polygon());
+        google.maps.event.clearInstanceListeners(this.get_circle());
     };
 
     // click
@@ -308,7 +317,7 @@ Artem.Google.PolygonBehavior.prototype = {
         if (handler) handler(this, e);
     }
 
-})(Artem.Google.PolygonBehavior.prototype);
+})(Artem.Google.CircleBehavior.prototype);
 
 // server events - entry points
 (function (behavior) {
@@ -373,6 +382,6 @@ Artem.Google.PolygonBehavior.prototype = {
             { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "rightClick" });
     };
 
-})(Artem.Google.PolygonBehavior);
+})(Artem.Google.CircleBehavior);
 
-Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.UI.Behavior);
+Artem.Google.CircleBehavior.registerClass('Artem.Google.CircleBehavior', Sys.UI.Behavior);

@@ -139,6 +139,10 @@ Artem.Google.Converter = {
         }
     },
 
+    latlng: function (point) {
+        return (point) ? new google.maps.LatLng(point.lat, point.lng) : null;
+    },
+
     latlngArray: function (points) {
 
         var result = null;
@@ -151,6 +155,10 @@ Artem.Google.Converter = {
         }
 
         return result;
+    },
+
+    latlngBounds: function (bounds) {
+        return (bounds) ? new google.maps.LatLngBounds(latl) : null;
     },
 
     mapTypeControlOptions: function (value) {
@@ -364,6 +372,41 @@ Artem.Google.serverHandler = function Artem_Google$serverHandler() { };
 
 //#endregion
 
+// convert
+Artem.Google.Convert = (function () {
+
+    function latlng(point) {
+        return (point) ? new google.maps.LatLng(point.lat, point.lng) : null;
+    }
+
+    function latlngArray(points) {
+
+        var result = null;
+
+        if (points) {
+            result = [];
+            for (var i = 0; i < points.length; i++) {
+                result.push(new google.maps.LatLng(points[i].lat, points[i].lng));
+            }
+        }
+
+        return result;
+    }
+
+    function latlngBounds(bounds) {
+        return (bounds)
+            ? new google.maps.LatLngBounds(latlng(bounds.sw), latlng(bounds.ne)) 
+            : null;
+    }
+
+    return {
+        latlng: latlng,
+        latlngArray: latlngArray,
+        latlngBounds: latlngBounds
+    };
+})();
+
+// log
 (function (log) {
 
     // methods

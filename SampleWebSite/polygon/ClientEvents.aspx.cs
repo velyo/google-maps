@@ -72,7 +72,7 @@ public partial class polygon_ClientEvents : Page {
         }
         //
         if (Points[0] != null && Points[1] != null) {
-            GoogleMap1.Polygons.Clear();
+            //GoogleMap1.Polygons.Clear();
             GooglePolygon polygon = new GooglePolygon();
             polygon.FillColor = Color.Red;
             polygon.FillOpacity = .8F;
@@ -83,7 +83,7 @@ public partial class polygon_ClientEvents : Page {
             polygon.Paths.Add(Points[1]);
             polygon.Paths.Add(new LatLng(Points[1].Latitude, Points[0].Longitude));
             polygon.Paths.Add(Points[0]);
-            GoogleMap1.Polygons.Add(polygon);
+            //GoogleMap1.Polygons.Add(polygon);
         }
     }
 

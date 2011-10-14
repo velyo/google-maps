@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\Duration.cs" />
+    <Compile Include="Common\LatLngBounds.cs" />
     <Compile Include="Common\MarkerOptions.cs" />
     <Compile Include="Common\MouseEventArgs.cs" />
     <Compile Include="Common\PolylineOptions.cs" />
@@ -85,6 +86,8 @@
     <Compile Include="Directions\DirectionsStep.cs" />
     <Compile Include="IScriptDataConverter.cs" />
     <Compile Include="JsonConvert.cs" />
+    <Compile Include="Polygon\GoogleCircle.cs" />
+    <Compile Include="Polygon\GoogleRectangle.cs" />
     <Compile Include="Serialization\PolylineOptionsConverter.cs" />
     <Compile Include="UI\ControlPosition.cs" />
     <Compile Include="Extensions\XtsCollection.cs" />
@@ -114,7 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\GoogleBounds.cs" />
-    <Compile Include="UI\GoogleCirclePolygon.cs" />
     <Compile Include="Directions\GoogleDirections.cs" />
     <Compile Include="UI\GoogleEventArgs.cs" />
     <Compile Include="UI\GoogleEventList.cs" />
@@ -128,7 +130,7 @@
     <Compile Include="UI\GoogleMap.State.cs">
       <DependentUpon>GoogleMap.cs</DependentUpon>
     </Compile>
-    <None Include="UI\GoogleMapDesigner.cs" />
+    <Compile Include="UI\GoogleMapDesigner.cs" />
     <Compile Include="UI\GoogleMarker.cs" />
     <Compile Include="UI\GoogleMarker.DefaultInfoContent.cs" />
     <Compile Include="UI\GoogleMarker.TemplateContainer.cs" />
@@ -209,18 +211,34 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.js" />
-    <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.min.js" />
+    <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.min.js">
+      <DependentUpon>GoogleDirectionsBehavior.js</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Markers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
-    <EmbeddedResource Include="Polyline\GooglePolylineBehavior.min.js" />
+    <EmbeddedResource Include="Polyline\GooglePolylineBehavior.min.js">
+      <DependentUpon>GooglePolylineBehavior.js</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polygon\GooglePolygonBehavior.js" />
-    <EmbeddedResource Include="Polygon\GooglePolygonBehavior.min.js" />
+    <EmbeddedResource Include="Polygon\GooglePolygonBehavior.min.js">
+      <DependentUpon>GooglePolygonBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Polygon\GoogleCircleBehavior.js" />
+    <EmbeddedResource Include="Polygon\GoogleCircleBehavior.min.js">
+      <DependentUpon>GoogleCircleBehavior.js</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Polygon\GoogleRectangleBehavior.js" />
+    <EmbeddedResource Include="Polygon\GoogleRectangleBehavior.min.js">
+      <DependentUpon>GoogleRectangleBehavior.js</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -232,7 +250,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
+      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -1,40 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Text;
-using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
-[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.Polygon.GoogleRectangleBehavior.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.Polygon.GoogleRectangleBehavior.min.js", "text/javascript")]
 
 namespace Artem.Google.UI {
 
     /// <summary>
-    /// Polygon (like a polyline) defines a series of connected coordinates in an ordered sequence; 
-    /// additionally, polygons form a closed loop and define a filled region.
+    /// A rectangle overlay.
     /// </summary>
-    [ParseChildren(true, "Paths")]
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
-    [ToolboxData("<{0}:GooglePolygon runat=server></{0}:GooglePolygon>")]
-    public class GooglePolygon : ExtenderControl, IPostBackEventHandler {
+    [ToolboxData("<{0}:GoogleRectangle runat=server></{0}:GoogleRectangle>")]
+    public class GoogleRectangle : ExtenderControl, IPostBackEventHandler {
 
         #region Fields
 
-        List<LatLng> _paths;
+        LatLngBounds _bounds;
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the bounds.
+        /// </summary>
+        /// <value>The bounds.</value>
+        [Browsable(true)]
+        [Category("Appearance")]
+        [Description("Gets or sets the bounds.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]    
+        public LatLngBounds Bounds {
+            get {
+                return _bounds ?? (_bounds = new LatLngBounds());
+            }
+            set {
+                _bounds = value;
+            }
+        }
 
         /// <summary>
         /// Indicates whether this Polygon handles click events. Defaults to true.
@@ -79,23 +89,6 @@ namespace Artem.Google.UI {
         [DefaultValue(true)]
         [Description("Render each edge as a geodesic (a segment of a great circle''). A geodesic is the shortest path between two points along the surface of the Earth.")]
         public bool Geodesic { get; set; }
-
-        /// <summary>
-        /// Gets or sets the points.
-        /// </summary>
-        /// <value>The points.</value>
-        [Browsable(true)]
-        [Category("Data")]
-        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
-        [PersistenceMode(PersistenceMode.InnerProperty)]
-        public List<LatLng> Paths {
-            get {
-                return _paths ?? (_paths = new List<LatLng>());
-            }
-            set {
-                _paths = value;
-            }
-        }
 
         /// <summary>
         /// The stroke color. All CSS3 colors are supported except for extended named colors.
@@ -258,7 +251,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Initializes a new instance of the <see cref="GooglePolygon"/> class.
         /// </summary>
-        public GooglePolygon() {
+        public GoogleRectangle() {
 
             this.Clickable = true;
             this.FillColor = Color.Red;
@@ -281,17 +274,16 @@ namespace Artem.Google.UI {
         /// </returns>
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl) {
 
-            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.PolygonBehavior", targetControl.ClientID);
+            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.RectangleBehavior", targetControl.ClientID);
 
             #region properties
 
+            descriptor.AddProperty("bounds", this.Bounds.ToScriptData());
             descriptor.AddProperty("clickable", this.Clickable);
             descriptor.AddProperty("fillColor", ColorTranslator.ToHtml(this.FillColor));
             descriptor.AddProperty("fillOpacity", this.FillOpacity);
             descriptor.AddProperty("geodesic", this.Geodesic);
             descriptor.AddProperty("name", this.UniqueID);
-            descriptor.AddProperty("paths",
-                (_paths != null) ? _paths.Select(p => new { lat = p.Latitude, lng = p.Longitude }).ToArray() : null);
             descriptor.AddProperty("strokeColor", ColorTranslator.ToHtml(this.StrokeColor));
             descriptor.AddProperty("strokeOpacity", this.StrokeOpacity);
             descriptor.AddProperty("strokeWeight", this.StrokeWeight);
@@ -302,42 +294,42 @@ namespace Artem.Google.UI {
             #region events
 
             if (this.Click != null)
-                descriptor.AddEvent("click", "Artem.Google.PolygonBehavior.raiseServerClick");
+                descriptor.AddEvent("click", "Artem.Google.RectangleBehavior.raiseServerClick");
             else if (this.OnClientClick != null)
                 descriptor.AddEvent("click", this.OnClientClick);
 
             if (this.DoubleClick != null)
-                descriptor.AddEvent("doubleClick", "Artem.Google.PolygonBehavior.raiseServerDoubleClick");
+                descriptor.AddEvent("doubleClick", "Artem.Google.RectangleBehavior.raiseServerDoubleClick");
             else if (this.OnClientDoubleClick != null)
                 descriptor.AddEvent("doubleClick", this.OnClientDoubleClick);
 
             if (this.MouseDown != null)
-                descriptor.AddEvent("mouseDown", "Artem.Google.PolygonBehavior.raiseServerMouseDown");
+                descriptor.AddEvent("mouseDown", "Artem.Google.RectangleBehavior.raiseServerMouseDown");
             else if (this.OnClientMouseDown != null)
                 descriptor.AddEvent("mouseDown", this.OnClientMouseDown);
 
             if (this.MouseMove != null)
-                descriptor.AddEvent("mouseMove", "Artem.Google.PolygonBehavior.raiseServerMouseMove");
+                descriptor.AddEvent("mouseMove", "Artem.Google.RectangleBehavior.raiseServerMouseMove");
             else if (this.OnClientMouseMove != null)
                 descriptor.AddEvent("mouseMove", this.OnClientMouseMove);
 
             if (this.MouseOut != null)
-                descriptor.AddEvent("mouseOut", "Artem.Google.PolygonBehavior.raiseServerMouseOut");
+                descriptor.AddEvent("mouseOut", "Artem.Google.RectangleBehavior.raiseServerMouseOut");
             else if (this.OnClientMouseMove != null)
                 descriptor.AddEvent("mouseOut", this.OnClientMouseOut);
 
             if (this.MouseOver != null)
-                descriptor.AddEvent("mouseOver", "Artem.Google.PolygonBehavior.raiseServerMouseOver");
+                descriptor.AddEvent("mouseOver", "Artem.Google.RectangleBehavior.raiseServerMouseOver");
             else if (this.OnClientMouseOver != null)
                 descriptor.AddEvent("mouseOver", this.OnClientMouseOver);
 
             if (this.MouseUp != null)
-                descriptor.AddEvent("mouseUp", "Artem.Google.PolygonBehavior.raiseServerMouseUp");
+                descriptor.AddEvent("mouseUp", "Artem.Google.RectangleBehavior.raiseServerMouseUp");
             else if (this.OnClientMouseUp != null)
                 descriptor.AddEvent("mouseUp", this.OnClientMouseUp);
 
             if (this.RightClick != null)
-                descriptor.AddEvent("rightClick", "Artem.Google.PolygonBehavior.raiseServerRightClick");
+                descriptor.AddEvent("rightClick", "Artem.Google.RectangleBehavior.raiseServerRightClick");
             else if (this.OnClientRightClick != null)
                 descriptor.AddEvent("rightClick", this.OnClientRightClick);
 
@@ -356,9 +348,9 @@ namespace Artem.Google.UI {
 
             string assembly = this.GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polygon.GoogleRectangleBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polyline.GooglePolygonBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polyline.GoogleRectangleBehavior.min.js", assembly);
 #endif
         }
 

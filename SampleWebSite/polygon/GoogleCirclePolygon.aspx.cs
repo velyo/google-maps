@@ -23,7 +23,7 @@ public partial class polygon_GoogleCirclePolygon : Page {
         LatLng location = LatLng.Parse(_txtPoint.Text);
         int radius;
         if (int.TryParse(_txtRadius.Text, out radius)) {
-            GoogleMap1.Polygons.Clear();
+            //GoogleMap1.Polygons.Clear();
             GoogleCirclePolygon pg = new GoogleCirclePolygon();
             pg.FillColor = Color.Blue;
             pg.FillOpacity = .5F;
@@ -36,7 +36,7 @@ public partial class polygon_GoogleCirclePolygon : Page {
             //
             GoogleMap1.Latitude = location.Latitude;
             GoogleMap1.Longitude = location.Longitude;
-            GoogleMap1.Polygons.Add(pg);
+            //GoogleMap1.Polygons.Add(pg);
         }
     } 
     #endregion

@@ -37,8 +37,8 @@ public partial class polyline_GooglePolyline : Page {
             foreach (string point in points) {
                 line.Path.Add(LatLng.Parse(point));
             }
-            GoogleMap1.Polylines.Clear();
-            GoogleMap1.Polylines.Add(line);
+            //GoogleMap1.Polylines.Clear();
+            //GoogleMap1.Polylines.Add(line);
         }
     }
 

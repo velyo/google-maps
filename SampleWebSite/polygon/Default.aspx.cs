@@ -38,8 +38,8 @@ public partial class polygon_GooglePolygon : Page {
                     gon.Paths.Add(startPoint = LatLng.Parse(point));
             }
             gon.Paths.Add(startPoint);
-            GoogleMap1.Polygons.Clear();
-            GoogleMap1.Polygons.Add(gon);
+            //GoogleMap1.Polygons.Clear();
+            //GoogleMap1.Polygons.Add(gon);
         }
     }
 

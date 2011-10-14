@@ -35,7 +35,7 @@
         <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="HYBRID" Zoom="5" Latitude="42.1229"
             Longitude="24.7879" CssClass="map" DefaultAddress="sofia">
         </artem:GoogleMap>
-        <%--<artem:GooglePolygon TargetControlID="GoogleMap1" runat="server" OnClick="HandleClick">
+        <%--<artem:GooglePolygon TargetControlID="GoogleMap1" runat="server" OnClick="HandleClick" OnClientRightClick="test">
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
             <artem:LatLng Latitude="41.036501" Longitude="28.984895" />
             <artem:LatLng Latitude="44.447924" Longitude="26.097879" />
@@ -43,10 +43,17 @@
             <artem:LatLng Latitude="42.002411" Longitude="21.436097" />
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
         </artem:GooglePolygon>--%>
-        <artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5" OnClientClick="test" OnRightClick="HandleClick">
+        <%--<artem:GoogleCircle TargetControlID="GoogleMap1" runat="server" Center="42.002411,21.436097"
+            Radius="100000" OnClick="HandleClick" OnClientRightClick="test" />--%>
+        <artem:GoogleRectangle TargetControlID="GoogleMap1" runat="server" OnClick="HandleClick"
+            OnClientRightClick="test" FillColor="Green" Bounds-SouthWest="44.802416,20.465601"
+            Bounds-NorthEast="37.97918,23.716647">
+            <%--Bounds="44.802416,20.465601:37.97918,23.716647"--%>
+        </artem:GoogleRectangle>
+        <%--<artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5" OnClientClick="test" OnRightClick="HandleClick">
             <artem:LatLng Latitude="42.14304" Longitude="24.74967" />
             <artem:LatLng Latitude="42.69649" Longitude="23.32601" />
-        </artem:GooglePolyline>
+        </artem:GooglePolyline>--%>
         <%--<artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
             Origin="plovdiv" Destination="sofia" Draggable="true" PanelID="info" OnChanged="HandleChanged">
         </artem:GoogleDirections>--%>
