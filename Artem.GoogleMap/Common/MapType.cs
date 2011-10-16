@@ -9,9 +9,9 @@ namespace Artem.Google.UI {
     /// 
     /// </summary>
     public enum MapType {
-        ROADMAP,
-        SATELLITE,
-        HYBRID,
-        TERRAIN
+        Hybrid,            
+        Roadmap,
+        Satellite,
+        Terrain
     }
 }

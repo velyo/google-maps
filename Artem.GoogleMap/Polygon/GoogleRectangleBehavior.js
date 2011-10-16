@@ -1,6 +1,5 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
-///<reference path="..\Scripts\GoogleCommons.js"/>
-///<reference path="..\Scripts\GoogleMap.js"/>
+///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
 Type.registerNamespace("Artem.Google");
@@ -79,7 +78,7 @@ Artem.Google.RectangleBehavior.prototype = {
         map = $find(this.get_element().id);
 
         var options = {
-            bounds: Artem.Google.Convert.latlngBounds(bounds),
+            bounds: Artem.Google.Convert.toLatLngBounds(bounds),
             clickable: clickable,
             fillColor: fillColor,
             fillOpacity: fillOpacity,

@@ -12,9 +12,24 @@ namespace Artem.Google.UI {
     /// A StreetViewPanorama object provides a Street View "viewer" 
     /// which can be stand-alone within a separate <div> or bound to a Map. 
     /// </summary>
-    public class StreetViewPanorama {
+    public class StreetViewPanorama : IScriptDataConverter {
 
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Static Methods
+
+        public static GoogleStreetView FromScriptData(object scriptObject) {
+
+            GoogleStreetView pano = null;
+            var data = scriptObject as IDictionary<string, object>;
+            if (data != null) {
+                object value;
+                pano = new GoogleStreetView();
+                // TODO
+            }
+            return pano;
+        }
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// The display options for the address control.
@@ -91,7 +106,7 @@ namespace Artem.Google.UI {
 
         #endregion
 
-        #region Construct /////////////////////////////////////////////////////////////////////////
+        #region Ctor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StreetViewPanoramaOptions"/> class.
@@ -99,6 +114,17 @@ namespace Artem.Google.UI {
         public StreetViewPanorama() {
             this.EnableAddressControl = true;
             this.EnableCloseButton = false;
+        }
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -24,15 +24,15 @@ public partial class polygon_GoogleCirclePolygon : Page {
         int radius;
         if (int.TryParse(_txtRadius.Text, out radius)) {
             //GoogleMap1.Polygons.Clear();
-            GoogleCirclePolygon pg = new GoogleCirclePolygon();
-            pg.FillColor = Color.Blue;
-            pg.FillOpacity = .5F;
-            pg.StrokeColor = Color.FromArgb(0x0000080);
-            pg.StrokeOpacity = .75F;
-            pg.StrokeWeight = 2;
-            pg.Latitude = location.Latitude;
-            pg.Longitude = location.Longitude;
-            pg.Radius = radius;
+            //GoogleCirclePolygon pg = new GoogleCirclePolygon();
+            //pg.FillColor = Color.Blue;
+            //pg.FillOpacity = .5F;
+            //pg.StrokeColor = Color.FromArgb(0x0000080);
+            //pg.StrokeOpacity = .75F;S
+            //pg.StrokeWeight = 2;
+            //pg.Latitude = location.Latitude;
+            //pg.Longitude = location.Longitude;
+            //pg.Radius = radius;
             //
             GoogleMap1.Latitude = location.Latitude;
             GoogleMap1.Longitude = location.Longitude;

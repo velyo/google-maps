@@ -9,9 +9,9 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.Script.Serialization;
 
 [assembly: WebResource("Artem.Google.Polyline.GooglePolylineBehavior.js", "text/javascript")]
 [assembly: WebResource("Artem.Google.Polyline.GooglePolylineBehavior.min.js", "text/javascript")]

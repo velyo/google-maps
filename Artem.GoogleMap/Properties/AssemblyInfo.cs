@@ -18,29 +18,23 @@ using System.Security;
 
 [assembly: Guid("61ecaa81-6989-4d3a-99a8-54d14a22dd2e")]
 
-[assembly: AssemblyVersion("5.0.0.0")]
-[assembly: AssemblyFileVersion("5.0.11282.1009")]
+[assembly: AssemblyVersion("5.5.0.0")]
+[assembly: AssemblyFileVersion("5.5.11282.1009")]
 
 //[assembly: AllowPartiallyTrustedCallers]
 
 // Embedded Resources
 
-[assembly: WebResource("Artem.Google.Scripts.GoogleCommons.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GoogleDirections.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GoogleMap.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GoogleMarker.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GooglePolygon.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GooglePolyline.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.GoogleCommons.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.GoogleMap.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.GoogleMarker.js", "text/javascript")]
 
-[assembly: WebResource("Artem.Google.Scripts.GoogleCommons.min.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GoogleDirections.min.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GoogleMap.min.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GoogleMarker.min.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GooglePolygon.min.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.GooglePolyline.min.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.GoogleCommons.min.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.GoogleMap.min.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.GoogleMarker.min.js", "text/javascript")]
 
-[assembly: WebResource("Artem.Google.Scripts.markermanager.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.markermanager_packed.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.markermanager.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.markermanager_packed.js", "text/javascript")]
 
-[assembly: WebResource("Artem.Google.Scripts.MicrosoftAjax.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Scripts.MicrosoftAjax.debug.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.MicrosoftAjax.js", "text/javascript")]
+//[assembly: WebResource("Artem.Google.Scripts.MicrosoftAjax.debug.js", "text/javascript")]
