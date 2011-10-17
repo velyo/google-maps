@@ -17,6 +17,7 @@ using System.Web.UI;
 using System.Web.UI.Design;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.Web.Script.Serialization;
 
 [assembly: WebResource("Artem.Google.Map.GoogleMap.js", "text/javascript")]
 [assembly: WebResource("Artem.Google.map.GoogleMap.min.js", "text/javascript")]
@@ -49,21 +50,6 @@ namespace Artem.Google.UI {
         /// control to automatically switch to HTTPS when requested under SSL.
         /// </summary>
         public static string StaticApiUrl = "maps.googleapis.com/maps/api/staticmap?";
-
-        #endregion
-
-        #region Fields
-
-        LatLng _center;
-        //string _key;
-        //bool _loading;
-        //GoogleMarkerEvents _markerEvents;
-        //List<GoogleMarker> _markers;
-        //GoogleMarkerStyle _markerStyle;
-        //GooglePolygonEvents _polygonEvents;
-        //List<GooglePolygon> _polygons;
-        //List<GooglePolyline> _polylines;
-        //HtmlGenericControl _templateContainer;
 
         #endregion
 
@@ -110,6 +96,7 @@ namespace Artem.Google.UI {
                 _center = value;
             }
         }
+        LatLng _center;
 
         /// <summary>
         /// The address to geocode and set as initial map center, when the provided <c>Address</c> 
@@ -365,7 +352,16 @@ namespace Artem.Google.UI {
         [Description("The initial display options for the Map type control.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public MapTypeControlOptions MapTypeControlOptions { get; set; }
+        public MapTypeControlOptions MapTypeControlOptions {
+            get {
+                return _mapTypeControlOptions ?? (_mapTypeControlOptions = new MapTypeControlOptions());
+            }
+            set {
+                _mapTypeControlOptions = value;
+            }
+        }
+        MapTypeControlOptions _mapTypeControlOptions;
+
 
         /// <summary>
         /// The maximum zoom level which will be displayed on the map. 
@@ -393,7 +389,16 @@ namespace Artem.Google.UI {
         [Description("The display options for the Overview Map control.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public OverviewMapControlOptions OverviewMapControlOptions { get; set; }
+        public OverviewMapControlOptions OverviewMapControlOptions {
+            get {
+                return _overviewMapControlOptions
+                    ?? (_overviewMapControlOptions = new OverviewMapControlOptions());
+            }
+            set {
+                _overviewMapControlOptions = value;
+            }
+        }
+        OverviewMapControlOptions _overviewMapControlOptions;
 
         /// <summary>
         /// The display options for the Pan control.
@@ -403,7 +408,15 @@ namespace Artem.Google.UI {
         [Description("The display options for the Pan control.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public PanControlOptions PanControlOptions { get; set; }
+        public PanControlOptions PanControlOptions {
+            get {
+                return _panControlOptions ?? (_panControlOptions = new PanControlOptions());
+            }
+            set {
+                _panControlOptions = value;
+            }
+        }
+        PanControlOptions _panControlOptions;
 
         /// <summary>
         /// The Maps API serves map tiles and biases application behavior, by default, using the 
@@ -432,7 +445,15 @@ namespace Artem.Google.UI {
         [Description("The display options for the Rotate control.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public RotateControlOptions RotateControlOptions { get; set; }
+        public RotateControlOptions RotateControlOptions {
+            get {
+                return _rotateControlOptions ?? (_rotateControlOptions = new RotateControlOptions());
+            }
+            set {
+                _rotateControlOptions = value;
+            }
+        }
+        RotateControlOptions _rotateControlOptions;
 
         /// <summary>
         /// The initial display options for the Scale control.
@@ -442,7 +463,15 @@ namespace Artem.Google.UI {
         [Description("The initial display options for the Scale control.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public ScaleControlOptions ScaleControlOptions { get; set; }
+        public ScaleControlOptions ScaleControlOptions {
+            get {
+                return _scaleControlOptions ?? (_scaleControlOptions = new ScaleControlOptions());
+            }
+            set {
+                _scaleControlOptions = value;
+            }
+        }
+        ScaleControlOptions _scaleControlOptions;
 
         /// <summary>
         /// Gets or sets a value indicating whether [show traffic].
@@ -504,12 +533,284 @@ namespace Artem.Google.UI {
         /// <value>The zoom control options.</value>
         [Category("Appearance")]
         [Description("The display options for the Zoom control.")]
-        public ZoomControlOptions ZoomControlOptions { get; set; }
+        public ZoomControlOptions ZoomControlOptions {
+            get {
+                return _zoomControlOptions ?? (_zoomControlOptions = new ZoomControlOptions());
+            }
+            set {
+                _zoomControlOptions = value;
+            }
+        }
+        ZoomControlOptions _zoomControlOptions;
 
         #endregion
 
         #region Events
 
+        /// <summary>
+        /// This event is fired when the viewport bounds have changed.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the viewport bounds have changed.")]
+        public event EventHandler<MapEventArgs> BoundsChanged;
+        /// <summary>
+        /// Gets or sets the client bounds changed handler.
+        /// </summary>
+        /// <value>The on client bounds changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client bounds changed handler.")]
+        public string OnClientBoundsChanged { get; set; }
+
+        /// <summary>
+        /// This event is fired when the map center property changes.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the map center property changes.")]
+        public event EventHandler<MapEventArgs> CenterChanged;
+        /// <summary>
+        /// Gets or sets the client center changed handler.
+        /// </summary>
+        /// <value>The on client center changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client center changed handler.")]
+        public string OnClientCenterChanged { get; set; }
+
+        /// <summary>
+        /// This event is fired when the user clicks on the map (but not when they click on a marker or infowindow).
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the user clicks on the map (but not when they click on a marker or infowindow).")]
+        public event EventHandler<MouseEventArgs> Click;
+        /// <summary>
+        /// Gets or sets the client click handler.
+        /// </summary>
+        /// <value>The on client click.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client click handler.")]
+        public string OnClientClick { get; set; }
+
+        /// <summary>
+        /// This event is fired when the user double-clicks on the map. Note that the click event will also fire, right before this one.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the user double-clicks on the map. Note that the click event will also fire, right before this one.")]
+        public event EventHandler<MouseEventArgs> DoubleClick;
+        /// <summary>
+        /// Gets or sets the client double click handler.
+        /// </summary>
+        /// <value>The on client double click.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client double click handler.")]
+        public string OnClientDoubleClick { get; set; }
+
+        /// <summary>
+        /// This event is repeatedly fired while the user drags the map.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is repeatedly fired while the user drags the map.")]
+        public event EventHandler<MapEventArgs> Drag;
+        /// <summary>
+        /// Gets or sets the client drag handler.
+        /// </summary>
+        /// <value>The on client drag.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client drag handler.")]
+        public string OnClientDrag { get; set; }
+
+        /// <summary>
+        /// This event is fired when the user stops dragging the map.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the user stops dragging the map.")]
+        public event EventHandler<MapEventArgs> DragEnd;
+        /// <summary>
+        /// Gets or sets the client drag end handler.
+        /// </summary>
+        /// <value>The on client drag end.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client drag end handler.")]
+        public string OnClientDragEnd { get; set; }
+
+        /// <summary>
+        /// This event is fired when the user starts dragging the map.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the user starts dragging the map.")]
+        public event EventHandler<MapEventArgs> DragStart;
+        /// <summary>
+        /// Gets or sets the client drag start handler.
+        /// </summary>
+        /// <value>The on client drag start.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client drag start handler.")]
+        public string OnClientDragStart { get; set; }
+
+        /// <summary>
+        /// This event is fired when the map heading property changes.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the map heading property changes.")]
+        public event EventHandler HeadingChanged;
+        /// <summary>
+        /// Gets or sets the client heading changed handler.
+        /// </summary>
+        /// <value>The on client heading changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client heading changed handler.")]
+        public string OnClientHeadingChanged { get; set; }
+
+        /// <summary>
+        /// This event is fired when the map becomes idle after panning or zooming.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the map becomes idle after panning or zooming.")]
+        public event EventHandler Idle;
+        /// <summary>
+        /// Gets or sets the client idle handler.
+        /// </summary>
+        [Category("Client Event")]
+        [Description("Gets or sets the client idle handler.")]
+        public string OnClientIdle;
+
+        /// <summary>
+        /// This event is fired when the mapTypeId property changes.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the mapTypeId property changes.")]
+        public event EventHandler<MapEventArgs> MapTypeChanged;
+        /// <summary>
+        /// Gets or sets the client map type changed handler.
+        /// </summary>
+        /// <value>The on client map type changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client map type changed handler.")]
+        public string OnClientMapTypeChanged { get; set; }
+
+        /// <summary>
+        /// This event is fired whenever the user's mouse moves over the map container.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired whenever the user's mouse moves over the map container.")]
+        public event EventHandler<MouseEventArgs> MouseMove;
+        /// <summary>
+        /// Gets or sets the client mouse move handler.
+        /// </summary>
+        /// <value>The on client mouse move.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client mouse move handler.")]
+        public string OnClientMouseMove { get; set; }
+
+        /// <summary>
+        /// This event is fired when the user's mouse exits the map container.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the user's mouse exits the map container.")]
+        public event EventHandler<MouseEventArgs> MouseOut;
+        /// <summary>
+        /// Gets or sets the client mouse out handler.
+        /// </summary>
+        /// <value>The on client mouse out.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client mouse out handler.")]
+        public string OnClientMouseOut { get; set; }
+
+        /// <summary>
+        /// This event is fired when the user's mouse enters the map container.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the user's mouse enters the map container.")]
+        public event EventHandler<MouseEventArgs> MouseOver;
+        /// <summary>
+        /// Gets or sets the client mouse over handler.
+        /// </summary>
+        /// <value>The on client mouse over.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client mouse over handler.")]
+        public string OnClientMouseOver { get; set; }
+
+        /// <summary>
+        /// This event is fired when the projection has changed.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the projection has changed.")]
+        public event EventHandler ProjectionChanged;
+        /// <summary>
+        /// Gets or sets the client projection changed handler.
+        /// </summary>
+        /// <value>The on client projection changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client projection changed handler.")]
+        public string OnClientProjectionChanged { get; set; }
+
+        /// <summary>
+        /// This event is fired on the map when the div changes size.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired on the map when the div changes size.")]
+        public event EventHandler<MapEventArgs> Resize;
+        /// <summary>
+        /// Gets or sets the client resize handler.
+        /// </summary>
+        /// <value>The on resize.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client resize handler.")]
+        public string OnClientResize { get; set; }
+
+        /// <summary>
+        /// This event is fired when the DOM contextmenu event is fired on the map container.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the DOM contextmenu event is fired on the map container.")]
+        public event EventHandler<MouseEventArgs> RightClick;
+        /// <summary>
+        /// Gets or sets the client right click handler.
+        /// </summary>
+        /// <value>The on client right click.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client right click handler.")]
+        public string OnClientRightClick { get; set; }
+
+        /// <summary>
+        /// This event is fired when the visible tiles have finished loading.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the visible tiles have finished loading.")]
+        public event EventHandler TilesLoaded;
+        /// <summary>
+        /// Gets or sets the client tiles loaded handler.
+        /// </summary>
+        /// <value>The on client tiles loaded.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client tiles loaded handler.")]
+        public string OnClientTilesLoaded { get; set; }
+
+        /// <summary>
+        /// This event is fired when the map tilt property changes.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the map tilt property changes.")]
+        public event EventHandler TiltChanged;
+        /// <summary>
+        /// Gets or sets the client tilt changed handler.
+        /// </summary>
+        /// <value>The on client tilt changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client tilt changed handler.")]
+        public string OnClientTiltChanged { get; set; }
+
+        /// <summary>
+        /// This event is fired when the map zoom property changes.
+        /// </summary>
+        [Category("Google")]
+        [Description("This event is fired when the map zoom property changes.")]
+        public event EventHandler<MapEventArgs> ZoomChanged;
+        /// <summary>
+        /// Gets or sets the client zoom changed handler.
+        /// </summary>
+        /// <value>The on client zoom changed.</value>
+        [Category("Client Event")]
+        [Description("Gets or sets the client zoom changed handler.")]
+        public string OnClientZoomChanged { get; set; }
 
         #endregion
 
@@ -560,6 +861,7 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("defaultAddress", this.DefaultAddress);
             descriptor.AddProperty("mapType", this.MapType);
             descriptor.AddProperty("zoom", this.Zoom);
+            descriptor.AddProperty("name", this.UniqueID);
 
             descriptor.AddProperty("backgroundColor", ColorTranslator.ToHtml(this.BackColor));
             descriptor.AddProperty("noClear", this.DisableClear);
@@ -609,7 +911,100 @@ namespace Artem.Google.UI {
 
             #region events
 
+            if (this.BoundsChanged != null)
+                descriptor.AddEvent("boundsChanged", "Artem.Google.Map.raiseServerBoundsChanged");
+            else if (this.OnClientBoundsChanged != null)
+                descriptor.AddEvent("boundsChanged", this.OnClientBoundsChanged);
 
+            if (this.CenterChanged != null)
+                descriptor.AddEvent("centerChanged", "Artem.Google.Map.raiseServerCenterChanged");
+            else if (this.OnClientCenterChanged != null)
+                descriptor.AddEvent("centerChanged", this.OnClientCenterChanged);
+
+            if (this.Click != null)
+                descriptor.AddEvent("click", "Artem.Google.Map.raiseServerClick");
+            else if (this.OnClientClick != null)
+                descriptor.AddEvent("click", this.OnClientClick);
+
+            if (this.DoubleClick != null)
+                descriptor.AddEvent("doubleClick", "Artem.Google.Map.raiseServerDoubleClick");
+            else if (this.OnClientDoubleClick != null)
+                descriptor.AddEvent("doubleClick", this.OnClientDoubleClick);
+
+            if (this.Drag != null)
+                descriptor.AddEvent("drag", "Artem.Google.Map.raiseServerDrag");
+            else if (this.OnClientDrag != null)
+                descriptor.AddEvent("drag", this.OnClientDrag);
+
+            if (this.DragEnd != null)
+                descriptor.AddEvent("dragEnd", "Artem.Google.Map.raiseServerDragEnd");
+            else if (this.OnClientDragEnd != null)
+                descriptor.AddEvent("dragEnd", this.OnClientDragEnd);
+
+            if (this.DragStart != null)
+                descriptor.AddEvent("dragStart", "Artem.Google.Map.raiseServerDragStart");
+            else if (this.OnClientDragStart != null)
+                descriptor.AddEvent("dragStart", this.OnClientDragStart);
+
+            if (this.HeadingChanged != null)
+                descriptor.AddEvent("headingChanged", "Artem.Google.Map.raiseServerHeadingChanged");
+            else if (this.OnClientHeadingChanged != null)
+                descriptor.AddEvent("headingChanged", this.OnClientHeadingChanged);
+
+            if (this.Idle != null)
+                descriptor.AddEvent("idle", "Artem.Google.Map.raiseServerIdle");
+            else if (this.OnClientIdle != null)
+                descriptor.AddEvent("idle", this.OnClientIdle);
+
+            if (this.MapTypeChanged != null)
+                descriptor.AddEvent("mapTypeChanged", "Artem.Google.Map.raiseServerMapTypeChanged");
+            else if (this.OnClientMapTypeChanged != null)
+                descriptor.AddEvent("mapTypeChanged", this.OnClientMapTypeChanged);
+
+            if (this.MouseMove != null)
+                descriptor.AddEvent("mouseMove", "Artem.Google.Map.raiseServerMouseMove");
+            else if (this.OnClientMouseMove != null)
+                descriptor.AddEvent("mouseMove", this.OnClientMouseMove);
+
+            if (this.MouseOut != null)
+                descriptor.AddEvent("mouseOut", "Artem.Google.Map.raiseServerMouseOut");
+            else if (this.OnClientMouseMove != null)
+                descriptor.AddEvent("mouseOut", this.OnClientMouseOut);
+
+            if (this.MouseOver != null)
+                descriptor.AddEvent("mouseOver", "Artem.Google.Map.raiseServerMouseOver");
+            else if (this.OnClientMouseOver != null)
+                descriptor.AddEvent("mouseOver", this.OnClientMouseOver);
+
+            if (this.ProjectionChanged != null)
+                descriptor.AddEvent("projectionChanged", "Artem.Google.Map.raiseServerProjectionChanged");
+            else if (this.OnClientProjectionChanged != null)
+                descriptor.AddEvent("projectionChanged", this.OnClientProjectionChanged);
+
+            if (this.Resize != null)
+                descriptor.AddEvent("resize", "Artem.Google.Map.raiseServerResize");
+            else if (this.OnClientResize != null)
+                descriptor.AddEvent("resize", this.OnClientResize);
+
+            if (this.RightClick != null)
+                descriptor.AddEvent("rightClick", "Artem.Google.Map.raiseServerRightClick");
+            else if (this.OnClientRightClick != null)
+                descriptor.AddEvent("rightClick", this.OnClientRightClick);
+
+            if (this.TilesLoaded != null)
+                descriptor.AddEvent("tilesLoaded", "Artem.Google.Map.raiseServerTilesLoaded");
+            else if (this.OnClientTilesLoaded != null)
+                descriptor.AddEvent("tilesLoaded", this.OnClientTilesLoaded);
+
+            if (this.TiltChanged != null)
+                descriptor.AddEvent("tiltChanged", "Artem.Google.Map.raiseServerTiltChanged");
+            else if (this.OnClientTiltChanged != null)
+                descriptor.AddEvent("tiltChanged", this.OnClientTiltChanged);
+
+            if (this.ZoomChanged != null)
+                descriptor.AddEvent("zoomChanged", "Artem.Google.Map.raiseServerZoomChanged");
+            else if (this.OnClientZoomChanged != null)
+                descriptor.AddEvent("zoomChanged", this.OnClientZoomChanged);
 
             #endregion
 
@@ -629,7 +1024,7 @@ namespace Artem.Google.UI {
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Map.GoogleMap.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Scripts.GoogleMap.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Map.GoogleMap.min.js", assembly);
 #endif
         }
 
@@ -683,41 +1078,6 @@ namespace Artem.Google.UI {
         }
 
         /// <summary>
-        /// When implemented by a class, enables a server control to process an event raised when a form is posted to the server.
-        /// </summary>
-        /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
-        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
-
-            //if (!string.IsNullOrEmpty(eventArgument)) {
-            //    string[] pair = eventArgument.Split('$');
-            //    if (pair.Length > 0) {
-            //        string[] header = pair[0].Split(':');
-            //        string type = header[0];
-            //        string key = (header.Length > 1) ? header[1] : null;
-            //        string args = (pair.Length > 1) ? pair[1] : null;
-
-            //        switch (type) {
-            //            case "map":
-            //                MapEvents.RaiseEvent(this, key, args);
-            //                break;
-            //            case "direction":
-            //                // TODO
-            //                break;
-            //            case "marker":
-            //                MarkerEvents.RaiseEvent(this, key, args);
-            //                break;
-            //            case "polygon":
-            //                //PolygonEvents.RaiseEvent(this, key, args);
-            //                break;
-            //            case "polyline":
-            //                //PolylineEvents.RaiseEvent(this, key, args);
-            //                break;
-            //        }
-            //    }
-            //}
-        }
-
-        /// <summary>
         /// Registers the GoogleMaps API reference.
         /// </summary>
         protected virtual void RegisterGoogleReference() {
@@ -762,7 +1122,236 @@ namespace Artem.Google.UI {
                 writer.RenderBeginTag(this.TagKey);
             }
         }
+
+        #region Events
+
+        /// <summary>
+        /// Raises the <see cref="E:BoundsChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.BoundsEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnBoundsChanged(MapEventArgs e) {
+            if (this.BoundsChanged != null) this.BoundsChanged(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:CenterChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnCenterChanged(MapEventArgs e) {
+            if (this.CenterChanged != null) this.CenterChanged(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:Click"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnClick(MouseEventArgs e) {
+            if (this.Click != null) this.Click(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DoubleClick"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDoubleClick(MouseEventArgs e) {
+            if (this.DoubleClick != null) this.DoubleClick(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:Drag"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.BoundsEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDrag(MapEventArgs e) {
+            if (this.Drag != null) this.Drag(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DragEnd"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.BoundsEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDragEnd(MapEventArgs e) {
+            if (this.DragEnd != null) this.DragEnd(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:DragStart"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.BoundsEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnDragStart(MapEventArgs e) {
+            if (this.DragStart != null) this.DragStart(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:HeadingChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnHeadingChanged(EventArgs e) {
+            if (this.HeadingChanged != null) this.HeadingChanged(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:Idle"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnIdle(EventArgs e) {
+            if (this.Idle != null) this.Idle(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MapTypeChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MapEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMapTypeChanged(MapEventArgs e) {
+            if (this.MapTypeChanged != null) this.MapTypeChanged(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseMove"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseMove(MouseEventArgs e) {
+            if (this.MouseMove != null) this.MouseMove(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseOut"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseOut(MouseEventArgs e) {
+            if (this.MouseOut != null) this.MouseOut(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:MouseOver"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnMouseOver(MouseEventArgs e) {
+            if (this.MouseOver != null) this.MouseOver(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:ProjectionChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnProjectionChanged(EventArgs e) {
+            if (this.ProjectionChanged != null) this.ProjectionChanged(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:Resize"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MapEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnResize(MapEventArgs e) {
+            if (this.Resize != null) this.Resize(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:RightClick"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnRightClick(MouseEventArgs e) {
+            if (this.RightClick != null) this.RightClick(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:TilesLoaded"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnTilesLoaded(EventArgs e) {
+            if (this.TilesLoaded != null) this.TilesLoaded(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:TiltChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected virtual void OnTiltChanged(EventArgs e) {
+            if (this.TiltChanged != null) this.TiltChanged(this, e);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="E:ZoomChanged"/> event.
+        /// </summary>
+        /// <param name="e">The <see cref="Artem.Google.UI.MapEventArgs"/> instance containing the event data.</param>
+        protected virtual void OnZoomChanged(MapEventArgs e) {
+            if (this.ZoomChanged != null) this.ZoomChanged(this, e);
+        }
+
+        /// <summary>
+        /// When implemented by a class, enables a server control to process an event raised when a form is posted to the server.
+        /// </summary>
+        /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
+
+            var ser = new JavaScriptSerializer();
+            dynamic args = ser.DeserializeObject(eventArgument);
+            if (args != null) {
+                string name = args["name"];
+                switch (name) {
+                    case "boundsChanged":
+                        this.OnBoundsChanged(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "centerChanged":
+                        this.OnCenterChanged(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "click":
+                        this.OnClick(MouseEventArgs.FromScriptData(args));
+                        break;
+                    case "doubleClick":
+                        this.OnDoubleClick(MouseEventArgs.FromScriptData(args));
+                        break;
+                    case "drag":
+                        this.OnDrag(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "dragEnd":
+                        this.OnDragEnd(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "dragStart":
+                        this.OnDragStart(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "headingChanged":
+                        this.OnHeadingChanged(EventArgs.Empty);
+                        break;
+                    case "idle":
+                        this.OnIdle(EventArgs.Empty);
+                        break;
+                    case "mapTypeChanged":
+                        this.OnMapTypeChanged(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "mouseMove":
+                        this.OnMouseMove(MouseEventArgs.FromScriptData(args));
+                        break;
+                    case "mouseOut":
+                        this.OnMouseOut(MouseEventArgs.FromScriptData(args));
+                        break;
+                    case "mouseOver":
+                        this.OnMouseOver(MouseEventArgs.FromScriptData(args));
+                        break;
+                    case "projectionChanged":
+                        this.OnProjectionChanged(EventArgs.Empty);
+                        break;
+                    case "resize":
+                        this.OnResize(MapEventArgs.FromScriptData(args));
+                        break;
+                    case "rightClick":
+                        this.OnRightClick(MouseEventArgs.FromScriptData(args));
+                        break;
+                    case "tilesLoaded":
+                        this.OnTilesLoaded(EventArgs.Empty);
+                        break;
+                    case "tiltChanged":
+                        this.OnTiltChanged(EventArgs.Empty);
+                        break;
+                    case "zoomChanged":
+                        this.OnZoomChanged(MapEventArgs.FromScriptData(args));
+                        break;
+                }
+            }
+        }
         #endregion
+        #endregion
+
+        #region DataBinding Methods
 
         ///// <summary>
         ///// Called by the ASP.NET page framework to notify server controls that use composition-based implementation to create any child controls they contain in preparation for posting back or rendering.
@@ -794,8 +1383,6 @@ namespace Artem.Google.UI {
         //    this.Controls.Add(_templateContainer);
         //    this.ClearChildViewState();
         //}
-
-        #region DataBinding Methods
 
         ///// <summary>
         ///// Gets or sets the data address field.

@@ -64,7 +64,15 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Location of destination. This can be specified as either a string to be geocoded or a LatLng. Required.")]
-        public Location Destination { get; set; }
+        public Location Destination {
+            get {
+                return _destination ?? (_destination = new Location());
+            }
+            set {
+                _destination = value;
+            }
+        }
+        Location _destination;
 
         // TODO
         ///// <summary>
@@ -117,7 +125,15 @@ namespace Artem.Google.UI {
         [Description("Options for the markers. All markers rendered by the DirectionsRenderer will use these options.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public MarkerOptions MarkerOptions { get; set; }
+        public MarkerOptions MarkerOptions {
+            get {
+                return _markerOptions ?? (_markerOptions = new MarkerOptions());
+            }
+            set {
+                _markerOptions = value;
+            }
+        }
+        MarkerOptions _markerOptions;
 
         /// <summary>
         /// Gets or sets a value indicating whether [optimize waypoints].
@@ -138,7 +154,15 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Location of origin. This can be specified as either a string to be geocoded or a LatLng. Required.")]
-        public Location Origin { get; set; }
+        public Location Origin {
+            get {
+                return _origin ?? (_origin = new Location());
+            }
+            set {
+                _origin = value;
+            }
+        }
+        Location _origin;
 
         /// <summary>
         /// The &lt;div&gt; in which to display the directions steps.
@@ -158,7 +182,15 @@ namespace Artem.Google.UI {
         [Description("Options for the polylines. All polylines rendered by the DirectionsRenderer will use these options.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public PolylineOptions PolylineOptions { get; set; }
+        public PolylineOptions PolylineOptions {
+            get {
+                return _polylineOptions ?? (_polylineOptions = new PolylineOptions());
+            }
+            set {
+                _polylineOptions = value;
+            }
+        }
+        PolylineOptions _polylineOptions;
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="GoogleDirections"/> should alter the viewport.

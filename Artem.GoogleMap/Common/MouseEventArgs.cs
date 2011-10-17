@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +6,6 @@ using System.Text;
 namespace Artem.Google.UI {
 
     public class MouseEventArgs : EventArgs, IScriptDataConverter {
-
-        #region Static Fields
-
-        public static readonly MouseEventArgs Empty = new MouseEventArgs();
-
-        #endregion
 
         #region Static Methods
 
@@ -27,7 +21,7 @@ namespace Artem.Google.UI {
 
         #region Properties
 
-        public LatLng LatLng { get; set; }
+        public LatLng Position { get; protected set; }
 
         #endregion
 
@@ -38,7 +32,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="latlng">The latlng.</param>
         public MouseEventArgs(LatLng latlng) {
-            this.LatLng = latlng;
+            this.Position = latlng;
         }
 
         /// <summary>
@@ -57,7 +51,7 @@ namespace Artem.Google.UI {
             : this(null) {
         }
         #endregion
-
+            
         #region Methods
 
         /// <summary>
@@ -65,7 +59,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <returns></returns>
         public IDictionary<string, object> ToScriptData() {
-            return this.LatLng.ToScriptData();
+            return this.Position.ToScriptData();
         }
         #endregion
     }

@@ -9,7 +9,7 @@ namespace Artem.Google.UI {
     /// <summary>
     /// A LatLngBounds instance represents a rectangle in geographical coordinates, including one that crosses the 180 degrees longitudinal meridian.
     /// </summary>
-    public class LatLngBounds : IScriptDataConverter {
+    public class Bounds : IScriptDataConverter {
 
         #region Static Methods
 
@@ -18,16 +18,17 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static LatLngBounds FromScriptData(IDictionary<string, object> data) {
+        public static Bounds FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
-                var result = new LatLngBounds();
+                var result = new Bounds();
                 object value;
 
                 if (data.TryGetValue("sw", out value))
-                    result.SouthWest = LatLng.FromScriptData(value as IDictionary<string, object>);
+                    result.SouthWest = LatLng.FromScriptData(value);
                 if (data.TryGetValue("ne", out value))
-                    result.NorthEast = LatLng.FromScriptData(value as IDictionary<string, object>);
+                    result.NorthEast = LatLng.FromScriptData(value);
 
                 return result;
             }
@@ -39,7 +40,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="bounds">The bounds.</param>
         /// <returns></returns>
-        public static LatLngBounds Parse(string bounds) {
+        public static Bounds Parse(string bounds) {
 
             double swlat = 0D;
             double swlng = 0D;
@@ -64,18 +65,18 @@ namespace Artem.Google.UI {
                 }
             }
 
-            return new LatLngBounds {
+            return new Bounds {
                 SouthWest = new LatLng(swlat, swlng),
                 NorthEast = new LatLng(nelat, nelng)
             };
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.UI.LatLngBounds"/>.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.UI.Bounds"/>.
         /// </summary>
         /// <param name="bounds">The bounds.</param>
         /// <returns>The result of the conversion.</returns>
-        public static implicit operator LatLngBounds(string bounds) {
+        public static implicit operator Bounds(string bounds) {
             return Parse(bounds);
         }
         #endregion

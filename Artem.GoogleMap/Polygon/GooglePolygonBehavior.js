@@ -294,7 +294,7 @@ Artem.Google.PolygonBehavior.prototype = {
         if (handler) handler(this, e);
     }
 
-    // mouse up
+    // mouse right
     proto.add_rightClick = function (handler) {
         this.get_events().addHandler("rightclick", handler);
         this.composeEvents();

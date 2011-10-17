@@ -32,11 +32,16 @@
     <asp:ScriptManager runat="server">
     </asp:ScriptManager>
     <div class="map-wrap">
-        <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Hybrid" CssClass="map"
-            Latitude="42.345573" Longitude="-71.098326" Zoom="14">
-            <%--Latitude="42.1229" Longitude="24.7879"--%>
-        </artem:GoogleMap>
-        <artem:GoogleStreetView TargetControlID="GoogleMap1" runat="server" />
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Hybrid" CssClass="map" Latitude="42.345573"
+                    Longitude="-71.098326" Zoom="14" OnClientClick="test" OnDragEnd="HandleAny" MapTypeControlOptions-Position="BottomRight">
+                    <%--Latitude="42.1229" Longitude="24.7879"--%>
+                </artem:GoogleMap>
+                <asp:Button runat="server" Text="Submit" />
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <%--<artem:GoogleStreetView TargetControlID="GoogleMap1" runat="server" />--%>
         <%--<artem:GoogleMarkers TargetControlID="GoogleMap1" runat="server" />--%>
         <%--<artem:GooglePolygon TargetControlID="GoogleMap1" runat="server" OnClick="HandleClick" OnClientRightClick="test">
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
@@ -113,6 +118,10 @@
 
     protected void HandleClick(object sender, MouseEventArgs e) {
         int i = 0;
+    }
+
+    protected void HandleAny(object sender, EventArgs e) {
+        var s = e.ToString();           
     }
     #endregion
 </script>

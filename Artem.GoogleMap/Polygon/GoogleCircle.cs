@@ -31,7 +31,15 @@ namespace Artem.Google.UI {
         [Description("Gets or sets the center.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public LatLng Center { get; set; }
+        public LatLng Center {
+            get {
+                return _center ?? (_center = new LatLng());
+            }
+            set {
+                _center = value;
+            }
+        }
+        LatLng _center;
 
         /// <summary>
         /// Indicates whether this Polygon handles click events. Defaults to true.
@@ -249,7 +257,7 @@ namespace Artem.Google.UI {
             this.FillColor = Color.Red;
             this.FillOpacity = .5F;
             this.StrokeColor = Color.Blue;
-            this.StrokeOpacity = .5F;   
+            this.StrokeOpacity = .5F;
             this.StrokeWeight = 5;
             this.ZIndex = 1;
         }

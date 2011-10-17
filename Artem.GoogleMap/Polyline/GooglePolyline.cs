@@ -27,13 +27,6 @@ namespace Artem.Google.UI {
     [ToolboxData("<{0}:GooglePolyline runat=server></{0}:GooglePolyline>")]
     public class GooglePolyline : ExtenderControl, IPostBackEventHandler {
 
-        #region Fields
-
-        //IDictionary<string, object> _options = new Dictionary<string, object>();
-        List<LatLng> _path;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -78,6 +71,7 @@ namespace Artem.Google.UI {
                 _path = value;
             }
         }
+        List<LatLng> _path;
 
         /// <summary>
         /// Gets or sets a value for stroke color of the polyline. 

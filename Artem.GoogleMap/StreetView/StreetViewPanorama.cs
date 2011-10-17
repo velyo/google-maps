@@ -16,13 +16,13 @@ namespace Artem.Google.UI {
 
         #region Static Methods
 
-        public static GoogleStreetView FromScriptData(object scriptObject) {
+        public static GoogleStreetViewPanorama FromScriptData(object scriptObject) {
 
-            GoogleStreetView pano = null;
+            GoogleStreetViewPanorama pano = null;
             var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 object value;
-                pano = new GoogleStreetView();
+                pano = new GoogleStreetViewPanorama();
                 // TODO
             }
             return pano;

@@ -1,260 +1,244 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProductVersion>9.0.30729</ProductVersion>
-        <SchemaVersion>2.0</SchemaVersion>
-        <ProjectGuid>{0660EA3D-B58B-4858-9822-9A6459A4001C}</ProjectGuid>
-        <OutputType>Library</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Artem.Google</RootNamespace>
-        <AssemblyName>Artem.Google</AssemblyName>
-        <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <SccProjectName>SAK</SccProjectName>
-        <SccLocalPath>SAK</SccLocalPath>
-        <SccAuxPath>SAK</SccAuxPath>
-        <SccProvider>SAK</SccProvider>
-        <SignAssembly>true</SignAssembly>
-        <AssemblyOriginatorKeyFile>../GoogleMapKey.snk</AssemblyOriginatorKeyFile>
-        <FileUpgradeFlags>
-        </FileUpgradeFlags>
-        <OldToolsVersion>3.5</OldToolsVersion>
-        <UpgradeBackupLocation />
-        <IsWebBootstrapper>false</IsWebBootstrapper>
-        <TargetFrameworkProfile />
-        <PublishUrl>publish\</PublishUrl>
-        <Install>true</Install>
-        <InstallFrom>Disk</InstallFrom>
-        <UpdateEnabled>false</UpdateEnabled>
-        <UpdateMode>Foreground</UpdateMode>
-        <UpdateInterval>7</UpdateInterval>
-        <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-        <UpdatePeriodically>false</UpdatePeriodically>
-        <UpdateRequired>false</UpdateRequired>
-        <MapFileExtensions>true</MapFileExtensions>
-        <ApplicationRevision>0</ApplicationRevision>
-        <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-        <UseApplicationTrust>false</UseApplicationTrust>
-        <BootstrapperEnabled>true</BootstrapperEnabled>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="Microsoft.CSharp" />
-        <Reference Include="System" />
-        <Reference Include="System.Core">
-            <RequiredTargetFramework>3.5</RequiredTargetFramework>
-        </Reference>
-        <Reference Include="System.Data" />
-        <Reference Include="System.Design" />
-        <Reference Include="System.Drawing" />
-        <Reference Include="System.Runtime.Serialization" />
-        <Reference Include="System.ServiceModel.Web" />
-        <Reference Include="System.Web" />
-        <Reference Include="System.Web.Extensions">
-            <RequiredTargetFramework>3.5</RequiredTargetFramework>
-        </Reference>
-        <Reference Include="System.Xml" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="Common\Distance.cs" />
-        <Compile Include="Common\Duration.cs" />
-        <Compile Include="Common\LatLngBounds.cs" />
-        <Compile Include="Common\MarkerOptions.cs" />
-        <Compile Include="Common\MouseEventArgs.cs" />
-        <Compile Include="Common\OverviewMapControlOptions.cs" />
-        <Compile Include="Common\PanControlOptions.cs" />
-        <Compile Include="Common\PolylineOptions.cs" />
-        <Compile Include="Common\RotateControlOptions.cs" />
-        <Compile Include="Common\ScaleControlOptions.cs" />
-        <Compile Include="Common\StreetViewControlOptions.cs" />
-        <Compile Include="Common\ZoomControlOptions.cs" />
-        <Compile Include="Directions\DirectionsChangedEventArgs.cs" />
-        <Compile Include="Directions\DirectionsStep.cs" />
-        <Compile Include="IScriptDataConverter.cs" />
-        <Compile Include="JsonConvert.cs" />
-        <Compile Include="Markers\GoogleMarkers.cs" />
-        <Compile Include="Polygon\GoogleCircle.cs" />
-        <Compile Include="Polygon\GoogleRectangle.cs" />
-        <Compile Include="Serialization\PolylineOptionsConverter.cs" />
-        <Compile Include="StreetView\GoogleStreetView.cs" />
-        <Compile Include="Common\ControlPosition.cs" />
-        <Compile Include="Extensions\XtsCollection.cs" />
-        <Compile Include="IClientAction.cs" />
-        <Compile Include="JsUtil.cs" />
-        <Compile Include="UI\InfoWindowOptions.cs" />
-        <Compile Include="Common\LatLng.cs" />
-        <Compile Include="Common\MapTypeControlOptions.cs" />
-        <Compile Include="Serialization\ColorJavaScriptConverter.cs" />
-        <None Include="Common\GeoStatusCode.cs" />
-        <Compile Include="Common\Location.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Resources\Errors.Designer.cs">
-            <AutoGen>True</AutoGen>
-            <DesignTime>True</DesignTime>
-            <DependentUpon>Errors.resx</DependentUpon>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup>
-        <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Resources\Errors.resx">
-            <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Errors.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="UI\GoogleBounds.cs" />
-        <Compile Include="Directions\GoogleDirections.cs" />
-        <Compile Include="UI\GoogleEventArgs.cs" />
-        <Compile Include="UI\GoogleEventList.cs" />
-        <Compile Include="Map\GoogleMap.cs" />
-        <Compile Include="Map\GoogleMap.Events.cs">
-            <DependentUpon>GoogleMap.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Map\GoogleMap.Render.cs">
-            <DependentUpon>GoogleMap.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Map\GoogleMap.State.cs">
-            <DependentUpon>GoogleMap.cs</DependentUpon>
-        </Compile>
-        <Compile Include="Map\GoogleMapDesigner.cs" />
-        <Compile Include="Markers\GoogleMarker.cs" />
-        <Compile Include="Markers\GoogleMarker.DefaultInfoContent.cs" />
-        <Compile Include="Markers\GoogleMarker.TemplateContainer.cs" />
-        <Compile Include="Markers\GoogleMarkerBehaviour.cs">
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Include="Markers\GoogleMarkerEvents.cs" />
-        <Compile Include="Markers\GoogleMarkerStyle.cs" />
-        <Compile Include="Common\Point.cs" />
-        <Compile Include="Polygon\GooglePolygon.cs" />
-        <Compile Include="Polyline\GooglePolyline.cs" />
-        <Compile Include="Common\Size.cs" />
-        <Compile Include="UI\GoogleZoomPair.cs" />
-        <Compile Include="Common\MapType.cs" />
-        <Compile Include="Common\MapTypeControlStyle.cs" />
-        <Compile Include="Common\MarkerImage.cs" />
-        <Compile Include="UI\MarkerManagerOptions.cs" />
-        <Compile Include="Common\MarkerShape.cs" />
-        <Compile Include="UI\NavigationControlOptions.cs" />
-        <Compile Include="UI\NavigationControlStyle.cs" />
-        <Compile Include="UI\OpenInfoBehaviour.cs" />
-        <Compile Include="Common\ScaleControlStyle.cs" />
-        <Compile Include="Common\StaticImageFormats.cs" />
-        <Compile Include="StreetView\StreetViewAddressControlOptions.cs" />
-        <Compile Include="StreetView\StreetViewPanorama.cs" />
-        <Compile Include="StreetView\StreetViewPov.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-            <Visible>False</Visible>
-            <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-            <Install>false</Install>
-        </BootstrapperPackage>
-        <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-            <Visible>False</Visible>
-            <ProductName>.NET Framework 3.5 SP1</ProductName>
-            <Install>true</Install>
-        </BootstrapperPackage>
-        <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-            <Visible>False</Visible>
-            <ProductName>Windows Installer 3.1</ProductName>
-            <Install>true</Install>
-        </BootstrapperPackage>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Scripts\MicrosoftAjax.debug.js" />
-        <EmbeddedResource Include="Scripts\MicrosoftAjax.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Map\GoogleCommons.js" />
-        <EmbeddedResource Include="..\..\..\..\..\GoogleMap.js">
-            <Link>Map\GoogleMap.js</Link>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Scripts\GoogleMarker.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Map\GoogleCommons.min.js">
-            <DependentUpon>GoogleCommons.js</DependentUpon>
-        </EmbeddedResource>
-        <EmbeddedResource Include="..\..\..\..\..\GoogleMap.min.js">
-            <DependentUpon>GoogleMap.js</DependentUpon>
-            <Link>Map\GoogleMap.min.js</Link>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Scripts\GoogleMarker.min.js">
-            <DependentUpon>GoogleMarker.js</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.js" />
-        <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.min.js">
-            <DependentUpon>GoogleDirectionsBehavior.js</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Markers\GoogleMarkersBehavior.js" />
-        <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
-        <EmbeddedResource Include="Polyline\GooglePolylineBehavior.min.js">
-            <DependentUpon>GooglePolylineBehavior.js</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Polygon\GooglePolygonBehavior.js" />
-        <EmbeddedResource Include="Polygon\GooglePolygonBehavior.min.js">
-            <DependentUpon>GooglePolygonBehavior.js</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="Polygon\GoogleCircleBehavior.js" />
-        <EmbeddedResource Include="Polygon\GoogleCircleBehavior.min.js">
-            <DependentUpon>GoogleCircleBehavior.js</DependentUpon>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Polygon\GoogleRectangleBehavior.js" />
-        <EmbeddedResource Include="Polygon\GoogleRectangleBehavior.min.js">
-            <DependentUpon>GoogleRectangleBehavior.js</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Include="StreetView\GoogleStreetViewBehavior.js" />
-        <EmbeddedResource Include="StreetView\GoogleStreetViewBehavior.min.js">
-            <DependentUpon>GoogleStreetViewBehavior.js</DependentUpon>
-        </EmbeddedResource>
-    </ItemGroup>
-    <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0660EA3D-B58B-4858-9822-9A6459A4001C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Artem.Google</RootNamespace>
+    <AssemblyName>Artem.Google</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../GoogleMapKey.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BoundsEventArgs.cs" />
+    <Compile Include="Common\Distance.cs" />
+    <Compile Include="Common\Duration.cs" />
+    <Compile Include="Common\Bounds.cs" />
+    <Compile Include="Common\MapEventArgs.cs" />
+    <Compile Include="Common\MarkerOptions.cs" />
+    <Compile Include="Common\MouseEventArgs.cs" />
+    <Compile Include="Common\OverviewMapControlOptions.cs" />
+    <Compile Include="Common\PanControlOptions.cs" />
+    <Compile Include="Common\PolylineOptions.cs" />
+    <Compile Include="Common\RotateControlOptions.cs" />
+    <Compile Include="Common\ScaleControlOptions.cs" />
+    <Compile Include="Common\StreetViewControlOptions.cs" />
+    <Compile Include="Common\ZoomControlOptions.cs" />
+    <Compile Include="Directions\DirectionsChangedEventArgs.cs" />
+    <Compile Include="Directions\DirectionsStep.cs" />
+    <Compile Include="IScriptDataConverter.cs" />
+    <Compile Include="JsonConvert.cs" />
+    <Compile Include="Markers\GoogleMarkers.cs" />
+    <Compile Include="Polygon\GoogleCircle.cs" />
+    <Compile Include="Polygon\GoogleRectangle.cs" />
+    <Compile Include="Serialization\PolylineOptionsConverter.cs" />
+    <Compile Include="StreetView\GoogleStreetViewPanorama.cs" />
+    <Compile Include="Common\ControlPosition.cs" />
+    <Compile Include="Extensions\XtsCollection.cs" />
+    <Compile Include="IClientAction.cs" />
+    <Compile Include="JsUtil.cs" />
+    <Compile Include="UI\InfoWindowOptions.cs" />
+    <Compile Include="Common\LatLng.cs" />
+    <Compile Include="Common\MapTypeControlOptions.cs" />
+    <Compile Include="Serialization\ColorJavaScriptConverter.cs" />
+    <None Include="Common\GeoStatusCode.cs" />
+    <Compile Include="Common\Location.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Directions\GoogleDirections.cs" />
+    <Compile Include="Map\GoogleMap.cs" />
+    <Compile Include="Map\GoogleMapDesigner.cs" />
+    <Compile Include="Markers\GoogleMarker.cs" />
+    <Compile Include="Markers\GoogleMarker.DefaultInfoContent.cs" />
+    <Compile Include="Markers\GoogleMarker.TemplateContainer.cs" />
+    <Compile Include="Markers\GoogleMarkerStyle.cs" />
+    <Compile Include="Common\Point.cs" />
+    <Compile Include="Polygon\GooglePolygon.cs" />
+    <Compile Include="Polyline\GooglePolyline.cs" />
+    <Compile Include="Common\Size.cs" />
+    <Compile Include="Common\MapType.cs" />
+    <Compile Include="Common\MapTypeControlStyle.cs" />
+    <Compile Include="Common\MarkerImage.cs" />
+    <Compile Include="UI\MarkerManagerOptions.cs" />
+    <Compile Include="Common\MarkerShape.cs" />
+    <Compile Include="UI\NavigationControlOptions.cs" />
+    <Compile Include="UI\NavigationControlStyle.cs" />
+    <Compile Include="UI\OpenInfoBehaviour.cs" />
+    <Compile Include="Common\ScaleControlStyle.cs" />
+    <Compile Include="Common\StaticImageFormats.cs" />
+    <Compile Include="StreetView\StreetViewAddressControlOptions.cs" />
+    <Compile Include="StreetView\StreetViewPanorama.cs" />
+    <Compile Include="StreetView\StreetViewPov.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\MicrosoftAjax.debug.js" />
+    <EmbeddedResource Include="Scripts\MicrosoftAjax.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Map\GoogleCommons.js" />
+    <EmbeddedResource Include="Scripts\GoogleMarker.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Map\GoogleCommons.min.js">
+      <DependentUpon>GoogleCommons.js</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Scripts\GoogleMarker.min.js">
+      <DependentUpon>GoogleMarker.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.js" />
+    <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.min.js">
+      <DependentUpon>GoogleDirectionsBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.js" />
+    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
+    <EmbeddedResource Include="Polyline\GooglePolylineBehavior.min.js">
+      <DependentUpon>GooglePolylineBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Polygon\GooglePolygonBehavior.js" />
+    <EmbeddedResource Include="Polygon\GooglePolygonBehavior.min.js">
+      <DependentUpon>GooglePolygonBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Polygon\GoogleCircleBehavior.js" />
+    <EmbeddedResource Include="Polygon\GoogleCircleBehavior.min.js">
+      <DependentUpon>GoogleCircleBehavior.js</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Polygon\GoogleRectangleBehavior.js" />
+    <EmbeddedResource Include="Polygon\GoogleRectangleBehavior.min.js">
+      <DependentUpon>GoogleRectangleBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="StreetView\GoogleStreetViewPanoramaBehavior.js" />
+    <EmbeddedResource Include="StreetView\GoogleStreetViewBehavior.min.js">
+      <DependentUpon>GoogleStreetViewPanoramaBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Map\GoogleMap.js" />
+    <EmbeddedResource Include="Map\GoogleMap.min.js">
+      <DependentUpon>GoogleMap.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   -->
-    <ProjectExtensions>
-        <VisualStudio>
-            <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
-        </VisualStudio>
-    </ProjectExtensions>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

@@ -20,12 +20,6 @@ namespace Artem.Google.UI {
     [ToolboxData("<{0}:GoogleRectangle runat=server></{0}:GoogleRectangle>")]
     public class GoogleRectangle : ExtenderControl, IPostBackEventHandler {
 
-        #region Fields
-
-        LatLngBounds _bounds;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -37,14 +31,15 @@ namespace Artem.Google.UI {
         [Description("Gets or sets the bounds.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]    
-        public LatLngBounds Bounds {
+        public Bounds Bounds {
             get {
-                return _bounds ?? (_bounds = new LatLngBounds());
+                return _bounds ?? (_bounds = new Bounds());
             }
             set {
                 _bounds = value;
             }
         }
+        Bounds _bounds;
 
         /// <summary>
         /// Indicates whether this Polygon handles click events. Defaults to true.

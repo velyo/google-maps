@@ -19,14 +19,21 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static LatLng FromScriptData(IDictionary<string, object> data) {
+        public static LatLng FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var result = new LatLng();
                 object value;
 
-                if (data.TryGetValue("lat", out value)) result.Latitude = (double)(decimal)value;
-                if (data.TryGetValue("lng", out value)) result.Longitude = (double)(decimal)value;
+                if (data.TryGetValue("lat", out value)) 
+                    result.Latitude = (double)(decimal)value;
+                else if (data.TryGetValue("Ma", out value))
+                    result.Latitude = (double)(decimal)value;
+                if (data.TryGetValue("lng", out value)) 
+                    result.Longitude = (double)(decimal)value;
+                else if (data.TryGetValue("Na", out value))
+                    result.Longitude = (double)(decimal)value;
 
                 return result;
             }

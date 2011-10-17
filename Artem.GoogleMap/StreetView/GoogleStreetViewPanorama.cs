@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Web.UI;
 
-[assembly: WebResource("Artem.Google.StreetView.GoogleStreetViewBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.StreetView.GoogleStreetViewBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.min.js", "text/javascript")]
 
 namespace Artem.Google.UI {
 
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
     [ToolboxData("<{0}:GoogleStreetView runat=server></{0}:GoogleStreetView>")]
-    public class GoogleStreetView : ExtenderControl, IPostBackEventHandler {
+    public class GoogleStreetViewPanorama : ExtenderControl, IPostBackEventHandler {
 
         #region Methods
 
@@ -25,7 +25,7 @@ namespace Artem.Google.UI {
         /// </returns>
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl) {
 
-            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.StreetViewBehavior", targetControl.ClientID);
+            var descriptor = new ScriptBehaviorDescriptor("Artem.Google.StreetViewPanoramaBehavior", targetControl.ClientID);
             yield return descriptor;
         }
 
@@ -39,9 +39,9 @@ namespace Artem.Google.UI {
 
             string assembly = this.GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.StreetView.GoogleStreetViewBehavior.js", assembly);
+            yield return new ScriptReference("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.StreetView.GoogleStreetViewBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.min.js", assembly);
 #endif
         }
 

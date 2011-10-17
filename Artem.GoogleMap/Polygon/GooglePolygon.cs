@@ -28,12 +28,6 @@ namespace Artem.Google.UI {
     [ToolboxData("<{0}:GooglePolygon runat=server></{0}:GooglePolygon>")]
     public class GooglePolygon : ExtenderControl, IPostBackEventHandler {
 
-        #region Fields
-
-        List<LatLng> _paths;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -96,6 +90,7 @@ namespace Artem.Google.UI {
                 _paths = value;
             }
         }
+        List<LatLng> _paths;
 
         /// <summary>
         /// The stroke color. All CSS3 colors are supported except for extended named colors.
