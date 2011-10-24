@@ -8,16 +8,16 @@ using Artem.Google.UI;
 
 public partial class marker_ServerGeocoding : System.Web.UI.Page {
 
-    protected void HandleGeoLoaded(object sender, GoogleEventArgs e) {
-    }
+    //protected void HandleGeoLoaded(object sender, GoogleEventArgs e) {
+    //}
 
 
-    protected override void OnLoad(EventArgs e) {
-        base.OnLoad(e);
+    //protected override void OnLoad(EventArgs e) {
+    //    base.OnLoad(e);
 
-        if (!IsPostBack) {
-            GoogleMarker marker = new GoogleMarker("sofia bulgaria");
-            GoogleMap1.Markers.Add(marker);
-        }
-    }
+    //    if (!IsPostBack) {
+    //        GoogleMarker marker = new GoogleMarker("sofia bulgaria");
+    //        GoogleMap1.Markers.Add(marker);
+    //    }
+    //}
 }

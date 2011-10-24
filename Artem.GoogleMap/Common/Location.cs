@@ -2,16 +2,38 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
+using System.ComponentModel;
 
 namespace Artem.Google.UI {
 
     /// <summary>
     /// 
     /// </summary>
-    [DataContract]
-    public class Location {
+    public class Location : IScriptDataConverter {
 
         #region Static Methods
+
+        /// <summary>
+        /// Froms the script data.
+        /// </summary>
+        /// <param name="scriptObject">The script object.</param>
+        /// <returns></returns>
+        public static Location FromScriptData(object scriptObject) {
+
+            var data = scriptObject as IDictionary<string, object>;
+            if (data != null) {
+                var location = new Location();
+                object value;
+                if (data.TryGetValue("location", out value)) {
+                    if (value is IDictionary<string, object>)
+                        location.Point = LatLng.FromScriptData(value);
+                    else
+                        location.Address = value as string;
+                }
+                return location;
+            }
+            return null;
+        }
 
         /// <summary>
         /// Parses the specified pair.
@@ -36,6 +58,12 @@ namespace Artem.Google.UI {
         }
         #endregion
 
+        #region Fields
+
+        LatLng _point;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -48,7 +76,15 @@ namespace Artem.Google.UI {
         /// Gets or sets the point.
         /// </summary>
         /// <value>The point.</value>
-        public LatLng Point { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public LatLng Point {
+            get {
+                return _point ?? (_point = new LatLng());
+            }
+            set {
+                _point = value;
+            }
+        }
 
         /// <summary>
         /// Gets the value.
@@ -56,7 +92,7 @@ namespace Artem.Google.UI {
         /// <value>The value.</value>
         public object Value {
             get {
-                return (object)this.Point ?? (object)this.Address;
+                return (object)_point ?? (object)Address;
             }
         }
         #endregion
@@ -107,6 +143,16 @@ namespace Artem.Google.UI {
         #region Methods
 
         /// <summary>
+        /// Returns the instance as a script data.
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<string, object> ToScriptData() {
+            return new Dictionary<string, object> { 
+                {"location", (_point != null) ? (object)_point.ToScriptData() : Address }
+            };
+        }
+
+        /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
@@ -114,8 +160,8 @@ namespace Artem.Google.UI {
         /// </returns>
         public override string ToString() {
 
-            return (this.Point != null)
-                ? string.Format("{0},{1}", JsUtil.Encode(this.Point.Latitude), JsUtil.Encode(this.Point.Longitude))
+            return (_point != null)
+                ? string.Format("{0},{1}", JsUtil.Encode(_point.Latitude), JsUtil.Encode(_point.Longitude))
                 : this.Address;
         }
         #endregion

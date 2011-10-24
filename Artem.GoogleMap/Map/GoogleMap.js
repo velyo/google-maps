@@ -5,10 +5,10 @@
 // Copyright (C) ArtemBG.
 // ------------------------------------------------------------------------------------------------
 // GoogleMap4.debug.js
-// GoogleMap Control v5.0 javascipt library (debug).
+// GoogleMap Control v5.5 javascipt library (debug).
 //
 // Assembly:    Artem.GooleMap
-// Version:     5.5.0.0
+// Version:     6.0.0.0
 // Project:     http://googlemap.codeplex.com
 // Demo:        http://googlemap.artembg.com
 // Author:      Velio Ivanov - velio@artembg.com
@@ -262,6 +262,12 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 };
                 Artem.Google.Geocoding.getAddress(options, function (address) { address = address; });
             }
+
+            try {
+                if (!window.maps) window.maps = {};
+                eval("window.maps." + this.get_id() + " = this;");
+            }
+            catch (ex) { }
         }
         else {
             var options = {
@@ -1038,3 +1044,11 @@ Artem.Google.Log = (function () {
         warn: warn
     };
 })();
+
+// object merging
+Artem.Google.merge = function (obj1, obj2) {
+    var result = {};
+    for (var name in obj1) result[name] = obj1[name];
+    for (var name in obj2) result[name] = obj2[name];
+    return result;
+};

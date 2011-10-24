@@ -10,18 +10,18 @@ public partial class marker_InfoContent : System.Web.UI.Page {
 
     #region Methods ///////////////////////////////////////////////////////////////////////////
 
-    protected void HandleMapDoubleClick(object sender, GoogleLocationEventArgs e) {
+    protected void HandleMapDoubleClick(object sender, EventArgs e) {
 
-        GoogleMarker marker = new GoogleMarker(e.Location.Point.Latitude, e.Location.Point.Longitude);
-        GoogleMap1.Markers.Add(marker);
+        //GoogleMarker marker = new GoogleMarker(e.Location.Point.Latitude, e.Location.Point.Longitude);
+        //GoogleMap1.Markers.Add(marker);
     }
 
-    protected override void OnPreRender(EventArgs e) {
-        base.OnPreRender(e);
+    //protected override void OnPreRender(EventArgs e) {
+    //    base.OnPreRender(e);
 
-        foreach (GoogleMarker marker in GoogleMap1.Markers) {
-            marker.InfoContent.Controls.Add(LoadControl("~/controls/TestInfoContent.ascx"));
-        }
-    }
+    //    foreach (GoogleMarker marker in GoogleMap1.Markers) {
+    //        marker.InfoContent.Controls.Add(LoadControl("~/controls/TestInfoContent.ascx"));
+    //    }
+    //}
     #endregion
 }

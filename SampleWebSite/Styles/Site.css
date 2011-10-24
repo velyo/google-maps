@@ -4,7 +4,6 @@
 	adopted by: Velio Ivanov
 	for: GoogleMap Control Website
 */
-
 * {
 	margin: 0;
 	padding: 0;
@@ -35,8 +34,8 @@ h3 {
 	margin: 0 0 .8em;
 }
 p {
-	margin: 0 0 2em 0;
-	line-height: 1.8em;
+	margin: 0 0 1em 0;
+	line-height: 1.3em;
 }
 em {
 	border-bottom: 1px dotted #fff;
@@ -65,7 +64,7 @@ fieldset label {
 fieldset div {
 	padding: 4px 0;
 }
-fieldset input[type=submit]{
+fieldset input[type=submit] {
 }
 legend {
 	padding: 10px;
@@ -193,6 +192,10 @@ a.step span {
 }
 #content li {
 	padding: 5px 0px;
+}
+#content .content {
+	float: left;
+	margin-bottom: 30px;
 }
 
 #footer {

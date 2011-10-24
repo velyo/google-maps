@@ -40,14 +40,14 @@
     <asp:Button runat="server" Text="Load" OnClick="HandleLoadClick" />
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="634px" Height="600px" Latitude="42.1229"
         Longitude="24.7879" Zoom="4" EnableScrollWheelZoom="true">
-        <Markers>
+        <%--<Markers>
             <artem:GoogleMarker Latitude="42.1229" Longitude="24.7879" Title="Click on the marker"
                 Text="Text of marker 1" Draggable="true">
             </artem:GoogleMarker>
             <artem:GoogleMarker Latitude="42.1229" Longitude="20." Title="Click on the marker"
                 Text="Text of marker 2" Draggable="true">
             </artem:GoogleMarker>
-        </Markers>
+        </Markers>--%>
     </artem:GoogleMap>
     <p>
         <asp:Button runat="server" Text="Make Map Static" OnClick="HandleMakeStaticClick" />

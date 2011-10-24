@@ -51,19 +51,28 @@ namespace Artem.Google.UI {
                 object value;
 
                 if (data.TryGetValue("anchor", out value))
-                    result.Anchor = Point.FromScriptData((IDictionary<string, object>)value);
+                    result._anchor = Point.FromScriptData((IDictionary<string, object>)value);
                 if (data.TryGetValue("origin", out value))
-                    result.Origin = Point.FromScriptData((IDictionary<string, object>)value);
+                    result._origin = Point.FromScriptData((IDictionary<string, object>)value);
                 if (data.TryGetValue("scaledSize", out value))
-                    result.ScaledSize = Size.FromScriptData((IDictionary<string, object>)value);
+                    result._scaledSize = Size.FromScriptData((IDictionary<string, object>)value);
                 if (data.TryGetValue("size", out value))
-                    result.Size = Size.FromScriptData((IDictionary<string, object>)value);
+                    result._size = Size.FromScriptData((IDictionary<string, object>)value);
                 if (data.TryGetValue("url", out value)) result.Url = (string)value;
 
                 return result;
             }
             return null;
         }
+        #endregion
+
+        #region Fields
+
+        Point _anchor;
+        Point _origin;
+        Size _scaledSize;
+        Size _size;
+
         #endregion
 
         #region Properties
@@ -74,7 +83,15 @@ namespace Artem.Google.UI {
         /// <value>The anchor.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public Point Anchor { get; set; }
+        public Point Anchor {
+            get {
+                return _anchor ?? (_anchor = new Point());
+            }
+            set {
+                _anchor = value;
+            }
+        }
+
 
         /// <summary>
         /// Gets or sets the origin.
@@ -82,7 +99,14 @@ namespace Artem.Google.UI {
         /// <value>The origin.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public Point Origin { get; set; }
+        public Point Origin {
+            get {
+                return _origin ?? (_origin = new Point());
+            }
+            set {
+                _origin = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the size of the scaled.
@@ -90,7 +114,14 @@ namespace Artem.Google.UI {
         /// <value>The size of the scaled.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public Size ScaledSize { get; set; }
+        public Size ScaledSize {
+            get {
+                return _scaledSize ?? (_scaledSize = new Size());
+            }
+            set {
+                _scaledSize = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the size.
@@ -98,7 +129,14 @@ namespace Artem.Google.UI {
         /// <value>The size.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public Size Size { get; set; }
+        public Size Size {
+            get {
+                return _size ?? (_size = new Size());
+            }
+            set {
+                _size = value;
+            }
+        }
 
         /// <summary>
         /// The URL of the marker image.
@@ -126,16 +164,11 @@ namespace Artem.Google.UI {
 
             var result = new Dictionary<string, object>();
 
-            if (this.Anchor != null)
-                result["anchor"] = this.Anchor.ToScriptData();
-            if(this.Origin != null)
-                result["origin"] = this.Origin.ToScriptData();
-            if(this.ScaledSize != null)
-                result["scaledSize"] = this.ScaledSize.ToScriptData();
-            if(this.Size != null)
-                result["size"] = this.Size.ToScriptData();
-            if (this.Url != null)
-                result["url"] = this.Url;
+            if (_anchor != null) result["anchor"] = _anchor.ToScriptData();
+            if (_origin != null) result["origin"] = _origin.ToScriptData();
+            if (_scaledSize != null) result["scaledSize"] = _scaledSize.ToScriptData();
+            if (_size != null) result["size"] = _size.ToScriptData();
+            if (this.Url != null) result["url"] = this.Url;
 
             return result;
         }

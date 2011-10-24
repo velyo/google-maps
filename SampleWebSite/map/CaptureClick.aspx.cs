@@ -26,8 +26,8 @@ public partial class map_CaptureClick : Page {
         if (IsPostBack) {
             string address = _txtAddress.Text;
             GoogleMap1.Address = address;
-            GoogleMap1.Markers.Clear();
-            GoogleMap1.Markers.Add(new GoogleMarker(address));
+            //GoogleMap1.Markers.Clear();
+            //GoogleMap1.Markers.Add(new GoogleMarker(address));
         }
     } 
     #endregion

@@ -81,6 +81,13 @@ namespace Artem.Google.UI {
         }
         #endregion
 
+        #region Fields
+
+        LatLng _southWest;
+        LatLng _northEast;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -88,14 +95,28 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The south west.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public LatLng SouthWest { get; set; }
+        public LatLng SouthWest {
+            get {
+                return _southWest ?? (_southWest = new LatLng());
+            }
+            set {
+                _southWest = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the north east point of bounds.
         /// </summary>
         /// <value>The north east.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public LatLng NorthEast { get; set; }
+        public LatLng NorthEast {
+            get {
+                return _northEast ?? (_northEast = new LatLng());
+            }
+            set {
+                _northEast = value;
+            }
+        }
 
         #endregion
 
@@ -106,8 +127,11 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <returns></returns>
         public IDictionary<string, object> ToScriptData() {
-            return new Dictionary<string, object> { 
-                { "sw", SouthWest.ToScriptData() }, { "ne", NorthEast.ToScriptData() } };
+
+            var data = new Dictionary<string, object>();
+            if (_northEast != null) data["ne"] = _northEast.ToScriptData();
+            if (_southWest != null) data["sw"] = _southWest.ToScriptData();
+            return data;
         }
 
         /// <summary>

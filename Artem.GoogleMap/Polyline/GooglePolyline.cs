@@ -296,7 +296,7 @@ namespace Artem.Google.UI {
 
             if (this.MouseOut != null)
                 descriptor.AddEvent("mouseOut", "Artem.Google.PolylineBehavior.raiseServerMouseOut");
-            else if (this.OnClientMouseMove != null)
+            else if (this.OnClientMouseOut != null)
                 descriptor.AddEvent("mouseOut", this.OnClientMouseOut);
 
             if (this.MouseOver != null)

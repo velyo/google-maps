@@ -23,7 +23,7 @@ public partial class map_Dynamic : System.Web.UI.Page {
 
         Artem.Google.UI.GoogleMap map = new Artem.Google.UI.GoogleMap();
         map.ID = "googleMap";
-        map.Key = key;
+        //map.Key = key;
         map.Latitude = latitude;
         map.Longitude = longitude;
         map.Height = new Unit("250px");

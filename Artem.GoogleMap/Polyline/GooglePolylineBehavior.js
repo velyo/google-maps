@@ -1,6 +1,5 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
-///<reference path="..\Scripts\GoogleCommons.js"/>
-///<reference path="..\Scripts\GoogleMap.js"/>
+///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
 Type.registerNamespace("Artem.Google");
@@ -68,7 +67,7 @@ Artem.Google.PolylineBehavior.prototype = {
     proto.create = function () {
         map = $find(this.get_element().id);
 
-        var points = Artem.Google.Converter.latlngArray(path);
+        var points = Artem.Google.Convert.toLatLngArray(path);
         var options = {
             clickable: clickable,
             geodesic: geodesic,

@@ -265,6 +265,13 @@ namespace Artem.Google.UI {
 
         #region Methods
 
+        /// <summary>
+        /// When overridden in a derived class, registers the <see cref="T:System.Web.UI.ScriptDescriptor"/> objects for the control.
+        /// </summary>
+        /// <param name="targetControl">The server control to which the extender is associated.</param>
+        /// <returns>
+        /// An enumeration of <see cref="T:System.Web.UI.ScriptDescriptor"/> objects.
+        /// </returns>
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors(Control targetControl) {
 
             var descriptor = new ScriptBehaviorDescriptor("Artem.Google.CircleBehavior", targetControl.ClientID);

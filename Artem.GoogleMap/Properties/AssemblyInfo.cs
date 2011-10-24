@@ -18,8 +18,8 @@ using System.Security;
 
 [assembly: Guid("61ecaa81-6989-4d3a-99a8-54d14a22dd2e")]
 
-[assembly: AssemblyVersion("5.5.0.0")]
-[assembly: AssemblyFileVersion("5.5.11282.1009")]
+[assembly: AssemblyVersion("6.0.0.0")]
+[assembly: AssemblyFileVersion("6.0.11296.1023")]
 
 //[assembly: AllowPartiallyTrustedCallers]
 

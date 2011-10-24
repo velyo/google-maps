@@ -91,7 +91,7 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
+        #region Properties
 
         public int Height { get; set; }
 

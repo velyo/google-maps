@@ -32,17 +32,22 @@
     <asp:ScriptManager runat="server">
     </asp:ScriptManager>
     <div class="map-wrap">
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
-                <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Hybrid" CssClass="map" Latitude="42.345573"
-                    Longitude="-71.098326" Zoom="14" OnClientClick="test" OnDragEnd="HandleAny" MapTypeControlOptions-Position="BottomRight">
-                    <%--Latitude="42.1229" Longitude="24.7879"--%>
-                </artem:GoogleMap>
-                <asp:Button runat="server" Text="Submit" />
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <%--<artem:GoogleStreetView TargetControlID="GoogleMap1" runat="server" />--%>
-        <%--<artem:GoogleMarkers TargetControlID="GoogleMap1" runat="server" />--%>
+        <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Roadmap" CssClass="map"
+            Latitude="40.740" Longitude="-74.18" Zoom="13" MapTypeControlOptions-Position="BottomRight">
+        </artem:GoogleMap>
+        <artem:GoogleGround TargetControlID="GoogleMap1" runat="server" Bounds-SouthWest-Latitude="40.716216"
+            Bounds-SouthWest-Longitude="-74.213393" Bounds-NorthEast-Latitude="40.765641"
+            Bounds-NorthEast-Longitude="-74.139235" Clickable="true" Url="http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+            OnClick="HandleAny" />
+        <%--<artem:GoogleMarkers TargetControlID="GoogleMap1" runat="server" OnClientRightClick="test"
+            OnDragEnd="HandleAny">
+            <Markers>
+                <artem:Marker Position="42.1229,24.7879" Title="click to see" Info="<h1>Test</h1><p>This is a test!</p>" />
+                <artem:Marker Position="42.2,24.8" Title="click to see" Info="<h1>Test 2</h1><p>This is a test!</p>" Draggable="false"/>
+            </Markers>
+            <MarkerOptions Draggable="true">
+            </MarkerOptions>
+        </artem:GoogleMarkers>--%>
         <%--<artem:GooglePolygon TargetControlID="GoogleMap1" runat="server" OnClick="HandleClick" OnClientRightClick="test">
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
             <artem:LatLng Latitude="41.036501" Longitude="28.984895" />
@@ -64,6 +69,8 @@
         </artem:GooglePolyline>--%>
         <%--<artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
             Origin="plovdiv" Destination="sofia" Draggable="true" PanelID="info" OnChanged="HandleChanged">
+            <MarkerOptions>
+            </MarkerOptions>
         </artem:GoogleDirections>--%>
     </div>
     <div id="info">
@@ -71,8 +78,8 @@
     <%--<site:TestControl ID="ctrTest" runat="server" />--%>
     </form>
     <script type="text/javascript">
-        function test() {
-            alert("Test!");
+        function test(sender, e) {
+            alert("Test");
         }
     </script>
 </body>
@@ -121,7 +128,7 @@
     }
 
     protected void HandleAny(object sender, EventArgs e) {
-        var s = e.ToString();           
+        var s = e.ToString();
     }
     #endregion
 </script>

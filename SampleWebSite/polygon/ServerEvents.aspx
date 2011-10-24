@@ -1,24 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false" %>
 
-<asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
-    <title>GoogleMap - GooglePolygon</title>
-    <meta name="description" content="GoogleMap Control - GooglePolygon how to use sample." />
-    <meta name="keywords" content="asp.net artem googlemap control polygon" />
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <title>GoogleMap - GooglePolygon - Server Events</title>
+    <meta name="description" content="GoogleMap - GooglePolygon - Server Events" />
+    <meta name="keywords" content="GoogleMap - GooglePolygon - Server Events" />
 </asp:Content>
-<asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
+<asp:Content ContentPlaceHolderID="main" runat="server">
     <h1>
-        GooglePolygon
+        Server Events
     </h1>
     <p>
-        Wraps Google Maps API class GPolygon.
-        <br />
-        This is very similar to a GPolyline, except that you can additionally specify a
-        fill color and opacity.
-    </p>
-    <p>
-        Common GooglePolygon usage and settings.
-        <br />
-        Change settings in the panel bellow and then click 'Show' to see how they are applied.
+        How to register GooglePolygon server event handlers.
     </p>
     <div class="map-wrap">
         <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
@@ -33,8 +25,4 @@
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
         </artem:GooglePolygon>
     </div>
-    <fieldset>
-        <legend>Settings</legend>
-        <asp:Button runat="server" Text="Show" />
-    </fieldset>
 </asp:Content>

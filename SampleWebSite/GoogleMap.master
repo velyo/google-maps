@@ -10,7 +10,6 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <meta charset="utf-8" />
@@ -26,7 +25,7 @@
         FIX: Wrong latlng value in click handler with IE8 
         http://googlemap.codeplex.com/Thread/View.aspx?ThreadId=54217
     --%>
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+    <%--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">--%>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -37,8 +36,8 @@
         <ul id="menu">
             <li><a href="/map/default.aspx">maps</a></li>
             <li><a href="/marker/default.aspx">markers</a></li>
-            <li><a href="/polyline/default.aspx">polylines</a></li>
             <li><a href="/polygon/default.aspx">polygons</a></li>
+            <li><a href="/polyline/default.aspx">polylines</a></li>
             <li><a href="/directions/default.aspx">directions</a></li>
         </ul>
     </div>
@@ -51,16 +50,20 @@
         </div>
     </div>
     <div id="content" class="container_12">
-        <div class="grid_3 alpha">
-            <h3>
-                Ads
-            </h3>
-            <asp:ContentPlaceHolder ID="side" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-        <div class="grid_9 omega">
-            <asp:ContentPlaceHolder ID="main" runat="server">
-            </asp:ContentPlaceHolder>
+        <div class="content">
+            <div class="grid_3 alpha">
+                <h3>
+                    Ads
+                </h3>
+                <asp:ContentPlaceHolder ID="side" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="grid_9 omega">
+                <asp:ScriptManager runat="server">
+                </asp:ScriptManager>
+                <asp:ContentPlaceHolder ID="main" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
     </div>
     <div id="footer">

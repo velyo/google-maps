@@ -32,6 +32,15 @@ namespace Artem.Google.UI {
     [ToolboxData("<{0}:GoogleDirections runat=server></{0}:GoogleDirections>")]
     public class GoogleDirections : ExtenderControl, IPostBackEventHandler {
 
+        #region Fields
+
+        Location _destination;
+        MarkerOptions _markerOptions;
+        Location _origin;
+        PolylineOptions _polylineOptions;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -64,6 +73,7 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Location of destination. This can be specified as either a string to be geocoded or a LatLng. Required.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public Location Destination {
             get {
                 return _destination ?? (_destination = new Location());
@@ -72,7 +82,6 @@ namespace Artem.Google.UI {
                 _destination = value;
             }
         }
-        Location _destination;
 
         // TODO
         ///// <summary>
@@ -123,7 +132,6 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Options for the markers. All markers rendered by the DirectionsRenderer will use these options.")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public MarkerOptions MarkerOptions {
             get {
@@ -133,7 +141,6 @@ namespace Artem.Google.UI {
                 _markerOptions = value;
             }
         }
-        MarkerOptions _markerOptions;
 
         /// <summary>
         /// Gets or sets a value indicating whether [optimize waypoints].
@@ -154,6 +161,7 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Location of origin. This can be specified as either a string to be geocoded or a LatLng. Required.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public Location Origin {
             get {
                 return _origin ?? (_origin = new Location());
@@ -162,7 +170,6 @@ namespace Artem.Google.UI {
                 _origin = value;
             }
         }
-        Location _origin;
 
         /// <summary>
         /// The &lt;div&gt; in which to display the directions steps.
@@ -180,7 +187,6 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Options for the polylines. All polylines rendered by the DirectionsRenderer will use these options.")]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public PolylineOptions PolylineOptions {
             get {
@@ -190,7 +196,6 @@ namespace Artem.Google.UI {
                 _polylineOptions = value;
             }
         }
-        PolylineOptions _polylineOptions;
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="GoogleDirections"/> should alter the viewport.
@@ -280,7 +285,7 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Type of routing requested. Required.")]
-        public TravelMode TravelMode { get; set; }
+        public TravelMode? TravelMode { get; set; }
 
         /// <summary>
         /// Preferred unit system to use when displaying distance. 
@@ -392,14 +397,18 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("avoidHighways", this.AvoidHighways.Value);
             if (this.AvoidTolls.HasValue)
                 descriptor.AddProperty("avoidTolls", this.AvoidTolls.Value);
-            descriptor.AddProperty("destination", this.Destination.Value);
+            if (_destination != null)
+                descriptor.AddProperty("destination", _destination.Value);
             if (this.OptimizeWaypoints.HasValue)
                 descriptor.AddProperty("optimizeWaypoints", this.OptimizeWaypoints.Value);
-            descriptor.AddProperty("origin", this.Origin.Value);
+            if (_origin != null)
+                descriptor.AddProperty("origin", _origin.Value);
             if (this.ProvideRouteAlternatives.HasValue)
                 descriptor.AddProperty("provideRouteAlternatives", this.ProvideRouteAlternatives.Value);
-            descriptor.AddProperty("region", this.Region);
-            descriptor.AddProperty("travelMode", this.TravelMode);
+            if (this.Region != null)
+                descriptor.AddProperty("region", this.Region);
+            if (this.TravelMode.HasValue)
+                descriptor.AddProperty("travelMode", this.TravelMode.Value);
             if (UnitSystem.HasValue)
                 descriptor.AddProperty("unitSystem", this.UnitSystem.Value);
             //descriptor.AddProperty("waypoints", this.waypoints);
@@ -407,12 +416,12 @@ namespace Artem.Google.UI {
             // directions renderer properties
             descriptor.AddProperty("draggable", this.Draggable);
             descriptor.AddProperty("hideRouteList", this.HideRouteList);
-            if (this.MarkerOptions != null)
-                descriptor.AddProperty("markerOptions", this.MarkerOptions.ToScriptData());
+            if (_markerOptions != null)
+                descriptor.AddProperty("markerOptions", _markerOptions.ToScriptData());
             if (this.PanelID != null)
                 descriptor.AddProperty("panelId", this.PanelID);
-            if (PolylineOptions != null)
-                descriptor.AddProperty("polylineOptions", this.PolylineOptions.ToScriptData());
+            if (_polylineOptions != null)
+                descriptor.AddProperty("polylineOptions", _polylineOptions.ToScriptData());
             descriptor.AddProperty("preserveViewport", this.PreserveViewport);
             descriptor.AddProperty("routeIndex", this.RouteIndex);
             if (this.SuppressBicyclingLayer.HasValue)

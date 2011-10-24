@@ -1,6 +1,5 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
-///<reference path="..\Scripts\GoogleCommons.js"/>
-///<reference path="..\Scripts\GoogleMap.js"/>
+///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
 Type.registerNamespace("Artem.Google");
@@ -19,6 +18,7 @@ Artem.Google.PolygonBehavior.prototype = {
         Artem.Google.PolygonBehavior.callBaseMethod(this, 'dispose');
     }
 };
+Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.UI.Behavior);
 
 // members
 (function (proto) {
@@ -78,7 +78,7 @@ Artem.Google.PolygonBehavior.prototype = {
     proto.create = function () {
         map = $find(this.get_element().id);
 
-        var points = Artem.Google.Converter.latlngArray(paths);
+        var points = Artem.Google.Convert.toLatLngArray(paths);
         var options = {
             clickable: clickable,
             fillColor: fillColor,
@@ -374,5 +374,3 @@ Artem.Google.PolygonBehavior.prototype = {
     };
 
 })(Artem.Google.PolygonBehavior);
-
-Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.UI.Behavior);

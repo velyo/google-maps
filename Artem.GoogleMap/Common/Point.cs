@@ -28,7 +28,9 @@ namespace Artem.Google.UI {
         /// <param name="b">The b.</param>
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(Point a, Point b) {
-            return ((a.X == b.X) && (a.Y == b.Y));
+            return object.ReferenceEquals(a, null) 
+                ? object.ReferenceEquals(b, null) 
+                : ((a.X == b.X) && (a.Y == b.Y));
         }
 
         /// <summary>
@@ -127,10 +129,17 @@ namespace Artem.Google.UI {
         /// true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
         /// </returns>
         public override bool Equals(object obj) {
+            return (obj is Point) ? this.Equals(obj as Point) : false;
+        }
 
-            if (!(obj is Point)) return false;
-            Point point = (Point)obj;
-            return ((point.X == this.X) && (point.Y == this.Y));
+        /// <summary>
+        /// Equalses the specified point.
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns></returns>
+        public virtual bool Equals(Point point) {
+            return !object.ReferenceEquals(point, null)
+                ? (this.X == point.X && this.Y == point.Y) : false;
         }
 
         /// <summary>

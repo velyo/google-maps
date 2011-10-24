@@ -14,6 +14,7 @@
     </h3>
     <ul>
         <li><a href="/directions/Default.aspx">&raquo; Default</a></li>
-        <li><a href="/directions/Events.aspx">&raquo; Events</a></li>
+        <li><a href="/directions/ClientEvents.aspx">&raquo; Client Events</a></li>
+        <li><a href="/directions/ServerEvents.aspx">&raquo; Server Events</a></li>
     </ul>
 </asp:Content>

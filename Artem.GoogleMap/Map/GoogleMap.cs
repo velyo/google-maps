@@ -825,7 +825,7 @@ namespace Artem.Google.UI {
             this.Draggable = true;
             this.EnableMapTypeControl = true;
             this.EnableOverviewMapControl = true;
-            this.EnablePanControl = true;
+            //this.EnablePanControl = true;
             this.EnableScaleControl = true;
             this.EnableScrollWheelZoom = true;
             this.EnableStreetViewControl = true;
