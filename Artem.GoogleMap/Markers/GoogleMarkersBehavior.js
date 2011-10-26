@@ -24,49 +24,56 @@ Artem.Google.MarkersBehavior.prototype = {
 
     // Google properties
 
-    var map;
+    proto.map;
     proto.get_map = function () { return map; };
 
-    var markers = [];
-    proto.get_markers = function () { return markers; };
+    proto._markers = [];
+    proto.get_markers = function () { return this._markers; };
 
     // properties
 
-    var groupOptions;
-    proto.get_groupOptions = function () { return groupOptions; };
-    proto.set_groupOptions = function (value) { groupOptions = value; };
+    proto._groupOptions = null;
+    proto.get_groupOptions = function () { return this._groupOptions; };
+    proto.set_groupOptions = function (value) { this._groupOptions = value; };
 
-    var markerOptions;
-    proto.get_markerOptions = function () { return markerOptions; };
-    proto.set_markerOptions = function (value) { markerOptions = value; };
+    proto._infoOptions = null;
+    proto.get_infoOptions = function () { return this._infoOptions; };
+    proto.set_infoOptions = function (value) { this._infoOptions = value; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto._markerOptions;
+    proto.get_markerOptions = function () { return this._markerOptions; };
+    proto.set_markerOptions = function (value) { this._markerOptions = value; };
+
+    proto._name;
+    proto.get_name = function () { return this._name; };
+    proto.set_name = function (value) { this._name = value; };
 
     // methods
 
     proto.create = function () {
 
-        if (markerOptions) {
+        if (this._markerOptions) {
             var gmarker;
             var ginfo;
 
-            if (!map)
-                map = $find(this.get_element().id);
+            if (!this.map)
+                this.map = $find(this.get_element().id);
 
-            for (var i = 0; i < markerOptions.length; i++) {
-                var marker = Artem.Google.merge(groupOptions, markerOptions[i]);
-                marker.map = map.get_map();
+            for (var i = 0; i < this._markerOptions.length; i++) {
+                var marker = Artem.Google.merge(this._groupOptions, this._markerOptions[i]);
+                marker.map = this.map.get_map();
                 marker.position = new google.maps.LatLng(marker.position.lat, marker.position.lng);
                 marker.index = i;
                 gmarker = new google.maps.Marker(marker);
                 if (marker.info) {
-                    ginfo = new google.maps.InfoWindow({ content: marker.info });
+                    ginfo = new google.maps.InfoWindow(Artem.Google.merge({ content: marker.info }, this._infoOptions));
                     marker.info = ginfo;
-                    google.maps.event.addListener(gmarker, 'click', function () { ginfo.open(map.get_map(), gmarker); });
+                    google.maps.event.addListener(gmarker, 'click',
+                        Function.createDelegate(this,
+                            Function.createCallback(
+                                function (e, ctx) { ctx.i.open(this.map.get_map(), ctx.m); }, { m: gmarker, i: ginfo })));
                 }
-                markers.push(gmarker);
+                this._markers.push(gmarker);
             }
 
             this.composeEvents();
@@ -101,7 +108,7 @@ Artem.Google.MarkersBehavior.prototype = {
         "mouseup": null,
         "position_changed": null,
         "rightclick": null,
-        "shadow_changed": null, 
+        "shadow_changed": null,
         "title_changed": null,
         "visible_changed": null,
         "zindex_changed": null

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
-    CodeFile="TemplatePostBack.aspx.cs" Inherits="marker_TemplatePostBack" %>
+    CodeFile="_TemplatePostBack.aspx.cs" Inherits="marker_TemplatePostBack" %>
 
 <asp:Content ID="headContent" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>

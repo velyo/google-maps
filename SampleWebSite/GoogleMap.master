@@ -35,7 +35,7 @@
         </h1>
         <ul id="menu">
             <li><a href="/map/default.aspx">maps</a></li>
-            <li><a href="/marker/default.aspx">markers</a></li>
+            <li><a href="/markers/default.aspx">markers</a></li>
             <li><a href="/polygon/default.aspx">polygons</a></li>
             <li><a href="/polyline/default.aspx">polylines</a></li>
             <li><a href="/directions/default.aspx">directions</a></li>

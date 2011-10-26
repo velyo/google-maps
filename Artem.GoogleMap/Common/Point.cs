@@ -28,9 +28,8 @@ namespace Artem.Google.UI {
         /// <param name="b">The b.</param>
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(Point a, Point b) {
-            return object.ReferenceEquals(a, null) 
-                ? object.ReferenceEquals(b, null) 
-                : ((a.X == b.X) && (a.Y == b.Y));
+            return object.ReferenceEquals(a, null)
+                ? object.ReferenceEquals(b, null) : a.Equals(b);
         }
 
         /// <summary>

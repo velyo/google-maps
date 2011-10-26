@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="true"
-    CodeFile="GoogleMarkerEvents.aspx.cs" Inherits="marker_GoogleMarkerEvents" %>
+    CodeFile="_GoogleMarkerEvents.aspx.cs" Inherits="marker_GoogleMarkerEvents" %>
 
 <asp:Content ContentPlaceHolderID="phHead" ID="cntHead" runat="server">
     <title>GoogleMarker - Events</title>

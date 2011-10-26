@@ -13,11 +13,10 @@
         Markers
     </h3>
     <ul>
-        <li><a href="/marker/Default.aspx">&raquo; Default</a></li>
-        <li><a href="/marker/GoogleMarkerEvents.aspx">&raquo; Events</a></li>
-        <li><a href="/marker/CustomIcons.aspx">&raquo; Custom Icons</a></li>
-        <li><a href="/marker/InfoContent.aspx">&raquo; InfoContent</a></li>
-        <li><a href="/marker/MarkerStyle.aspx">&raquo; MarkerStyle</a></li>
-        <li><a href="/marker/MarkerManager.aspx">&raquo; MarkerManager</a></li>
+        <li><a href="/markers/Default.aspx">&raquo; Default</a></li>
+        <li><a href="/markers/ClientEvents.aspx">&raquo; Client Events</a></li>
+        <li><a href="/markers/ServerEvents.aspx">&raquo; Server Events</a></li>
+        <li><a href="/markers/CustomIcons.aspx">&raquo; Custom Icons</a></li>
+        <li><a href="/markers/DataBound.aspx">&raquo; Data Bound</a></li>
     </ul>
 </asp:Content>

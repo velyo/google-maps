@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
-    CodeFile="MarkerStyle.aspx.cs" Inherits="marker_MarkerStyle" %>
+    CodeFile="_MarkerStyle.aspx.cs" Inherits="marker_MarkerStyle" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMarker - Style</title>

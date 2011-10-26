@@ -1,14 +1,13 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
-    CodeFile="CustomIcons.aspx.cs" Inherits="marker_CustomIcons" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/markers/Marker.master" AutoEventWireup="false" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
-    <title>GoogleMarker - Custom Icons</title>
+    <title>GoogleMap - Markers - Custom Icons</title>
     <meta name="description" content="GoogleMap Control markers custom icons." />
     <meta name="keywords" content="asp.net artem googlemap control marker custom icons" />
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
-        Custom Icons Sample
+        Markers - Custom Icons
     </h1>
     <artem:GoogleMap ID="GoogleMap1" runat="server" Width="634px" Height="600px" Latitude="42.1229"
         Longitude="24.7879" Zoom="5" BorderStyle="Solid">

@@ -6,6 +6,7 @@ using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
+using System.Collections;
 
 [assembly: WebResource("Artem.Google.Markers.GoogleMarkersBehavior.js", "text/javascript")]
 [assembly: WebResource("Artem.Google.Markers.GoogleMarkersBehavior.min.js", "text/javascript")]
@@ -38,12 +39,60 @@ namespace Artem.Google.UI {
 
         #region Fields
 
+        InfoWindowOptions _infoWindowOptions;
         List<Marker> _markers;
         MarkerOptions _options;
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets the data address field.
+        /// </summary>
+        /// <value>The data address field.</value>
+        [Category("Data")]
+        public string DataAddressField { get; set; }
+
+        [Category("Data")]
+        public string DataIconField { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data info field.
+        /// </summary>
+        /// <value>The data info field.</value>
+        [Category("Data")]
+        public string DataInfoField { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data latitude field.
+        /// </summary>
+        /// <value>The data latitude field.</value>
+        [Category("Data")]
+        public string DataLatitudeField { get; set; }
+
+        /// <summary>
+        /// Gets or sets the data longitude field.
+        /// </summary>
+        /// <value>The data longitude field.</value>
+        [Category("Data")]
+        public string DataLongitudeField { get; set; }
+
+        /// <summary>
+        /// Options for the markers' info wondows. All markers' info windows will use these options.
+        /// </summary>
+        /// <value>The info window options.</value>
+        [Category("Appearance")]
+        [Description("Options for the markers' info wondows. All markers' info windows will use these options.")]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        public InfoWindowOptions InfoWindowOptions {
+            get {
+                return _infoWindowOptions ?? (_infoWindowOptions = new InfoWindowOptions());
+            }
+            set {
+                _infoWindowOptions = value;
+            }
+        }
 
         /// <summary>
         /// Options for the markers. All markers rendered will use these options.
@@ -508,6 +557,8 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("groupOptions", _options.ToScriptData());
             if (_markers != null)
                 descriptor.AddProperty("markerOptions", _markers.Select(m => m.ToScriptData()).ToArray());
+            if (_infoWindowOptions != null)
+                descriptor.AddProperty("infoOptions", _infoWindowOptions.ToScriptData());
             descriptor.AddProperty("name", this.UniqueID);
 
             #region events
@@ -617,7 +668,7 @@ namespace Artem.Google.UI {
             else if (this.OnClientVisibleChanged != null)
                 descriptor.AddEvent("visibleChanged", this.OnClientVisibleChanged);
 
-            if (this.ZIndexChanged!= null)
+            if (this.ZIndexChanged != null)
                 descriptor.AddEvent("zindexChanged", "Artem.Google.MarkersBehavior.raiseServerZIndexChanged");
             else if (this.OnClientZIndexChanged != null)
                 descriptor.AddEvent("zindexChanged", this.OnClientZIndexChanged);
@@ -644,7 +695,7 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Events
+        #region Event Methods
 
         /// <summary>
         /// Raises the <see cref="E:AnimationChanged"/> event.
@@ -902,6 +953,74 @@ namespace Artem.Google.UI {
                         break;
                 }
             }
+        }
+        #endregion
+
+        #region DataBound Methods
+
+        /// <summary>
+        /// When overridden in a derived class, binds data from the data source to the control.
+        /// </summary>
+        /// <param name="data">The <see cref="T:System.Collections.IEnumerable"/> list of data returned from a <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect"/> method call.</param>
+        protected override void PerformDataBinding(IEnumerable data) {
+            base.PerformDataBinding(data);
+
+            if (data != null) {
+                bool hasAddressDataField = !string.IsNullOrEmpty(DataAddressField);
+                bool hasIconDataField = !string.IsNullOrEmpty(DataIconField);
+                bool hasInfoDataField = !string.IsNullOrEmpty(DataInfoField);
+                bool hasLatitudeDataField = !string.IsNullOrEmpty(DataLatitudeField);
+                bool hasLongitudeDataField = !string.IsNullOrEmpty(DataLongitudeField);
+
+                Marker marker;
+                foreach (object dataItem in data) {
+                    marker = new Marker();
+
+                    //if (hasAddressDataField)
+                    //    marker.Address = DataBinder.Eval(dataItem, DataAddressField, "");
+                    if (hasIconDataField)
+                        marker.Icon = DataBinder.Eval(dataItem, DataIconField, null);
+                    if (hasInfoDataField)
+                        marker.Info = DataBinder.Eval(dataItem, DataInfoField, null);
+                    if (hasLatitudeDataField)
+                        marker.Position.Latitude = (double)DataBinder.Eval(dataItem, DataLatitudeField);
+                    if (hasLongitudeDataField)
+                        marker.Position.Longitude = (double)DataBinder.Eval(dataItem, DataLongitudeField);
+
+                    this.Markers.Add(marker);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Retrieves data from the associated data source.
+        /// </summary>
+        protected override void PerformSelect() {
+
+            // Call OnDataBinding here if bound to a data source using the
+            // DataSource property (instead of a DataSourceID), because the
+            // databinding statement is evaluated before the call to GetData.       
+            if (!IsBoundUsingDataSourceID) OnDataBinding(EventArgs.Empty);
+
+            // The GetData method retrieves the DataSourceView object from  
+            // the IDataSource associated with the data-bound control.            
+            GetData().Select(
+                CreateDataSourceSelectArguments(),
+                (data) => {
+                    // Call OnDataBinding only if it has not already been 
+                    // called in the PerformSelect method.
+                    if (IsBoundUsingDataSourceID) OnDataBinding(EventArgs.Empty);
+                    // The PerformDataBinding method binds the data in the  
+                    // retrievedData collection to elements of the data-bound control.
+                    PerformDataBinding(data);
+                });
+
+            // The PerformDataBinding method has completed.
+            RequiresDataBinding = false;
+            MarkAsDataBound();
+
+            // Raise the DataBound event.
+            OnDataBound(EventArgs.Empty);
         }
         #endregion
         #endregion

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
-    CodeFile="MarkerManager.aspx.cs" Inherits="marker_MarkerManager" %>
+    CodeFile="_MarkerManager.aspx.cs" Inherits="marker_MarkerManager" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phHead" runat="Server">
     <title>GoogleMarker - MarkerManager</title>

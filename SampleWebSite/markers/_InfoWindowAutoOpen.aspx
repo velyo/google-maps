@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="true" CodeFile="InfoWindowAutoOpen.aspx.cs" Inherits="marker_InfoWindowAutoOpen" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="true" CodeFile="_InfoWindowAutoOpen.aspx.cs" Inherits="marker_InfoWindowAutoOpen" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="phHead" Runat="Server">
 </asp:Content>

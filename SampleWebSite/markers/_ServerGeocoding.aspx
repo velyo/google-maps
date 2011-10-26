@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/GoogleMap.master" AutoEventWireup="false"
-    CodeFile="ServerGeocoding.aspx.cs" Inherits="marker_ServerGeocoding" %>
+    CodeFile="_ServerGeocoding.aspx.cs" Inherits="marker_ServerGeocoding" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMarker - Server Geocoding</title>

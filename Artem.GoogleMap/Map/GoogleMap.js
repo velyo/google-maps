@@ -1045,10 +1045,13 @@ Artem.Google.Log = (function () {
     };
 })();
 
+// utility functions
 // object merging
 Artem.Google.merge = function (obj1, obj2) {
     var result = {};
-    for (var name in obj1) result[name] = obj1[name];
-    for (var name in obj2) result[name] = obj2[name];
+    if (obj1)
+        for (var name in obj1) result[name] = obj1[name];
+    if (obj2)
+        for (var name in obj2) result[name] = obj2[name];
     return result;
 };

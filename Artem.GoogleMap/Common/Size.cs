@@ -9,7 +9,6 @@ namespace Artem.Google.UI {
     /// <summary>
     /// 
     /// </summary>
-    [DataContract]
     public class Size : IScriptDataConverter {
 
         #region Static Fields
@@ -28,7 +27,8 @@ namespace Artem.Google.UI {
         /// <param name="b">The b.</param>
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(Size a, Size b) {
-            return ((a.Width == b.Width) && (a.Height == b.Height));
+            return object.ReferenceEquals(a, null)
+                ? object.ReferenceEquals(b, null) : a.Equals(b);
         }
 
         /// <summary>
@@ -55,14 +55,15 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static Size FromScriptData(IDictionary<string, object> data) {
+        public static Size FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var size = new Size();
                 object value;
 
-                if(data.TryGetValue("width", out value)) size.Width =(int)value;
-                if(data.TryGetValue("height", out value)) size.Height =(int)value;
+                if (data.TryGetValue("width", out value)) size.Width = (int)value;
+                if (data.TryGetValue("height", out value)) size.Height = (int)value;
 
                 return size;
             }
@@ -132,10 +133,18 @@ namespace Artem.Google.UI {
         /// true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
         /// </returns>
         public override bool Equals(object obj) {
+            return (obj is Size) ? this.Equals(obj as Size) : false;
+        }
 
-            if (!(obj is Size)) return false;
-            Size size = (Size)obj;
-            return ((size.Width == this.Width) && (size.Height == this.Height));
+        /// <summary>
+        /// Equalses the specified size.
+        /// </summary>
+        /// <param name="size">The size.</param>
+        /// <returns></returns>
+        public bool Equals(Size size) {
+            return !object.ReferenceEquals(size, null)
+                ? ((this.Width == size.Width) && (this.Height == size.Height))
+                : false;
         }
 
         /// <summary>

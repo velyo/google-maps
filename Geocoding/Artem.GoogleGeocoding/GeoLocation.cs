@@ -18,10 +18,8 @@ namespace Artem.Google.Net {
         /// <param name="y">The y.</param>
         /// <returns>The result of the operator.</returns>
         public static bool operator ==(GeoLocation x, GeoLocation y) {
-
-            return (!object.ReferenceEquals(x, null))
-                ? x.Equals(y) // if x not null then compare
-                : object.ReferenceEquals(y, null); // else equals only if y is null too
+            return object.ReferenceEquals(x, null)
+                ? object.ReferenceEquals(y, null) : x.Equals(y);
         }
 
         /// <summary>
@@ -115,8 +113,7 @@ namespace Artem.Google.Net {
         /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public override bool Equals(object obj) {
-            GeoLocation location = obj as GeoLocation;
-            return location != null && this.Equals(location);
+            return (obj is GeoLocation) ? this.Equals(obj as GeoLocation) : false;
         }
 
         /// <summary>
@@ -125,10 +122,9 @@ namespace Artem.Google.Net {
         /// <param name="other">The other.</param>
         /// <returns></returns>
         public bool Equals(GeoLocation other) {
-
-            return other != null &&
-                this.Latitude == other.Latitude &&
-                this.Longitude == other.Longitude;
+            return !object.ReferenceEquals(other, null)
+                ? ((this.Latitude == other.Latitude) && (this.Longitude == other.Longitude))
+                : false;
         }
 
         /// <summary>
