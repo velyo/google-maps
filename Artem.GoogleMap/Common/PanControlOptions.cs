@@ -19,14 +19,14 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public static PanControlOptions FromScriptData(object scriptObject) {
 
-            PanControlOptions options = null;
             var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
+                var options = new PanControlOptions();
                 object value;
-                options = new PanControlOptions();
                 if (data.TryGetValue("position", out value)) options.Position = (ControlPosition)value;
+                return options;
             }
-            return options;
+            return null;
         }
         #endregion
 

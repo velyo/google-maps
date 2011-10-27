@@ -81,6 +81,9 @@
     <Compile Include="Common\Duration.cs" />
     <Compile Include="Common\Bounds.cs" />
     <Compile Include="Common\MapEventArgs.cs" />
+    <Compile Include="Common\ZoomControlStyle.cs" />
+    <Compile Include="Directions\TravelMode.cs" />
+    <Compile Include="Directions\UnitSystem.cs" />
     <Compile Include="Markers\Marker.cs" />
     <Compile Include="Markers\MarkerAnimation.cs" />
     <Compile Include="Markers\MarkerEventArgs.cs" />

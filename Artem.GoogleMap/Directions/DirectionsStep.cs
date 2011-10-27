@@ -38,11 +38,52 @@ namespace Artem.Google.UI {
 
         #region Fields
 
-        public Distance Distance { get; set; }
-        public Duration Duration { get; set; }
-        public LatLng EndLocation { get; set; }
+        Distance _distance;
+        Duration _duration;
+        LatLng _endLocation;
+        string _instructions;
+        LatLng _startLocation;
+
+        #endregion
+
+        #region Properties
+
+        public Distance Distance {
+            get {
+                return _distance ?? (_distance = new Distance());
+            }
+            set {
+                _distance = value;
+            }
+        }
+        public Duration Duration {
+            get {
+                return _duration ?? (_duration = new Duration());
+            }
+            set {
+                _duration = value;
+            }
+        }
+
+        public LatLng EndLocation {
+            get {
+                return _endLocation ?? (_endLocation = new LatLng());
+            }
+            set {
+                _endLocation = value;
+            }
+        }
+
         public string Instructions { get; set; }
-        public LatLng StartLocation { get; set; }
+
+        public LatLng StartLocation {
+            get{
+                return _startLocation ?? (_startLocation = new LatLng());
+            }
+            set {
+                _startLocation = value;
+            }
+        }
 
         #endregion
 
@@ -56,11 +97,11 @@ namespace Artem.Google.UI {
 
             var result = new Dictionary<string, object>();
 
-            if (this.Distance != null) result["distance"] = this.Distance.ToScriptData();
-            if (this.Duration != null) result["duration"] = this.Duration.ToScriptData();
-            if (this.EndLocation != null) result["end_location"] = this.EndLocation.ToScriptData();
+            if (_distance != null) result["distance"] = _distance.ToScriptData();
+            if (_duration != null) result["duration"] = _duration.ToScriptData();
+            if (_endLocation != null) result["end_location"] = _endLocation.ToScriptData();
             if (this.Instructions != null) result["instructions"] = this.Instructions;
-            if (this.StartLocation != null) result["start_location"] = this.StartLocation.ToScriptData();
+            if (_startLocation != null) result["start_location"] = _startLocation.ToScriptData();
 
             return result;
         }

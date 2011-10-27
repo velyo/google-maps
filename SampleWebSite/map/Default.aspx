@@ -13,8 +13,6 @@
     <p>
         A GoogleMap Control example to show the map location positioning.
     </p>
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <fieldset>

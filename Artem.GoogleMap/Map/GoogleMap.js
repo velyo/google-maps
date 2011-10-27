@@ -44,154 +44,117 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
     // google properties
 
-    var map;
-    proto.get_map = function () { return map; };
+    proto.get_map = function () { return this.map; };
 
     // properties
 
-    var address;
-    proto.get_address = function () { return address; };
-    proto.set_address = function (value) { address = value; };
+    proto.get_address = function () { return this.address; };
+    proto.set_address = function (value) { this.address = value; };
 
-    var backgroundColor;
-    proto.get_backgroundColor = function () { return backgroundColor; };
-    proto.set_backgroundColor = function (value) { backgroundColor = value; };
+    proto.get_backgroundColor = function () { return this.backgroundColor; };
+    proto.set_backgroundColor = function (value) { this.backgroundColor = value; };
 
-    var center;
-    proto.get_center = function () { return center; };
-    proto.set_center = function (value) { center = value; };
+    proto.get_center = function () { return this.center; };
+    proto.set_center = function (value) { this.center = value; };
 
-    var defaultAddress;
-    proto.get_defaultAddress = function () { return defaultAddress; };
-    proto.set_defaultAddress = function (value) { defaultAddress = value; };
+    proto.get_defaultAddress = function () { return this.defaultAddress; };
+    proto.set_defaultAddress = function (value) { this.defaultAddress = value; };
 
-    var disableDefaultUI;
-    proto.get_disableDefaultUI = function () { return disableDefaultUI; };
-    proto.set_disableDefaultUI = function (value) { disableDefaultUI = value; };
+    proto.get_disableDefaultUI = function () { return this.disableDefaultUI; };
+    proto.set_disableDefaultUI = function (value) { this.disableDefaultUI = value; };
 
-    var disableDoubleClickZoom;
-    proto.get_disableDoubleClickZoom = function () { return disableDoubleClickZoom; };
-    proto.set_disableDoubleClickZoom = function (value) { disableDoubleClickZoom = value; };
+    proto.get_disableDoubleClickZoom = function () { return this.disableDoubleClickZoom; };
+    proto.set_disableDoubleClickZoom = function (value) { this.disableDoubleClickZoom = value; };
 
-    var draggable;
-    proto.get_draggable = function () { return draggable; };
-    proto.set_draggable = function (value) { draggable = value; };
+    proto.get_draggable = function () { return this.draggable; };
+    proto.set_draggable = function (value) { this.draggable = value; };
 
-    var draggableCursor;
-    proto.get_draggableCursor = function () { return draggableCursor; };
-    proto.set_draggableCursor = function (value) { draggableCursor = value; };
+    proto.get_draggableCursor = function () { return this.draggableCursor; };
+    proto.set_draggableCursor = function (value) { this.draggableCursor = value; };
 
-    var draggingCursor;
-    proto.get_draggingCursor = function () { return draggingCursor; };
-    proto.set_draggingCursor = function (value) { draggingCursor = value; };
+    proto.get_draggingCursor = function () { return this.draggingCursor; };
+    proto.set_draggingCursor = function (value) { this.draggingCursor = value; };
 
-    var enableReverseGeocoding;
-    proto.get_enableReverseGeocoding = function () { return enableReverseGeocoding; };
-    proto.set_enableReverseGeocoding = function (value) { enableReverseGeocoding = value; };
+    proto.get_enableReverseGeocoding = function () { return this.enableReverseGeocoding; };
+    proto.set_enableReverseGeocoding = function (value) { this.enableReverseGeocoding = value; };
 
-    var heading;
-    proto.get_heading = function () { return heading; };
-    proto.set_heading = function (value) { heading = value; };
+    proto.get_heading = function () { return this.heading; };
+    proto.set_heading = function (value) { this.heading = value; };
 
-    var keyboardShortcuts;
-    proto.get_keyboardShortcuts = function () { return keyboardShortcuts; };
-    proto.set_keyboardShortcuts = function (value) { keyboardShortcuts = value; };
+    proto.get_keyboardShortcuts = function () { return this.keyboardShortcuts; };
+    proto.set_keyboardShortcuts = function (value) { this.keyboardShortcuts = value; };
 
-    var language;
-    proto.get_language = function () { return language; };
-    proto.set_language = function (value) { language = value; };
+    proto.get_language = function () { return this.language; };
+    proto.set_language = function (value) { this.language = value; };
 
-    var mapType;
-    proto.get_mapType = function () { return mapType; };
-    proto.set_mapType = function (value) { mapType = value; };
+    proto.get_mapType = function () { return this.mapType; };
+    proto.set_mapType = function (value) { this.mapType = value; };
 
-    var mapTypeControl;
-    proto.get_mapTypeControl = function () { return mapTypeControl; };
-    proto.set_mapTypeControl = function (value) { mapTypeControl = value; };
+    proto.get_mapTypeControl = function () { return this.mapTypeControl; };
+    proto.set_mapTypeControl = function (value) { this.mapTypeControl = value; };
 
-    var mapTypeControlOptions;
-    proto.get_mapTypeControlOptions = function () { return mapTypeControlOptions; };
-    proto.set_mapTypeControlOptions = function (value) { mapTypeControlOptions = value; };
+    proto.get_mapTypeControlOptions = function () { return this.mapTypeControlOptions; };
+    proto.set_mapTypeControlOptions = function (value) { this.mapTypeControlOptions = value; };
 
-    var maxZoom;
-    proto.get_maxZoom = function () { return maxZoom; };
-    proto.set_maxZoom = function (value) { maxZoom = value; };
+    proto.get_maxZoom = function () { return this.maxZoom; };
+    proto.set_maxZoom = function (value) { this.maxZoom = value; };
 
-    var minZoom;
-    proto.get_minZoom = function () { return minZoom; };
-    proto.set_minZoom = function (value) { minZoom = value; };
+    proto.get_minZoom = function () { return this.minZoom; };
+    proto.set_minZoom = function (value) { this.minZoom = value; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
-    var noClear;
-    proto.get_noClear = function () { return noClear; };
-    proto.set_noClear = function (value) { noClear = value; };
+    proto.get_noClear = function () { return this.noClear; };
+    proto.set_noClear = function (value) { this.noClear = value; };
 
-    var overviewMapControl;
-    proto.get_overviewMapControl = function () { return overviewMapControl; };
-    proto.set_overviewMapControl = function (value) { overviewMapControl = value; };
+    proto.get_overviewMapControl = function () { return this.overviewMapControl; };
+    proto.set_overviewMapControl = function (value) { this.overviewMapControl = value; };
 
-    var overviewMapControlOptions;
-    proto.get_overviewMapControlOptions = function () { return overviewMapControlOptions; };
-    proto.set_overviewMapControlOptions = function (value) { overviewMapControlOptions = value; };
+    proto.get_overviewMapControlOptions = function () { return this.overviewMapControlOptions; };
+    proto.set_overviewMapControlOptions = function (value) { this.overviewMapControlOptions = value; };
 
-    var panControl;
-    proto.get_panControl = function () { return panControl; };
-    proto.set_panControl = function (value) { panControl = value; };
+    proto.get_panControl = function () { return this.panControl; };
+    proto.set_panControl = function (value) { this.panControl = value; };
 
-    var panControlOptions;
-    proto.get_panControlOptions = function () { return panControlOptions; };
-    proto.set_panControlOptions = function (value) { panControlOptions = value; };
+    proto.get_panControlOptions = function () { return this.panControlOptions; };
+    proto.set_panControlOptions = function (value) { this.panControlOptions = value; };
 
-    var region;
-    proto.get_region = function () { return region; };
-    proto.set_region = function (value) { region = value; };
+    proto.get_region = function () { return this.region; };
+    proto.set_region = function (value) { this.region = value; };
 
-    var rotateControl;
-    proto.get_rotateControl = function () { return rotateControl; };
-    proto.set_rotateControl = function (value) { rotateControl = value; };
+    proto.get_rotateControl = function () { return this.rotateControl; };
+    proto.set_rotateControl = function (value) { this.rotateControl = value; };
 
-    var rotateControlOptions;
-    proto.get_rotateControlOptions = function () { return rotateControlOptions; };
-    proto.set_rotateControlOptions = function (value) { rotateControlOptions = value; };
+    proto.get_rotateControlOptions = function () { return this.rotateControlOptions; };
+    proto.set_rotateControlOptions = function (value) { this.rotateControlOptions = value; };
 
-    var scaleControl;
-    proto.get_scaleControl = function () { return scaleControl; };
-    proto.set_scaleControl = function (value) { scaleControl = value; };
+    proto.get_scaleControl = function () { return this.scaleControl; };
+    proto.set_scaleControl = function (value) { this.scaleControl = value; };
 
-    var scaleControlOptions;
-    proto.get_scaleControlOptions = function () { return scaleControlOptions; };
-    proto.set_scaleControlOptions = function (value) { scaleControlOptions = value; };
+    proto.get_scaleControlOptions = function () { return this.scaleControlOptions; };
+    proto.set_scaleControlOptions = function (value) { this.scaleControlOptions = value; };
 
-    var scrollwheel;
-    proto.get_scrollwheel = function () { return scrollwheel; };
-    proto.set_scrollwheel = function (value) { scrollwheel = value; };
+    proto.get_scrollwheel = function () { return this.scrollwheel; };
+    proto.set_scrollwheel = function (value) { this.scrollwheel = value; };
 
-    var showTraffic;
-    proto.get_showTraffic = function () { return showTraffic; };
-    proto.set_showTraffic = function (value) { showTraffic = value; };
+    proto.get_showTraffic = function () { return this.showTraffic; };
+    proto.set_showTraffic = function (value) { this.showTraffic = value; };
 
-    var streetViewControl;
-    proto.get_streetViewControl = function () { return streetViewControl; };
-    proto.set_streetViewControl = function (value) { streetViewControl = value; };
+    proto.get_streetViewControl = function () { return this.streetViewControl; };
+    proto.set_streetViewControl = function (value) { this.streetViewControl = value; };
 
-    var tilt;
-    proto.get_tilt = function () { return tilt; };
-    proto.set_tilt = function (value) { tilt = value; };
+    proto.get_tilt = function () { return this.tilt; };
+    proto.set_tilt = function (value) { this.tilt = value; };
 
-    var zoom;
-    proto.get_zoom = function () { return zoom; };
-    proto.set_zoom = function (value) { zoom = value; };
+    proto.get_zoom = function () { return this.zoom; };
+    proto.set_zoom = function (value) { this.zoom = value; };
 
-    var zoomControl;
-    proto.get_zoomControl = function () { return zoomControl; };
-    proto.set_zoomControl = function (value) { zoomControl = value; };
+    proto.get_zoomControl = function () { return this.zoomControl; };
+    proto.set_zoomControl = function (value) { this.zoomControl = value; };
 
-    var zoomControlOptions;
-    proto.get_zoomControlOptions = function () { return zoomControlOptions; };
-    proto.set_zoomControlOptions = function (value) { zoomControlOptions = value; };
+    proto.get_zoomControlOptions = function () { return this.zoomControlOptions; };
+    proto.set_zoomControlOptions = function (value) { this.zoomControlOptions = value; };
 
     // private methods
 
@@ -201,66 +164,68 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         /// <summary>Creates the map.</summary>
 
         if (!location) {
-            if (center)
-                location = Artem.Google.Convert.toLatLng(center);
+            if (this.center)
+                location = Artem.Google.Convert.toLatLng(this.center);
         }
         else {
-            center = location;
+            this.center = location;
         }
 
         // create map
         if (location) {
             var options = {
                 center: location,
-                mapTypeId: Artem.Google.Convert.toMapTypeId(mapType),
-                zoom: zoom,
-                backgroundColor: backgroundColor,
-                disableDefaultUI: disableDefaultUI,
-                disableDoubleClickZoom: disableDoubleClickZoom,
-                draggable: draggable,
-                draggableCursor: draggableCursor,
-                draggingCursor: draggingCursor,
-                keyboardShortcuts: keyboardShortcuts,
-                mapTypeControl: mapTypeControl,
-                noClear: noClear,
-                overviewMapControl: overviewMapControl,
-                panControl: panControl,
-                rotateControl: rotateControl,
-                scaleControl: scaleControl,
-                scrollwheel: scrollwheel,
-                streetViewControl: streetViewControl,
-                tilt: tilt,
+                mapTypeId: Artem.Google.Convert.toMapTypeId(this.mapType),
+                zoom: this.zoom,
+                backgroundColor: this.backgroundColor,
+                disableDefaultUI: this.disableDefaultUI,
+                disableDoubleClickZoom: this.disableDoubleClickZoom,
+                draggable: this.draggable,
+                keyboardShortcuts: this.keyboardShortcuts,
+                mapTypeControl: this.mapTypeControl,
+                noClear: this.noClear,
+                overviewMapControl: this.overviewMapControl,
+                panControl: this.panControl,
+                rotateControl: this.rotateControl,
+                scaleControl: this.scaleControl,
+                scrollwheel: this.scrollwheel,
+                streetViewControl: this.streetViewControl,
+                tilt: this.tilt,
                 zoomControl: zoomControl
             };
-            if (draggableCursor) options.draggableCursor = draggableCursor;
-            if (draggingCursor) options.draggingCursor = draggingCursor;
-            if (heading) options.heading = heading;
-            if (mapTypeControlOptions) options.mapTypeControlOptions = mapTypeControlOptions;
-            if (maxZoom) options.maxZoom = maxZoom;
-            if (minZoom) options.minZoom = minZoom;
-            if (overviewMapControlOptions) options.overviewMapControlOptions = overviewMapControlOptions;
-            if (panControlOptions) options.panControlOptions = panControlOptions;
-            if (rotateControlOptions) options.rotateControlOptions = rotateControlOptions;
-            if (scaleControlOptions) options.scaleControlOptions = scaleControlOptions;
-            if (zoomControlOptions) options.zoomControlOptions = zoomControlOptions;
+            if (this.draggableCursor) options.draggableCursor = this.draggableCursor;
+            if (this.draggingCursor) options.draggingCursor = this.draggingCursor;
+            if (this.heading) options.heading = this.heading;
+            if (this.mapTypeControlOptions) options.mapTypeControlOptions = this.mapTypeControlOptions;
+            if (this.maxZoom) options.maxZoom = this.maxZoom;
+            if (this.minZoom) options.minZoom = this.minZoom;
+            if (this.overviewMapControlOptions) options.overviewMapControlOptions = this.overviewMapControlOptions;
+            if (this.panControlOptions) options.panControlOptions = this.panControlOptions;
+            if (this.rotateControlOptions) options.rotateControlOptions = this.rotateControlOptions;
+            if (this.scaleControlOptions) options.scaleControlOptions = this.scaleControlOptions;
+            if (this.zoomControlOptions) options.zoomControlOptions = this.zoomControlOptions;
 
-            map = new google.maps.Map(this.get_element(), options);
+            this.map = new google.maps.Map(this.get_element(), options);
             this.composeEvents();
 
+            this.mapLoaded = true;
+            this.raiseMapLoaded();
+
             // layers
-            if (showTraffic) {
+            if (this.showTraffic) {
                 var traffic = new google.maps.TrafficLayer();
-                traffic.setMap(map);
+                traffic.setMap(this.map);
             }
 
             // if reverse geocoding is enabled then try resolve the address
-            if (enableReverseGeocoding) {
+            if (this.enableReverseGeocoding) {
                 var options = {
                     latlng: location,
-                    language: language,
-                    region: region
+                    language: this.language,
+                    region: this.region
                 };
-                Artem.Google.Geocoding.getAddress(options, function (address) { address = address; });
+                Artem.Google.Geocoding.getAddress(options,
+                    Function.createDelegate(this, function (address) { this.address = address; }));
             }
 
             try {
@@ -271,10 +236,10 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         }
         else {
             var options = {
-                address: address,
-                defaultAddress: defaultAddress,
-                language: language,
-                region: region
+                address: this.address,
+                defaultAddress: this.defaultAddress,
+                language: this.language,
+                region: this.region
             }
             Artem.Google.Geocoding.getLocation(options, Function.createDelegate(this, this.create));
             //            function (location) { create(self, location); });
@@ -285,94 +250,94 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
     proto.fitBounds = function (bounds) {
         ///<summary>Sets the viewport to contain the given bounds.</summary>
-        map.fitBounds(bounds);
+        this.map.fitBounds(bounds);
     };
 
     proto.getBounds = function () {
         ///<summary>Returns the lat/lng bounds of the current viewport. If the map is not yet initialized (i.e. the mapType is still null), or center and zoom have not been set then the result is null or undefined.</summary>
-        return map.getBounds();
+        return this.map.getBounds();
     };
 
     proto.getCenter = function () {
-        return map.getCenter();
+        return this.map.getCenter();
     };
 
     proto.getDiv = function () {
-        return map.getDiv();
+        return this.map.getDiv();
     };
 
     proto.getHeading = function () {
         ///<summary>Returns the compass heading of aerial imagery. The heading value is measured in degrees (clockwise) from cardinal direction North.</summary>
-        return map.getHeading();
+        return this.map.getHeading();
     };
 
     proto.getMapTypeId = function () {
-        return map.getMapTypeId();
+        return this.map.getMapTypeId();
     };
 
     proto.getProjection = function () {
         ///<summary>Returns the current Projection. If the map is not yet initialized (i.e. the mapType is still null) then the result is null. Listen to projection_changed and check its value to ensure it is not null.</summary>
-        return map.getProjection();
+        return this.map.getProjection();
     };
 
     proto.getStreetView = function () {
         ///<summary>Returns the default StreetViewPanorama bound to the map, which may be a default panorama embedded within the map, or the panorama set using setStreetView(). Changes to the map's streetViewControl will be reflected in the display of such a bound panorama.</summary>
-        return map.getStreetView();
+        return this.map.getStreetView();
     };
 
     proto.getTilt = function () {
         ///<summary>Returns the angle of incidence for aerial imagery (available for SATELLITE and HYBRID map types) measured in degrees from the viewport plane to the map plane. A value of 0 indicates no angle of incidence (no tilt) while 45° imagery will return a value of 45.</summary>
-        return map.getTilt();
+        return this.map.getTilt();
     };
 
     proto.getZoom = function () {
-        return map.getZoom();
+        return this.map.getZoom();
     };
 
     proto.panBy = function (x, y) {
         ///<summary>Changes the center of the map by the given distance in pixels. If the distance is less than both the width and height of the map, the transition will be smoothly animated. Note that the map coordinate system increases from west to east (for x values) and north to south (for y values).</summary>
-        map.panBy(x, y);
+        this.map.panBy(x, y);
     };
 
     proto.panTo = function (latLng) {
         ///<summary>Changes the center of the map to the given LatLng. If the change is less than both the width and height of the map, the transition will be smoothly animated.</summary>
-        map.panTo(latLng);
+        this.map.panTo(latLng);
     };
 
     proto.panToBounds = function (latLngBounds) {
         ///<summary>Pans the map by the minimum amount necessary to contain the given LatLngBounds. It makes no guarantee where on the map the bounds will be, except that as much of the bounds as possible will be visible. The bounds will be positioned inside the area bounded by the map type and navigation (pan, zoom, and Street View) controls, if they are present on the map. If the bounds is larger than the map, the map will be shifted to include the northwest corner of the bounds. If the change in the map's position is less than both the width and height of the map, the transition will be smoothly animated.</summary>
-        map.panToBounds(latLngBounds);
+        this.map.panToBounds(latLngBounds);
     };
 
     proto.setCenter = function (latlng) {
-        map.setCenter(latlng);
+        this.map.setCenter(latlng);
     };
 
     proto.setHeading = function (heading) {
         ///<summary>Sets the compass heading for aerial imagery measured in degrees from cardinal direction North.</summary>
-        map.setHeading(heading);
+        this.map.setHeading(heading);
     };
 
     proto.setMapTypeId = function (mapTypeId) {
-        map.setMapTypeId(mapTypeId);
+        this.map.setMapTypeId(mapTypeId);
     };
 
     proto.setOptions = function (options) {
-        map.setOptions(options);
+        this.map.setOptions(options);
     };
 
     proto.setStreetView = function (panorama) {
         ///<summary>Binds a StreetViewPanorama to the map. This panorama overrides the default StreetViewPanorama, allowing the map to bind to an external panorama outside of the map. Setting the panorama to null binds the default embedded panorama back to the map.</summary>
-        map.setStreetView(panorama);
+        this.map.setStreetView(panorama);
     };
 
     proto.setTilt = function (tilt) {
         ///<summary>Sets the angle of incidence for aerial imagery (available for SATELLITE and HYBRID map types) measured in degrees from the viewport plane to the map plane. The only supported values are 0, indicating no angle of incidence (no tilt), and 45 indicating a tilt of 45deg;.</summary>
-        map.setTilt(tilt);
+        this.map.setTilt(tilt);
     };
 
     proto.setZoom = function (zoom) {
-        map.setZoom(zoom);
+        this.map.setZoom(zoom);
     };
 
 })(Artem.Google.Map.prototype);
@@ -381,27 +346,6 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 (function (proto) {
 
     // fields
-    var delegates = {
-        "bounds_changed": null,
-        "center_changed": null,
-        "click": null,
-        "dblclick": null,
-        "drag": null,
-        "dragend": null,
-        "dragstart": null,
-        "heading_changed": null,
-        "idle": null,
-        "maptypeid_changed": null,
-        "mousemove": null,
-        "mouseout": null,
-        "mouseover": null,
-        "projection_changed": null,
-        "resize": null,
-        "rightclick": null,
-        "tilesloaded": null,
-        "tilt_changed": null,
-        "zoom_changed": null
-    };
     var handlers = {
         "bounds_changed": raiseBoundsChanged,
         "center_changed": raiseCenterChanged,
@@ -423,7 +367,28 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         "tilt_changed": raiseTiltChanged,
         "zoom_changed": raiseZoomChanged
     };
-    var listeners = {
+    proto.delegates = {
+        "bounds_changed": null,
+        "center_changed": null,
+        "click": null,
+        "dblclick": null,
+        "drag": null,
+        "dragend": null,
+        "dragstart": null,
+        "heading_changed": null,
+        "idle": null,
+        "maptypeid_changed": null,
+        "mousemove": null,
+        "mouseout": null,
+        "mouseover": null,
+        "projection_changed": null,
+        "resize": null,
+        "rightclick": null,
+        "tilesloaded": null,
+        "tilt_changed": null,
+        "zoom_changed": null
+    };
+    proto.listeners = {
         "bounds_changed": null,
         "center_changed": null,
         "click": null,
@@ -455,20 +420,21 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
-                    if (!listeners[name]) {
-                        if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(map, name, delegates[name]);
+                    if (!this.listeners[name]) {
+                        if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
+                        this.listeners[name] = google.maps.event.addListener(map, name, this.delegates[name]);
                     }
                 }
-                else if (listeners[name]) {
-                    google.maps.event.removeListener(listeners[name]);
+                else if (this.listeners[name]) {
+                    google.maps.event.removeListener(this.listeners[name]);
                 }
             }
         }
     };
 
     proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_map());
+        if (this.map)
+            google.maps.event.clearInstanceListeners(this.map);
     };
 
     // bounds changed
@@ -596,6 +562,21 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         var handler = this.get_events().getHandler("idle");
         if (handler) handler(this, e);
     }
+
+    // map loaded
+    proto.add_mapLoaded = function (handler) {
+        if (!this.mapLoaded)
+            this.get_events().addHandler("mapLoaded", handler);
+        else
+            handler(this);
+    };
+    proto.remove_mapLoaded = function (handler) {
+        this.get_events().removeHandler("mapLoaded", handler);
+    };
+    proto.raiseMapLoaded = function () {
+        var handler = this.get_events().getHandler("mapLoaded");
+        if (handler) handler(this);
+    };
 
     // map type changed
     proto.add_mapTypeChanged = function (handler) {

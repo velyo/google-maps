@@ -19,14 +19,14 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public static StreetViewControlOptions FromScriptData(object scriptObject) {
 
-            StreetViewControlOptions options = null;
             var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 object value;
-                options = new StreetViewControlOptions();
+                var options = new StreetViewControlOptions();
                 if (data.TryGetValue("position", out value)) options.Position = (ControlPosition)value;
+                return options;
             }
-            return options;
+            return null;
         }
         #endregion
 

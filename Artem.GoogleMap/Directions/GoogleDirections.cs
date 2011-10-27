@@ -12,17 +12,6 @@ using Artem.Google.Serialization;
 
 namespace Artem.Google.UI {
 
-    public enum TravelMode {
-        Driving,
-        Walking,
-        Bicycling
-    }
-
-    public enum UnitSystem {
-        Metric = 0,
-        Imperial = 1
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -285,7 +274,7 @@ namespace Artem.Google.UI {
         [Browsable(true)]
         [Category("Appearance")]
         [Description("Type of routing requested. Required.")]
-        public TravelMode? TravelMode { get; set; }
+        public TravelMode TravelMode { get; set; }
 
         /// <summary>
         /// Preferred unit system to use when displaying distance. 
@@ -407,8 +396,7 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("provideRouteAlternatives", this.ProvideRouteAlternatives.Value);
             if (this.Region != null)
                 descriptor.AddProperty("region", this.Region);
-            if (this.TravelMode.HasValue)
-                descriptor.AddProperty("travelMode", this.TravelMode.Value);
+            descriptor.AddProperty("travelMode", this.TravelMode);
             if (UnitSystem.HasValue)
                 descriptor.AddProperty("unitSystem", this.UnitSystem.Value);
             //descriptor.AddProperty("waypoints", this.waypoints);

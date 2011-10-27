@@ -108,10 +108,8 @@ namespace Artem.Google.UI {
 
             result["clickable"] = Clickable;
             result["geodesic"] = Geodesic;
-            if (StrokeColor != null)
-                result["strokeColor"] = StrokeColor;
-            if (StrokeOpacity >= 0 && StrokeOpacity <= 1)
-                result["strokeOpacity"] = StrokeOpacity;
+            if (StrokeColor != null) result["strokeColor"] = StrokeColor;
+            if (StrokeOpacity >= 0 && StrokeOpacity <= 1) result["strokeOpacity"] = StrokeOpacity;
             result["strokeWeight"] = StrokeWeight;
             result["zIndex"] = ZIndex;
 

@@ -61,10 +61,8 @@ namespace Artem.Google.UI {
             if (data != null) {
                 var size = new Size();
                 object value;
-
                 if (data.TryGetValue("width", out value)) size.Width = (int)value;
                 if (data.TryGetValue("height", out value)) size.Height = (int)value;
-
                 return size;
             }
             return null;

@@ -11,10 +11,10 @@ Artem.Google.DirectionsBehavior = function (element) {
 Artem.Google.DirectionsBehavior.prototype = {
     initialize: function () {
         Artem.Google.DirectionsBehavior.callBaseMethod(this, 'initialize');
-        this.load();
+        this._attach();
     },
     dispose: function () {
-        this.unload();
+        this.detachEvents();
         Artem.Google.DirectionsBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -23,104 +23,79 @@ Artem.Google.DirectionsBehavior.prototype = {
 (function (proto) {
 
     // properties
-    var map;
-    proto.get_map = function () { return map; };
+    proto.get_map = function () { return this.map; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
-    var renderer;
-    proto.get_renderer = function () { return renderer; };
+    proto.get_renderer = function () { return this.renderer; };
 
-    var service;
-    proto.get_servise = function () { return service; };
+    proto.get_servise = function () { return this.service; };
 
     // service properties
-    var avoidHighways = false;
-    proto.get_avoidHighways = function () { return avoidHighways; };
-    proto.set_avoidHighways = function (value) { avoidHighways = value; };
+    proto.get_avoidHighways = function () { return this.avoidHighways ? this.avoidHighways : false; };
+    proto.set_avoidHighways = function (value) { this.avoidHighways = value; };
 
-    var avoidTolls = false;
-    proto.get_avoidTolls = function () { return avoidTolls; };
-    proto.set_avoidTolls = function (value) { avoidTolls = value; };
+    proto.get_avoidTolls = function () { return this.avoidTolls ? this.avoidTolls : false; };
+    proto.set_avoidTolls = function (value) { this.avoidTolls = value; };
 
-    var destination;
-    proto.get_destination = function () { return destination; };
-    proto.set_destination = function (value) { destination = value; };
+    proto.get_destination = function () { return this.destination; };
+    proto.set_destination = function (value) { this.destination = value; };
 
-    var optimizeWaypoints = false;
-    proto.get_optimizeWaypoints = function () { return optimizeWaypoints; };
-    proto.set_optimizeWaypoints = function (value) { optimizeWaypoints = value; };
+    proto.get_optimizeWaypoints = function () { return this.optimizeWaypoints ? this.optimizeWaypoints : false; };
+    proto.set_optimizeWaypoints = function (value) { this.optimizeWaypoints = value; };
 
-    var origin;
-    proto.get_origin = function () { return origin };
-    proto.set_origin = function (value) { origin = value; }
+    proto.get_origin = function () { return this.origin };
+    proto.set_origin = function (value) { this.origin = value; }
 
-    var provideRouteAlternatives = false;
-    proto.get_provideRouteAlternatives = function () { return provideRouteAlternatives; };
-    proto.set_provideRouteAlternatives = function (value) { provideRouteAlternatives = value; };
+    proto.get_provideRouteAlternatives = function () { return this.provideRouteAlternatives ? this.provideRouteAlternatives : false; };
+    proto.set_provideRouteAlternatives = function (value) { this.provideRouteAlternatives = value; };
 
-    var region;
-    proto.get_region = function () { return region; };
-    proto.set_region = function (value) { region = value; };
+    proto.get_region = function () { return this.region; };
+    proto.set_region = function (value) { this.region = value; };
 
-    var travelMode;
-    proto.get_travelMode = function () { return travelMode; };
-    proto.set_travelMode = function (value) { travelMode = value; };
+    proto.get_travelMode = function () { return this.travelMode; };
+    proto.set_travelMode = function (value) { this.travelMode = value; };
 
-    var unitSystem;
-    proto.get_unitSystem = function () { return unitSystem; };
-    proto.set_unitSystem = function (value) { unitSystem = value };
+    proto.get_unitSystem = function () { return this.unitSystem; };
+    proto.set_unitSystem = function (value) { this.unitSystem = value };
 
-    var waypoints;
-    proto.get_waypoints = function () { return waypoints; };
-    proto.set_waypoints = function (value) { waypoints = value; };
+    proto.get_waypoints = function () { return this.waypoints; };
+    proto.set_waypoints = function (value) { this.waypoints = value; };
 
     // renderer properties
-    var draggable;
-    proto.get_draggable = function () { return draggable; };
-    proto.set_draggable = function (value) { draggable = value };
+    proto.get_draggable = function () { return this.draggable; };
+    proto.set_draggable = function (value) { this.draggable = value };
 
-    var hideRouteList;
-    proto.get_hideRouteList = function () { return hideRouteList; };
-    proto.set_hideRouteList = function (value) { hideRouteList = value };
+    proto.get_hideRouteList = function () { return this.hideRouteList; };
+    proto.set_hideRouteList = function (value) { this.hideRouteList = value };
 
-    var markerOptions;
-    proto.get_markerOptions = function () { return markerOptions; };
-    proto.set_markerOptions = function (value) { markerOptions = value; };
+    proto.get_markerOptions = function () { return this.markerOptions; };
+    proto.set_markerOptions = function (value) { this.markerOptions = value; };
 
-    var panelId;
-    proto.get_panelId = function () { return panelId; };
-    proto.set_panelId = function (value) { panelId = value; };
+    proto.get_panelId = function () { return this.panelId; };
+    proto.set_panelId = function (value) { this.panelId = value; };
 
-    var polylineOptions;
-    proto.get_polylineOptions = function () { return polylineOptions; };
-    proto.set_polylineOptions = function (value) { polylineOptions = value };
+    proto.get_polylineOptions = function () { return this.polylineOptions; };
+    proto.set_polylineOptions = function (value) { this.polylineOptions = value };
 
-    var preserveViewport;
-    proto.get_preserveViewport = function () { return preserveViewport; };
-    proto.set_preserveViewport = function (value) { preserveViewport = value };
+    proto.get_preserveViewport = function () { return this.preserveViewport; };
+    proto.set_preserveViewport = function (value) { this.preserveViewport = value };
 
-    var routeIndex;
-    proto.get_routeIndex = function () { return routeIndex; };
-    proto.set_routeIndex = function (value) { routeIndex = value };
+    proto.get_routeIndex = function () { return this.routeIndex; };
+    proto.set_routeIndex = function (value) { this.routeIndex = value };
 
-    var suppressBicyclingLayer;
-    proto.get_suppressBicyclingLayer = function () { return suppressBicyclingLayer; };
-    proto.set_suppressBicyclingLayer = function (value) { suppressBicyclingLayer = value };
+    proto.get_suppressBicyclingLayer = function () { return this.suppressBicyclingLayer; };
+    proto.set_suppressBicyclingLayer = function (value) { this.suppressBicyclingLayer = value };
 
-    var suppressInfoWindows;
-    proto.get_suppressInfoWindows = function () { return suppressInfoWindows; };
-    proto.set_suppressInfoWindows = function (value) { suppressInfoWindows = value };
+    proto.get_suppressInfoWindows = function () { return this.suppressInfoWindows; };
+    proto.set_suppressInfoWindows = function (value) { this.suppressInfoWindows = value };
 
-    var suppressMarkers;
-    proto.get_suppressMarkers = function () { return suppressMarkers; };
-    proto.set_suppressMarkers = function (value) { suppressMarkers = value };
+    proto.get_suppressMarkers = function () { return this.suppressMarkers; };
+    proto.set_suppressMarkers = function (value) { this.suppressMarkers = value };
 
-    var suppressPolylines;
-    proto.get_suppressPolylines = function () { return suppressPolylines; };
-    proto.set_suppressPolylines = function (value) { suppressPolylines = value };
+    proto.get_suppressPolylines = function () { return this.suppressPolylines; };
+    proto.set_suppressPolylines = function (value) { this.suppressPolylines = value };
 
     // private methods
 
@@ -132,28 +107,28 @@ Artem.Google.DirectionsBehavior.prototype = {
 
         if (status == google.maps.DirectionsStatus.OK) {
             var init = false;
-            if (init = !renderer) {
+            if (init = !this.renderer) {
                 var options = {
-                    draggable: draggable,
-                    hideRouteList: hideRouteList,
-                    map: map.get_gmap(),
-                    preserveViewport: preserveViewport,
-                    routeIndex: routeIndex
+                    draggable: this.draggable,
+                    hideRouteList: this.hideRouteList,
+                    map: this.map,
+                    preserveViewport: this.preserveViewport,
+                    routeIndex: this.routeIndex
                 };
-                if (markerOptions) options.markerOptions = markerOptions;
-                if (panelId) options.panel = document.getElementById(panelId);
-                if (polylineOptions) options.polylineOptions = polylineOptions;
-                if (suppressBicyclingLayer) options.suppressBicyclingLayer = suppressBicyclingLayer;
-                if (suppressInfoWindows) options.suppressInfoWindows = suppressInfoWindows;
-                if (suppressMarkers) options.suppressMarkers = suppressMarkers;
-                if (suppressPolylines) options.suppressPolylines = suppressPolylines;
+                if (this.markerOptions) options.markerOptions = this.markerOptions;
+                if (this.panelId) options.panel = document.getElementById(this.panelId);
+                if (this.polylineOptions) options.polylineOptions = this.polylineOptions;
+                if (this.suppressBicyclingLayer) options.suppressBicyclingLayer = this.suppressBicyclingLayer;
+                if (this.suppressInfoWindows) options.suppressInfoWindows = this.suppressInfoWindows;
+                if (this.suppressMarkers) options.suppressMarkers = this.suppressMarkers;
+                if (this.suppressPolylines) options.suppressPolylines = this.suppressPolylines;
 
-                renderer = new google.maps.DirectionsRenderer(options);
+                this.renderer = new google.maps.DirectionsRenderer(options);
                 //                if (map)
                 //                    renderer.setMap(map.get_gmap());
             }
-            renderer.setDirections(result);
-            if (init) this.registerEvents(renderer, null);
+            this.renderer.setDirections(result);
+            if (init) this.composeEvents(this.renderer, null);
         }
         else {
             handleError(status);
@@ -162,132 +137,141 @@ Artem.Google.DirectionsBehavior.prototype = {
 
     // public method
 
-    proto.load = function (request) {
-        ///<summary>Loads the directions and renders them out.</summary>
+    proto._attach = function () {
 
-        if (!map)
-            map = $find(this.get_element().id);
-
-        if (!service)
-            service = new google.maps.DirectionsService();
-
-        if (!request) {
-            request = {
-                destination: destination,
-                origin: origin,
-                travelMode: (travelMode == 0) ? google.maps.TravelMode.DRIVING : ((travelMode == 1) ? google.maps.TravelMode.WALKING : google.maps.TravelMode.BICYCLING)
-            };
-            if (avoidHighways)
-                request.avoidHighways = avoidHighways;
-            if (avoidTolls)
-                request.avoidTolls = avoidTolls;
-            if (optimizeWaypoints)
-                request.optimizeWaypoints = optimizeWaypoints;
-            if (provideRouteAlternatives)
-                request.provideRouteAlternatives = provideRouteAlternatives;
-            if (region)
-                request.region = region;
-            if (unitSystem)
-                request.unitSystem = unitSystem;
-            if (waypoints)
-                request.waypoints = waypoints;
-        }
-
-        if (request.origin && request.destination) {
-            service.route(request, Function.createDelegate(this, handleResponse));
-        }
-        else {
-            if (!origin) Artem.Google.Log.warn("GoogleDirections: origin value is missing!");
-            if (!destination) Artem.Google.Log.warn("GoogleDirections: destination value is missing!");
-        }
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create))
     };
 
-    proto.unload = function () {
-        if (renderer)
-            google.maps.event.clearInstanceListeners(renderer);
+    proto.create = function () {
+        ///<summary>Loads the directions and renders them out.</summary>
+
+        if (!this.service)
+            this.service = new google.maps.DirectionsService();
+        if (!this.map) {
+            var control = $find(this.get_element().id);
+            if (control) this.map = control.get_map();
+        }
+
+        var request = {
+            destination: this.destination,
+            origin: this.origin,
+            travelMode: (this.travelMode == 0)
+                    ? google.maps.TravelMode.DRIVING
+                    : ((this.travelMode == 1)
+                        ? google.maps.TravelMode.WALKING
+                        : google.maps.TravelMode.BICYCLING)
+        };
+        if (this.avoidHighways)
+            request.avoidHighways = this.avoidHighways;
+        if (this.avoidTolls)
+            request.avoidTolls = this.avoidTolls;
+        if (this.optimizeWaypoints)
+            request.optimizeWaypoints = this.optimizeWaypoints;
+        if (this.provideRouteAlternatives)
+            request.provideRouteAlternatives = this.provideRouteAlternatives;
+        if (this.region)
+            request.region = this.region;
+        if (this.unitSystem)
+            request.unitSystem = this.unitSystem;
+        if (this.waypoints)
+            request.waypoints = this.waypoints;
+
+        if (request.origin && request.destination) {
+            this.service.route(request, Function.createDelegate(this, handleResponse));
+        }
+        else {
+            if (!this.origin) Artem.Google.Log.warn("GoogleDirections: origin value is missing!");
+            if (!this.destination) Artem.Google.Log.warn("GoogleDirections: destination value is missing!");
+        }
     };
 
     // methods - GoogleMaps API
 
     proto.getDirections = function () {
         ///<summary>Returns the renderer's current set of directions.</summary>
-        return renderer.getDirections();
+        return this.renderer.getDirections();
     };
 
     proto.getMap = function () {
         ///<summary>Returns the map on which the DirectionsResult is rendered.</summary>
-        return renderer.getMap();
+        return this.renderer.getMap();
     };
 
     proto.getPanel = function () {
         ///<summary>Returns the panel &lt;div&gt; in which the DirectionsResult is rendered.</summary>
-        return renderer.getPanel();
+        return this.renderer.getPanel();
     };
 
     proto.getRouteIndex = function () {
         ///<summary>Returns the current (zero-based) route index in use by this DirectionsRenderer object.</summary>
-        return renderer.getRouteIndex();
+        return this.renderer.getRouteIndex();
     };
 
     proto.setDirections = function (directions) {
         ///<summary>Set the renderer to use the result from the DirectionsService. Setting a valid set of directions in this manner will display the directions on the renderer's designated map and panel.</summary>
-        renderer.setDirections(directions);
+        this.renderer.setDirections(directions);
     };
 
     proto.setMap = function (map) {
         ///<summary>This method specifies the map on which directions will be rendered. Pass null to remove the directions from the map.</summary>
-        renderer.setMap(map);
+        this.renderer.setMap(map);
+        this.map = map;
     };
 
     proto.setOptions = function (options) {
         ///<summary>Change the options settings of this DirectionsRenderer after initialization.</summary>
-        renderer.setOptions(map);
+        this.renderer.setOptions(options);
     };
 
     proto.setPanel = function (panel) {
         ///<summary>This method renders the directions in a &lt;div&gt;. Pass null to remove the content from the panel.</summary>
-        renderer.setPanel(map);
+        this.renderer.setPanel(panel);
     };
 
     proto.setRouteIndex = function (routeIndex) {
         ///<summary>Set the (zero-based) index of the route in the DirectionsResult object to render. By default, the first route in the array will be rendered.</summary>
-        renderer.setRouteIndex(routeIndex);
+        this.renderer.setRouteIndex(routeIndex);
+        this.routeIndex = routeIndex;
     };
 
-}) (Artem.Google.DirectionsBehavior.prototype);
+})(Artem.Google.DirectionsBehavior.prototype);
 
 // events
 (function (proto) {
 
-    // fields
-    var listener;
-
     // methods
-    proto.registerEvents = function (renderer, handler) {
+    proto.composeEvents = function (renderer, handler) {
 
-        if (!listener) {
+        if (!this.listener) {
             renderer = renderer || this.get_renderer();
             if (renderer) {
                 handler = handler || this.get_events().getHandler("changed");
                 if (handler) {
-                    listener = google.maps.event.addListener(
+                    this.listener = google.maps.event.addListener(
                         renderer, "directions_changed", Function.createDelegate(this, raiseChanged));
                 }
             }
         }
     };
 
+    proto.detachEvents = function () {
+        if (this.renderer)
+            google.maps.event.clearInstanceListeners(this.renderer);
+    };
+
     // changed
     proto.add_changed = function (handler) {
         this.get_events().addHandler("changed", handler);
-        this.registerEvents(null, handler);
+        this.composeEvents(null, handler);
     };
 
     proto.remove_changed = function (handler) {
         this.get_events().removeHandler("changed", handler);
-        if (listener) {
+        if (this.listener) {
             var hnd = this.get_events().getHandler("changed");
-            if (!hnd) google.maps.event.removeListener(listener);
+            if (!hnd) google.maps.event.removeListener(this.listener);
         }
     };
 
@@ -296,7 +280,7 @@ Artem.Google.DirectionsBehavior.prototype = {
         if (handler) handler(this, args);
     }
 
-}) (Artem.Google.DirectionsBehavior.prototype);
+})(Artem.Google.DirectionsBehavior.prototype);
 
 Artem.Google.DirectionsBehavior.raiseServerChanged = function (sender) {
 

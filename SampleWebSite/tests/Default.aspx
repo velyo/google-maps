@@ -32,18 +32,22 @@
     <asp:ScriptManager runat="server">
     </asp:ScriptManager>
     <div class="map-wrap">
-        <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Roadmap" CssClass="map"
-            Latitude="40.740" Longitude="-74.18" Zoom="13" MapTypeControlOptions-Position="BottomRight">
+        <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Hybrid" CssClass="map" 
+            Address="plovdiv" Zoom="8" MapTypeControlOptions-Position="BottomRight">
+            <%--Latitude="42.14304" Longitude="24.74967" --%>
+            <%-- --%>
+            <%-- ground overlay Latitude="40.740" Longitude="-74.18" Zoom="13" --%>
         </artem:GoogleMap>
-        <artem:GoogleGround TargetControlID="GoogleMap1" runat="server" Bounds-SouthWest-Latitude="40.716216"
+        <%--<artem:GoogleGround TargetControlID="GoogleMap1" runat="server" Bounds-SouthWest-Latitude="40.716216"
             Bounds-SouthWest-Longitude="-74.213393" Bounds-NorthEast-Latitude="40.765641"
             Bounds-NorthEast-Longitude="-74.139235" Clickable="true" Url="http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-            OnClick="HandleAny" />
+            OnClick="HandleAny" />--%>
         <%--<artem:GoogleMarkers TargetControlID="GoogleMap1" runat="server" OnClientRightClick="test"
             OnDragEnd="HandleAny">
             <Markers>
                 <artem:Marker Position="42.1229,24.7879" Title="click to see" Info="<h1>Test</h1><p>This is a test!</p>" />
-                <artem:Marker Position="42.2,24.8" Title="click to see" Info="<h1>Test 2</h1><p>This is a test!</p>" Draggable="false"/>
+                <artem:Marker Position="42.2,24.8" Title="click to see" Info="<h1>Test 2</h1><p>This is a test!</p>"
+                    Draggable="false" />
             </Markers>
             <MarkerOptions Draggable="true">
             </MarkerOptions>
@@ -67,11 +71,9 @@
             <artem:LatLng Latitude="42.14304" Longitude="24.74967" />
             <artem:LatLng Latitude="42.69649" Longitude="23.32601" />
         </artem:GooglePolyline>--%>
-        <%--<artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
+        <artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
             Origin="plovdiv" Destination="sofia" Draggable="true" PanelID="info" OnChanged="HandleChanged">
-            <MarkerOptions>
-            </MarkerOptions>
-        </artem:GoogleDirections>--%>
+        </artem:GoogleDirections>
     </div>
     <div id="info">
     </div>

@@ -18,18 +18,17 @@ namespace Artem.Google.UI {
         /// <param name="scriptObject">The value.</param>
         /// <returns></returns>
         public static MapTypeControlOptions FromScriptData(object scriptObject) {
-
-            MapTypeControlOptions options = null;
+            
             IDictionary<string, object> data = scriptObject as IDictionary<string, object>;
-
             if (data != null) {
+                MapTypeControlOptions options = new MapTypeControlOptions();
                 object value;
                 if (data.TryGetValue("mapTypeIds", out value)) options.MapTypes = (MapType[])value;
                 if (data.TryGetValue("position", out value)) options.Position = (ControlPosition)value;
                 if (data.TryGetValue("style", out value)) options.ViewStyle = (MapTypeControlStyle)value;
+                return options;
             }
-
-            return options;
+            return null;
         }
         #endregion
 
@@ -74,11 +73,12 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public IDictionary<string, object> ToScriptData() {
 
-            return new Dictionary<string, object>{ 
-                {"mapTypeIds", this.MapTypes},
+            var data = new Dictionary<string, object>{ 
                 {"position", this.Position},
                 {"style", this.ViewStyle}
             };
+            if (this.MapTypes != null) data["mapTypeIds"] = this.MapTypes;
+            return data;
         }
         #endregion
     }

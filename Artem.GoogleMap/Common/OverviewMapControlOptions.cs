@@ -19,14 +19,14 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public static OverviewMapControlOptions FromScriptData(object scriptValue) {
 
-            OverviewMapControlOptions options = null;
             var data = scriptValue as IDictionary<string, object>;
             if (data != null) {
+                var options = new OverviewMapControlOptions();
                 object value;
-                options = new OverviewMapControlOptions();
                 if (data.TryGetValue("opened", out value)) options.Opened = (bool)value;
+                return options;
             }
-            return options;
+            return null;
         }
         #endregion
 

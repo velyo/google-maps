@@ -19,15 +19,15 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public static ScaleControlOptions FromScriptData(object scriptObject) {
 
-            ScaleControlOptions options = null;
             var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 object value;
-                options = new ScaleControlOptions();
+                var options = new ScaleControlOptions();
                 if (data.TryGetValue("position", out value)) options.Position = (ControlPosition)value;
                 if (data.TryGetValue("style", out value)) options.Style = (ScaleControlStyle)value;
+                return options;
             }
-            return options;
+            return null;
         }
         #endregion
 
