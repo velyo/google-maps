@@ -58,12 +58,6 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
-
-        LatLng _point;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -78,22 +72,17 @@ namespace Artem.Google.UI {
         /// <value>The point.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public LatLng Point {
-            get {
-                return _point ?? (_point = new LatLng());
-            }
-            set {
-                _point = value;
-            }
+            get { return _point ?? (_point = new LatLng()); }
+            set { _point = value; }
         }
+        LatLng _point;
 
         /// <summary>
         /// Gets the value.
         /// </summary>
         /// <value>The value.</value>
         public object Value {
-            get {
-                return (object)_point ?? (object)Address;
-            }
+            get { return (object)_point ?? (object)Address; }
         }
         #endregion
 

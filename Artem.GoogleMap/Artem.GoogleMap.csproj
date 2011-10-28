@@ -139,7 +139,6 @@
     <Compile Include="Markers\GoogleMarker.cs" />
     <Compile Include="Markers\GoogleMarker.DefaultInfoContent.cs" />
     <Compile Include="Markers\GoogleMarker.TemplateContainer.cs" />
-    <Compile Include="Markers\GoogleMarkerStyle.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Polygon\GooglePolygon.cs" />
     <Compile Include="Polyline\GooglePolyline.cs" />
@@ -199,7 +198,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Markers\GoogleMarkersBehavior.js" />
-    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js" />
+    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js">
+      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
@@ -251,7 +252,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

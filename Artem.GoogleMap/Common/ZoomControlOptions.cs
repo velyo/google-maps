@@ -19,15 +19,17 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public static ZoomControlOptions FromScriptData(object scriptObject) {
 
-            ZoomControlOptions options = null;
             var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 object value;
-                options = new ZoomControlOptions();
+                var options = new ZoomControlOptions();
+
                 if (data.TryGetValue("position", out value)) options.Position = (ControlPosition)value;
                 if (data.TryGetValue("style", out value)) options.Style = (ZoomControlStyle)value;
+
+                return options;
             }
-            return options;
+            return null;
         }
         #endregion
 

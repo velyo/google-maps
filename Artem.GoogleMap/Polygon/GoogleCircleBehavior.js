@@ -12,10 +12,10 @@ Artem.Google.CircleBehavior = function (element) {
 Artem.Google.CircleBehavior.prototype = {
     initialize: function () {
         Artem.Google.CircleBehavior.callBaseMethod(this, 'initialize');
-        this.create();
+        this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.CircleBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -23,80 +23,82 @@ Artem.Google.CircleBehavior.prototype = {
 // members
 (function (proto) {
 
-    // Google properties
+    // fields
 
-    var map;
-    proto.get_map = function () { return map; };
-
-    var circle
-    proto.get_circle = function () { return circle; };
+    proto.map = null;
+    proto.circle = null;
 
     // properties
 
-    var center;
-    proto.get_center = function () { return center; };
-    proto.set_center = function (value) { center = value; };
+    proto.get_center = function () { return this.center; };
+    proto.set_center = function (value) { this.center = value; };
 
-    var clickable;
-    proto.get_clickable = function () { return clickable; };
-    proto.set_clickable = function (value) { clickable = value; };
+    proto.get_clickable = function () { return this.clickable; };
+    proto.set_clickable = function (value) { this.clickable = value; };
 
-    var fillColor;
-    proto.get_fillColor = function () { return fillColor; };
-    proto.set_fillColor = function (value) { fillColor = value; };
+    proto.get_fillColor = function () { return this.fillColor; };
+    proto.set_fillColor = function (value) { this.fillColor = value; };
 
-    var fillOpacity;
-    proto.get_fillOpacity = function () { return fillOpacity; };
-    proto.set_fillOpacity = function (value) { fillOpacity = value; };
+    proto.get_fillOpacity = function () { return this.fillOpacity; };
+    proto.set_fillOpacity = function (value) { this.fillOpacity = value; };
 
-    var geodesic;
-    proto.get_geodesic = function () { return geodesic; };
-    proto.set_geodesic = function (value) { geodesic = value; };
+    proto.get_geodesic = function () { return this.geodesic; };
+    proto.set_geodesic = function (value) { this.geodesic = value; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
-    var radius;
-    proto.get_radius = function () { return radius; };
-    proto.set_radius = function (value) { radius = value; };
+    proto.get_radius = function () { return this.radius; };
+    proto.set_radius = function (value) { this.radius = value; };
 
-    var strokeColor;
-    proto.get_strokeColor = function () { return strokeColor; };
-    proto.set_strokeColor = function (value) { strokeColor = value; };
+    proto.get_strokeColor = function () { return this.strokeColor; };
+    proto.set_strokeColor = function (value) { this.strokeColor = value; };
 
-    var strokeOpacity;
-    proto.get_strokeOpacity = function () { return strokeOpacity; };
-    proto.set_strokeOpacity = function (value) { strokeOpacity = value; };
+    proto.get_strokeOpacity = function () { return this.strokeOpacity; };
+    proto.set_strokeOpacity = function (value) { this.strokeOpacity = value; };
 
-    var strokeWeight;
-    proto.get_strokeWeight = function () { return strokeWeight; };
-    proto.set_strokeWeight = function (value) { strokeWeight = value; };
+    proto.get_strokeWeight = function () { return this.strokeWeight; };
+    proto.set_strokeWeight = function (value) { this.strokeWeight = value; };
 
-    var zIndex;
-    proto.get_zIndex = function () { return zIndex; };
-    proto.set_zIndex = function (value) { zIndex = value; };
+    proto.get_zIndex = function () { return this.zIndex; };
+    proto.set_zIndex = function (value) { this.zIndex = value; };
 
     // methods
 
+    proto._attach = function(){
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
+
+    proto._detach = function () {
+        if (this.circle)
+            google.maps.event.clearInstanceListeners(this.circle);
+    };
+
     proto.create = function () {
-        map = $find(this.get_element().id);
+
+        if (!this.map) {
+            var control = $find(this.get_element().id);
+            if (control)
+                this.map = control.map;
+        }
 
         var options = {
-            center: new google.maps.LatLng(center.lat, center.lng),
-            clickable: clickable,
-            fillColor: fillColor,
-            fillOpacity: fillOpacity,
-            geodesic: geodesic,
-            map: map.get_map(),
-            radius: radius,
-            strokeColor: strokeColor,
-            strokeOpacity: strokeOpacity,
-            strokeWeight: strokeWeight,
-            zIndex: zIndex
+            center: new google.maps.LatLng(this.center.lat, this.center.lng),
+            clickable: this.clickable,
+            fillColor: this.fillColor,
+            fillOpacity: this.fillOpacity,
+            geodesic: this.geodesic,
+            map: this.map,
+            radius: this.radius,
+            strokeColor: this.strokeColor,
+            strokeOpacity: this.strokeOpacity,
+            strokeWeight: this.strokeWeight,
+            zIndex: this.zIndex
         };
 
-        circle = new google.maps.Circle(options);
+        this.circle = new google.maps.Circle(options);
         this.composeEvents();
     };
 
@@ -104,42 +106,42 @@ Artem.Google.CircleBehavior.prototype = {
 
     proto.getBounds = function () {
         ///<summary>Gets the LatLngBounds of this Circle.</summary>
-        return circle.getBounds();
+        return this.circle.getBounds();
     };
 
     proto.getCenter = function () {
         ///<summary>Returns the center of this circle.</summary>
-        return circle.getCenter();
+        return this.circle.getCenter();
     };
 
     proto.getMap = function () {
         ///<summary>Returns the map on which this poly is attached.</summary>
-        return circle.getMap();
+        return this.circle.getMap();
     };
 
     proto.getRadius = function () {
         ///<summary>Returns the radius of this circle (in meters).</summary>
-        return circle.getRadius();
+        return this.circle.getRadius();
     };
 
     proto.setCenter = function (value) {
         ///<summary>Sets the center of this circle.</summary>
-        circle.setCenter(value);
+        this.circle.setCenter(value);
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        circle.setMap(map);
+        this.circle.setMap(map);
     };
 
     proto.setOptions = function (options) {
         ///<summary></summary>
-        circle.setOptions(options);
+        this.circle.setOptions(options);
     };
 
     proto.setRadius = function (value) {
         ///<summary>Sets the radius of this circle (in meters).</summary>
-        circle.setRadius(value);
+        this.circle.setRadius(value);
     };
 
 })(Artem.Google.CircleBehavior.prototype);
@@ -148,17 +150,7 @@ Artem.Google.CircleBehavior.prototype = {
 (function (proto) {
 
     // fields
-    var delegates = {
-        "click": null,
-        "dblclick": null,
-        "mousedown": null,
-        "mousemove": null,
-        "mouseout": null,
-        "mouseover": null,
-        "mouseup": null,
-        "rightclick": null
-    };
-    var handlers = {
+     var handlers = {
         "click": raiseClick,
         "dblclick": raiseDoubleClick,
         "mousedown": raiseMouseDown,
@@ -168,7 +160,17 @@ Artem.Google.CircleBehavior.prototype = {
         "mouseup": raiseMouseUp,
         "rightclick": raiseRightClick
     };
-    var listeners = {
+    proto.delegates = {
+        "click": null,
+        "dblclick": null,
+        "mousedown": null,
+        "mousemove": null,
+        "mouseout": null,
+        "mouseover": null,
+        "mouseup": null,
+        "rightclick": null
+    };
+    proto.listeners = {
         "click": null,
         "dblclick": null,
         "mousedown": null,
@@ -183,26 +185,21 @@ Artem.Google.CircleBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        var circle = this.get_circle();
-        if (circle) {
+        if (this.circle) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
-                    if (!listeners[name]) {
-                        if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(circle, name, delegates[name]);
+                    if (!this.listeners[name]) {
+                        if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.circle, name, this.delegates[name]);
                     }
                 }
-                else if (listeners[name]) {
-                    google.maps.event.removeListener(listeners[name]);
+                else if (this.listeners[name]) {
+                    google.maps.event.removeListener(this.listeners[name]);
                 }
             }
         }
-    };
-
-    proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_circle());
     };
 
     // click

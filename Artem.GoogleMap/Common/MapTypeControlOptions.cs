@@ -19,13 +19,15 @@ namespace Artem.Google.UI {
         /// <returns></returns>
         public static MapTypeControlOptions FromScriptData(object scriptObject) {
             
-            IDictionary<string, object> data = scriptObject as IDictionary<string, object>;
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 MapTypeControlOptions options = new MapTypeControlOptions();
                 object value;
+
                 if (data.TryGetValue("mapTypeIds", out value)) options.MapTypes = (MapType[])value;
                 if (data.TryGetValue("position", out value)) options.Position = (ControlPosition)value;
                 if (data.TryGetValue("style", out value)) options.ViewStyle = (MapTypeControlStyle)value;
+
                 return options;
             }
             return null;

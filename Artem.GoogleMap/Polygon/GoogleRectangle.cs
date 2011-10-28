@@ -30,14 +30,10 @@ namespace Artem.Google.UI {
         [Category("Appearance")]
         [Description("Gets or sets the bounds.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [PersistenceMode(PersistenceMode.InnerProperty)]    
+        [PersistenceMode(PersistenceMode.InnerProperty)]
         public Bounds Bounds {
-            get {
-                return _bounds ?? (_bounds = new Bounds());
-            }
-            set {
-                _bounds = value;
-            }
+            get { return _bounds ?? (_bounds = new Bounds()); }
+            set { _bounds = value; }
         }
         Bounds _bounds;
 

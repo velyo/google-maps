@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class MarkerEventArgs : EventArgs, IScriptDataConverter {
 
         #region Static Methods

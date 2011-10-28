@@ -37,14 +37,6 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
-
-        InfoWindowOptions _infoWindowOptions;
-        List<Marker> _markers;
-        MarkerOptions _options;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -89,10 +81,9 @@ namespace Artem.Google.UI {
             get {
                 return _infoWindowOptions ?? (_infoWindowOptions = new InfoWindowOptions());
             }
-            set {
-                _infoWindowOptions = value;
-            }
+            set { _infoWindowOptions = value; }
         }
+        InfoWindowOptions _infoWindowOptions;
 
         /// <summary>
         /// Options for the markers. All markers rendered will use these options.
@@ -102,13 +93,10 @@ namespace Artem.Google.UI {
         [Description("Options for the markers. All markers rendered will use these options.")]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public MarkerOptions MarkerOptions {
-            get {
-                return _options ?? (_options = new MarkerOptions());
-            }
-            set {
-                _options = value;
-            }
+            get { return _options ?? (_options = new MarkerOptions()); }
+            set { _options = value; }
         }
+        MarkerOptions _options;
 
         /// <summary>
         /// Markers to be rendered to target map control.
@@ -125,6 +113,7 @@ namespace Artem.Google.UI {
                 _markers = value;
             }
         }
+        List<Marker> _markers;
 
         /// <summary>
         /// Gets the script manager.
@@ -157,12 +146,8 @@ namespace Artem.Google.UI {
         [Description("Identifies the control to extend.")]
         [IDReferenceProperty]
         public string TargetControlID {
-            get {
-                return _targetControlID ?? string.Empty;
-            }
-            set {
-                _targetControlID = value;
-            }
+            get { return _targetControlID ?? string.Empty; }
+            set { _targetControlID = value; }
         }
         string _targetControlID;
 
@@ -175,12 +160,8 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Visible {
-            get {
-                return base.Visible;
-            }
-            set {
-                throw new NotSupportedException();
-            }
+            get { return base.Visible; }
+            set { throw new NotSupportedException(); }
         }
         #endregion
 

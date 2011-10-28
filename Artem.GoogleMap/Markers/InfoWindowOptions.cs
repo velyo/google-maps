@@ -38,13 +38,6 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
-
-        Size _pixelOffset;
-        LatLng _position;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -68,7 +61,11 @@ namespace Artem.Google.UI {
         /// <value>The pixel offset.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public Size PixelOffset { get { return _pixelOffset ?? (_pixelOffset = new Size()); } set { _pixelOffset = value; } }
+        public Size PixelOffset {
+            get { return _pixelOffset ?? (_pixelOffset = new Size()); }
+            set { _pixelOffset = value; }
+        }
+        Size _pixelOffset;
 
         /// <summary>
         /// The LatLng at which to display this InfoWindow. 
@@ -77,7 +74,11 @@ namespace Artem.Google.UI {
         /// <value>The position.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
-        public LatLng Position { get { return _position ?? (_position = new LatLng()); } set { _position = value; } }
+        public LatLng Position {
+            get { return _position ?? (_position = new LatLng()); }
+            set { _position = value; }
+        }
+        LatLng _position;
 
         /// <summary>
         /// All InfoWindows are displayed on the map in order of their zIndex, with higher values displaying 

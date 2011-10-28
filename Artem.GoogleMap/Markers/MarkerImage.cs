@@ -44,8 +44,9 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static MarkerImage FromScriptData(IDictionary<string, object> data) {
+        public static MarkerImage FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var result = new MarkerImage();
                 object value;
@@ -66,15 +67,6 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
-
-        Point _anchor;
-        Point _origin;
-        Size _scaledSize;
-        Size _size;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -84,14 +76,10 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public Point Anchor {
-            get {
-                return _anchor ?? (_anchor = new Point());
-            }
-            set {
-                _anchor = value;
-            }
+            get { return _anchor ?? (_anchor = new Point()); }
+            set { _anchor = value; }
         }
-
+        Point _anchor;
 
         /// <summary>
         /// Gets or sets the origin.
@@ -100,13 +88,10 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public Point Origin {
-            get {
-                return _origin ?? (_origin = new Point());
-            }
-            set {
-                _origin = value;
-            }
+            get { return _origin ?? (_origin = new Point()); }
+            set { _origin = value; }
         }
+        Point _origin;
 
         /// <summary>
         /// Gets or sets the size of the scaled.
@@ -115,13 +100,10 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public Size ScaledSize {
-            get {
-                return _scaledSize ?? (_scaledSize = new Size());
-            }
-            set {
-                _scaledSize = value;
-            }
+            get { return _scaledSize ?? (_scaledSize = new Size()); }
+            set { _scaledSize = value; }
         }
+        Size _scaledSize;
 
         /// <summary>
         /// Gets or sets the size.
@@ -130,13 +112,10 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public Size Size {
-            get {
-                return _size ?? (_size = new Size());
-            }
-            set {
-                _size = value;
-            }
+            get { return _size ?? (_size = new Size()); }
+            set { _size = value; }
         }
+        Size _size;
 
         /// <summary>
         /// The URL of the marker image.

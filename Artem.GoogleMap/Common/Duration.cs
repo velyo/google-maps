@@ -17,8 +17,9 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="iDictionary">The i dictionary.</param>
         /// <returns></returns>
-        public static Duration FromScriptData(IDictionary<string, object> data) {
+        public static Duration FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var duration = new Duration();
                 object value;
@@ -32,7 +33,7 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
+        #region Properties
 
         /// <summary>
         /// A string representation of the duration value.

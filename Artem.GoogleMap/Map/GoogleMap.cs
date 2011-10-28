@@ -89,12 +89,8 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public LatLng Center {
-            get {
-                return _center ?? (_center = new LatLng());
-            }
-            set {
-                _center = value;
-            }
+            get { return _center ?? (_center = new LatLng()); }
+            set { _center = value; }
         }
         LatLng _center;
 
@@ -312,12 +308,8 @@ namespace Artem.Google.UI {
         /// <value>The latitude.</value>
         [Category("Data")]
         public double Latitude {
-            get {
-                return this.Center.Latitude;
-            }
-            set {
-                this.Center.Latitude = value;
-            }
+            get { return this.Center.Latitude; }
+            set { this.Center.Latitude = value; }
         }
 
         /// <summary>
@@ -327,12 +319,8 @@ namespace Artem.Google.UI {
         /// <value>The longitude.</value>
         [Category("Data")]
         public double Longitude {
-            get {
-                return this.Center.Longitude;
-            }
-            set {
-                this.Center.Longitude = value;
-            }
+            get { return this.Center.Longitude; }
+            set { this.Center.Longitude = value; }
         }
 
         /// <summary>
@@ -356,9 +344,7 @@ namespace Artem.Google.UI {
             get {
                 return _mapTypeControlOptions ?? (_mapTypeControlOptions = new MapTypeControlOptions());
             }
-            set {
-                _mapTypeControlOptions = value;
-            }
+            set { _mapTypeControlOptions = value; }
         }
         MapTypeControlOptions _mapTypeControlOptions;
 
@@ -394,9 +380,7 @@ namespace Artem.Google.UI {
                 return _overviewMapControlOptions
                     ?? (_overviewMapControlOptions = new OverviewMapControlOptions());
             }
-            set {
-                _overviewMapControlOptions = value;
-            }
+            set { _overviewMapControlOptions = value; }
         }
         OverviewMapControlOptions _overviewMapControlOptions;
 
@@ -412,9 +396,7 @@ namespace Artem.Google.UI {
             get {
                 return _panControlOptions ?? (_panControlOptions = new PanControlOptions());
             }
-            set {
-                _panControlOptions = value;
-            }
+            set { _panControlOptions = value; }
         }
         PanControlOptions _panControlOptions;
 
@@ -449,9 +431,7 @@ namespace Artem.Google.UI {
             get {
                 return _rotateControlOptions ?? (_rotateControlOptions = new RotateControlOptions());
             }
-            set {
-                _rotateControlOptions = value;
-            }
+            set { _rotateControlOptions = value; }
         }
         RotateControlOptions _rotateControlOptions;
 
@@ -467,9 +447,7 @@ namespace Artem.Google.UI {
             get {
                 return _scaleControlOptions ?? (_scaleControlOptions = new ScaleControlOptions());
             }
-            set {
-                _scaleControlOptions = value;
-            }
+            set { _scaleControlOptions = value; }
         }
         ScaleControlOptions _scaleControlOptions;
 
@@ -537,9 +515,7 @@ namespace Artem.Google.UI {
             get {
                 return _zoomControlOptions ?? (_zoomControlOptions = new ZoomControlOptions());
             }
-            set {
-                _zoomControlOptions = value;
-            }
+            set { _zoomControlOptions = value; }
         }
         ZoomControlOptions _zoomControlOptions;
 

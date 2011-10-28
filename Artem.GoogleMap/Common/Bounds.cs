@@ -81,13 +81,6 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
-
-        LatLng _southWest;
-        LatLng _northEast;
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -96,13 +89,10 @@ namespace Artem.Google.UI {
         /// <value>The south west.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public LatLng SouthWest {
-            get {
-                return _southWest ?? (_southWest = new LatLng());
-            }
-            set {
-                _southWest = value;
-            }
+            get { return _southWest ?? (_southWest = new LatLng()); }
+            set { _southWest = value; }
         }
+        LatLng _southWest;
 
         /// <summary>
         /// Gets or sets the north east point of bounds.
@@ -110,13 +100,10 @@ namespace Artem.Google.UI {
         /// <value>The north east.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public LatLng NorthEast {
-            get {
-                return _northEast ?? (_northEast = new LatLng());
-            }
-            set {
-                _northEast = value;
-            }
+            get { return _northEast ?? (_northEast = new LatLng()); }
+            set { _northEast = value; }
         }
+        LatLng _northEast;
 
         #endregion
 

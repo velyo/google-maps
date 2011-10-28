@@ -42,9 +42,9 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 // members
 (function (proto) {
 
-    // google properties
+    // fields
 
-    proto.get_map = function () { return this.map; };
+    proto.map = null;
 
     // properties
 
@@ -191,7 +191,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 scrollwheel: this.scrollwheel,
                 streetViewControl: this.streetViewControl,
                 tilt: this.tilt,
-                zoomControl: zoomControl
+                zoomControl: this.zoomControl
             };
             if (this.draggableCursor) options.draggableCursor = this.draggableCursor;
             if (this.draggingCursor) options.draggingCursor = this.draggingCursor;
@@ -414,15 +414,14 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
     proto.composeEvents = function () {
 
-        var map = this.get_map();
-        if (map) {
+        if (this.map) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
                     if (!this.listeners[name]) {
                         if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
-                        this.listeners[name] = google.maps.event.addListener(map, name, this.delegates[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.map, name, this.delegates[name]);
                     }
                 }
                 else if (this.listeners[name]) {
@@ -725,7 +724,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
     function getMapEventArgs(sender, name) {
 
-        var map = sender.get_map();
+        var map = sender.map;
         var bounds = map.getBounds();
         var center = map.getCenter();
         return {

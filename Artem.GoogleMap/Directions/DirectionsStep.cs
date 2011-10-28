@@ -36,54 +36,53 @@ namespace Artem.Google.UI {
         }
         #endregion
 
-        #region Fields
-
-        Distance _distance;
-        Duration _duration;
-        LatLng _endLocation;
-        string _instructions;
-        LatLng _startLocation;
-
-        #endregion
-
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the distance.
+        /// </summary>
+        /// <value>The distance.</value>
         public Distance Distance {
-            get {
-                return _distance ?? (_distance = new Distance());
-            }
-            set {
-                _distance = value;
-            }
+            get { return _distance ?? (_distance = new Distance()); }
+            set { _distance = value; }
         }
+        Distance _distance;
+
+        /// <summary>
+        /// Gets or sets the duration.
+        /// </summary>
+        /// <value>The duration.</value>
         public Duration Duration {
-            get {
-                return _duration ?? (_duration = new Duration());
-            }
-            set {
-                _duration = value;
-            }
+            get { return _duration ?? (_duration = new Duration()); }
+            set { _duration = value; }
         }
+        Duration _duration;
 
+        /// <summary>
+        /// Gets or sets the end location.
+        /// </summary>
+        /// <value>The end location.</value>
         public LatLng EndLocation {
-            get {
-                return _endLocation ?? (_endLocation = new LatLng());
-            }
-            set {
-                _endLocation = value;
-            }
+            get { return _endLocation ?? (_endLocation = new LatLng()); }
+            set { _endLocation = value; }
         }
+        LatLng _endLocation;
 
+        /// <summary>
+        /// Gets or sets the instructions.
+        /// </summary>
+        /// <value>The instructions.</value>
         public string Instructions { get; set; }
 
+        /// <summary>
+        /// Gets or sets the start location.
+        /// </summary>
+        /// <value>The start location.</value>
         public LatLng StartLocation {
-            get{
-                return _startLocation ?? (_startLocation = new LatLng());
-            }
-            set {
-                _startLocation = value;
-            }
+            get { return _startLocation ?? (_startLocation = new LatLng()); }
+            set { _startLocation = value; }
         }
+        LatLng _startLocation;
 
         #endregion
 

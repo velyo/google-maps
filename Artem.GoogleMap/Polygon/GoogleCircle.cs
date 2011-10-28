@@ -32,12 +32,8 @@ namespace Artem.Google.UI {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public LatLng Center {
-            get {
-                return _center ?? (_center = new LatLng());
-            }
-            set {
-                _center = value;
-            }
+            get { return _center ?? (_center = new LatLng()); }
+            set { _center = value; }
         }
         LatLng _center;
 

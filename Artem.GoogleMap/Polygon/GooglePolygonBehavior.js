@@ -11,10 +11,10 @@ Artem.Google.PolygonBehavior = function (element) {
 Artem.Google.PolygonBehavior.prototype = {
     initialize: function () {
         Artem.Google.PolygonBehavior.callBaseMethod(this, 'initialize');
-        this.create();
+        this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.PolygonBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -23,76 +23,77 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
 // members
 (function (proto) {
 
-    // Google properties
+    // fieds
 
-    var map;
-    proto.get_map = function () { return map; };
-
-    var polygon
-    proto.get_polygon = function () { return polygon; };
+    proto.map = null;
+    proto.polygon = null;
 
     // properties
 
-    var clickable;
-    proto.get_clickable = function () { return clickable; };
-    proto.set_clickable = function (value) { clickable = value; };
+    proto.get_clickable = function () { return this.clickable; };
+    proto.set_clickable = function (value) { this.clickable = value; };
 
-    var fillColor;
-    proto.get_fillColor = function () { return fillColor; };
-    proto.set_fillColor = function (value) { fillColor = value; };
+    proto.get_fillColor = function () { return this.fillColor; };
+    proto.set_fillColor = function (value) { this.fillColor = value; };
 
-    var fillOpacity;
-    proto.get_fillOpacity = function () { return fillOpacity; };
-    proto.set_fillOpacity = function (value) { fillOpacity = value; };
+    proto.get_fillOpacity = function () { return this.fillOpacity; };
+    proto.set_fillOpacity = function (value) { this.fillOpacity = value; };
 
-    var geodesic;
-    proto.get_geodesic = function () { return geodesic; };
-    proto.set_geodesic = function (value) { geodesic = value; };
+    proto.get_geodesic = function () { return this.geodesic; };
+    proto.set_geodesic = function (value) { this.geodesic = value; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
-    var paths;
-    proto.get_paths = function () { return paths; };
-    proto.set_paths = function (value) { paths = value; };
+    proto.get_paths = function () { return this.paths; };
+    proto.set_paths = function (value) { this.paths = value; };
 
-    var strokeColor;
-    proto.get_strokeColor = function () { return strokeColor; };
-    proto.set_strokeColor = function (value) { strokeColor = value; };
+    proto.get_strokeColor = function () { return this.strokeColor; };
+    proto.set_strokeColor = function (value) { this.strokeColor = value; };
 
-    var strokeOpacity;
-    proto.get_strokeOpacity = function () { return strokeOpacity; };
-    proto.set_strokeOpacity = function (value) { strokeOpacity = value; };
+    proto.get_strokeOpacity = function () { return this.strokeOpacity; };
+    proto.set_strokeOpacity = function (value) { this.strokeOpacity = value; };
 
-    var strokeWeight;
-    proto.get_strokeWeight = function () { return strokeWeight; };
-    proto.set_strokeWeight = function (value) { strokeWeight = value; };
+    proto.get_strokeWeight = function () { return this.strokeWeight; };
+    proto.set_strokeWeight = function (value) { this.strokeWeight = value; };
 
-    var zIndex;
-    proto.get_zIndex = function () { return zIndex; };
-    proto.set_zIndex = function (value) { zIndex = value; };
+    proto.get_zIndex = function () { return this.zIndex; };
+    proto.set_zIndex = function (value) { this.zIndex = value; };
 
     // methods
 
-    proto.create = function () {
-        map = $find(this.get_element().id);
+    proto._attach = function () {
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
 
-        var points = Artem.Google.Convert.toLatLngArray(paths);
+    proto._detach = function () {
+        if(this.polygon)
+            google.maps.event.clearInstanceListeners(this.polygon);
+    };
+
+    proto.create = function () {
+
+        var control = $find(this.get_element().id);
+        if (control)
+            this.map = control.map;
+
+        var points = Artem.Google.Convert.toLatLngArray(this.paths);
         var options = {
-            clickable: clickable,
-            fillColor: fillColor,
-            fillOpacity: fillOpacity,
-            geodesic: geodesic,
-            map: map.get_map(),
+            clickable: this.clickable,
+            fillColor: this.fillColor,
+            fillOpacity: this.fillOpacity,
+            geodesic: this.geodesic,
+            map: this.map,
             paths: points,
-            strokeColor: strokeColor,
-            strokeOpacity: strokeOpacity,
-            strokeWeight: strokeWeight,
-            zIndex: zIndex
+            strokeColor: this.strokeColor,
+            strokeOpacity: this.strokeOpacity,
+            strokeWeight: this.strokeWeight,
+            zIndex: this.zIndex
         };
 
-        polygon = new google.maps.Polygon(options);
+        this.polygon = new google.maps.Polygon(options);
         this.composeEvents();
     };
 
@@ -100,37 +101,37 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
 
     proto.getMap = function () {
         ///<summary>Returns the map on which this poly is attached.</summary>
-        return polygon.getMap();
+        return this.polygon.getMap();
     };
 
     proto.getPath = function () {
         ///<summary>Retrieves the first path.</summary>        
-        return polygon.getPath();
+        return this.polygon.getPath();
     };
 
     proto.getPaths = function () {
         ///<summary>Retrieves the paths for this Polygon.</summary>
-        return polygon.getPaths()
+        return this.polygon.getPaths()
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        polygon.setMap(map);
+        this.polygon.setMap(map);
     };
 
     proto.setOptions = function (options) {
         ///<summary></summary>
-        polygon.setOptions(options);
+        this.polygon.setOptions(options);
     };
 
     proto.setPath = function (path) {
         ///<summary>Sets the first path. See PolylineOptions for more details.</summary>
-        polygon.setPath(path);
+        this.polygon.setPath(path);
     };
 
     proto.setPaths = function (paths) {
         ///<summary>Sets the path for this Polygon.</summary>
-        polygon.setPaths(paths);
+        this.polygon.setPaths(paths);
     };
 
 })(Artem.Google.PolygonBehavior.prototype);
@@ -139,16 +140,6 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
 (function (proto) {
 
     // fields
-    var delegates = {
-        "click": null,
-        "dblclick": null,
-        "mousedown": null,
-        "mousemove": null,
-        "mouseout": null,
-        "mouseover": null,
-        "mouseup": null,
-        "rightclick": null
-    };
     var handlers = {
         "click": raiseClick,
         "dblclick": raiseDoubleClick,
@@ -159,7 +150,17 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
         "mouseup": raiseMouseUp,
         "rightclick": raiseRightClick
     };
-    var listeners = {
+    proto.delegates = {
+        "click": null,
+        "dblclick": null,
+        "mousedown": null,
+        "mousemove": null,
+        "mouseout": null,
+        "mouseover": null,
+        "mouseup": null,
+        "rightclick": null
+    };
+    proto.listeners = {
         "click": null,
         "dblclick": null,
         "mousedown": null,
@@ -174,26 +175,21 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
 
     proto.composeEvents = function () {
 
-        var polygon = this.get_polygon();
-        if (polygon) {
+        if (this.polygon) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
-                    if (!listeners[name]) {
-                        if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(polygon, name, delegates[name]);
+                    if (!this.listeners[name]) {
+                        if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.polygon, name, this.delegates[name]);
                     }
                 }
-                else if (listeners[name]) {
-                    google.maps.event.removeListener(listeners[name]);
+                else if (this.listeners[name]) {
+                    google.maps.event.removeListener(this.listeners[name]);
                 }
             }
         }
-    };
-
-    proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_polygon());
     };
 
     // click

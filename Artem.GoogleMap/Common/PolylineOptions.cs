@@ -16,8 +16,9 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static PolylineOptions FromScriptData(IDictionary<string, object> data) {
+        public static PolylineOptions FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var options = new PolylineOptions();
                 object value;

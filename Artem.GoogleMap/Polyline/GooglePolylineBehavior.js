@@ -11,10 +11,10 @@ Artem.Google.PolylineBehavior = function (element) {
 Artem.Google.PolylineBehavior.prototype = {
     initialize: function () {
         Artem.Google.PolylineBehavior.callBaseMethod(this, 'initialize');
-        this.create();
+        this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.PolylineBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -22,64 +22,69 @@ Artem.Google.PolylineBehavior.prototype = {
 // members
 (function (proto) {
 
+    // fields
+
+    proto.map = null;
+    proto.polyline = null;
+
     // properties
-    var map;
-    proto.get_map = function () { return map; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto.get_clickable = function () { return this.clickable; };
+    proto.set_clickable = function (value) { this.clickable = value; };
 
-    var polyline;
-    proto.get_polyline = function () { return polyline; };
+    proto.get_geodesic = function () { return this.geodesic; };
+    proto.set_geodesic = function (value) { this.geodesic = value; };
 
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
-    var clickable;
-    proto.get_clickable = function () { return clickable; };
-    proto.set_clickable = function (value) { clickable = value; };
+    proto.get_path = function () { return this.path; };
+    proto.set_path = function (value) { this.path = value; };
 
-    var geodesic;
-    proto.get_geodesic = function () { return geodesic; };
-    proto.set_geodesic = function (value) { geodesic = value; };
+    proto.get_strokeColor = function () { return this.strokeColor; };
+    proto.set_strokeColor = function (value) { this.strokeColor = value; };
 
-    var path;
-    proto.get_path = function () { return path; };
-    proto.set_path = function (value) { path = value; };
+    proto.get_strokeOpacity = function () { return this.strokeOpacity; };
+    proto.set_strokeOpacity = function (value) { this.strokeOpacity = value; };
 
-    var strokeColor;
-    proto.get_strokeColor = function () { return strokeColor; };
-    proto.set_strokeColor = function (value) { strokeColor = value; };
+    proto.get_strokeWeight = function () { return this.strokeWeight; };
+    proto.set_strokeWeight = function (value) { this.strokeWeight = value; };
 
-    var strokeOpacity;
-    proto.get_strokeOpacity = function () { return strokeOpacity; };
-    proto.set_strokeOpacity = function (value) { strokeOpacity = value; };
-
-    var strokeWeight;
-    proto.get_strokeWeight = function () { return strokeWeight; };
-    proto.set_strokeWeight = function (value) { strokeWeight = value; };
-
-    var zIndex;
-    proto.get_zIndex = function () { return zIndex; };
-    proto.set_zIndex = function (value) { zIndex = value; };
+    proto.get_zIndex = function () { return this.zIndex; };
+    proto.set_zIndex = function (value) { this.zIndex = value; };
 
     // methods
 
-    proto.create = function () {
-        map = $find(this.get_element().id);
+    proto._attach = function () {
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
 
-        var points = Artem.Google.Convert.toLatLngArray(path);
+    proto._detach = function () {
+        if(this.polyline)
+            google.maps.event.clearInstanceListeners(this.polyline);
+    };
+
+    proto.create = function () {
+
+        var control = $find(this.get_element().id);
+        if (control)
+            this.map = control.map;
+
+        var points = Artem.Google.Convert.toLatLngArray(this.path);
         var options = {
-            clickable: clickable,
-            geodesic: geodesic,
-            map: map.get_map(),
+            clickable: this.clickable,
+            geodesic: this.geodesic,
+            map: this.map,
             path: points,
-            strokeColor: strokeColor,
-            strokeOpacity: strokeOpacity,
-            strokeWeight: strokeWeight,
-            zIndex: zIndex
+            strokeColor: this.strokeColor,
+            strokeOpacity: this.strokeOpacity,
+            strokeWeight: this.strokeWeight,
+            zIndex: this.zIndex
         };
 
-        polyline = new google.maps.Polyline(options);
+        this.polyline = new google.maps.Polyline(options);
         this.composeEvents();
     };
 
@@ -87,27 +92,27 @@ Artem.Google.PolylineBehavior.prototype = {
 
     proto.getMap = function () {
         ///<summary>Returns the map on which this poly is attached.</summary>
-        return polyline.getMap();
+        return this.polyline.getMap();
     };
 
     proto.getPath = function () {
         ///<summary>Retrieves the first path.</summary>
-        return polyline.getPath();
+        return this.polyline.getPath();
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        polyline.setMap(map);
+        this.polyline.setMap(map);
     };
 
     proto.setOptions = function (options) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        polyline.setOptions(options);
+        this.polyline.setOptions(options);
     };
 
     proto.setPath = function (path) {
         ///<summary>Sets the first path. See PolylineOptions for more details.</summary>
-        polyline.setPath(path);
+        this.polyline.setPath(path);
     };
 
 })(Artem.Google.PolylineBehavior.prototype);
@@ -116,16 +121,6 @@ Artem.Google.PolylineBehavior.prototype = {
 (function (proto) {
 
     // fields
-    var delegates = {
-        "click": null,
-        "dblclick": null,
-        "mousedown": null,
-        "mousemove": null,
-        "mouseout": null,
-        "mouseover": null,
-        "mouseup": null,
-        "rightclick": null
-    };
     var handlers = {
         "click": raiseClick,
         "dblclick": raiseDoubleClick,
@@ -136,7 +131,17 @@ Artem.Google.PolylineBehavior.prototype = {
         "mouseup": raiseMouseUp,
         "rightclick": raiseRightClick
     };
-    var listeners = {
+    proto.delegates = {
+        "click": null,
+        "dblclick": null,
+        "mousedown": null,
+        "mousemove": null,
+        "mouseout": null,
+        "mouseover": null,
+        "mouseup": null,
+        "rightclick": null
+    };
+    proto.listeners = {
         "click": null,
         "dblclick": null,
         "mousedown": null,
@@ -151,26 +156,21 @@ Artem.Google.PolylineBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        var polyline = this.get_polyline();
-        if (polyline) {
+        if (this.polyline) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
-                    if (!listeners[name]) {
-                        if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(polyline, name, delegates[name]);
+                    if (!this.listeners[name]) {
+                        if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.polyline, name, this.delegates[name]);
                     }
                 }
-                else if (listeners[name]) {
-                    google.maps.event.removeListener(listeners[name]);
+                else if (this.listeners[name]) {
+                    google.maps.event.removeListener(this.listeners[name]);
                 }
             }
         }
-    };
-
-    proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_polyline());
     };
 
     // click

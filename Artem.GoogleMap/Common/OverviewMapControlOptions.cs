@@ -15,11 +15,11 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="scriptValue">The script value.</param>
+        /// <param name="scriptObject">The script value.</param>
         /// <returns></returns>
-        public static OverviewMapControlOptions FromScriptData(object scriptValue) {
+        public static OverviewMapControlOptions FromScriptData(object scriptObject) {
 
-            var data = scriptValue as IDictionary<string, object>;
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var options = new OverviewMapControlOptions();
                 object value;

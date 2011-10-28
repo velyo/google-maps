@@ -11,10 +11,10 @@ Artem.Google.MarkersBehavior = function (element) {
 Artem.Google.MarkersBehavior.prototype = {
     initialize: function () {
         Artem.Google.MarkersBehavior.callBaseMethod(this, 'initialize');
-        this.create();
+        this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.MarkersBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -22,67 +22,75 @@ Artem.Google.MarkersBehavior.prototype = {
 // members
 (function (proto) {
 
-    // Google properties
+    // fields
 
-    proto.map;
-    proto.get_map = function () { return map; };
-
-    proto._markers = [];
-    proto.get_markers = function () { return this._markers; };
+    proto.map = null;
+    proto.markers = [];
 
     // properties
 
-    proto._groupOptions = null;
-    proto.get_groupOptions = function () { return this._groupOptions; };
-    proto.set_groupOptions = function (value) { this._groupOptions = value; };
+    proto.get_groupOptions = function () { return this.groupOptions; };
+    proto.set_groupOptions = function (value) { this.groupOptions = value; };
 
-    proto._infoOptions = null;
-    proto.get_infoOptions = function () { return this._infoOptions; };
-    proto.set_infoOptions = function (value) { this._infoOptions = value; };
+    proto.get_infoOptions = function () { return this.infoOptions; };
+    proto.set_infoOptions = function (value) { this.infoOptions = value; };
 
-    proto._markerOptions;
-    proto.get_markerOptions = function () { return this._markerOptions; };
-    proto.set_markerOptions = function (value) { this._markerOptions = value; };
+    proto.get_markerOptions = function () { return this.markerOptions; };
+    proto.set_markerOptions = function (value) { this.markerOptions = value; };
 
-    proto._name;
-    proto.get_name = function () { return this._name; };
-    proto.set_name = function (value) { this._name = value; };
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
     // methods
 
+    proto._attach = function () {
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
+
+    proto._detach = function () {
+        if (this.markers) {
+            for (var i = 0; i < this.markers.length; i++)
+                google.maps.event.clearInstanceListeners(this.markers[i]);
+        }
+    };
+
     proto.create = function () {
 
-        if (this._markerOptions) {
+        if (this.markerOptions) {
             var gmarker;
             var ginfo;
 
-            if (!this.map)
-                this.map = $find(this.get_element().id);
+            if (!this.map) {
+                var control = $find(this.get_element().id);
+                if (control)
+                    this.map = control.map;
+            }
 
-            for (var i = 0; i < this._markerOptions.length; i++) {
-                var marker = Artem.Google.merge(this._groupOptions, this._markerOptions[i]);
-                marker.map = this.map.get_map();
+            for (var i = 0; i < this.markerOptions.length; i++) {
+                var marker = Artem.Google.merge(this.groupOptions, this.markerOptions[i]);
+                marker.map = this.map;
                 marker.position = new google.maps.LatLng(marker.position.lat, marker.position.lng);
                 marker.index = i;
                 gmarker = new google.maps.Marker(marker);
                 if (marker.info) {
-                    ginfo = new google.maps.InfoWindow(Artem.Google.merge({ content: marker.info }, this._infoOptions));
+                    ginfo = new google.maps.InfoWindow(Artem.Google.merge({ content: marker.info }, this.infoOptions));
                     marker.info = ginfo;
                     google.maps.event.addListener(gmarker, 'click',
                         Function.createDelegate(this,
                             Function.createCallback(
-                                function (e, ctx) { ctx.i.open(this.map.get_map(), ctx.m); }, { m: gmarker, i: ginfo })));
+                                function (e, ctx) { ctx.i.open(this.map, ctx.m); }, { m: gmarker, i: ginfo })));
                 }
-                this._markers.push(gmarker);
+                this.markers.push(gmarker);
             }
 
             this.composeEvents();
         }
     };
 
-    // GoogleMaps API
+    // TODO GoogleMaps API
 
-    //    proto.
 
 })(Artem.Google.MarkersBehavior.prototype);
 
@@ -90,29 +98,6 @@ Artem.Google.MarkersBehavior.prototype = {
 (function (proto) {
 
     // fields
-    var delegates = {
-        "animation_changed": null,
-        "click": null,
-        "clickable_changed": null,
-        "cursor_changed": null,
-        "dblclick": null,
-        "drag": null,
-        "dragend": null,
-        "draggable_changed": null,
-        "dragstart": null,
-        "flat_changed": null,
-        "icon_changed": null,
-        "mousedown": null,
-        "mouseout": null,
-        "mouseover": null,
-        "mouseup": null,
-        "position_changed": null,
-        "rightclick": null,
-        "shadow_changed": null,
-        "title_changed": null,
-        "visible_changed": null,
-        "zindex_changed": null
-    };
     var handlers = {
         "animation_changed": raiseAnimationChanged,
         "click": raiseClick,
@@ -136,7 +121,31 @@ Artem.Google.MarkersBehavior.prototype = {
         "visible_changed": raiseVisibleChanged,
         "zindex_changed": raiseZIndexChanged
     };
-    var listeners = {
+    proto.delegates = {
+        "animation_changed": null,
+        "click": null,
+        "clickable_changed": null,
+        "cursor_changed": null,
+        "dblclick": null,
+        "drag": null,
+        "dragend": null,
+        "draggable_changed": null,
+        "dragstart": null,
+        "flat_changed": null,
+        "icon_changed": null,
+        "mousedown": null,
+        "mouseout": null,
+        "mouseover": null,
+        "mouseup": null,
+        "position_changed": null,
+        "rightclick": null,
+        "shadow_changed": null,
+        "title_changed": null,
+        "visible_changed": null,
+        "zindex_changed": null
+    };
+    
+    proto.listeners = {
         "animation_changed": [],
         "click": [],
         "clickable_changed": [],
@@ -164,20 +173,19 @@ Artem.Google.MarkersBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        var markers = this.get_markers();
-        if (markers) {
+        if (this.markers) {
             var handler;
             var listener;
 
-            for (var i = 0; i < markers.length; i++) {
+            for (var i = 0; i < this.markers.length; i++) {
                 for (var name in handlers) {
                     handler = this.get_events().getHandler(name);
-                    listener = listeners[name][i];
+                    listener = this.listeners[name][i];
                     if (handler) {
                         if (!listener) {
-                            if (!delegates[name])
-                                delegates[name] = Function.createDelegate(this, Function.createCallback(handlers[name], i));
-                            listeners[name][i] = google.maps.event.addListener(markers[i], name, delegates[name]);
+                            if (!this.delegates[name])
+                                this.delegates[name] = Function.createDelegate(this, Function.createCallback(handlers[name], i));
+                            this.listeners[name][i] = google.maps.event.addListener(this.markers[i], name, this.delegates[name]);
                         }
                     }
                     else if (listener) {
@@ -185,14 +193,6 @@ Artem.Google.MarkersBehavior.prototype = {
                     }
                 }
             }
-        }
-    };
-
-    proto.detachEvents = function () {
-        var markers = this.get_markers();
-        if (markers) {
-            for (var i = 0; i < markers.length; i++)
-                google.maps.event.clearInstanceListeners(markers[i]);
         }
     };
 
@@ -521,8 +521,8 @@ Artem.Google.MarkersBehavior.prototype = {
 
     function raiseServerEvent(name, sender, e) {
 
-        var position = e.latLng || sender.get_markers()[e.index].getPosition();
-        var target = sender.get_name();
+        var position = e.latLng || sender.markers[e.index].getPosition();
+        var target = sender.name;
         var args = {
             index: e.index,
             name: name,

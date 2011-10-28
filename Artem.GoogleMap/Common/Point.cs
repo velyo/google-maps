@@ -56,8 +56,9 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static Point FromScriptData(IDictionary<string, object> data) {
+        public static Point FromScriptData(object scriptObject) {
 
+            var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
                 var result = new Point();
                 object value;
@@ -94,7 +95,6 @@ namespace Artem.Google.UI {
         #region Properties
 
         public int X { get; set; }
-
         public int Y { get; set; }
 
         #endregion

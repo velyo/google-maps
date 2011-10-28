@@ -11,10 +11,10 @@ Artem.Google.RectangleBehavior = function (element) {
 Artem.Google.RectangleBehavior.prototype = {
     initialize: function () {
         Artem.Google.RectangleBehavior.callBaseMethod(this, 'initialize');
-        this.create();
+        this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.RectangleBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -22,75 +22,76 @@ Artem.Google.RectangleBehavior.prototype = {
 // members
 (function (proto) {
 
-    // Google properties
+    // fields
 
-    var map;
-    proto.get_map = function () { return map; };
-
-    var rect
-    proto.get_rect = function () { return rect; };
+    proto.map = null;
+    proto.rect = null;
 
     // properties
 
-    var bounds;
-    proto.get_bounds = function() { return bounds; };
-    proto.set_bounds = function(value) { bounds = value; };
+    proto.get_bounds = function() { return this.bounds; };
+    proto.set_bounds = function(value) { this.bounds = value; };
 
-    var clickable;
-    proto.get_clickable = function () { return clickable; };
-    proto.set_clickable = function (value) { clickable = value; };
+    proto.get_clickable = function () { return this.clickable; };
+    proto.set_clickable = function (value) { this.clickable = value; };
 
-    var fillColor;
-    proto.get_fillColor = function () { return fillColor; };
-    proto.set_fillColor = function (value) { fillColor = value; };
+    proto.get_fillColor = function () { return this.fillColor; };
+    proto.set_fillColor = function (value) { this.fillColor = value; };
 
-    var fillOpacity;
-    proto.get_fillOpacity = function () { return fillOpacity; };
-    proto.set_fillOpacity = function (value) { fillOpacity = value; };
+    proto.get_fillOpacity = function () { return this.fillOpacity; };
+    proto.set_fillOpacity = function (value) { this.fillOpacity = value; };
 
-    var geodesic;
-    proto.get_geodesic = function () { return geodesic; };
-    proto.set_geodesic = function (value) { geodesic = value; };
+    proto.get_geodesic = function () { return this.geodesic; };
+    proto.set_geodesic = function (value) { this.geodesic = value; };
 
-    var name;
-    proto.get_name = function () { return name; };
-    proto.set_name = function (value) { name = value; };
+    proto.get_name = function () { return this.name; };
+    proto.set_name = function (value) { this.name = value; };
 
-    var strokeColor;
-    proto.get_strokeColor = function () { return strokeColor; };
-    proto.set_strokeColor = function (value) { strokeColor = value; };
+    proto.get_strokeColor = function () { return this.strokeColor; };
+    proto.set_strokeColor = function (value) { this.strokeColor = value; };
 
-    var strokeOpacity;
-    proto.get_strokeOpacity = function () { return strokeOpacity; };
-    proto.set_strokeOpacity = function (value) { strokeOpacity = value; };
+    proto.get_strokeOpacity = function () { return this.strokeOpacity; };
+    proto.set_strokeOpacity = function (value) { this.strokeOpacity = value; };
 
-    var strokeWeight;
-    proto.get_strokeWeight = function () { return strokeWeight; };
-    proto.set_strokeWeight = function (value) { strokeWeight = value; };
+    proto.get_strokeWeight = function () { return this.strokeWeight; };
+    proto.set_strokeWeight = function (value) { this.strokeWeight = value; };
 
-    var zIndex;
-    proto.get_zIndex = function () { return zIndex; };
-    proto.set_zIndex = function (value) { zIndex = value; };
+    proto.get_zIndex = function () { return this.zIndex; };
+    proto.set_zIndex = function (value) { this.zIndex = value; };
 
     // methods
 
+    proto._attach = function () {
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
+
+    proto._detach = function () {
+        if(this.rect)
+            google.maps.event.clearInstanceListeners(this.rect);
+    };
+
     proto.create = function () {
-        map = $find(this.get_element().id);
+        
+        var control = $find(this.get_element().id);
+        if (control)
+            this.map = control.map;
 
         var options = {
-            bounds: Artem.Google.Convert.toLatLngBounds(bounds),
-            clickable: clickable,
-            fillColor: fillColor,
-            fillOpacity: fillOpacity,
-            geodesic: geodesic,
-            map: map.get_map(),
-            strokeColor: strokeColor,
-            strokeOpacity: strokeOpacity,
-            strokeWeight: strokeWeight,
-            zIndex: zIndex
+            bounds: Artem.Google.Convert.toLatLngBounds(this.bounds),
+            clickable: this.clickable,
+            fillColor: this.fillColor,
+            fillOpacity: this.fillOpacity,
+            geodesic: this.geodesic,
+            map: this.map,
+            strokeColor: this.strokeColor,
+            strokeOpacity: this.strokeOpacity,
+            strokeWeight: this.strokeWeight,
+            zIndex: this.zIndex
         };
 
-        rect = new google.maps.Rectangle(options);
+        this.rect = new google.maps.Rectangle(options);
         this.composeEvents();
     };
 
@@ -98,27 +99,27 @@ Artem.Google.RectangleBehavior.prototype = {
 
     proto.getBounds = function () {
         ///<summary>Returns the bounds of this rectangle.</summary>
-        return rect.getBounds();
+        return this.rect.getBounds();
     };
 
     proto.getMap = function () {
         ///<summary>Returns the map on which this rectangle is displayed.</summary>
-        return rect.getMap();
+        return this.rect.getMap();
     };
 
     proto.setBounds = function (value) {
         ///<summary>Sets the bounds of this rectangle.</summary>
-        rect.setBounds(value);
+        this.rect.setBounds(value);
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders the rectangle on the specified map. If map is set to null, the rectangle will be removed.</summary>
-        rect.setMap(map);
+        this.rect.setMap(map);
     };
 
     proto.setOptions = function (options) {
         ///<summary></summary>
-        rect.setOptions(options);
+        this.rect.setOptions(options);
     };
 
 })(Artem.Google.RectangleBehavior.prototype);
@@ -127,16 +128,6 @@ Artem.Google.RectangleBehavior.prototype = {
 (function (proto) {
 
     // fields
-    var delegates = {
-        "click": null,
-        "dblclick": null,
-        "mousedown": null,
-        "mousemove": null,
-        "mouseout": null,
-        "mouseover": null,
-        "mouseup": null,
-        "rightclick": null
-    };
     var handlers = {
         "click": raiseClick,
         "dblclick": raiseDoubleClick,
@@ -147,7 +138,18 @@ Artem.Google.RectangleBehavior.prototype = {
         "mouseup": raiseMouseUp,
         "rightclick": raiseRightClick
     };
-    var listeners = {
+    proto.delegates = {
+        "click": null,
+        "dblclick": null,
+        "mousedown": null,
+        "mousemove": null,
+        "mouseout": null,
+        "mouseover": null,
+        "mouseup": null,
+        "rightclick": null
+    };
+    
+    proto.listeners = {
         "click": null,
         "dblclick": null,
         "mousedown": null,
@@ -162,26 +164,21 @@ Artem.Google.RectangleBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        var rect = this.get_rect();
-        if (rect) {
+        if (this.rect) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
-                    if (!listeners[name]) {
-                        if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(rect, name, delegates[name]);
+                    if (!this.listeners[name]) {
+                        if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.rect, name, this.delegates[name]);
                     }
                 }
-                else if (listeners[name]) {
-                    google.maps.event.removeListener(listeners[name]);
+                else if (this.listeners[name]) {
+                    google.maps.event.removeListener(this.listeners[name]);
                 }
             }
         }
-    };
-
-    proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_rect());
     };
 
     // click

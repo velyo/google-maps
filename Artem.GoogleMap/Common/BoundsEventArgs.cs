@@ -7,23 +7,17 @@ namespace Artem.Google.UI {
 
     public class BoundsEventArgs : EventArgs, IScriptDataConverter {
 
-        #region Static Fields
-
-        public static readonly BoundsEventArgs Empty = new BoundsEventArgs();
-
-        #endregion
-
         #region Static Methods
 
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="value">The value.</param>
+        /// <param name="scriptObject">The value.</param>
         /// <returns></returns>
-        public static BoundsEventArgs FromScriptData(object value) {
-            return new BoundsEventArgs(Bounds.FromScriptData(value));
+        public static BoundsEventArgs FromScriptData(object scriptObject) {
+            return new BoundsEventArgs(Bounds.FromScriptData(scriptObject));
         }
-        #endregion  
+        #endregion
 
         #region Properties
 
@@ -38,7 +32,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="bounds">The bounds.</param>
         public BoundsEventArgs(Bounds bounds) {
-            this.Bounds  = bounds;
+            this.Bounds = bounds;
         }
 
         /// <summary>
@@ -56,7 +50,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <returns></returns>
         public IDictionary<string, object> ToScriptData() {
-            return this.Bounds.ToScriptData();
+            return (this.Bounds != null) ? this.Bounds.ToScriptData() : null;
         }
         #endregion
     }

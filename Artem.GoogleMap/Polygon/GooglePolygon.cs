@@ -83,12 +83,8 @@ namespace Artem.Google.UI {
         [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public List<LatLng> Paths {
-            get {
-                return _paths ?? (_paths = new List<LatLng>());
-            }
-            set {
-                _paths = value;
-            }
+            get { return _paths ?? (_paths = new List<LatLng>()); }
+            set { _paths = value; }
         }
         List<LatLng> _paths;
 

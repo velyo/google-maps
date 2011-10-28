@@ -32,11 +32,12 @@
     <asp:ScriptManager runat="server">
     </asp:ScriptManager>
     <div class="map-wrap">
-        <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Hybrid" CssClass="map" 
-            Address="plovdiv" Zoom="8" MapTypeControlOptions-Position="BottomRight">
-            <%--Latitude="42.14304" Longitude="24.74967" --%>
-            <%-- --%>
-            <%-- ground overlay Latitude="40.740" Longitude="-74.18" Zoom="13" --%>
+        <artem:GoogleMap ID="GoogleMap1" runat="server" MapType="Hybrid" CssClass="map" Zoom="7"
+            Address="plovdiv">
+            <%--Address="Newark"  Latitude="40.740" Longitude="-74.18"--%>
+            <%--Address="plovdiv" Zoom="8" MapTypeControlOptions-Position="BottomRight">--%>
+            <%-- Latitude="42.14304" Longitude="24.74967" --%>
+            <%-- ground overlay  --%>
         </artem:GoogleMap>
         <%--<artem:GoogleGround TargetControlID="GoogleMap1" runat="server" Bounds-SouthWest-Latitude="40.716216"
             Bounds-SouthWest-Longitude="-74.213393" Bounds-NorthEast-Latitude="40.765641"
@@ -60,20 +61,21 @@
             <artem:LatLng Latitude="42.002411" Longitude="21.436097" />
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
         </artem:GooglePolygon>--%>
-        <%--<artem:GoogleCircle TargetControlID="GoogleMap1" runat="server" Center="42.002411,21.436097"
+        <%--<artem:GoogleCircle TargetControlID="GoogleMap1" runat="server" Center="42.14304,24.74967"
             Radius="100000" OnClick="HandleClick" OnClientRightClick="test" />--%>
         <%--<artem:GoogleRectangle TargetControlID="GoogleMap1" runat="server" OnClick="HandleClick"
-            OnClientRightClick="test" FillColor="Green" Bounds-SouthWest="44.802416,20.465601"
-            Bounds-NorthEast="37.97918,23.716647">
+            OnClientRightClick="test" FillColor="Green" Bounds-SouthWest="42.0,24.0"
+            Bounds-NorthEast="43.0,25.0">
         </artem:GoogleRectangle>--%>
         <%--Bounds="44.802416,20.465601:37.97918,23.716647"--%>
-        <%--<artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5" OnClientClick="test" OnRightClick="HandleClick">
+        <artem:GooglePolyline TargetControlID="GoogleMap1" runat="server" StrokeWeight="5"
+            OnClientClick="test" OnRightClick="HandleClick">
             <artem:LatLng Latitude="42.14304" Longitude="24.74967" />
             <artem:LatLng Latitude="42.69649" Longitude="23.32601" />
-        </artem:GooglePolyline>--%>
-        <artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
+        </artem:GooglePolyline>
+        <%--<artem:GoogleDirections TargetControlID="GoogleMap1" runat="server" OnClientChanged="test"
             Origin="plovdiv" Destination="sofia" Draggable="true" PanelID="info" OnChanged="HandleChanged">
-        </artem:GoogleDirections>
+        </artem:GoogleDirections>--%>
     </div>
     <div id="info">
     </div>

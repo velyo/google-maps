@@ -64,12 +64,8 @@ namespace Artem.Google.UI {
         [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
         [PersistenceMode(PersistenceMode.InnerDefaultProperty)]
         public List<LatLng> Path {
-            get {
-                return _path ?? (_path = new List<LatLng>());
-            }
-            set {
-                _path = value;
-            }
+            get { return _path ?? (_path = new List<LatLng>()); }
+            set { _path = value; }
         }
         List<LatLng> _path;
 
@@ -410,7 +406,7 @@ namespace Artem.Google.UI {
             if (args != null) {
                 string name = args["name"];
                 var e = MouseEventArgs.FromScriptData(args);
-                switch(name){
+                switch (name) {
                     case "click":
                         this.OnClick(e);
                         break;

@@ -88,7 +88,7 @@ namespace Artem.Google.UI {
 
         #endregion
 
-        #region Construct
+        #region Ctor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Point"/> class.

@@ -14,7 +14,7 @@ Artem.Google.DirectionsBehavior.prototype = {
         this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.DirectionsBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -22,15 +22,14 @@ Artem.Google.DirectionsBehavior.prototype = {
 // members
 (function (proto) {
 
-    // properties
-    proto.get_map = function () { return this.map; };
+    // fields
+    proto.map = null;
+    proto.renderer = null;
+    proto.service = null;
 
+    // properties
     proto.get_name = function () { return this.name; };
     proto.set_name = function (value) { this.name = value; };
-
-    proto.get_renderer = function () { return this.renderer; };
-
-    proto.get_servise = function () { return this.service; };
 
     // service properties
     proto.get_avoidHighways = function () { return this.avoidHighways ? this.avoidHighways : false; };
@@ -97,6 +96,63 @@ Artem.Google.DirectionsBehavior.prototype = {
     proto.get_suppressPolylines = function () { return this.suppressPolylines; };
     proto.set_suppressPolylines = function (value) { this.suppressPolylines = value };
 
+    // public method
+
+    proto._attach = function () {
+
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
+
+    proto._detach = function () {
+        if (this.renderer)
+            google.maps.event.clearInstanceListeners(this.renderer);
+    };
+
+    proto.create = function () {
+        ///<summary>Loads the directions and renders them out.</summary>
+
+        if (!this.service)
+            this.service = new google.maps.DirectionsService();
+        if (!this.map) {
+            var control = $find(this.get_element().id);
+            if (control) this.map = control.map;
+        }
+
+        var request = {
+            destination: this.destination,
+            origin: this.origin,
+            travelMode: (this.travelMode == 0)
+                    ? google.maps.TravelMode.DRIVING
+                    : ((this.travelMode == 1)
+                        ? google.maps.TravelMode.WALKING
+                        : google.maps.TravelMode.BICYCLING)
+        };
+        if (this.avoidHighways)
+            request.avoidHighways = this.avoidHighways;
+        if (this.avoidTolls)
+            request.avoidTolls = this.avoidTolls;
+        if (this.optimizeWaypoints)
+            request.optimizeWaypoints = this.optimizeWaypoints;
+        if (this.provideRouteAlternatives)
+            request.provideRouteAlternatives = this.provideRouteAlternatives;
+        if (this.region)
+            request.region = this.region;
+        if (this.unitSystem)
+            request.unitSystem = this.unitSystem;
+        if (this.waypoints)
+            request.waypoints = this.waypoints;
+
+        if (request.origin && request.destination) {
+            this.service.route(request, Function.createDelegate(this, handleResponse));
+        }
+        else {
+            if (!this.origin) Artem.Google.Log.warn("GoogleDirections: origin value is missing!");
+            if (!this.destination) Artem.Google.Log.warn("GoogleDirections: destination value is missing!");
+        }
+    };
+
     // private methods
 
     function handleError(status) {
@@ -134,58 +190,6 @@ Artem.Google.DirectionsBehavior.prototype = {
             handleError(status);
         }
     }
-
-    // public method
-
-    proto._attach = function () {
-
-        var control = $find(this.get_element().id);
-        if (control)
-            control.add_mapLoaded(Function.createDelegate(this, this.create))
-    };
-
-    proto.create = function () {
-        ///<summary>Loads the directions and renders them out.</summary>
-
-        if (!this.service)
-            this.service = new google.maps.DirectionsService();
-        if (!this.map) {
-            var control = $find(this.get_element().id);
-            if (control) this.map = control.get_map();
-        }
-
-        var request = {
-            destination: this.destination,
-            origin: this.origin,
-            travelMode: (this.travelMode == 0)
-                    ? google.maps.TravelMode.DRIVING
-                    : ((this.travelMode == 1)
-                        ? google.maps.TravelMode.WALKING
-                        : google.maps.TravelMode.BICYCLING)
-        };
-        if (this.avoidHighways)
-            request.avoidHighways = this.avoidHighways;
-        if (this.avoidTolls)
-            request.avoidTolls = this.avoidTolls;
-        if (this.optimizeWaypoints)
-            request.optimizeWaypoints = this.optimizeWaypoints;
-        if (this.provideRouteAlternatives)
-            request.provideRouteAlternatives = this.provideRouteAlternatives;
-        if (this.region)
-            request.region = this.region;
-        if (this.unitSystem)
-            request.unitSystem = this.unitSystem;
-        if (this.waypoints)
-            request.waypoints = this.waypoints;
-
-        if (request.origin && request.destination) {
-            this.service.route(request, Function.createDelegate(this, handleResponse));
-        }
-        else {
-            if (!this.origin) Artem.Google.Log.warn("GoogleDirections: origin value is missing!");
-            if (!this.destination) Artem.Google.Log.warn("GoogleDirections: destination value is missing!");
-        }
-    };
 
     // methods - GoogleMaps API
 
@@ -245,7 +249,7 @@ Artem.Google.DirectionsBehavior.prototype = {
     proto.composeEvents = function (renderer, handler) {
 
         if (!this.listener) {
-            renderer = renderer || this.get_renderer();
+            renderer = renderer || this.renderer;
             if (renderer) {
                 handler = handler || this.get_events().getHandler("changed");
                 if (handler) {
@@ -254,11 +258,6 @@ Artem.Google.DirectionsBehavior.prototype = {
                 }
             }
         }
-    };
-
-    proto.detachEvents = function () {
-        if (this.renderer)
-            google.maps.event.clearInstanceListeners(this.renderer);
     };
 
     // changed

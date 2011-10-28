@@ -11,10 +11,10 @@ Artem.Google.GroundBehavior = function (element) {
 Artem.Google.GroundBehavior.prototype = {
     initialize: function () {
         Artem.Google.GroundBehavior.callBaseMethod(this, 'initialize');
-        this.create();
+        this._attach();
     },
     dispose: function () {
-        this.detachEvents();
+        this._detach();
         Artem.Google.GroundBehavior.callBaseMethod(this, 'dispose');
     }
 };
@@ -24,13 +24,10 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
 // members
 (function (proto) {
 
-    // google
+    // fields
 
-    var map;
-    proto.get_map = function () { return map; };
-
-    var ground;
-    proto.get_ground = function () { return ground; };
+    proto.map = null;
+    proto.ground = null;
 
     // properties
 
@@ -52,13 +49,26 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
 
     // methods
 
+    proto._attach = function () {
+        var control = $find(this.get_element().id);
+        if (control)
+            control.add_mapLoaded(Function.createDelegate(this, this.create));
+    };
+
+    proto._detach = function () {
+        if (this.ground)
+            google.maps.event.clearInstanceListeners(this.ground);
+    };
+
     proto.create = function () {
 
-        map = $find(this.get_element().id);
-        ground = new google.maps.GroundOverlay(
+        var control = $find(this.get_element().id);
+        if (control)
+            this.map = control.map;
+        this.ground = new google.maps.GroundOverlay(
             url,
             Artem.Google.Convert.toLatLngBounds(bounds),
-            { clickable: clickable, map: map.get_map() });
+            { clickable: clickable, map: this.map });
         this.composeEvents();
     };
 
@@ -66,22 +76,22 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
 
     proto.getBounds = function () {
         ///<summary>Gets the LatLngBounds of this overlay.</summary>
-        return map.getBounds();
+        return this.ground.getBounds();
     };
 
     proto.getMap = function () {
         ///<summary>Returns the map on which this ground overlay is displayed.</summary>
-        return map.getMap();
+        return this.ground.getMap();
     };
 
     proto.getUrl = function () {
         ///<summary>Gets the url of the projected image.</summary>
-        return map.getUrl();
+        return this.ground.getUrl();
     };
 
     proto.getMap = function (map) {
         ///<summary>Renders the ground overlay on the specified map. If map is set to null, the overlay is removed.</summary>
-        return map.setMap(map);
+        return this.ground.setMap(map);
     };
 
 })(Artem.Google.GroundBehavior.prototype);
@@ -90,13 +100,13 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
 (function (proto) {
 
     // fields
-    var delegates = {
-        "click": null
-    };
     var handlers = {
         "click": raiseClick
     };
-    var listeners = {
+    proto.delegates = {
+        "click": null
+    };
+    proto.listeners = {
         "click": null
     };
 
@@ -104,26 +114,21 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
 
     proto.composeEvents = function () {
 
-        var ground = this.get_ground();
-        if (ground) {
+        if (this.ground) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
-                    if (!listeners[name]) {
-                        if (!delegates[name]) delegates[name] = Function.createDelegate(this, handlers[name]);
-                        listeners[name] = google.maps.event.addListener(ground, name, delegates[name]);
+                    if (!this.listeners[name]) {
+                        if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.ground, name, this.delegates[name]);
                     }
                 }
-                else if (listeners[name]) {
-                    google.maps.event.removeListener(listeners[name]);
+                else if (this.listeners[name]) {
+                    google.maps.event.removeListener(this.listeners[name]);
                 }
             }
         }
-    };
-
-    proto.detachEvents = function () {
-        google.maps.event.clearInstanceListeners(this.get_ground());
     };
 
     // click

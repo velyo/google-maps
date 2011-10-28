@@ -14,8 +14,8 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns></returns>
-        public static MouseEventArgs FromScriptData(IDictionary<string, object> data) {
-            return new MouseEventArgs(LatLng.FromScriptData(data));
+        public static MouseEventArgs FromScriptData(object scriptObject) {
+            return new MouseEventArgs(LatLng.FromScriptData(scriptObject));
         }
         #endregion
 
