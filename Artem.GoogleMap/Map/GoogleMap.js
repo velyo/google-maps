@@ -240,9 +240,8 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 defaultAddress: this.defaultAddress,
                 language: this.language,
                 region: this.region
-            }
+            };
             Artem.Google.Geocoding.getLocation(options, Function.createDelegate(this, this.create));
-            //            function (location) { create(self, location); });
         }
     };
 

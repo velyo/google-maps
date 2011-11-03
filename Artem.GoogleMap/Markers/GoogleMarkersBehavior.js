@@ -24,6 +24,7 @@ Artem.Google.MarkersBehavior.prototype = {
 
     // fields
 
+    proto.counter = 0;
     proto.map = null;
     proto.markers = [];
 
@@ -59,11 +60,12 @@ Artem.Google.MarkersBehavior.prototype = {
     proto.create = function () {
 
         if (this.markerOptions) {
+            var control;
             var gmarker;
             var ginfo;
 
             if (!this.map) {
-                var control = $find(this.get_element().id);
+                control = $find(this.get_element().id);
                 if (control)
                     this.map = control.map;
             }
@@ -71,23 +73,46 @@ Artem.Google.MarkersBehavior.prototype = {
             for (var i = 0; i < this.markerOptions.length; i++) {
                 var marker = Artem.Google.merge(this.groupOptions, this.markerOptions[i]);
                 marker.map = this.map;
-                marker.position = new google.maps.LatLng(marker.position.lat, marker.position.lng);
                 marker.index = i;
-                gmarker = new google.maps.Marker(marker);
-                if (marker.info) {
-                    ginfo = new google.maps.InfoWindow(Artem.Google.merge({ content: marker.info }, this.infoOptions));
-                    marker.info = ginfo;
-                    google.maps.event.addListener(gmarker, 'click',
+
+                if (marker.position) {
+                    marker.position = new google.maps.LatLng(marker.position.lat, marker.position.lng);
+                    Function.createDelegate(this, setMarker)(null, marker);
+                }
+                else if (marker.address) {
+                    var delegate = Function.createDelegate(this, Function.createCallback(setMarker, marker));
+                    var options = { address: marker.address };
+                    if (control) {
+                        options.language = control.get_language();
+                        options.region = control.get_region();
+                    }
+                    Artem.Google.Geocoding.getLocation(options, delegate);
+                }
+            }
+        }
+    };
+
+    // private methods
+
+    function setMarker(position, marker) {
+
+        if (marker) {
+            if (position) marker.position = position;
+
+            gmarker = new google.maps.Marker(marker);
+            if (marker.info) {
+                ginfo = new google.maps.InfoWindow(Artem.Google.merge({ content: marker.info }, this.infoOptions));
+                marker.info = ginfo;
+                google.maps.event.addListener(gmarker, 'click',
                         Function.createDelegate(this,
                             Function.createCallback(
                                 function (e, ctx) { ctx.i.open(this.map, ctx.m); }, { m: gmarker, i: ginfo })));
-                }
-                this.markers.push(gmarker);
             }
-
-            this.composeEvents();
+            this.markers.push(gmarker);
         }
-    };
+        this.counter++;
+        if (this.counter == this.markerOptions.length) this.composeEvents();
+    }
 
     // TODO GoogleMaps API
 
@@ -144,7 +169,7 @@ Artem.Google.MarkersBehavior.prototype = {
         "visible_changed": null,
         "zindex_changed": null
     };
-    
+
     proto.listeners = {
         "animation_changed": [],
         "click": [],
@@ -183,9 +208,9 @@ Artem.Google.MarkersBehavior.prototype = {
                     listener = this.listeners[name][i];
                     if (handler) {
                         if (!listener) {
-                            if (!this.delegates[name])
-                                this.delegates[name] = Function.createDelegate(this, Function.createCallback(handlers[name], i));
-                            this.listeners[name][i] = google.maps.event.addListener(this.markers[i], name, this.delegates[name]);
+                            var delegate = Function.createDelegate(
+                                this, Function.createCallback(handlers[name], this.markers[i].index));
+                            this.listeners[name][i] = google.maps.event.addListener(this.markers[i], name, delegate);//this.delegates[name]);
                         }
                     }
                     else if (listener) {

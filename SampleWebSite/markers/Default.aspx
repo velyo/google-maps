@@ -15,10 +15,10 @@
         <artem:GoogleMap ID="GoogleMap1" runat="server" Width="634px" Height="600px" Latitude="42.1229"
             Longitude="24.7879" Zoom="4" EnableScrollWheelZoom="true" CssClass="map">
         </artem:GoogleMap>
-        <artem:GoogleMarkers ID="GoogleMarkers1" TargetControlID="GoogleMap1" runat="server">
+        <artem:GoogleMarkers ID="GoogleMarkers1" TargetControlID="GoogleMap1" runat="server" OnClientClick="handleMarkerClick">
             <Markers>
-                <artem:Marker Position-Latitude="42.1229" Position-Longitude="24.7879" Title="Click on the marker"
-                    Info="Text of marker 1">
+                <artem:Marker Address="plovdiv" Title="Click on the marker" Info="Text of marker 1">
+                    <%--Position-Latitude="42.1229" Position-Longitude="24.7879"--%>
                 </artem:Marker>
                 <artem:Marker Position-Latitude="42.1229" Position-Longitude="20." Title="Click on the marker"
                     Info="Text of marker 2">
@@ -28,4 +28,10 @@
             </MarkerOptions>
         </artem:GoogleMarkers>
     </div>
+    <script type="text/javascript">
+        function handleMarkerClick(sender, e) {
+            alert("Marker #" + (e.index + 1) + "\nPosition: lat=" + e.latLng.lat() + "/lng=" + e.latLng.lng() + 
+                "\nPixel: x=" + e.pixel.x + "/y=" + e.pixel.y);
+        }
+    </script>
 </asp:Content>
