@@ -14,17 +14,11 @@
     </h3>
     <ul>
         <li><a href="/map/Default.aspx">&raquo; Default</a></li>
-        <li><a href="/map/Appearance.aspx">&raquo; Appearance</a></li>
-        <li><a href="/map/Behavior.aspx">&raquo; Behavior</a></li>
         <li><a href="/map/ClientEvents.aspx">&raquo; Client Events</a></li>
-        <li><a href="/map/CaptureClick.aspx">&raquo; Capture Click</a></li>
-        <li><a href="/map/ClientUpdate.aspx">&raquo; Client Update</a></li>
-        <li><a href="/map/DataBinding.aspx">&raquo; Data Binding</a></li>
+        <li><a href="/map/ServerEvents.aspx">&raquo; Server Events</a></li>
         <li><a href="/map/DataBound.aspx">&raquo; Data Bound</a></li>
         <li><a href="/map/InTabPanel.aspx">&raquo; Inside TabPanel</a></li>
         <li><a href="/map/InUpdatePanel.aspx">&raquo; Inside UpdatePanel</a></li>
-        <li><a href="/map/ZoomPanType.aspx">&raquo; ZoomPanType</a></li>
-        <li><a href="/map/StreetView.aspx">&raquo; StreetView</a></li>
-        <li><a href="/map/PostbackPersistence.aspx">&raquo; Postback Persistence</a></li>
+        <li><a href="/map/WithMenu.aspx">&raquo; With Menu</a></li>
     </ul>
 </asp:Content>

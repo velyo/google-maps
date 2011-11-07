@@ -26,14 +26,14 @@ namespace Artem.Google.UI {
                 var result = new LatLng();
                 object value;
 
-                if (data.TryGetValue("lat", out value)) 
-                    result.Latitude = (double)(decimal)value;
-                else if (data.TryGetValue("Ma", out value))
-                    result.Latitude = (double)(decimal)value;
-                if (data.TryGetValue("lng", out value)) 
-                    result.Longitude = (double)(decimal)value;
-                else if (data.TryGetValue("Na", out value))
-                    result.Longitude = (double)(decimal)value;
+                if (data.TryGetValue("lat", out value))
+                    result.Latitude = Convert.ToDouble(value);
+                //else if (data.TryGetValue("Ma", out value))
+                //    result.Latitude = (double)(decimal)value;
+                if (data.TryGetValue("lng", out value))
+                    result.Longitude = Convert.ToDouble(value);
+                //else if (data.TryGetValue("Na", out value))
+                //    result.Longitude = (double)(decimal)value;
 
                 return result;
             }

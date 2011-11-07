@@ -30,8 +30,8 @@ h2 {
 }
 h3 {
 	font-size: 1.5em;
-	border-bottom: 1px solid #eee;
-	margin: 0 0 .8em;
+	border-bottom: 1px solid #CCC;
+	margin: .8em 0;
 }
 p {
 	margin: 0 0 1em 0;
@@ -66,12 +66,20 @@ fieldset div {
 }
 fieldset input[type=submit] {
 }
+fieldset input[type=text] {
+}
+fieldset input[type=text]:focus {
+	background-color: #EFE;
+}
 legend {
 	padding: 10px;
 	padding-top: 0;
 }
 ol, ul {
 	list-style-type: none;
+}
+pre {
+	overflow: auto;
 }
 
 .wrap {
@@ -197,13 +205,16 @@ a.step span {
 	float: left;
 	margin-bottom: 30px;
 }
+#content .side li {
+	padding: 2px 0px;
+}
 
 #footer {
 	clear: both;
 	width: 960px;
 	margin: 0 auto;
 	padding: 15px;
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid #CCC;
 }
 #footer .right {
 	float: right;

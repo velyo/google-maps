@@ -726,9 +726,11 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         var map = sender.map;
         var bounds = map.getBounds();
         var center = map.getCenter();
+        var sw = bounds.getSouthWest();
+        var ne = bounds.getNorthEast();
         return {
             name: name,
-            bounds: { sw: bounds.getSouthWest(), ne: bounds.getNorthEast() },
+            bounds: { sw: { lat: sw.lat(), lng: sw.lng() }, ne: { lat: ne.lat(), lng: ne.lng() } },
             center: { lat: center.lat(), lng: center.lng() },
             mapType: map.getMapTypeId(),
             zoom: map.getZoom()

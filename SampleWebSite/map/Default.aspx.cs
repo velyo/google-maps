@@ -41,6 +41,7 @@ public partial class map_GoogleMap : Page {
             string address = txtAddress.Text;
             if (!string.IsNullOrEmpty(address)) {
                 GoogleMap1.Address = address;
+                GoogleMap1.Center = null;
             }
         }
 

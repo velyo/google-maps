@@ -128,8 +128,8 @@ namespace Artem.Google.UI {
         #region Ctor
 
         public MarkerImage() {
-            this.Anchor = Point.DefaultMarkerIconAnchor;
-            this.Size = Size.DefaultMarkerIconSize;
+            //this.Anchor = Point.DefaultMarkerIconAnchor;
+            //this.Size = Size.DefaultMarkerIconSize;
         }
         #endregion
 
@@ -150,6 +150,16 @@ namespace Artem.Google.UI {
             if (this.Url != null) result["url"] = this.Url;
 
             return result;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
+        public override string ToString() {
+            return this.Url;
         }
         #endregion
     }

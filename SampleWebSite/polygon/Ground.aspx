@@ -1,16 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>GoogleMap - GooglePolygon - Gound Overlay</title>
-    <meta name="description" content="GoogleMap - GooglePolygon - Rectangle" />
-    <meta name="keywords" content="GoogleMap - GooglePolygon - Rectangle" />
+    <title>GoogleMap - Polygon - Gound Overlay</title>
+    <meta name="description" content="GoogleMap control ground overlay sample." />
+    <meta name="keywords" content="googlemap control ground overlay sample" />
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="main">
     <h1>
         Ground Overlay
     </h1>
     <p>
-        How to draw a ground overlay on GoogleMap.
+        GoogleMap control ground overlay sample.
     </p>
     <p>
         Events can be handled same way as the polygon events.

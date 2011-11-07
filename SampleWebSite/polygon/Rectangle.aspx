@@ -1,16 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>GoogleMap - GooglePolygon - Rectangle</title>
-    <meta name="description" content="GoogleMap - GooglePolygon - Rectangle" />
-    <meta name="keywords" content="GoogleMap - GooglePolygon - Rectangle" />
+    <title>GoogleMap - Polygon - Rectangle</title>
+    <meta name="description" content="GoogleMap control rectangle polygon sample." />
+    <meta name="keywords" content="googlemap control rectangle polygon sample" />
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="main">
     <h1>
         Rectangle Polygon
     </h1>
     <p>
-        How to draw a rectangle polygon on GoogleMap.
+        GoogleMap control rectangle polygon sample.
     </p>
     <p>
         Events can be handled same way as the polygon events.

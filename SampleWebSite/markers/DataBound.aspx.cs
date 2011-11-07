@@ -39,11 +39,11 @@ namespace Artem.GoogleMap.WebSite {
         #region Methods
 
         /// <summary>
-        /// Generates the specified sender.
+        /// Handles the map event.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="Artem.Google.UI.MapEventArgs"/> instance containing the event data.</param>
-        protected void Generate(object sender, MapEventArgs e) {
+        protected void HandleMapEvent(object sender, MapEventArgs e) {
 
             _bounds = e.Bounds;
             GoogleMap1.Center = e.Center;

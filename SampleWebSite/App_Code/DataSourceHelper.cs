@@ -40,7 +40,7 @@ namespace Artem.GoogleMap.WebSite {
         /// <returns></returns>
         [DataObjectMethod(DataObjectMethodType.Select)]
         public static GoogleMapData GetMapData() {
-            return new GoogleMapData(42.1229, 24.7879, 5);
+            return new GoogleMapData(42.1229, 24.7879, 8);
         }
         #endregion
     }

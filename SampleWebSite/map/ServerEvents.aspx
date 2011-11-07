@@ -2,15 +2,15 @@
     CodeFile="ServerEvents.aspx.cs" Inherits="map_ServerEvents" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
-    <title>Server Events</title>
-    <meta name="description" content="GoogleMap Control server events sample." />
-    <meta name="keywords" content="asp.net artem googlemap control server events" />
+    <title>GoogleMap - Server Events</title>
+    <meta name="description" content="GoogleMap control map server event handling sample." />
+    <meta name="keywords" content="googlemap control map server event handling sample" />
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
-        Server Events
+        Map Server Events
     </h1>
     <p>
-        This sample shows how to handle all GoogleMap Control events on the server-side.
+        GoogleMap control map server event handling sample.
     </p>
 </asp:Content>

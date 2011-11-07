@@ -1,16 +1,20 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
-    <title>GoogleMap - GooglePolygon - Client Events</title>
-    <meta name="description" content="GoogleMap Control - GooglePolygon client events sample." />
-    <meta name="keywords" content="asp.net artem googlemap control polygon client events" />
+    <title>GoogleMap - Polygon - Client Events</title>
+    <meta name="description" content="GoogleMap control polygon client event handling sample." />
+    <meta name="keywords" content="googlemap control polygon client event handling sample" />
 </asp:Content>
 <asp:Content runat="server" ContentPlaceHolderID="main">
     <h1>
-        Client Events
+        Polygon Client Events
     </h1>
     <p>
-        How to register GooglePolygon client event handlers.
+        GoogleMap control polygon client event handling sample.<br />
+        The polygon fires next events: click, double click, mouse down, mouse move, mouse
+        out, mouse over, mouse up, right click.<br />
+        The event fired by the polygon will be listed in the info panel bellow (most recent
+        first).
     </p>
     <div class="map-wrap">
         <artem:GoogleMap ID="GoogleMap1" runat="server" Width="640px" Height="600px" Latitude="42.1229"
@@ -27,55 +31,68 @@
             <artem:LatLng Latitude="37.97918" Longitude="23.716647" />
         </artem:GooglePolygon>
     </div>
-    <select id="list" multiple="multiple" size="10" style="width: 100%;">
+    <div>
+        Events (most recent first): <input type="button" value="Clear" onclick="handleClearClick()" />
+    </div>
+    <select id="list" multiple="multiple" size="20" style="width: 100%;">
     </select>
-    <input type="button" value="Clear" onclick="handleClearClick()" />
     <script type="text/javascript">
         var list = document.getElementById("list");
 
-        function addEvent(name) {
-            var option = document.createElement("option");
-            option.text = name + " event was fired!";
-            list.insertBefore(option);
-        }
-
         function handleClearClick() {
-            var parent = list.parentNode;
-            var empty = list.cloneNode(false);
-            parent.replaceChild(empty, list);
+            $("#list").empty();
         }
 
         function handleClick(sender, e) {
-            addEvent("Click");
-            console.dir(e);
+            printEvent("Click", e);
         }
         function handleDoubleClick(sender, e) {
-            addEvent("Double Click");
-            console.dir(e);
+            printEvent("Double Click", e);
         }
         function handleMouseDown(sender, e) {
-            addEvent("Mouse Down");
-            console.dir(e);
+            printEvent("Mouse Down", e);
         }
         function handleMouseMove(sender, e) {
-            addEvent("Mouse Move");
-            console.dir(e);
+            printEvent("Mouse Move", e);
         }
         function handleMouseOut(sender, e) {
-            addEvent("Mouse Out");
-            console.dir(e);
+            printEvent("Mouse Out", e);
         }
         function handleMouseOver(sender, e) {
-            addEvent("Mouse Over");
-            console.dir(e);
+            printEvent("Mouse Over", e);
         }
         function handleMouseUp(sender, e) {
-            addEvent("Mouse Up");
-            console.dir(e);
+            printEvent("Mouse Up", e);
         }
         function handleRightClick(sender, e) {
-            addEvent("Right Click");
-            console.dir(e);
+            printEvent("Right Click", e);
+        }
+
+        function printEvent(name, e) {
+
+            var buffer = [];
+            buffer.push(name);
+            buffer.push(" event was fired");
+            if (e && e.latLng) {
+                buffer.push(" (lat: ");
+                buffer.push(e.latLng.lat());
+                buffer.push(", lng: ");
+                buffer.push(e.latLng.lng());
+                buffer.push(")");
+            }
+            buffer.push(".");
+
+            var option = document.createElement("option");
+            option.text = buffer.join('');
+
+            if (list.childNodes.length > 0) {
+                list.insertBefore(option, list.childNodes[0]);
+            }
+            else {
+                list.appendChild(option);
+            }
+            // print it out in the browser console as well, if provided
+            if (console) console.dir(e);
         }
     </script>
 </asp:Content>

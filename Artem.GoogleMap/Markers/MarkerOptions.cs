@@ -147,6 +147,8 @@ namespace Artem.Google.UI {
         /// Gets or sets the shadow image.
         /// </summary>
         /// <value>The shadow.</value>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
         public MarkerImage Shadow {
             get {
                 return _shadow ?? (_shadow = new MarkerImage());

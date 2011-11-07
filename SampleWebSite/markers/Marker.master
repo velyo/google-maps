@@ -17,6 +17,7 @@
         <li><a href="/markers/ClientEvents.aspx">&raquo; Client Events</a></li>
         <li><a href="/markers/ServerEvents.aspx">&raquo; Server Events</a></li>
         <li><a href="/markers/CustomIcons.aspx">&raquo; Custom Icons</a></li>
+        <li><a href="/markers/CustomSpriteIcons.aspx">&raquo; Custom Sprite Icons</a></li>
         <li><a href="/markers/DataBound.aspx">&raquo; Data Bound</a></li>
     </ul>
 </asp:Content>

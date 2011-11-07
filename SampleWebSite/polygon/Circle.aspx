@@ -1,16 +1,16 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <title>GoogleMap - GooglePolygon - Circle</title>
-    <meta name="description" content="GoogleMap Control - GooglePolygon client events sample." />
-    <meta name="keywords" content="asp.net artem googlemap control polygon client events" />
+    <title>GoogleMap - Polygon - Circle</title>
+    <meta name="description" content="GoogleMap control circle polygon sample." />
+    <meta name="keywords" content="googlemap control circle polygon sample" />
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="main">
     <h1>
         Circle Polygon
     </h1>
     <p>
-        How to draw a circle polygon on GoogleMap.
+        GoogleMap control circle polygon sample.
     </p>
     <p>
         Events can be handled same way as the polygon events.

@@ -2,14 +2,17 @@
     CodeFile="InTabPanel.aspx.cs" Inherits="map_InTabPanel" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
-    <title>Inside AJAX TabPanel</title>
-    <meta name="description" content="GoogleMap Control inside AJAX TabPanel sample." />
-    <meta name="keywords" content="asp.net artem googlemap control ajax tabpanel" />
+    <title>GoogleMap - Inside TabPanel</title>
+    <meta name="description" content="GoogleMap control inside ajax tab panel sample." />
+    <meta name="keywords" content="googlemap control inside ajax tab panel sample" />
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>
-        Inside AJAX TabPanel
+        Map Inside TabPanel
     </h1>
+    <p>
+        GoogleMap control inside ajax tab panel sample.
+    </p>
     <%--<ajax:TabContainer ID="tabContainer" runat="server" OnClientActiveTabChanged="refreshMap">
         <ajax:TabPanel ID="tabLorem" runat="server" HeaderText="Text">
             <ContentTemplate>
@@ -89,17 +92,11 @@
         </ajax:TabPanel>
     </ajax:TabContainer>--%>
 
-    <script type="text/javascript">
+    <%--<script type="text/javascript">
         function refreshMap() {
             GoogleMap1.checkResize();
         }
     </script>
-
-</asp:Content>
-<asp:Content ID="cntDescription" ContentPlaceHolderID="phDescription" runat="Server">
-    <p>
-        This sample shows a case when GoogleMap control is inside an AJAX TabPanel control.
-    </p>
     Source Code:
     <pre>&lt;ajax:TabContainer ID="tabContainer1" runat="server" Width="640px" Height="600px" OnClientActiveTabChanged="refreshMap"&gt;
         &lt;ajax:TabPanel ID="TabPanel1" runat="server" HeaderText="Text"&gt;
@@ -123,5 +120,5 @@
             var map = &lt;%= GoogleMap1.ClientID %&gt;;
             map.checkResize();
         }
-    &lt;/script></pre>
+    &lt;/script></pre>--%>
 </asp:Content>
