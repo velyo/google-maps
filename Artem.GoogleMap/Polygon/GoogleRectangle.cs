@@ -341,7 +341,7 @@ namespace Artem.Google.UI {
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Polygon.GoogleRectangleBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polyline.GoogleRectangleBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polygon.GoogleRectangleBehavior.min.js", assembly);
 #endif
         }
 

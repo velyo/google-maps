@@ -347,7 +347,7 @@ namespace Artem.Google.UI {
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Polygon.GoogleCircleBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polyline.GoogleCircleBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polygon.GoogleCircleBehavior.min.js", assembly);
 #endif
         }
 

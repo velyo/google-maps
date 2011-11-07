@@ -349,7 +349,7 @@ namespace Artem.Google.UI {
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polyline.GooglePolygonBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.min.js", assembly);
 #endif
         }
 

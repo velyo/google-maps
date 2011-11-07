@@ -112,7 +112,7 @@ namespace Artem.Google.UI {
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Polygon.GoogleGroundBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polyline.GoogleGroundBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Polygon.GoogleGroundBehavior.min.js", assembly);
 #endif
         }
 

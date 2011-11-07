@@ -20,7 +20,7 @@ using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 
 [assembly: WebResource("Artem.Google.Map.GoogleMap.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.map.GoogleMap.min.js", "text/javascript")]
+[assembly: WebResource("Artem.Google.Map.GoogleMap.min.js", "text/javascript")]
 
 namespace Artem.Google.UI {
 

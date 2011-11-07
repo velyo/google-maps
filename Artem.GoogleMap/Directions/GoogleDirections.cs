@@ -422,7 +422,7 @@ namespace Artem.Google.UI {
 #if DEBUG
             yield return new ScriptReference("Artem.Google.Directions.GoogleDirectionsBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.UI.GoogleDirectionsBehavior.min.js", assembly);
+            yield return new ScriptReference("Artem.Google.Directions.GoogleDirectionsBehavior.min.js", assembly);
 #endif
         }
 
