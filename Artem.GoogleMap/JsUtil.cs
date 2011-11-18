@@ -17,7 +17,7 @@ namespace Artem.Google {
         #region Static Fields
 
         static NumberFormatInfo _NumberFormat;
-        public static readonly RegexOptions DefaultRegexOptions =
+        static readonly RegexOptions DefaultRegexOptions =
             RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace;
 
         #endregion

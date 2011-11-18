@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="true" CodeFile="ClientEvents.aspx.cs"
-    Inherits="map_ClientEvents" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Client Events</title>

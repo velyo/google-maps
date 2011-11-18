@@ -13,7 +13,9 @@ using System.Collections;
 
 namespace Artem.Google.UI {
 
-    //[ParseChildren(true, "Markers")]
+    /// <summary>
+    /// Extender control which targets GoogleMap contol and adds the markers overlays to the google map.
+    /// </summary>
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
     [ToolboxData("<{0}:GoogleMarkers runat=server></{0}:GoogleMarkers>")]
@@ -46,6 +48,10 @@ namespace Artem.Google.UI {
         [Category("Data")]
         public string DataAddressField { get; set; }
 
+        /// <summary>
+        /// Gets or sets the data icon field.
+        /// </summary>
+        /// <value>The data icon field.</value>
         [Category("Data")]
         public string DataIconField { get; set; }
 

@@ -9,6 +9,10 @@ using System.Web.UI;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// Extender control which targets GoogleMap controls and displays the panorama for a given LatLng or panorama ID. 
+    /// A StreetViewPanorama object provides a Street View "viewer" which can be stand-alone within a separate &lt;div&gt; or bound to a Map.
+    /// </summary>
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
     [ToolboxData("<{0}:GoogleStreetView runat=server></{0}:GoogleStreetView>")]

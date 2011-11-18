@@ -6,7 +6,7 @@ using System.Web.UI;
 using Artem.Google.UI;
 using System.Web.UI.WebControls;
 
-namespace Artem.GoogleMap.WebSite {
+namespace Artem.GoogleMap.WebSite.Markers {
 
     /// <summary>
     /// Summary description for DataBound

@@ -20,7 +20,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static MarkerOptions FromScriptData(object scriptObject) {
 
@@ -195,6 +195,9 @@ namespace Artem.Google.UI {
 
         #region Ctor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MarkerOptions"/> class.
+        /// </summary>
         public MarkerOptions() {
             this.Clickable = true;
             this.Optimized = true;

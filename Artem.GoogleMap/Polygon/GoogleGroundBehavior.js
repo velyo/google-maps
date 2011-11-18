@@ -11,7 +11,7 @@ Artem.Google.GroundBehavior = function (element) {
 Artem.Google.GroundBehavior.prototype = {
     initialize: function () {
         Artem.Google.GroundBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();

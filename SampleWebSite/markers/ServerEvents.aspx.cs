@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using Artem.Google.UI;
 
-namespace Artem.GoogleMap.WebSite.Polygons {
+namespace Artem.GoogleMap.WebSite.Markers {
 
     /// <summary>
     /// Summary description for ServerEvents

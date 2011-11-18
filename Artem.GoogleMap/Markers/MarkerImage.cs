@@ -42,7 +42,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static MarkerImage FromScriptData(object scriptObject) {
 
@@ -127,6 +127,9 @@ namespace Artem.Google.UI {
 
         #region Ctor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MarkerImage"/> class.
+        /// </summary>
         public MarkerImage() {
             //this.Anchor = Point.DefaultMarkerIconAnchor;
             //this.Size = Size.DefaultMarkerIconSize;

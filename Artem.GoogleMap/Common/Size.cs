@@ -13,8 +13,9 @@ namespace Artem.Google.UI {
 
         #region Static Fields
 
-        public static readonly Size DefaultMarkerIconSize = new Size(16, 16);
-        public static readonly Size DefaultMarkerShadowSize = new Size(16, 16);
+
+        static readonly Size DefaultMarkerIconSize = new Size(16, 16);
+        static readonly Size DefaultMarkerShadowSize = new Size(16, 16);
 
         #endregion
 
@@ -53,7 +54,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static Size FromScriptData(object scriptObject) {
 
@@ -92,6 +93,10 @@ namespace Artem.Google.UI {
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the height.
+        /// </summary>
+        /// <value>The height.</value>
         public int Height { get; set; }
 
         /// <summary>

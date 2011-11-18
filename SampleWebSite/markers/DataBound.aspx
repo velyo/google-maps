@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/markers/Marker.master" AutoEventWireup="false"
-    CodeFile="~/markers/DataBound.aspx.cs" Inherits="Artem.GoogleMap.WebSite.DataBound"
+    CodeFile="~/markers/DataBound.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Markers.DataBound"
     MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">

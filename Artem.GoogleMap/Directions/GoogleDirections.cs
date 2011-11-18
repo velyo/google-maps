@@ -248,7 +248,7 @@ namespace Artem.Google.UI {
         /// Gets or sets the travel mode.
         /// The mode of travel, such as driving (default) or walking. 
         /// Note that if you specify walking directions, 
-        /// you will need to specify a <div> panel to hold a warning notice to users.
+        /// you will need to specify a &lt;div&gt; panel to hold a warning notice to users.
         /// </summary>
         /// <value>The travel mode.</value>
         [Browsable(true)]

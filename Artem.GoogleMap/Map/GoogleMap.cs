@@ -31,7 +31,7 @@ namespace Artem.Google.UI {
     [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
     [Designer(typeof(GoogleMapDesigner))]
     [ToolboxData("<{0}:GoogleMap runat=\"server\"></{0}:GoogleMap>")]
-    public partial class GoogleMap : ScriptControl, INamingContainer, IPostBackEventHandler {//DataBoundControl, 
+    public partial class GoogleMap : ScriptControl, IPostBackEventHandler {//DataBoundControl, 
 
         #region Static Fields
 
@@ -521,6 +521,63 @@ namespace Artem.Google.UI {
 
         #endregion
 
+        #region Collections
+
+        /// <summary>
+        /// Gets the directions.
+        /// </summary>
+        /// <value>The directions.</value>
+        [Category("Google")]
+        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        public List<GoogleDirections> Directions {
+            get {
+                return _directions ??
+                    (_directions = new List<GoogleDirections>());
+            }
+        }
+        List<GoogleDirections> _directions;
+
+        /// <summary>
+        /// Gets the markers.
+        /// </summary>
+        /// <value>The markers.</value>
+        [Category("Google")]
+        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        public List<Marker> Markers {
+            get {
+                return _markers ?? (_markers = new List<Marker>());
+            }
+        }
+        List<Marker> _markers;
+
+        /// <summary>
+        /// Gets the polygons.
+        /// </summary>
+        /// <value>The polygons.</value>
+        [Category("Google")]
+        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        public List<Overlay> Overlays {
+            get {
+                return _overlays ?? (_overlays = new List<Overlay>());
+            }
+        }
+        List<Overlay> _overlays;
+
+        /// <summary>
+        /// Gets the polylines.
+        /// </summary>
+        /// <value>The polylines.</value>
+        [Category("Google")]
+        [Editor(typeof(CollectionEditor), typeof(UITypeEditor))]
+        public List<GooglePolyline> Polylines {
+            get {
+                return _polylines ?? (_polylines = new List<GooglePolyline>());
+            }
+        }
+        List<GooglePolyline> _polylines;
+
+        #endregion
+
         #region Events
 
         /// <summary>
@@ -818,6 +875,45 @@ namespace Artem.Google.UI {
         #region Methods
 
         /// <summary>
+        /// Called by the ASP.NET page framework to notify server controls that use composition-based implementation to create any child controls they contain in preparation for posting back or rendering.
+        /// </summary>
+        protected override void CreateChildControls() {
+
+            this.Controls.Clear();
+
+            if (_directions != null) {
+                for (int i = 0; i < _directions.Count; i++) {
+                    _directions[i].ID = this.ID + "_GoogleDirections" + (i + 1).ToString();
+                    _directions[i].TargetControlID = this.ID;
+                    this.Controls.Add(_directions[i]);
+                }
+            }
+            if (_markers != null) {
+                this.Controls.Add(new GoogleMarkers { 
+                    ID = this.ID + "_GoogleMarkers",
+                    TargetControlID = this.ID,
+                    Markers = _markers
+                });
+            }
+            if (_overlays != null) {
+                for (int i = 0; i < _overlays.Count; i++) {
+                    _overlays[i].ID = this.ID + "_GooglePolygon" + (i + 1).ToString();
+                    _overlays[i].TargetControlID = this.ID;
+                    this.Controls.Add(_overlays[i]);
+                }
+            }
+            if (_polylines != null) {
+                for (int i = 0; i < _polylines.Count; i++) {
+                    _polylines[i].ID = this.ID + "_GooglePolyline" + (i + 1).ToString();
+                    _polylines[i].TargetControlID = this.ID;
+                    this.Controls.Add(_polylines[i]);
+                }
+            }
+
+            this.ClearChildViewState();
+        }
+
+        /// <summary>
         /// Gets the script descriptors.
         /// </summary>
         /// <returns>
@@ -1099,7 +1195,9 @@ namespace Artem.Google.UI {
             }
         }
 
-        #region Events
+        #endregion
+
+        #region Event Methods
 
         /// <summary>
         /// Raises the <see cref="E:BoundsChanged"/> event.
@@ -1324,41 +1422,6 @@ namespace Artem.Google.UI {
                 }
             }
         }
-        #endregion
-        #endregion
-
-        #region DataBinding Methods
-
-        ///// <summary>
-        ///// Called by the ASP.NET page framework to notify server controls that use composition-based implementation to create any child controls they contain in preparation for posting back or rendering.
-        ///// </summary>
-        //protected override void CreateChildControls() {
-        //    base.CreateChildControls();
-
-        //    _templateContainer = new HtmlGenericControl("div");
-        //    _templateContainer.ID = "Templates";
-        //    _templateContainer.Style[HtmlTextWriterStyle.Display] = "none";
-
-        //    if (_markers.IsNotNullOrEmpty()) {
-        //        GoogleMarker marker;
-        //        for (int i = 0; i < _markers.Count; i++) {
-        //            marker = _markers[i];
-        //            if (marker.InfoContent.Controls.Count > 0) {
-        //                marker.InfoContent.ID = string.Format("{0}_MarkerInfo{1}", this.ClientID, i.ToString());
-        //                _templateContainer.Controls.Add(marker.InfoContent);
-        //            }
-        //            else if (marker.InfoWindowTemplate != null) {
-        //                var container = new GoogleMarker.TemplateContainer();
-        //                container.ID = string.Format("{0}_MarkerInfo{1}", this.ClientID, i.ToString());
-        //                marker.InfoWindowTemplate.InstantiateIn(container);
-        //                _templateContainer.Controls.Add(container);
-        //            }
-        //        }
-        //    }
-
-        //    this.Controls.Add(_templateContainer);
-        //    this.ClearChildViewState();
-        //}
         #endregion
     }
 }

@@ -17,7 +17,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static LatLng FromScriptData(object scriptObject) {
 
@@ -63,7 +63,7 @@ namespace Artem.Google.UI {
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.LatLng"/>.
+        /// Performs an implicit conversion from <see cref="System.String"/> to <see cref="Artem.Google.UI.LatLng"/>.
         /// </summary>
         /// <param name="point">The point.</param>
         /// <returns>The result of the conversion.</returns>

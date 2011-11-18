@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// Class for containing bounds event data.
+    /// </summary>
     public class BoundsEventArgs : EventArgs, IScriptDataConverter {
 
         #region Static Methods
@@ -21,6 +24,10 @@ namespace Artem.Google.UI {
 
         #region Properties
 
+        /// <summary>
+        /// The bounds data.
+        /// </summary>
+        /// <value>The bounds.</value>
         public Bounds Bounds { get; protected set; }
 
         #endregion

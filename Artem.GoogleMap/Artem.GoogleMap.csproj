@@ -48,6 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\Debug\Artem.Google.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -99,8 +100,9 @@
     <Compile Include="Directions\DirectionsChangedEventArgs.cs" />
     <Compile Include="Directions\DirectionsStep.cs" />
     <Compile Include="IScriptDataConverter.cs" />
-    <Compile Include="JsonConvert.cs" />
+    <None Include="JsonConvert.cs" />
     <Compile Include="Markers\GoogleMarkers.cs" />
+    <Compile Include="Overlays\Overlay.cs" />
     <Compile Include="Polygon\GoogleCircle.cs" />
     <Compile Include="Polygon\GoogleGround.cs" />
     <Compile Include="Polygon\GoogleRectangle.cs" />
@@ -108,7 +110,6 @@
     <Compile Include="StreetView\GoogleStreetViewPanorama.cs" />
     <Compile Include="Common\ControlPosition.cs" />
     <Compile Include="Extensions\XtsCollection.cs" />
-    <Compile Include="IClientAction.cs" />
     <Compile Include="JsUtil.cs" />
     <Compile Include="Markers\InfoWindowOptions.cs" />
     <Compile Include="Common\LatLng.cs" />
@@ -136,9 +137,6 @@
     <Compile Include="Directions\GoogleDirections.cs" />
     <Compile Include="Map\GoogleMap.cs" />
     <Compile Include="Map\GoogleMapDesigner.cs" />
-    <Compile Include="Markers\GoogleMarker.cs" />
-    <Compile Include="Markers\GoogleMarker.DefaultInfoContent.cs" />
-    <Compile Include="Markers\GoogleMarker.TemplateContainer.cs" />
     <Compile Include="Common\Point.cs" />
     <Compile Include="Polygon\GooglePolygon.cs" />
     <Compile Include="Polyline\GooglePolyline.cs" />
@@ -146,11 +144,9 @@
     <Compile Include="Common\MapType.cs" />
     <Compile Include="Common\MapTypeControlStyle.cs" />
     <Compile Include="Markers\MarkerImage.cs" />
-    <Compile Include="UI\MarkerManagerOptions.cs" />
     <Compile Include="Markers\MarkerShape.cs" />
-    <Compile Include="UI\NavigationControlOptions.cs" />
-    <Compile Include="UI\NavigationControlStyle.cs" />
-    <Compile Include="UI\OpenInfoBehaviour.cs" />
+    <Compile Include="StreetView\NavigationControlOptions.cs" />
+    <Compile Include="StreetView\NavigationControlStyle.cs" />
     <Compile Include="Common\ScaleControlStyle.cs" />
     <Compile Include="Common\StaticImageFormats.cs" />
     <Compile Include="StreetView\StreetViewAddressControlOptions.cs" />
@@ -173,22 +169,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Scripts\MicrosoftAjax.debug.js" />
-    <EmbeddedResource Include="Scripts\MicrosoftAjax.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Map\GoogleCommons.js" />
-    <EmbeddedResource Include="Scripts\GoogleMarker.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Map\GoogleCommons.min.js">
-      <DependentUpon>GoogleCommons.js</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Scripts\GoogleMarker.min.js">
-      <DependentUpon>GoogleMarker.js</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Directions\GoogleDirectionsBehavior.js" />
@@ -242,6 +222,7 @@
       <DependentUpon>GoogleGroundBehavior.js</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -252,7 +233,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
+      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

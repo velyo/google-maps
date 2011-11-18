@@ -1,5 +1,4 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
-///<reference path="..\Scripts\GoogleCommons.js"/>
 ///<reference path="..\Scripts\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
@@ -12,7 +11,7 @@ Artem.Google.CircleBehavior = function (element) {
 Artem.Google.CircleBehavior.prototype = {
     initialize: function () {
         Artem.Google.CircleBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
@@ -65,7 +64,7 @@ Artem.Google.CircleBehavior.prototype = {
 
     // methods
 
-    proto._attach = function(){
+    proto._attach = function () {
         var control = $find(this.get_element().id);
         if (control)
             control.add_mapLoaded(Function.createDelegate(this, this.create));
@@ -150,7 +149,7 @@ Artem.Google.CircleBehavior.prototype = {
 (function (proto) {
 
     // fields
-     var handlers = {
+    var handlers = {
         "click": raiseClick,
         "dblclick": raiseDoubleClick,
         "mousedown": raiseMouseDown,

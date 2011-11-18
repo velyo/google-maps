@@ -11,7 +11,7 @@ Artem.Google.RectangleBehavior = function (element) {
 Artem.Google.RectangleBehavior.prototype = {
     initialize: function () {
         Artem.Google.RectangleBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
@@ -29,8 +29,8 @@ Artem.Google.RectangleBehavior.prototype = {
 
     // properties
 
-    proto.get_bounds = function() { return this.bounds; };
-    proto.set_bounds = function(value) { this.bounds = value; };
+    proto.get_bounds = function () { return this.bounds; };
+    proto.set_bounds = function (value) { this.bounds = value; };
 
     proto.get_clickable = function () { return this.clickable; };
     proto.set_clickable = function (value) { this.clickable = value; };
@@ -68,12 +68,12 @@ Artem.Google.RectangleBehavior.prototype = {
     };
 
     proto._detach = function () {
-        if(this.rect)
+        if (this.rect)
             google.maps.event.clearInstanceListeners(this.rect);
     };
 
     proto.create = function () {
-        
+
         var control = $find(this.get_element().id);
         if (control)
             this.map = control.map;
@@ -148,7 +148,7 @@ Artem.Google.RectangleBehavior.prototype = {
         "mouseup": null,
         "rightclick": null
     };
-    
+
     proto.listeners = {
         "click": null,
         "dblclick": null,

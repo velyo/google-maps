@@ -15,7 +15,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static Distance FromScriptData(object scriptObject) {
 

@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="true"
-    CodeFile="InTabPanel.aspx.cs" Inherits="map_InTabPanel" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
+    CodeFile="InTabPanel.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Maps.InTabPanel" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Inside TabPanel</title>

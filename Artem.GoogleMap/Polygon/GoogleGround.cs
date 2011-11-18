@@ -17,7 +17,7 @@ namespace Artem.Google.UI {
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
     [ToolboxData("<{0}:GoogleGround runat=server></{0}:GoogleGround>")]
-    public class GoogleGround : ExtenderControl, IPostBackEventHandler {
+    public class GoogleGround : Overlay {// ExtenderControl, IPostBackEventHandler {
 
         #region Properties
 
@@ -35,14 +35,14 @@ namespace Artem.Google.UI {
         }
         Bounds _bounds;
 
-        /// <summary>
-        /// If true, the ground overlay can receive click events. Defaults to true.
-        /// </summary>
-        /// <value><c>true</c> if clickable; otherwise, <c>false</c>.</value>
-        [Category("Behavior")]
-        [DefaultValue(true)]
-        [Description("If true, the ground overlay can receive click events. Defaults to true.")]
-        public bool Clickable { get; set; }
+        ///// <summary>
+        ///// If true, the ground overlay can receive click events. Defaults to true.
+        ///// </summary>
+        ///// <value><c>true</c> if clickable; otherwise, <c>false</c>.</value>
+        //[Category("Behavior")]
+        //[DefaultValue(true)]
+        //[Description("If true, the ground overlay can receive click events. Defaults to true.")]
+        //public bool Clickable { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of the image to show on this overlay.
@@ -128,7 +128,7 @@ namespace Artem.Google.UI {
         /// When implemented by a class, enables a server control to process an event raised when a form is posted to the server.
         /// </summary>
         /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
-        public void RaisePostBackEvent(string eventArgument) {
+        public override void RaisePostBackEvent(string eventArgument) {
 
             var ser = new JavaScriptSerializer();
             dynamic args = ser.DeserializeObject(eventArgument);

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
-    CodeFile="ServerEvents.aspx.cs" Inherits="map_ServerEvents" %>
+    CodeFile="ServerEvents.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Maps.ServerEvents" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Server Events</title>

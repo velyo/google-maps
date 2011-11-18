@@ -1,10 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/directions/Directions.master" CodeFile="Default.aspx.cs"
-    Inherits="directions_Default" %>
+    Inherits="Artem.GoogleMap.WebSite.Directions.Default" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Directions</title>
-    <meta name="description" content="GoogleMap Control Directions." />
-    <meta name="keywords" content="asp.net artem googlemap control directions" />
+    <meta name="description" content="GoogleMap control directions sample." />
+    <meta name="keywords" content="googlemap control directions sample" />
 </asp:Content>
 <asp:Content ID="mainContent" ContentPlaceHolderID="main" runat="Server">
     <h1>

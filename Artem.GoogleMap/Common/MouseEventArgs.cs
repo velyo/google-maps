@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// Class for containing mouse event data.
+    /// </summary>
     public class MouseEventArgs : EventArgs, IScriptDataConverter {
 
         #region Static Methods
@@ -12,7 +15,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static MouseEventArgs FromScriptData(object scriptObject) {
             return new MouseEventArgs(LatLng.FromScriptData(scriptObject));
@@ -21,6 +24,10 @@ namespace Artem.Google.UI {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the mouse position.
+        /// </summary>
+        /// <value>The position.</value>
         public LatLng Position { get; protected set; }
 
         #endregion

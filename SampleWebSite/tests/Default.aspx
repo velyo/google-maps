@@ -124,11 +124,11 @@
     }
 
     protected void HandleChanged(object sender, DirectionsChangedEventArgs e) {
-        int i = 0;
+        // TODO
     }
 
     protected void HandleClick(object sender, MouseEventArgs e) {
-        int i = 0;
+        // TODO
     }
 
     protected void HandleAny(object sender, EventArgs e) {

@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
-    CodeFile="DataBound.aspx.cs" Inherits="map_DataBound" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Data Bound</title>
@@ -21,9 +20,9 @@
         DefaultMode="ReadOnly">
         <ItemTemplate>
             <div class="map-wrap">
-            <artem:GoogleMap ID="GoogleMap1" runat="server" CssClass="map" Latitude='<%# DataBinder.Eval(Container.DataItem, "Latitude") %>'
-                Longitude='<%# DataBinder.Eval(Container.DataItem, "Longitude") %>' Zoom='<%# DataBinder.Eval(Container.DataItem, "Zoom") %>'>
-            </artem:GoogleMap>
+                <artem:GoogleMap ID="GoogleMap1" runat="server" CssClass="map" Latitude='<%# DataBinder.Eval(Container.DataItem, "Latitude") %>'
+                    Longitude='<%# DataBinder.Eval(Container.DataItem, "Longitude") %>' Zoom='<%# DataBinder.Eval(Container.DataItem, "Zoom") %>'>
+                </artem:GoogleMap>
             </div>
         </ItemTemplate>
     </asp:FormView>

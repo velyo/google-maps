@@ -74,9 +74,9 @@ namespace Artem.Google.UI {
         }
 
         /// <summary>
-        /// 
+        /// Initializes the control designer and loads the specified component.
         /// </summary>
-        /// <param name="Component"></param>
+        /// <param name="component">The control being designed.</param>
         public override void Initialize(IComponent component) {
 
             _map = component as GoogleMap;

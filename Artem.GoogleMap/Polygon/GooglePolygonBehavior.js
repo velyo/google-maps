@@ -11,7 +11,7 @@ Artem.Google.PolygonBehavior = function (element) {
 Artem.Google.PolygonBehavior.prototype = {
     initialize: function () {
         Artem.Google.PolygonBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
@@ -69,7 +69,7 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
     };
 
     proto._detach = function () {
-        if(this.polygon)
+        if (this.polygon)
             google.maps.event.clearInstanceListeners(this.polygon);
     };
 

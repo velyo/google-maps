@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// Class for containing map's event data.
+    /// </summary>
     public class MapEventArgs : EventArgs, IScriptDataConverter {
 
         #region Static Methods
@@ -40,9 +43,28 @@ namespace Artem.Google.UI {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the map bounds.
+        /// </summary>
+        /// <value>The bounds.</value>
         public Bounds Bounds { get; protected set; }
+
+        /// <summary>
+        /// Gets the map center.
+        /// </summary>
+        /// <value>The center.</value>
         public LatLng Center { get; protected set; }
+
+        /// <summary>
+        /// Gets the type of the map.
+        /// </summary>
+        /// <value>The type of the map.</value>
         public MapType MapType { get; protected set; }
+
+        /// <summary>
+        /// Gets the map zoom.
+        /// </summary>
+        /// <value>The zoom.</value>
         public int Zoom { get; protected set; }
 
         #endregion

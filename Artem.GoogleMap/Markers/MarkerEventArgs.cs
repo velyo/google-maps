@@ -6,7 +6,7 @@ using System.Text;
 namespace Artem.Google.UI {
 
     /// <summary>
-    /// 
+    /// Class for containing marker event data.
     /// </summary>
     public class MarkerEventArgs : EventArgs, IScriptDataConverter {
 
@@ -33,7 +33,16 @@ namespace Artem.Google.UI {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the marker index.
+        /// </summary>
+        /// <value>The index.</value>
         public int? Index { get; private set; }
+
+        /// <summary>
+        /// Gets the marker position.
+        /// </summary>
+        /// <value>The position.</value>
         public LatLng Position { get; private set; }
 
         #endregion

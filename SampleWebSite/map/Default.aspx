@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
-    MaintainScrollPositionOnPostback="true" CodeFile="Default.aspx.cs" Inherits="map_GoogleMap" %>
+    MaintainScrollPositionOnPostback="true" CodeFile="Default.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Maps.Default" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Map</title>

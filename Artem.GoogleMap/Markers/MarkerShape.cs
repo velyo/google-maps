@@ -10,13 +10,15 @@ namespace Artem.Google.UI {
     /// </summary>
     public enum MarkerShapeType {
         /// <summary>
+        /// Circle shape type.
+        /// </summary>
         Circle = 1,
         /// <summary>
-        /// 
+        /// Poly shape type.
         /// </summary>
         Poly,
         /// <summary>
-        /// 
+        /// Rectangle shape type.
         /// </summary>
         Rect
     }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polyline/Polyline.master" AutoEventWireup="false"
-    CodeFile="~/polyline/ServerEvents.aspx.cs" Inherits="polyline_ServerEvents" MaintainScrollPositionOnPostback="true" %>
+    CodeFile="~/polyline/ServerEvents.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Polylines.ServerEvents" MaintainScrollPositionOnPostback="true" %>
 
 <asp:Content ID="headContent" ContentPlaceHolderID="head" runat="server">
     <title>GoogleMap - Polyline - Server Events</title>

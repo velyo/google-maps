@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/polygon/Polygon.master" AutoEventWireup="false"
-    CodeFile="~/polygon/ServerEvents.aspx.cs" Inherits=" Artem.GoogleMap.WebSite.Polygons.ServerEvents" %>
+    CodeFile="~/polygon/ServerEvents.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Polygons.ServerEvents" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <title>GoogleMap - Polygon - Server Events</title>

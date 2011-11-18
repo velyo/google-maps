@@ -14,10 +14,10 @@ namespace Artem.Google.UI {
         #region Static Methods
 
         /// <summary>
-        /// Retrieves an instance from script data.
+        /// Retrieves an instance of Bounds from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
-        /// <returns></returns>
+        /// <param name="scriptObject">The script object.</param>
+        /// <returns>The new Bounds filled with the script data</returns>
         public static Bounds FromScriptData(object scriptObject) {
 
             var data = scriptObject as IDictionary<string, object>;

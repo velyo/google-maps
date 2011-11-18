@@ -10,18 +10,23 @@ namespace Artem.Google.UI {
     /// <summary>
     /// Displays the panorama for a given LatLng or panorama ID. 
     /// A StreetViewPanorama object provides a Street View "viewer" 
-    /// which can be stand-alone within a separate <div> or bound to a Map. 
+    /// which can be stand-alone within a separate &lt;div&gt; or bound to a Map. 
     /// </summary>
     public class StreetViewPanorama : IScriptDataConverter {
 
         #region Static Methods
 
+        /// <summary>
+        /// Retrieves an instance of GoogleStreetViewPanorama from script data.
+        /// </summary>
+        /// <param name="scriptObject">The script object.</param>
+        /// <returns></returns>
         public static GoogleStreetViewPanorama FromScriptData(object scriptObject) {
 
             GoogleStreetViewPanorama pano = null;
             var data = scriptObject as IDictionary<string, object>;
             if (data != null) {
-                object value;
+                //object value;
                 pano = new GoogleStreetViewPanorama();
                 // TODO
             }
@@ -109,7 +114,7 @@ namespace Artem.Google.UI {
         #region Ctor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="StreetViewPanoramaOptions"/> class.
+        /// Initializes a new instance of the <see cref="StreetViewPanorama"/> class.
         /// </summary>
         public StreetViewPanorama() {
             this.EnableAddressControl = true;

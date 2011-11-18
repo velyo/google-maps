@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// Class for containing directions event data.
+    /// </summary>
     public class DirectionsChangedEventArgs : EventArgs, IScriptDataConverter {
 
         #region Static Fields
 
-        public static readonly DirectionsChangedEventArgs Empty = new DirectionsChangedEventArgs();
+        //public static readonly DirectionsChangedEventArgs Empty = new DirectionsChangedEventArgs();
 
         #endregion
 

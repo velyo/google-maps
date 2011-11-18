@@ -7,6 +7,9 @@ using Artem.Google.Serialization;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// The options for a google polyline.
+    /// </summary>
     public class PolylineOptions : IScriptDataConverter {
 
         #region Static Methods
@@ -14,7 +17,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static PolylineOptions FromScriptData(object scriptObject) {
 
@@ -89,6 +92,9 @@ namespace Artem.Google.UI {
 
         #region Ctor
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PolylineOptions"/> class.
+        /// </summary>
         public PolylineOptions() {
             this.Clickable = true;
             this.StrokeOpacity = 1;

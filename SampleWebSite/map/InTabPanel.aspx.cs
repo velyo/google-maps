@@ -5,5 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class map_InTabPanel : Page {
+namespace Artem.GoogleMap.WebSite.Maps {
+
+    public partial class InTabPanel : Page {
+    }
 }

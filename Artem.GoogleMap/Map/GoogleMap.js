@@ -1026,6 +1026,42 @@ Artem.Google.Log = (function () {
     };
 })();
 
+// worker - queue taks in sequence one by one to give ability other js operations to queued meanwhile
+Artem.Worker = (function () {
+    var tasks = [];
+    var timer = null;
+
+    function clear(delegate) {
+        tasks = [];
+    }
+
+    function queue(task) {
+        tasks.push(task);
+        if (!timer) setTimeout(work, 1);
+    }
+
+    function stop() {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+        }
+        clear();
+    }
+
+    function work() {
+        var task = tasks.pop();
+        if (task) {
+            task.call();
+            setTimeout(work, 1);
+        }
+        else {
+            timer = null;
+        }
+    }
+
+    return { clear: clear, queue: queue, stop: stop };
+})();
+
 // utility functions
 // object merging
 Artem.Google.merge = function (obj1, obj2) {

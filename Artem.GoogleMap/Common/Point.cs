@@ -15,7 +15,7 @@ namespace Artem.Google.UI {
 
         #region Static Fields
 
-        public static readonly Point DefaultMarkerIconAnchor = new Point(8, 16);
+        static readonly Point DefaultMarkerIconAnchor = new Point(8, 16);
 
         #endregion
 
@@ -54,7 +54,7 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Retrieves an instance from script data.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="scriptObject">The script object.</param>
         /// <returns></returns>
         public static Point FromScriptData(object scriptObject) {
 
@@ -94,7 +94,16 @@ namespace Artem.Google.UI {
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the X.
+        /// </summary>
+        /// <value>The X.</value>
         public int X { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Y.
+        /// </summary>
+        /// <value>The Y.</value>
         public int Y { get; set; }
 
         #endregion

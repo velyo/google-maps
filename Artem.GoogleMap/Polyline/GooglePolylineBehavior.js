@@ -11,7 +11,7 @@ Artem.Google.PolylineBehavior = function (element) {
 Artem.Google.PolylineBehavior.prototype = {
     initialize: function () {
         Artem.Google.PolylineBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
@@ -62,7 +62,7 @@ Artem.Google.PolylineBehavior.prototype = {
     };
 
     proto._detach = function () {
-        if(this.polyline)
+        if (this.polyline)
             google.maps.event.clearInstanceListeners(this.polyline);
     };
 

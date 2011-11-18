@@ -18,7 +18,7 @@ namespace Artem.Google.UI {
     [PersistChildren(false)]
     [TargetControlType(typeof(GoogleMap))]
     [ToolboxData("<{0}:GoogleCircle runat=server></{0}:GoogleCircle>")]
-    public class GoogleCircle : ExtenderControl, IPostBackEventHandler {
+    public class GoogleCircle : Overlay{// ExtenderControl, IPostBackEventHandler {
 
         #region Properties
 
@@ -37,17 +37,17 @@ namespace Artem.Google.UI {
         }
         LatLng _center;
 
-        /// <summary>
-        /// Indicates whether this Polygon handles click events. Defaults to true.
-        /// </summary>
-        /// <value>
-        /// 	<c>true</c> if this instance is clickable; otherwise, <c>false</c>.
-        /// </value>
-        [Browsable(true)]
-        [Category("Behavior")]
-        [DefaultValue(true)]
-        [Description("Indicates whether this Polygon handles click events. Defaults to true.")]
-        public bool Clickable { get; set; }
+        ///// <summary>
+        ///// Indicates whether this Polygon handles click events. Defaults to true.
+        ///// </summary>
+        ///// <value>
+        ///// 	<c>true</c> if this instance is clickable; otherwise, <c>false</c>.
+        ///// </value>
+        //[Browsable(true)]
+        //[Category("Behavior")]
+        //[DefaultValue(true)]
+        //[Description("Indicates whether this Polygon handles click events. Defaults to true.")]
+        //public bool Clickable { get; set; }
 
         /// <summary>
         /// The fill color. All CSS3 colors are supported except for extended named colors.
@@ -81,9 +81,13 @@ namespace Artem.Google.UI {
         [Description("Render each edge as a geodesic (a segment of a great circle''). A geodesic is the shortest path between two points along the surface of the Earth.")]
         public bool Geodesic { get; set; }
 
+        /// <summary>
+        /// The radius in meters on the Earth's surface.
+        /// </summary>
+        /// <value>The radius.</value>
         [Browsable(true)]
         [Category("Appearance")]
-        [Description("The radius in meters on the Earth's surface")]
+        [Description("The radius in meters on the Earth's surface.")]
         public int Radius { get; set; }
 
         /// <summary>
@@ -421,7 +425,7 @@ namespace Artem.Google.UI {
         /// When implemented by a class, enables a server control to process an event raised when a form is posted to the server.
         /// </summary>
         /// <param name="eventArgument">A <see cref="T:System.String"/> that represents an optional event argument to be passed to the event handler.</param>
-        public void RaisePostBackEvent(string eventArgument) {
+        public override void RaisePostBackEvent(string eventArgument) {
 
             var ser = new JavaScriptSerializer();
             dynamic args = ser.DeserializeObject(eventArgument);

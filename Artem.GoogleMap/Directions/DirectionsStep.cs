@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Artem.Google.UI {
 
+    /// <summary>
+    /// Represents a step in directions result.
+    /// </summary>
     public class DirectionsStep : IScriptDataConverter {
 
         #region Static Methods

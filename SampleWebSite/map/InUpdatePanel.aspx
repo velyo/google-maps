@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/map/Map.master" AutoEventWireup="false"
-    CodeFile="InUpdatePanel.aspx.cs" Inherits="map_InUpdatePanel" %>
+    CodeFile="InUpdatePanel.aspx.cs" Inherits="Artem.GoogleMap.WebSite.Maps.InUpdatePanel" %>
 
 <asp:Content ContentPlaceHolderID="head" ID="headContent" runat="server">
     <title>GoogleMap - Inside UpdatePanel</title>

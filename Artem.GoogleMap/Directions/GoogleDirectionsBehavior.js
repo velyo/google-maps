@@ -1,5 +1,4 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
-///<reference path="..\Scripts\GoogleCommons.js"/>
 ///<reference path="..\Scripts\GoogleMap.js"/>
 
 Type.registerNamespace("Artem.Google");
@@ -11,7 +10,7 @@ Artem.Google.DirectionsBehavior = function (element) {
 Artem.Google.DirectionsBehavior.prototype = {
     initialize: function () {
         Artem.Google.DirectionsBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();

@@ -11,7 +11,7 @@ Artem.Google.MarkersBehavior = function (element) {
 Artem.Google.MarkersBehavior.prototype = {
     initialize: function () {
         Artem.Google.MarkersBehavior.callBaseMethod(this, 'initialize');
-        this._attach();
+        Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
