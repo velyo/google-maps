@@ -47,6 +47,32 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding.Tests
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{B2D2B92B-47F5-4F83-B667-99F65269DAF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{73F5863D-99FC-4D08-AF5D-615F3A1B2D59}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoogleMap", "GoogleMap", "{3B7E2028-1D93-4A25-956A-EE454284243B}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap\build.cmd = NuGet\GoogleMap\build.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C2530BEC-2043-427F-B3B1-CEEA1BC408CF}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap\src\GoogleMap.nuspec = NuGet\GoogleMap\src\GoogleMap.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{7507E77A-348E-46FF-95B8-38AD7A2B507C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{A430F22C-4E60-419F-82DB-AF7D7767D56C}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap\src\content\Web.config.transform = NuGet\GoogleMap\src\content\Web.config.transform
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "out", "out", "{A4800611-7B4B-4280-9CDF-029DDFD7453D}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap\out\GoogleMapControl.6.0.nupkg = NuGet\GoogleMap\out\GoogleMapControl.6.0.nupkg
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{50C409F5-4EEC-4589-8012-C86F49B4763E}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ArtemGoogle.vsmdi
@@ -76,6 +102,10 @@ Global
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2D2B92B-47F5-4F83-B667-99F65269DAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2D2B92B-47F5-4F83-B667-99F65269DAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,5 +113,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1F0D1656-CF0D-4704-91D4-90A39E91B908} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
+		{3B7E2028-1D93-4A25-956A-EE454284243B} = {73F5863D-99FC-4D08-AF5D-615F3A1B2D59}
+		{C2530BEC-2043-427F-B3B1-CEEA1BC408CF} = {3B7E2028-1D93-4A25-956A-EE454284243B}
+		{A4800611-7B4B-4280-9CDF-029DDFD7453D} = {3B7E2028-1D93-4A25-956A-EE454284243B}
+		{7507E77A-348E-46FF-95B8-38AD7A2B507C} = {C2530BEC-2043-427F-B3B1-CEEA1BC408CF}
+		{A430F22C-4E60-419F-82DB-AF7D7767D56C} = {C2530BEC-2043-427F-B3B1-CEEA1BC408CF}
 	EndGlobalSection
 EndGlobal
