@@ -34,7 +34,7 @@ namespace Artem.Google.Net {
         public class JsonAddress {
             public string long_name { get; set; }
             public string short_name { get; set; }
-            public GeoAddressType[] types { get; set; }
+            public string[] types { get; set; }
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Artem.Google.Net {
             public string formatted_address { get; set; }
             public JsonGeometry geometry { get; set; }
             public string partial_match { get; set; }
-            public GeoAddressType[] types { get; set; }
+            public string[] types { get; set; }
         }
         #endregion
     }

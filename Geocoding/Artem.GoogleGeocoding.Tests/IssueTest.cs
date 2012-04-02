@@ -7,10 +7,13 @@ using Artem.Google.Net;
 
 namespace Artem.GoogleGeocoding.Tests {
     
+    /// <summary>
+    /// Unit test for project issues. Most recent first.
+    /// </summary>
     [TestClass]
     public class IssueTest {
 
-        #region Construct /////////////////////////////////////////////////////////////////////////
+        #region Ctor
 
         private TestContext testContextInstance;
 
@@ -58,7 +61,14 @@ namespace Artem.GoogleGeocoding.Tests {
         #endregion
         #endregion
 
-        #region Methods ///////////////////////////////////////////////////////////////////////////
+        #region Methods
+
+        [TestMethod]
+        public void Issue14376() {
+            var request = new GeoRequest("BH5 1DP");
+            var response = request.GetResponse();
+            Assert.AreEqual(GeoStatus.OK, response.Status);
+        }
 
         [TestMethod]
         public void Issue13038() {
@@ -75,6 +85,7 @@ namespace Artem.GoogleGeocoding.Tests {
             GeoResponse response = request.GetResponse();
             Assert.AreEqual(GeoStatus.OK, response.Status);
         }
+        
         #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace Artem.Google.Net {
     /// </summary>
     public class GeoResult {
 
-        #region Properties  ///////////////////////////////////////////////////////////////////////
+        #region Properties
 
         /// <summary>
         /// Gets or sets the address_components.
@@ -40,7 +40,7 @@ namespace Artem.Google.Net {
         /// Gets or sets the types.
         /// </summary>
         /// <value>The types.</value>
-        public GeoAddressType[] Types { get; set; }
+        public string[] Types { get; set; }
 
         #endregion
     }

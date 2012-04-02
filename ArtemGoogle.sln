@@ -1,38 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleMap", "Artem.GoogleMap\Artem.GoogleMap.csproj", "{0660EA3D-B58B-4858-9822-9A6459A4001C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleMap.Extensions", "Artem.GoogleMap.Extensions\Artem.GoogleMap.Extensions.csproj", "{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SampleWebSite", "SampleWebSite\", "{F64D22ED-71BF-42DA-810D-010462E4B23F}"
-	ProjectSection(WebsiteProperties) = preProject
-		SccProjectName = "SAK"
-		SccAuxPath = "SAK"
-		SccLocalPath = "SAK"
-		SccProvider = "SAK"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{0660EA3D-B58B-4858-9822-9A6459A4001C}|Artem.Google.dll;{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}|Artem.Google.Extensions.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/SampleWebSite"
-		Debug.AspNetCompiler.PhysicalPath = "SampleWebSite\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SampleWebSite\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/SampleWebSite"
-		Release.AspNetCompiler.PhysicalPath = "SampleWebSite\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SampleWebSite\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "82"
-		VWDDynamicPort = "false"
-		VWDVirtualPath = "/"
-		StartServerOnDebug = "false"
-	EndProjectSection
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 11
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Geocoding", "Geocoding", "{60800C2B-E0AE-421F-870B-F4BC715E2FED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97B43B42-C396-4767-92EA-94111BB30286}"
@@ -40,12 +8,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		GoogleMapKey.snk = GoogleMapKey.snk
 		LICENSE.txt = LICENSE.txt
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding", "Geocoding\Artem.GoogleGeocoding\Artem.GoogleGeocoding.csproj", "{1F0D1656-CF0D-4704-91D4-90A39E91B908}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding.Tests", "Geocoding\Artem.GoogleGeocoding.Tests\Artem.GoogleGeocoding.Tests.csproj", "{BE6699E0-260C-49E3-9959-6246D40DBFBE}"
-EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{B2D2B92B-47F5-4F83-B667-99F65269DAF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{73F5863D-99FC-4D08-AF5D-615F3A1B2D59}"
 EndProject
@@ -71,7 +33,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "out", "out", "{A4800611-7B4
 		NuGet\GoogleMap\out\GoogleMapControl.6.0.nupkg = NuGet\GoogleMap\out\GoogleMapControl.6.0.nupkg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{50C409F5-4EEC-4589-8012-C86F49B4763E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleMap", "Artem.GoogleMap\Artem.GoogleMap.csproj", "{0660EA3D-B58B-4858-9822-9A6459A4001C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleMap.Extensions", "Artem.GoogleMap.Extensions\Artem.GoogleMap.Extensions.csproj", "{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SampleWebSite", "SampleWebSite\", "{F64D22ED-71BF-42DA-810D-010462E4B23F}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.PhysicalPath = "SampleWebSite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SampleWebSite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.VirtualPath = "/SampleWebSite"
+		ProjectReferences = "{0660EA3D-B58B-4858-9822-9A6459A4001C}|Artem.Google.dll;{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}|Artem.Google.Extensions.dll;"
+		Release.AspNetCompiler.Debug = "False"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.PhysicalPath = "SampleWebSite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SampleWebSite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.VirtualPath = "/SampleWebSite"
+		SccAuxPath = "SAK"
+		SccLocalPath = "SAK"
+		SccProjectName = "SAK"
+		SccProvider = "SAK"
+		StartServerOnDebug = "false"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		VWDDynamicPort = "false"
+		VWDPort = "82"
+		VWDVirtualPath = "/"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding", "Geocoding\Artem.GoogleGeocoding\Artem.GoogleGeocoding.csproj", "{1F0D1656-CF0D-4704-91D4-90A39E91B908}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleGeocoding.Tests", "Geocoding\Artem.GoogleGeocoding.Tests\Artem.GoogleGeocoding.Tests.csproj", "{BE6699E0-260C-49E3-9959-6246D40DBFBE}"
+EndProject
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation\Documentation.shfbproj", "{B2D2B92B-47F5-4F83-B667-99F65269DAF2}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -86,6 +84,14 @@ Global
 		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D2B92B-47F5-4F83-B667-99F65269DAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D2B92B-47F5-4F83-B667-99F65269DAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBB064F3-8093-4DAC-AF5E-74AE7F2931B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,29 +100,17 @@ Global
 		{F64D22ED-71BF-42DA-810D-010462E4B23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F64D22ED-71BF-42DA-810D-010462E4B23F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{F64D22ED-71BF-42DA-810D-010462E4B23F}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F0D1656-CF0D-4704-91D4-90A39E91B908}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2D2B92B-47F5-4F83-B667-99F65269DAF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2D2B92B-47F5-4F83-B667-99F65269DAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50C409F5-4EEC-4589-8012-C86F49B4763E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1F0D1656-CF0D-4704-91D4-90A39E91B908} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
-		{BE6699E0-260C-49E3-9959-6246D40DBFBE} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
 		{3B7E2028-1D93-4A25-956A-EE454284243B} = {73F5863D-99FC-4D08-AF5D-615F3A1B2D59}
-		{C2530BEC-2043-427F-B3B1-CEEA1BC408CF} = {3B7E2028-1D93-4A25-956A-EE454284243B}
-		{A4800611-7B4B-4280-9CDF-029DDFD7453D} = {3B7E2028-1D93-4A25-956A-EE454284243B}
 		{7507E77A-348E-46FF-95B8-38AD7A2B507C} = {C2530BEC-2043-427F-B3B1-CEEA1BC408CF}
 		{A430F22C-4E60-419F-82DB-AF7D7767D56C} = {C2530BEC-2043-427F-B3B1-CEEA1BC408CF}
+		{A4800611-7B4B-4280-9CDF-029DDFD7453D} = {3B7E2028-1D93-4A25-956A-EE454284243B}
+		{BE6699E0-260C-49E3-9959-6246D40DBFBE} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
+		{C2530BEC-2043-427F-B3B1-CEEA1BC408CF} = {3B7E2028-1D93-4A25-956A-EE454284243B}
 	EndGlobalSection
 EndGlobal

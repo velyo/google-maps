@@ -96,6 +96,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Artem.GoogleGeocoding\Artem.GoogleGeocoding.csproj">
+      <Project>{1f0d1656-cf0d-4704-91d4-90a39e91b908}</Project>
+      <Name>Artem.GoogleGeocoding</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
