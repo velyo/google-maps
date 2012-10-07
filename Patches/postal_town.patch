@@ -1,0 +1,15 @@
+Index: Source/Artem.GoogleGeocoding/GeoAddressType.cs
+===================================================================
+--- Source/Artem.GoogleGeocoding/GeoAddressType.cs	(revision 84610)
++++ Source/Artem.GoogleGeocoding/GeoAddressType.cs	(working copy)
+@@ -69,6 +69,10 @@
+         /// indicates a postal code as used to address postal mail within the country. 
+         /// </summary>
+         postal_code,
++		/// <summary>
++		/// indicates a postal town as used to address postal mail within the country. 
++		/// </summary>
++		postal_town,
+         /// <summary>
+         /// indicates a prominent natural feature. 
+         /// </summary>

@@ -1,0 +1,6 @@
+6965 
+by adiazsanti  Oct 1 2010 at
+9:56 AM Being evaluated  Patch include:
+a) MarkerClusterer manager (http://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/1.0/docs/reference.html)
+b) RSSGeo & KML Support (http://code.google.com/apis/maps/documentation/javascript/v2/services.html#XML_Overlays)
+ 
