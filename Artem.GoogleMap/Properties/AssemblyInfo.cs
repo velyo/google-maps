@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.UI;
 using System.Security;
+using System.Security.Permissions;
 
 [assembly: AssemblyTitle("Artem.GoogleMap")]
 [assembly: AssemblyDescription("")]

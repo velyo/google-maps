@@ -46,6 +46,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{AEAAA9E2-9C5E-4D44-9B2A-E2B4C1597606}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{0660ea3d-b58b-4858-9822-9a6459a4001c}|Artem.Google.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/WebSite"
 		Debug.AspNetCompiler.PhysicalPath = "WebSite\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WebSite\"
@@ -61,6 +62,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{AEA
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "9730"
+		VWDDynamicPort = "false"
+		VWDVirtualPath = "/"
 	EndProjectSection
 EndProject
 Global

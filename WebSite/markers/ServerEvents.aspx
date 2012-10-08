@@ -24,7 +24,6 @@
     <div class="map-wrap">
         <artem:GoogleMap ID="GoogleMap1" runat="server" Latitude="42.1229" Longitude="24.7879"
             Zoom="4" EnableScrollWheelZoom="true" CssClass="map">
-            <
         </artem:GoogleMap>
         <artem:GoogleMarkers ID="GoogleMarkers1" TargetControlID="GoogleMap1" runat="server"
             OnClick="HandleClick" OnPositionChanged="HandlePositionChanged">

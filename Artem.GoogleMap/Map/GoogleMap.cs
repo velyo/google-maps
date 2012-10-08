@@ -27,11 +27,9 @@ namespace Artem.Google.UI {
     /// <summary>
     /// 
     /// </summary>
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [Designer(typeof(GoogleMapDesigner))]
+    [Designer("Artem.Google.UI.GoogleMapDesigner, Artem.Google, Version=6.0.0.0, Culture=neutral, PublicKeyToken=fc8d6190a3aeb01c")]
     [ToolboxData("<{0}:GoogleMap runat=\"server\"></{0}:GoogleMap>")]
-    public partial class GoogleMap : ScriptControl, IPostBackEventHandler {//DataBoundControl, 
+    public partial class GoogleMap : ScriptControl, IPostBackEventHandler {
 
         #region Static Fields
 

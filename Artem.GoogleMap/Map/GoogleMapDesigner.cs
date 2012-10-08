@@ -5,6 +5,7 @@ using System.Web.UI.Design;
 using System.ComponentModel;
 using System.IO;
 using System.Web.UI;
+using System.Security.Permissions;
 
 namespace Artem.Google.UI {
 
