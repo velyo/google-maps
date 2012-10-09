@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using Artem.Google.UI;
 
 namespace Artem.GoogleMap.WebSite.Directions {
 
@@ -23,7 +24,7 @@ namespace Artem.GoogleMap.WebSite.Directions {
             string destination = txtDestination.Text;
             string origin = txtOrigin.Text;
             if ((origin != null) && (destination != null)) {
-                GoogleDirections1.Destination.Address = destination;
+                GoogleDirections1.Destination.Point = "41.12345, -87.12345";// destination;
                 GoogleDirections1.Origin.Address = origin;
             }
         }
