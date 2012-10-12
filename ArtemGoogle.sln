@@ -66,6 +66,40 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite", "WebSite\", "{AEA
 		VWDVirtualPath = "/"
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoogleMap6.1", "GoogleMap6.1", "{05875FC1-2E01-4F67-B559-00B5B1195745}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap6.1\build.cmd = NuGet\GoogleMap6.1\build.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "out", "out", "{1186EFCF-3EAE-411A-8959-12524939B455}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap6.1\out\GoogleMapControl.6.1.nupkg = NuGet\GoogleMap6.1\out\GoogleMapControl.6.1.nupkg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{31E3D84A-3012-4FB1-B138-B5AC74504B8E}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap6.1\src\GoogleMap.nuspec = NuGet\GoogleMap6.1\src\GoogleMap.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{9F618DCB-87C4-4021-B353-427165985528}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap6.1\src\content\Web.config.transform = NuGet\GoogleMap6.1\src\content\Web.config.transform
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{69E08C7D-6FED-4FE1-BFEA-F4C6817C341C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{A3D72063-F800-423E-962E-DF1D0480DE14}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap6.1\src\lib\net40\Artem.Google.dll = NuGet\GoogleMap6.1\src\lib\net40\Artem.Google.dll
+		NuGet\GoogleMap6.1\src\lib\net40\Artem.Google.pdb = NuGet\GoogleMap6.1\src\lib\net40\Artem.Google.pdb
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{2A0112AB-2662-4203-B4F5-D9314A504AFA}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\GoogleMap\src\lib\net40\Artem.Google.dll = NuGet\GoogleMap\src\lib\net40\Artem.Google.dll
+		NuGet\GoogleMap\src\lib\net40\Artem.Google.pdb = NuGet\GoogleMap\src\lib\net40\Artem.Google.pdb
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ArtemGoogle.vsmdi
@@ -103,9 +137,16 @@ Global
 		{1F0D1656-CF0D-4704-91D4-90A39E91B908} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE} = {60800C2B-E0AE-421F-870B-F4BC715E2FED}
 		{3B7E2028-1D93-4A25-956A-EE454284243B} = {73F5863D-99FC-4D08-AF5D-615F3A1B2D59}
+		{05875FC1-2E01-4F67-B559-00B5B1195745} = {73F5863D-99FC-4D08-AF5D-615F3A1B2D59}
 		{C2530BEC-2043-427F-B3B1-CEEA1BC408CF} = {3B7E2028-1D93-4A25-956A-EE454284243B}
 		{A4800611-7B4B-4280-9CDF-029DDFD7453D} = {3B7E2028-1D93-4A25-956A-EE454284243B}
 		{7507E77A-348E-46FF-95B8-38AD7A2B507C} = {C2530BEC-2043-427F-B3B1-CEEA1BC408CF}
 		{A430F22C-4E60-419F-82DB-AF7D7767D56C} = {C2530BEC-2043-427F-B3B1-CEEA1BC408CF}
+		{2A0112AB-2662-4203-B4F5-D9314A504AFA} = {7507E77A-348E-46FF-95B8-38AD7A2B507C}
+		{31E3D84A-3012-4FB1-B138-B5AC74504B8E} = {05875FC1-2E01-4F67-B559-00B5B1195745}
+		{1186EFCF-3EAE-411A-8959-12524939B455} = {05875FC1-2E01-4F67-B559-00B5B1195745}
+		{9F618DCB-87C4-4021-B353-427165985528} = {31E3D84A-3012-4FB1-B138-B5AC74504B8E}
+		{69E08C7D-6FED-4FE1-BFEA-F4C6817C341C} = {31E3D84A-3012-4FB1-B138-B5AC74504B8E}
+		{A3D72063-F800-423E-962E-DF1D0480DE14} = {69E08C7D-6FED-4FE1-BFEA-F4C6817C341C}
 	EndGlobalSection
 EndGlobal
