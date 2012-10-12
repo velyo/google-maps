@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Web.UI;
 
 namespace Artem.Google.UI {
 
@@ -88,6 +89,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The south west.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
         public LatLng SouthWest {
             get { return _southWest ?? (_southWest = new LatLng()); }
             set { _southWest = value; }
@@ -99,6 +101,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The north east.</value>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
         public LatLng NorthEast {
             get { return _northEast ?? (_northEast = new LatLng()); }
             set { _northEast = value; }

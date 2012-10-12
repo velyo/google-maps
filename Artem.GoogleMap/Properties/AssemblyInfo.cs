@@ -19,8 +19,8 @@ using System.Security.Permissions;
 
 [assembly: Guid("61ecaa81-6989-4d3a-99a8-54d14a22dd2e")]
 
-[assembly: AssemblyVersion("6.0.0.0")]
-[assembly: AssemblyFileVersion("6.0.12282.1008")]
+[assembly: AssemblyVersion("6.1.0.0")]
+[assembly: AssemblyFileVersion("6.1.12286.1012")]
 
 //[assembly: AllowPartiallyTrustedCallers]
 

@@ -71,6 +71,16 @@ namespace Artem.Google.UI {
         public string ApiVersion { get; set; }
 
         /// <summary>
+        /// The initial Bounds of the map. 
+        /// This or Zoom is required in order to show the map.
+        /// </summary>
+        [Category("Appearance")]
+        [Description("The initial Bounds of the map. This or Zoom is required in order to show the map.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        public Bounds Bounds { get; set; }
+
+        /// <summary>
         /// The initial LatLng map center.
         /// This is a new property which handles the <c>Latitude</c> and <c>Longitude</c> values.
         /// The initial map center LatLng can be set through <c>Latitude</c> and <c>Longitude</c> properties of
@@ -83,7 +93,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The center.</value>
         [Category("Data")]
-        [Description("The initial LatLng map center.")]
+        [Description("The initial LatLng map center. This is required in order to show the map.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public LatLng Center {
@@ -552,11 +562,12 @@ namespace Artem.Google.UI {
         public int Zoom { get; set; }
 
         /// <summary>
-        /// The display options for the Zoom control.
+        /// The initial zoom level of the map.
+        /// This or Bounds is required in order to show the map.
         /// </summary>
         /// <value>The zoom control options.</value>
         [Category("Appearance")]
-        [Description("The display options for the Zoom control.")]
+        [Description("The initial zoom level of the map. This or Bounds is required in order to show the map.")]
         public ZoomControlOptions ZoomControlOptions {
             get {
                 return _zoomControlOptions ?? (_zoomControlOptions = new ZoomControlOptions());
@@ -895,10 +906,10 @@ namespace Artem.Google.UI {
 
         #region Ctor
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GoogleMap"/> class.
-        /// </summary>
-        public GoogleMap() {
+        ///
+        public GoogleMap(LatLng center)
+        {
+            this.Center = center;
 
             this.BackColor = Color.Gray;
             this.Draggable = true;
@@ -909,12 +920,44 @@ namespace Artem.Google.UI {
             this.EnableScrollWheelZoom = true;
             this.EnableStreetViewControl = true;
             this.EnableZoomControl = true;
-            this.Zoom = 4;
-
             this.StaticScale = 1;
-
             this.Width = new Unit("640px");
             this.Height = new Unit("480px");
+        }
+
+        ///
+        public GoogleMap(LatLng center, int zoom)
+            : this(center)
+        {
+            this.Zoom = zoom;
+        }
+
+        ///
+        public GoogleMap(Bounds bounds, int zoom)
+            : this((LatLng)null)
+        {
+            this.Bounds = bounds;
+            this.Zoom = zoom;
+        }
+
+        ///
+        public GoogleMap(Bounds bounds)
+            : this((LatLng)null)
+        {
+            this.Bounds = bounds;
+        }
+
+        /// 
+        public GoogleMap(int zoom)
+            : this((LatLng)null)
+        {
+            this.Zoom = zoom;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GoogleMap"/> class.
+        /// </summary>
+        public GoogleMap() : this(4) {
         }
         #endregion
 
@@ -977,6 +1020,8 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("center", _center.ToScriptData());
             if (this.DefaultAddress != null)
                 descriptor.AddProperty("defaultAddress", this.DefaultAddress);
+            if (this.Bounds != null)
+                descriptor.AddProperty("bounds", this.Bounds.ToScriptData());
             descriptor.AddProperty("mapType", this.MapType);
             descriptor.AddProperty("zoom", this.Zoom);
             descriptor.AddProperty("name", this.UniqueID);
