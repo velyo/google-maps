@@ -45,6 +45,9 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
     // fields
 
     proto.map = null;
+    proto.get_bounds = function () { return this.bounds; };
+    proto.set_bounds = function (value) { this.bounds = value;};
+
 
     // properties
 
@@ -172,7 +175,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         }
 
         // create map
-        if (location) {
+        if (location || this.bounds) {
             var options = {
                 center: location,
                 mapTypeId: Artem.Google.Convert.toMapTypeId(this.mapType),
@@ -210,6 +213,12 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
             this.mapLoaded = true;
             this.raiseMapLoaded();
+
+            // fit to bounds, if provided
+            if (this.bounds)
+                this.fitBounds(new google.maps.LatLngBounds(
+                    new google.maps.LatLng(this.bounds.sw.lat, this.bounds.sw.lng), 
+                    new google.maps.LatLng(this.bounds.ne.lat, this.bounds.ne.lng)));
 
             // layers
             if (this.showTraffic) {

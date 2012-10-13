@@ -18,6 +18,8 @@ namespace Artem.Google.UI {
         /// <value>The address.</value>
         public string Address { get; set; }
 
+        public bool? AutoOpen { get; set; }
+
         /// <summary>
         /// The text content to show in marker's InfoWindow.
         /// </summary>
@@ -36,6 +38,7 @@ namespace Artem.Google.UI {
 
             var data = base.ToScriptData();
             if (this.Address != null) data["address"] = this.Address;
+            if (this.AutoOpen.HasValue) data["autoOpen"] = this.AutoOpen.Value;
             if (this.Info != null) data["info"] = this.Info;
             return data;
         }

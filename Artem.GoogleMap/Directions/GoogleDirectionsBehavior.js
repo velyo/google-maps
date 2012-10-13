@@ -128,6 +128,13 @@ Artem.Google.DirectionsBehavior.prototype = {
                         ? google.maps.TravelMode.WALKING
                         : google.maps.TravelMode.BICYCLING)
         };
+
+        var d = this.destination;
+        request.destination = (d.Latitude && d.Longitude) 
+            ? new google.maps.LatLng(d.Latitude, d.Longitude) : d;
+        var o = this.origin;
+        request.origin = (o.Latitude && o.Longitude)
+            ? new google.maps.LatLng(o.Latitude, o.Longitude) : o;
         if (this.avoidHighways)
             request.avoidHighways = this.avoidHighways;
         if (this.avoidTolls)

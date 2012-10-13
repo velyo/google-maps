@@ -107,8 +107,11 @@ Artem.Google.MarkersBehavior.prototype = {
                         Function.createDelegate(this,
                             Function.createCallback(
                                 function (e, ctx) { ctx.i.open(this.map, ctx.m); }, { m: gmarker, i: ginfo })));
+                // auto open
+                if (this.markerOptions[marker.index].autoOpen) ginfo.open(this.map, gmarker);
             }
             this.markers.push(gmarker);
+            
         }
         this.counter++;
         if (this.counter == this.markerOptions.length) this.composeEvents();

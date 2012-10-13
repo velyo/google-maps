@@ -71,6 +71,16 @@ namespace Artem.Google.UI {
         public string ApiVersion { get; set; }
 
         /// <summary>
+        /// The initial Bounds of the map. 
+        /// This or Zoom is required in order to show the map.
+        /// </summary>
+        [Category("Appearance")]
+        [Description("The initial Bounds of the map. This or Zoom is required in order to show the map.")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        public Bounds Bounds { get; set; }
+
+        /// <summary>
         /// The initial LatLng map center.
         /// This is a new property which handles the <c>Latitude</c> and <c>Longitude</c> values.
         /// The initial map center LatLng can be set through <c>Latitude</c> and <c>Longitude</c> properties of
@@ -83,7 +93,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The center.</value>
         [Category("Data")]
-        [Description("The initial LatLng map center.")]
+        [Description("The initial LatLng map center. This is required in order to show the map.")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [PersistenceMode(PersistenceMode.InnerProperty)]
         public LatLng Center {
@@ -285,6 +295,54 @@ namespace Artem.Google.UI {
         [Category("Google")]
         [Description("Value indicating whether this instance is static.")]
         public bool IsStatic { get; set; }
+
+        /// <summary>
+        /// All Maps API applications* should load the Maps API using an API key. 
+        /// Using an API key enables you to monitor your application's Maps API usage, and ensures that Google can contact you about your application if necessary. 
+        /// If your application's Maps API usage exceeds the Usage Limits (https://developers.google.com/maps/documentation/javascript/usage#usage_limits), 
+        /// you must load the Maps API using an API key in order to purchase additional quota.
+        /// <b>
+        /// Google Maps API for Business developers must not include a key in their requests. 
+        /// Please refer to Loading the Google Maps JavaScript API for Business-specific instructions(https://developers.google.com/maps/documentation/business/clientside#MapsJS).
+        /// </b>
+        /// To create your API key:
+        /// <list type="number">
+        /// <item>
+        ///     <description>
+        ///         Visit the APIs Console at https://code.google.com/apis/console and log in with your Google Account.
+        ///     </description>
+        /// </item>
+        /// <item>
+        ///     <description>
+        ///         Click the Services link from the left-hand menu.
+        ///     </description>
+        /// </item>
+        /// <item>
+        ///     <description>
+        ///         Activate the Google Maps API v3 service.
+        ///     </description>
+        /// </item>
+        /// <item>
+        ///     <description>
+        ///         Click the API Access link from the left-hand menu. Your API key is available from the API Access page, in the Simple API Access section. Maps API applications use the Key for browser apps.
+        ///     </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        [Category("Google")]
+        [DefaultValue("")]
+        [Description("The key obtained from Google Maps API.")]
+        public string Key
+        {
+            get
+            {
+                return (_key != null)
+                    ? _key : WebConfigurationManager.AppSettings["GoogleMapKey"];
+            }
+            set { _key = value; }
+        }
+        string _key;
+
 
         /// <summary>
         /// The Google Maps API uses the browser's preferred language setting when displaying 
@@ -504,11 +562,12 @@ namespace Artem.Google.UI {
         public int Zoom { get; set; }
 
         /// <summary>
-        /// The display options for the Zoom control.
+        /// The initial zoom level of the map.
+        /// This or Bounds is required in order to show the map.
         /// </summary>
         /// <value>The zoom control options.</value>
         [Category("Appearance")]
-        [Description("The display options for the Zoom control.")]
+        [Description("The initial zoom level of the map. This or Bounds is required in order to show the map.")]
         public ZoomControlOptions ZoomControlOptions {
             get {
                 return _zoomControlOptions ?? (_zoomControlOptions = new ZoomControlOptions());
@@ -847,10 +906,10 @@ namespace Artem.Google.UI {
 
         #region Ctor
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GoogleMap"/> class.
-        /// </summary>
-        public GoogleMap() {
+        ///
+        public GoogleMap(LatLng center)
+        {
+            this.Center = center;
 
             this.BackColor = Color.Gray;
             this.Draggable = true;
@@ -861,12 +920,44 @@ namespace Artem.Google.UI {
             this.EnableScrollWheelZoom = true;
             this.EnableStreetViewControl = true;
             this.EnableZoomControl = true;
-            this.Zoom = 4;
-
             this.StaticScale = 1;
-
             this.Width = new Unit("640px");
             this.Height = new Unit("480px");
+        }
+
+        ///
+        public GoogleMap(LatLng center, int zoom)
+            : this(center)
+        {
+            this.Zoom = zoom;
+        }
+
+        ///
+        public GoogleMap(Bounds bounds, int zoom)
+            : this((LatLng)null)
+        {
+            this.Bounds = bounds;
+            this.Zoom = zoom;
+        }
+
+        ///
+        public GoogleMap(Bounds bounds)
+            : this((LatLng)null)
+        {
+            this.Bounds = bounds;
+        }
+
+        /// 
+        public GoogleMap(int zoom)
+            : this((LatLng)null)
+        {
+            this.Zoom = zoom;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GoogleMap"/> class.
+        /// </summary>
+        public GoogleMap() : this(4) {
         }
         #endregion
 
@@ -929,6 +1020,8 @@ namespace Artem.Google.UI {
                 descriptor.AddProperty("center", _center.ToScriptData());
             if (this.DefaultAddress != null)
                 descriptor.AddProperty("defaultAddress", this.DefaultAddress);
+            if (this.Bounds != null)
+                descriptor.AddProperty("bounds", this.Bounds.ToScriptData());
             descriptor.AddProperty("mapType", this.MapType);
             descriptor.AddProperty("zoom", this.Zoom);
             descriptor.AddProperty("name", this.UniqueID);
@@ -1152,12 +1245,16 @@ namespace Artem.Google.UI {
         /// </summary>
         protected virtual void RegisterGoogleReference() {
 
-            //var clientScript = this.Page.ClientScript;
-            //if (!clientScript.IsClientScriptIncludeRegistered("maps.google.com")) {
             string proto = this.Page.Request.IsSecureConnection ? "https" : "http";
             string url = string.Format("{0}://{1}", proto, ApiUrl);
             StringBuilder buffer = new StringBuilder(url);
 
+            // business or standard api key
+            if(!string.IsNullOrEmpty(this.EnterpriseKey))
+                buffer.AppendFormat("client={0}&", this.EnterpriseKey);
+            else if (!string.IsNullOrEmpty(this.Key))
+                buffer.AppendFormat("key={0}&", this.Key);
+            // version
             if (!string.IsNullOrEmpty(this.ApiVersion))
                 buffer.AppendFormat("v={0}&", this.ApiVersion);
             // sensor
@@ -1169,12 +1266,7 @@ namespace Artem.Google.UI {
             if (!string.IsNullOrEmpty(this.Region))
                 buffer.AppendFormat("&region={0}", this.Region);
 
-            //if (!string.IsNullOrEmpty(this.EnterpriseKey))
-            //    buffer.AppendFormat("&client={0}", this.EnterpriseKey);
-
             ScriptManager.RegisterClientScriptInclude(this.Page, this.GetType(), "maps.google.com", buffer.ToString());
-            //    clientScript.RegisterClientScriptInclude("maps.google.com", buffer.ToString());
-            //}
         }
 
         /// <summary>
