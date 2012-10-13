@@ -3,13 +3,13 @@
     <metadata>
         <id>GoogleMapControl</id>
         <title>GoogleMap Control</title>
-        <version>6.0</version>
+        <version>6.1</version>
         <authors>Velio Ivanov</authors>
         <owners>Velio Ivanov</owners>
         <description>Wraps Google Maps API as ASP.NET custom control.</description>
         <projectUrl>http://googlemap.codeplex.com/</projectUrl>
         <licenseUrl>http://googlemap.codeplex.com/license</licenseUrl>
-        <tags>google maps control</tags>
+        <tags>google maps asp.net control</tags>
         <language>en-US</language>
     </metadata>
 </package>
