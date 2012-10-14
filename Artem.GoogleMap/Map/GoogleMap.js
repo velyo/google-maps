@@ -141,6 +141,9 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
     proto.get_scrollwheel = function () { return this.scrollwheel; };
     proto.set_scrollwheel = function (value) { this.scrollwheel = value; };
 
+    proto.get_shortID = function () { return this.shortID; };
+    proto.set_shortID = function (value) { this.shortID = value; };
+
     proto.get_showTraffic = function () { return this.showTraffic; };
     proto.set_showTraffic = function (value) { this.showTraffic = value; };
 
@@ -239,7 +242,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
             try {
                 if (!window.maps) window.maps = {};
-                eval("window.maps." + this.get_id() + " = this;");
+                eval("window.maps." + this.get_shortID() + " = this;");
             }
             catch (ex) { }
         }

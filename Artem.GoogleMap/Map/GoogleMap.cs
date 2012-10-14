@@ -1025,6 +1025,7 @@ namespace Artem.Google.UI {
             descriptor.AddProperty("mapType", this.MapType);
             descriptor.AddProperty("zoom", this.Zoom);
             descriptor.AddProperty("name", this.UniqueID);
+            descriptor.AddProperty("shortID", this.ID);
 
             descriptor.AddProperty("backgroundColor", ColorTranslator.ToHtml(this.BackColor));
             descriptor.AddProperty("noClear", this.DisableClear);
