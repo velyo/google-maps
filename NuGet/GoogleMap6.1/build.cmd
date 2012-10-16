@@ -1,1 +1,0 @@
-nuget pack .\src\GoogleMap.nuspec -o .\out\

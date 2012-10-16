@@ -3,7 +3,7 @@
     <metadata>
         <id>GoogleMapControl</id>
         <title>GoogleMap Control</title>
-        <version>6.1</version>
+        <version>6.1.12290.1016</version>
         <authors>Velio Ivanov</authors>
         <owners>Velio Ivanov</owners>
         <description>Wraps Google Maps API as ASP.NET custom control.</description>

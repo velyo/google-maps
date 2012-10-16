@@ -31,6 +31,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "out", "out", "{A4800611-7B4B-4280-9CDF-029DDFD7453D}"
 	ProjectSection(SolutionItems) = preProject
 		NuGet\GoogleMap\out\GoogleMapControl.6.0.nupkg = NuGet\GoogleMap\out\GoogleMapControl.6.0.nupkg
+		NuGet\GoogleMap\out\GoogleMapControl.6.1.nupkg = NuGet\GoogleMap\out\GoogleMapControl.6.1.nupkg
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Artem.GoogleMap", "Artem.GoogleMap\Artem.GoogleMap.csproj", "{0660EA3D-B58B-4858-9822-9A6459A4001C}"
