@@ -24,50 +24,54 @@ namespace Artem.Google.UI {
         /// <summary>
         /// Represents the top left position.
         /// </summary>
-        TopLeft = 0,
+        TopLeft = 1,
         /// <summary>
         /// Represents the top center position.
         /// </summary>
-        TopCenter,
+        TopCenter = 2,
         /// <summary>
         /// Represents the top right position.
         /// </summary>
-        TopRight,
+        TopRight = 3,
         /// <summary>
         /// Represents the bottom center position.
         /// </summary>
-        BottomCenter,
+        BottomCenter = 11,
         /// <summary>
         /// Represents the bottom left position.
         /// </summary>
-        BottomLeft,
+        BottomLeft = 10,
         /// <summary>
         /// Represents the bottom right position.
         /// </summary>
-        BottomRight,
+        BottomRight = 12,
         /// <summary>
         /// Represents the left bottom position.
         /// </summary>
-        LeftBottom,
+        LeftBottom = 6,
         /// <summary>
         /// Represents the left center position.
         /// </summary>
-        LeftCenter,
+        LeftCenter = 4,
         /// <summary>
         /// Represents the left top position.
         /// </summary>
-        LeftTop,
+        LeftTop = 5,
         /// <summary>
         /// Represents the right bottom position.
         /// </summary>
-        RightBottom,
+        RightBottom = 9,
         /// <summary>
         /// Represents the right center position.
         /// </summary>
-        RightCenter,
+        RightCenter = 8,
         /// <summary>
         /// Represents the right top position.
         /// </summary>
-        RightTop
+        RightTop = 7,
+        /// <summary>
+        /// Represents the center position.
+        /// </summary>
+        Center = 13
     }
 }

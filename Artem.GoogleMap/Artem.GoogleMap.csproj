@@ -85,7 +85,9 @@
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\Duration.cs" />
     <Compile Include="Common\Bounds.cs" />
+    <Compile Include="Common\GoogleMapLibrary.cs" />
     <Compile Include="Common\MapEventArgs.cs" />
+    <Compile Include="Common\SearchBoxControlOptions.cs" />
     <Compile Include="Common\ZoomControlStyle.cs" />
     <Compile Include="Directions\TravelMode.cs" />
     <Compile Include="Directions\UnitSystem.cs" />
@@ -234,6 +236,7 @@
       <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
