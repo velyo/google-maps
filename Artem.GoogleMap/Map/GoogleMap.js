@@ -23,7 +23,7 @@ Type.registerNamespace("Artem.Google");
 Artem.Google.Map = function (element) {
     /// <summary>This class represents the client GoogleMap control object.</summary>
     Artem.Google.Map.initializeBase(this, [element]);
-};
+}; 
 
 Artem.Google.Map.prototype = {
 
@@ -43,11 +43,9 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 (function (proto) {
 
     // fields
-
     proto.map = null;
     proto.get_bounds = function () { return this.bounds; };
     proto.set_bounds = function (value) { this.bounds = value;};
-
 
     // properties
 
@@ -162,8 +160,6 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
     proto.get_zoomControlOptions = function () { return this.zoomControlOptions; };
     proto.set_zoomControlOptions = function (value) { this.zoomControlOptions = value; };
 
-    proto.get_disableMultipleInfoWindows = function () { return this.disableMultipleInfoWindows; };
-    proto.set_disableMultipleInfoWindows = function (value) { this.disableMultipleInfoWindows = value; };
     // private methods
 
     // methods
@@ -193,15 +189,15 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 mapTypeControl: this.mapTypeControl,
                 noClear: this.noClear,
                 overviewMapControl: this.overviewMapControl,
-                panControl: this.panControl,
+                panControl: this.panControl, 
                 rotateControl: this.rotateControl,
                 scaleControl: this.scaleControl,
                 scrollwheel: this.scrollwheel,
                 streetViewControl: this.streetViewControl,
                 tilt: this.tilt,
-                zoomControl: this.zoomControl,
-                disableMultipleInfoWindows: this.disableMultipleInfoWindows
+                zoomControl: this.zoomControl
             };
+            
             if (this.draggableCursor) options.draggableCursor = this.draggableCursor;
             if (this.draggingCursor) options.draggingCursor = this.draggingCursor;
             if (this.heading) options.heading = this.heading;
@@ -219,7 +215,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
             this.composeEvents();
 
             this.mapLoaded = true;
-            this.raiseMapLoaded();            
+            this.raiseMapLoaded();
 
             // fit to bounds, if provided
             if (this.bounds)
@@ -228,7 +224,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                     new google.maps.LatLng(this.bounds.ne.lat, this.bounds.ne.lng)));
 
             // layers
-            if (this.showTraffic) {
+            if (this.showTraffic) { 
                 var traffic = new google.maps.TrafficLayer();
                 traffic.setMap(this.map);
             }

@@ -127,6 +127,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Errors.resx</DependentUpon>
     </Compile>
+    <None Include="Map\GoogleMap.min.js.map">
+      <DependentUpon>GoogleMap.js</DependentUpon>
+    </None>
+    <None Include="Markers\GoogleMarkersBehavior.min.js.map">
+      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
@@ -182,9 +188,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Markers\GoogleMarkersBehavior.js" />
-    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js">
-      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
@@ -216,9 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Map\GoogleMap.js" />
-    <EmbeddedResource Include="Map\GoogleMap.min.js">
-      <DependentUpon>GoogleMap.js</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polygon\GoogleGroundBehavior.js" />
@@ -226,7 +226,14 @@
       <DependentUpon>GoogleGroundBehavior.js</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Map\GoogleMap.min.js">
+      <DependentUpon>GoogleMap.js</DependentUpon>
+    </Content>
+    <Content Include="Markers\GoogleMarkersBehavior.min.js">
+      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -237,7 +244,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
+      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
