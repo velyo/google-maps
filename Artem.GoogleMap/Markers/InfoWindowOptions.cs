@@ -89,6 +89,7 @@ namespace Artem.Google.UI {
         /// </summary>
         /// <value>The index of the Z.</value>
         public int? ZIndex { get; set; }
+      
 
         #endregion
 

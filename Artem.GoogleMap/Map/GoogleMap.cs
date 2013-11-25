@@ -633,6 +633,14 @@ namespace Artem.Google.UI {
         }
         List<GooglePolyline> _polylines;
 
+
+        /// <summary>
+        /// If true, when one infowindow is shown, all others are hidden
+        /// </summary>
+        [Category("Behavior")]
+        [Description("If true, when one infowindow is shown, all others are hidden")]
+        public bool? DisableMultipleInfoWindows { get; set; }
+
         #endregion
 
         #region Events
@@ -1070,6 +1078,8 @@ namespace Artem.Google.UI {
             descriptor.AddProperty("tilt", this.Tilt);
             if (this.ZoomControlOptions != null)
                 descriptor.AddProperty("zoomControlOptions", this.ZoomControlOptions.ToScriptData());
+            if (this.DisableMultipleInfoWindows != null)
+                descriptor.AddProperty("disableMultipleInfoWindows", this.DisableMultipleInfoWindows);
 
             #endregion
 

@@ -162,6 +162,8 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
     proto.get_zoomControlOptions = function () { return this.zoomControlOptions; };
     proto.set_zoomControlOptions = function (value) { this.zoomControlOptions = value; };
 
+    proto.get_disableMultipleInfoWindows = function () { return this.disableMultipleInfoWindows; };
+    proto.set_disableMultipleInfoWindows = function (value) { this.disableMultipleInfoWindows = value; };
     // private methods
 
     // methods
@@ -197,7 +199,8 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 scrollwheel: this.scrollwheel,
                 streetViewControl: this.streetViewControl,
                 tilt: this.tilt,
-                zoomControl: this.zoomControl
+                zoomControl: this.zoomControl,
+                disableMultipleInfoWindows: this.disableMultipleInfoWindows
             };
             if (this.draggableCursor) options.draggableCursor = this.draggableCursor;
             if (this.draggingCursor) options.draggingCursor = this.draggingCursor;
@@ -210,12 +213,13 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
             if (this.rotateControlOptions) options.rotateControlOptions = this.rotateControlOptions;
             if (this.scaleControlOptions) options.scaleControlOptions = this.scaleControlOptions;
             if (this.zoomControlOptions) options.zoomControlOptions = this.zoomControlOptions;
+            if (this.disableMultipleInfoWindows) options.disableMultipleInfoWindows = this.disableMultipleInfoWindows;
 
             this.map = new google.maps.Map(this.get_element(), options);
             this.composeEvents();
 
             this.mapLoaded = true;
-            this.raiseMapLoaded();
+            this.raiseMapLoaded();            
 
             // fit to bounds, if provided
             if (this.bounds)
