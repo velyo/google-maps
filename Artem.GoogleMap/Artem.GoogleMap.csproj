@@ -229,12 +229,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Map\GoogleMap.min.js">
+    <EmbeddedResource Include="Map\GoogleMap.min.js">
       <DependentUpon>GoogleMap.js</DependentUpon>
-    </Content>
-    <Content Include="Markers\GoogleMarkersBehavior.min.js">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js">
       <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -247,7 +247,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
