@@ -20,5 +20,6 @@
         <li><a href="/markers/CustomIcons.aspx">&raquo; Custom Icons</a></li>
         <li><a href="/markers/CustomSpriteIcons.aspx">&raquo; Custom Sprite Icons</a></li>
         <li><a href="/markers/DataBound.aspx">&raquo; Data Bound</a></li>
+        <li><a href="/markers/OnlyOneInfoWindow.aspx">&raquo; Only one InfoWindows</a></li>
     </ul>
 </asp:Content>

@@ -20,5 +20,6 @@
         <li><a href="/map/InTabPanel.aspx">&raquo; Inside TabPanel</a></li>
         <li><a href="/map/InUpdatePanel.aspx">&raquo; Inside UpdatePanel</a></li>
         <li><a href="/map/WithMenu.aspx">&raquo; With Menu</a></li>
+        <li><a href="/map/SearchBox.aspx">&raquo; With SearchBox</a></li>
     </ul>
 </asp:Content>

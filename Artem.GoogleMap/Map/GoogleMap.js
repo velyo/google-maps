@@ -17,13 +17,13 @@
 //              http://www.codeplex.com/googlemap/license
 // API:         http://code.google.com/apis/maps/
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Artem.Google"); 
 
 // Map class
 Artem.Google.Map = function (element) {
     /// <summary>This class represents the client GoogleMap control object.</summary>
     Artem.Google.Map.initializeBase(this, [element]);
-};
+}; 
 
 Artem.Google.Map.prototype = {
 
@@ -43,11 +43,9 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 (function (proto) {
 
     // fields
-
     proto.map = null;
     proto.get_bounds = function () { return this.bounds; };
     proto.set_bounds = function (value) { this.bounds = value;};
-
 
     // properties
 
@@ -161,6 +159,12 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
     proto.get_zoomControlOptions = function () { return this.zoomControlOptions; };
     proto.set_zoomControlOptions = function (value) { this.zoomControlOptions = value; };
+    
+    proto.get_searchBoxControl = function () { return this.searchBoxControl; };
+    proto.set_searchBoxControl = function (value) { this.searchBoxControl = value; };
+    
+    proto.get_searchBoxControlOptions = function () { return this.searchBoxControlOptions; };
+    proto.set_searchBoxControlOptions = function (value) { this.searchBoxControlOptions = value; };
 
     // private methods
 
@@ -191,7 +195,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 mapTypeControl: this.mapTypeControl,
                 noClear: this.noClear,
                 overviewMapControl: this.overviewMapControl,
-                panControl: this.panControl,
+                panControl: this.panControl, 
                 rotateControl: this.rotateControl,
                 scaleControl: this.scaleControl,
                 scrollwheel: this.scrollwheel,
@@ -199,6 +203,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 tilt: this.tilt,
                 zoomControl: this.zoomControl
             };
+            
             if (this.draggableCursor) options.draggableCursor = this.draggableCursor;
             if (this.draggingCursor) options.draggingCursor = this.draggingCursor;
             if (this.heading) options.heading = this.heading;
@@ -210,6 +215,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
             if (this.rotateControlOptions) options.rotateControlOptions = this.rotateControlOptions;
             if (this.scaleControlOptions) options.scaleControlOptions = this.scaleControlOptions;
             if (this.zoomControlOptions) options.zoomControlOptions = this.zoomControlOptions;
+            if (this.disableMultipleInfoWindows) options.disableMultipleInfoWindows = this.disableMultipleInfoWindows;
 
             this.map = new google.maps.Map(this.get_element(), options);
             this.composeEvents();
@@ -224,9 +230,37 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                     new google.maps.LatLng(this.bounds.ne.lat, this.bounds.ne.lng)));
 
             // layers
-            if (this.showTraffic) {
+            if (this.showTraffic) { 
                 var traffic = new google.maps.TrafficLayer();
                 traffic.setMap(this.map);
+            }
+            
+            // searchbox
+            if (this.searchBoxControl) {
+                var self = this;
+                // Create the search box and link it to the UI element.
+                var input = document.getElementById(this.get_element() + "_SearchBox");
+                
+                if (!input) {
+                    input = document.createElement("input");
+                    input.type = "text";
+                    input.setAttribute("style", self.searchBoxControlOptions.style);
+                    input.setAttribute("placeHolder", self.searchBoxControlOptions.text);
+                    this.get_element().appendChild(input);
+                }
+                
+                input.onkeypress = function (e) {
+                    if (e.keyCode == 13) { // Detect Enter
+                        var options = { address: this.value, language: self.language, region: self.region };
+                        Artem.Google.Geocoding.getResults(options, function (results) {
+                            if (results && results.length)
+                                self.map.fitBounds(results[0].geometry.bounds);
+                        });
+                        return false;
+                    }
+                };
+
+                this.map.controls[self.searchBoxControlOptions.position].push(input);
             }
 
             // if reverse geocoding is enabled then try resolve the address
@@ -973,6 +1007,29 @@ Artem.Google.Geocoding = (function () {
         });
     }
 
+    function getResults(options, callback) {
+         var request = {
+            address: options.address,
+            language: options.language,
+            region: options.region
+        };
+
+        geocoder = geocoder || new google.maps.Geocoder();
+        geocoder.geocode(request, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                try {
+                    callback(results);
+                }
+                catch (ex) {
+                    Artem.Google.Log.error(ex);
+                }
+            }
+            else {
+                handleAddressError(status, options, callback);
+            }
+        });
+    }
+
     function handleAddressError(status, options, callback) {
 
         if (options.defaultAddress) {
@@ -1003,7 +1060,7 @@ Artem.Google.Geocoding = (function () {
         }
     }
 
-    return { getAddress: getAddress, getLocation: getLocation };
+    return { getAddress: getAddress, getLocation: getLocation, getResults: getResults };
 })();
 
 // log

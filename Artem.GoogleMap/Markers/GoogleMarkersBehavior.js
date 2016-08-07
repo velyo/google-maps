@@ -27,6 +27,7 @@ Artem.Google.MarkersBehavior.prototype = {
     proto.counter = 0;
     proto.map = null;
     proto.markers = [];
+    proto.infos = [];
 
     // properties
 
@@ -93,7 +94,6 @@ Artem.Google.MarkersBehavior.prototype = {
     };
 
     // private methods
-
     function setMarker(position, marker) {
 
         if (marker) {
@@ -106,12 +106,21 @@ Artem.Google.MarkersBehavior.prototype = {
                 google.maps.event.addListener(gmarker, 'click',
                         Function.createDelegate(this,
                             Function.createCallback(
-                                function (e, ctx) { ctx.i.open(this.map, ctx.m); }, { m: gmarker, i: ginfo })));
+                                function (e, ctx) {
+                                    if (this.map.disableMultipleInfoWindows) {
+                                        for (i = 0; i < this.infos.length; i++)
+                                            this.infos[i].close();
+                                    }
+                                    ctx.i.open(this.map, ctx.m);
+                                    
+                                }, { m: gmarker, i: ginfo })));
                 // auto open
                 if (this.markerOptions[marker.index].autoOpen) ginfo.open(this.map, gmarker);
+                
+                this.infos.push(ginfo);
             }
-            this.markers.push(gmarker);
             
+            this.markers.push(gmarker);
         }
         this.counter++;
         if (this.counter == this.markerOptions.length) this.composeEvents();

@@ -12,10 +12,14 @@
     <AssemblyName>Artem.Google</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../GoogleMapKey.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
@@ -81,7 +85,9 @@
     <Compile Include="Common\Distance.cs" />
     <Compile Include="Common\Duration.cs" />
     <Compile Include="Common\Bounds.cs" />
+    <Compile Include="Common\GoogleMapLibrary.cs" />
     <Compile Include="Common\MapEventArgs.cs" />
+    <Compile Include="Common\SearchBoxControlOptions.cs" />
     <Compile Include="Common\ZoomControlStyle.cs" />
     <Compile Include="Directions\TravelMode.cs" />
     <Compile Include="Directions\UnitSystem.cs" />
@@ -123,6 +129,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Errors.resx</DependentUpon>
     </Compile>
+    <None Include="Map\GoogleMap.min.js.map">
+      <DependentUpon>GoogleMap.js</DependentUpon>
+    </None>
+    <None Include="Markers\GoogleMarkersBehavior.min.js.map">
+      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
@@ -178,9 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Markers\GoogleMarkersBehavior.js" />
-    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js">
-      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polyline\GooglePolylineBehavior.js" />
@@ -212,14 +221,19 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Map\GoogleMap.js" />
-    <EmbeddedResource Include="Map\GoogleMap.min.js">
-      <DependentUpon>GoogleMap.js</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Polygon\GoogleGroundBehavior.js" />
     <EmbeddedResource Include="Polygon\GoogleGroundBehavior.min.js">
       <DependentUpon>GoogleGroundBehavior.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Map\GoogleMap.min.js">
+      <DependentUpon>GoogleMap.js</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Markers\GoogleMarkersBehavior.min.js">
+      <DependentUpon>GoogleMarkersBehavior.js</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
@@ -233,7 +247,7 @@
   -->
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateFileVersion="False" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
