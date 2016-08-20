@@ -1,2 +1,2 @@
-# google-map
-ASP.NET controls to wrap Google Maps API
+# Google Map Control
+ASP.NET WebForms controls wraps Google Maps API
