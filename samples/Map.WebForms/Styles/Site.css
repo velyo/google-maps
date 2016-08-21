@@ -1,0 +1,251 @@
+﻿/*
+	project: web application template
+	author: luka cvrk (www.solucija.com)
+	adopted by: Velio Ivanov
+	for: GoogleMap Control Website
+*/
+* {
+	margin: 0;
+	padding: 0;
+}
+* body {
+	margin: 50px 0 0;
+	background: #fff url(images/bg.gif) repeat-x;
+	font: .74em "Trebuchet MS" , Arial, Sans-Serif;
+	color: #444;
+}
+h1 {
+	font-size: 3em;
+	font-weight: normal;
+	margin: 0 0 .8em;
+}
+h1 a {
+	text-decoration: none;
+}
+h2 {
+	font-size: 2em;
+	color: #FFF2B3;
+	font-weight: normal;
+	margin: 0 0 .8em;
+}
+h3 {
+	font-size: 1.5em;
+	border-bottom: 1px solid #CCC;
+	margin: .8em 0;
+}
+p {
+	margin: 0 0 1em 0;
+	line-height: 1.3em;
+}
+em {
+	border-bottom: 1px dotted #fff;
+	cursor: pointer;
+}
+a {
+	color: #9D2900;
+}
+a:hover {
+	color: #A0000E;
+	text-decoration: none;
+}
+img {
+	border: 0;
+}
+.red {
+	color: #9D2900;
+}
+fieldset {
+	padding: 10px 20px;
+}
+fieldset label {
+	display: inline-block;
+	min-width: 120px;
+}
+fieldset div {
+	padding: 4px 0;
+}
+fieldset input[type=submit] {
+}
+fieldset input[type=text] {
+}
+fieldset input[type=text]:focus {
+	background-color: #EFE;
+}
+legend {
+	padding: 10px;
+	padding-top: 0;
+}
+ol, ul {
+	list-style-type: none;
+}
+pre {
+	overflow: auto;
+}
+
+.wrap {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#header {
+	width: 960px;
+	height: 50px;
+	margin: 0 auto;
+}
+#header h1 {
+	float: left;
+}
+#header h1 a {
+	background: url(images/logo.png) no-repeat;
+	display: inline-block;
+	width: 366px;
+	height: 50px;
+	overflow: hidden;
+	text-indent: -5000px;
+}
+#menu {
+	float: right;
+	padding: 6px 0 0 0;
+	list-style: none;
+}
+#menu li {
+	display: inline;
+}
+#menu a {
+	display: block;
+	float: left;
+	margin-left: 30px;
+	padding: 7px;
+	text-decoration: none;
+	font-size: 13px;
+	color: #000000;
+}
+#menu a:hover {
+	color: #000;
+	border-bottom: 2px solid #ccc;
+}
+ul.home .home a, ul.demo .demo a, ul.docs .docs a, ul.donate .donate a, ul.contact .contact a {
+	border-bottom: 2px solid #C70012;
+	color: #9D2900;
+}
+
+#teaser {
+	clear: both;
+	height: 259px;
+	background: #fff url(images/teaserbg.jpg) repeat-x;
+}
+.box {
+	float: left;
+	padding: 66px 0 0;
+	width: 480px;
+	color: #C7E3EE;
+}
+.box a {
+	color: #FFF2B3;
+}
+#image {
+	float: right;
+	width: 388px;
+	position: relative;
+	top: 16px;
+	background: url(images/logotype.jpg) no-repeat top right;
+	height: 258px;
+}
+
+#bar {
+	height: 40px;
+	margin: 0 0 30px;
+	padding: 8px 0 0 0;
+	background: url(images/bar.gif) repeat-x;
+}
+a.step {
+	cursor: pointer;
+	color: #FAFDDD;
+	padding: 4px 0 0 11px;
+	margin: 0 35px 0 0;
+	font-size: 1.4em;
+	float: left;
+	text-align: center;
+	background: url(images/step.gif) no-repeat;
+	height: 30px;
+	text-decoration: none;
+	line-height: 22px;
+	vertical-align: middle;
+}
+a.step span {
+	padding-left: 20px;
+}
+
+.col {
+	float: left;
+	width: 296px;
+	margin: 0 30px 16px 0;
+}
+.last {
+	float: right;
+	margin: 0;
+}
+.info {
+	border: 1px solid #e0e0e0;
+	background: #f4f4f4;
+	padding: 7px;
+}
+
+#content {
+	font: 1.2em "Trebuchet MS" , Arial, Sans-Serif;
+	min-height: 180px;
+}
+#content h2 {
+	color: #444;
+}
+#content li {
+	padding: 5px 0px;
+}
+#content .content {
+	float: left;
+	margin-bottom: 30px;
+}
+#content .side li {
+	padding: 2px 0px;
+}
+
+#footer {
+	clear: both;
+	width: 960px;
+	margin: 0 auto;
+	padding: 15px;
+	border-top: 1px solid #CCC;
+}
+#footer .right {
+	float: right;
+	margin: 0px;
+}
+#footer a {
+	color: #808080;
+	font-weight: bold;
+}
+
+/* forms */
+input[type=text], input[type=password] {
+	border: 1px solid #CCC;
+	padding: 4px;
+	min-width: 160px;
+}
+input[type=submit], input[type=button], button {
+	padding: 4px;
+	min-width: 60px;
+}
+
+/* misc */
+.map-wrap {
+	background-color: #EEE;
+	border: 1px solid #CCC;
+	padding: 10px;
+	margin: 20px 0px;
+}
+.map {
+	margin: 0px auto;
+}
+.validation-summary-errors {
+	color: #C00;
+}

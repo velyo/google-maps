@@ -1,0 +1,284 @@
+
+Property changes on: Artem.GoogleMap
+___________________________________________________________________
+Added: svn:ignore
+   + bin
+obj
+
+
+Index: Artem.GoogleMap/Artem.GoogleMap.csproj
+===================================================================
+--- Artem.GoogleMap/Artem.GoogleMap.csproj	(revision 67130)
++++ Artem.GoogleMap/Artem.GoogleMap.csproj	(working copy)
+@@ -176,6 +176,12 @@
+     <EmbeddedResource Include="Scripts\MicrosoftAjax.debug.js" />
+     <EmbeddedResource Include="Scripts\MicrosoftAjax.js" />
+   </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="Scripts\markerclusterer.js" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="Scripts\markerclusterer_packed.js" />
++  </ItemGroup>
+   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+        Other similar extension points exist, see Microsoft.Common.targets.
+@@ -189,4 +195,7 @@
+       <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_UpdateFileVersion="False" />
+     </VisualStudio>
+   </ProjectExtensions>
++  <PropertyGroup>
++    <PostBuildEvent>xcopy /s /y "$(TargetDir)*.*" "$(SolutionDir)..\..\Output"</PostBuildEvent>
++  </PropertyGroup>
+ </Project>
+\ No newline at end of file
+Index: Artem.GoogleMap/Properties/AssemblyInfo.cs
+===================================================================
+--- Artem.GoogleMap/Properties/AssemblyInfo.cs	(revision 67130)
++++ Artem.GoogleMap/Properties/AssemblyInfo.cs	(working copy)
+@@ -33,3 +33,7 @@
+ 
+ [assembly: WebResource("Artem.Google.Scripts.MicrosoftAjax.js", "text/javascript")]
+ [assembly: WebResource("Artem.Google.Scripts.MicrosoftAjax.debug.js", "text/javascript")]
++
++[assembly: WebResource("Artem.Google.Scripts.markerclusterer.js", "text/javascript")]
++[assembly: WebResource("Artem.Google.Scripts.markerclusterer_packed.js", "text/javascript")]
++
+Index: Artem.GoogleMap/Scripts/ArtemGoogle.js
+===================================================================
+--- Artem.GoogleMap/Scripts/ArtemGoogle.js	(revision 67130)
++++ Artem.GoogleMap/Scripts/ArtemGoogle.js	(working copy)
+@@ -80,6 +80,10 @@
+     this.get_markerManager = function () { return markerManager; };
+     this.set_markerManager = function (value) { markerManager = value; }
+ 
++    var markerClusterer = null;
++    this.get_markerClusterer = function () { return markerClusterer; };
++    this.set_markerClusterer = function (value) { markerClusterer = value; }
++
+     var name = null;
+     this.get_name = function () { return name; };
+     this.set_name = function (value) { name = value; };
+@@ -142,6 +146,7 @@
+     EnableGoogleBar: null,
+     EnableInfoWindow: null,
+     EnableMarkerManager: null,
++    EnableMarkerClusterer: null,
+     EnableReverseGeocoding: null,
+     EnableScrollWheelZoom: null,
+     EnterpriseKey: null,
+@@ -198,6 +203,8 @@
+     get_markerEvents: null,
+     get_markerManager: null,
+     set_markerManager: null,
++    get_markerClusterer: null,
++    set_markerClusterer: null,
+     get_name: null,
+     set_name: null,
+     get_partialUpdateDelegate: null,
+@@ -745,6 +752,7 @@
+         delete this.get_mapEvents;
+         delete this.get_mapPano;
+         delete this.get_markerManager;
++        delete this.get_markerClusterer;
+         delete this.get_name;
+         delete this.get_partialUpdateDelegate;
+         delete this.get_polygonEvents;
+@@ -774,6 +782,7 @@
+         delete this.EnableGoogleBar;
+         delete this.EnableInfoWindow;
+         delete this.EnableMarkerManager;
++        delete this.EnableMarkerClusterer;
+         delete this.EnableReverseGeocoding;
+         delete this.EnableScrollWheelZoom;
+         delete this.EnterpriseKey;
+@@ -829,6 +838,7 @@
+             this.EnableGoogleBar = state.EnableGoogleBar;
+             this.EnableInfoWindow = state.EnableInfoWindow;
+             this.EnableMarkerManager = state.EnableMarkerManager;
++            this.EnableMarkerClusterer = state.EnableMarkerClusterer;
+             this.EnableReverseGeocoding = state.EnableReverseGeocoding;
+             this.EnableScrollWheelZoom = state.EnableScrollWheelZoom;
+             this.EnterpriseKey = state.EnterpriseKey;
+@@ -1215,6 +1225,13 @@
+         // enable marker manager
+         if (this.EnableMarkerManager)
+             this.set_markerManager(new MarkerManager(map, this.MarkerManagerOptions));
++
++        // enable marker clusterer
++        if (this.EnableMarkerClusterer) {
++            var mcOptions = { gridSize: 50, maxZoom: 15 };
++            this.set_markerClusterer(new MarkerClusterer(map, [], mcOptions));
++        }
++
+         // map view
+         this.setMapView();
+         // street view
+@@ -1295,6 +1312,18 @@
+                 }
+             }
+         }
++
++        if (this.EnableMarkerClusterer) {
++            var gs = [];
++
++            for (var i = 0; i < this.Markers.length; i++)
++                gs.push(this.Markers[i].get_marker());
++
++            var mcOptions = { gridSize: 50, maxZoom: 15 };
++
++            this.get_markerClusterer().addMarkers(gs);
++            this.get_markerClusterer().resetViewport();
++        }
+         //        // fire actions
+         //        if (this.Actions) {
+         //            for (var i = 0; i < this.Actions.length; i++) {
+@@ -1634,6 +1663,10 @@
+     this.Text = state.Text;
+     this.Title = state.Title;
+ 
++    this.Managed = false;
++    if (map.EnableMarkerClusterer || map.EnableMarkerManager)
++        this.Managed = true;
++
+     this.get_map = function () { return map; };
+ 
+     // render or resolve address agains geocoding
+@@ -1666,6 +1699,8 @@
+     ShadowUrl: null,
+     Text: null,
+     Title: null,
++    GoogleMarker: null,
++    Managed: null,
+ 
+     //#endregion
+ 
+@@ -1703,6 +1738,7 @@
+         this.get_map.removeOverlay(this.get_marker());
+     },
+ 
++
+     render: function Artem_Google_Marker$render(point) {
+ 
+         if (!point) point = new GLatLng(this.Latitude, this.Longitude);
+@@ -1719,7 +1755,9 @@
+         // create
+         var marker = new GMarker(point, options);
+         this.get_marker = function () { return marker; };
+-        this.get_map().addOverlay(marker);
++        
++        if (!this.Managed)
++            this.get_map().addOverlay(marker);
+     },
+ 
+     resolve: function Artem_Google_Marker$resolve() {
+@@ -2389,6 +2427,7 @@
+     this.EnableGoogleBar = gmap.EnableGoogleBar;
+     this.EnableInfoWindow = gmap.EnableInfoWindow;
+     this.EnableMarkerManager = gmap.EnableMarkerManager;
++    this.EnableMarkerClusterer = gmap.EnableMarkerClusterer;
+     this.EnableReverseGeocoding = gmap.EnableReverseGeocoding;
+     this.EnableScrollWheelZoom = gmap.EnableScrollWheelZoom;
+     this.EnterpriseKey = gmap.EnterpriseKey;
+@@ -2423,6 +2462,7 @@
+     EnableGoogleBar: null,
+     EnableInfoWindow: null,
+     EnableMarkerManager: null,
++    EnableMarkerClusterer: null,
+     EnableReverseGeocoding: null,
+     EnableScrollWheelZoom: null,
+     EnterpriseKey: null,
+Index: Artem.GoogleMap/UI/GoogleMap.cs
+===================================================================
+--- Artem.GoogleMap/UI/GoogleMap.cs	(revision 67130)
++++ Artem.GoogleMap/UI/GoogleMap.cs	(working copy)
+@@ -214,6 +214,14 @@
+         public bool EnableMarkerManager { get; set; }
+ 
+         /// <summary>
++        /// Gets or sets a value indicating whether [enable marker clusterer].
++        /// </summary>
++        /// <value><c>true</c> if [enable marker clusterer]; otherwise, <c>false</c>.</value>
++        [Category("Behavior")]
++        public bool EnableMarkerClusterer { get; set; }
++
++
++        /// <summary>
+         /// Gets or sets a value indicating whether [enable pinch to zoom].
+         /// </summary>
+         /// <value><c>true</c> if [enable pinch to zoom]; otherwise, <c>false</c>.</value>
+Index: Artem.GoogleMap/UI/GoogleMap.Render.cs
+===================================================================
+--- Artem.GoogleMap/UI/GoogleMap.Render.cs	(revision 67130)
++++ Artem.GoogleMap/UI/GoogleMap.Render.cs	(working copy)
+@@ -170,9 +170,11 @@
+ #if DEBUG
+             yield return new ScriptReference("Artem.Google.Scripts.ArtemGoogle.js", assembly);
+             yield return new ScriptReference("Artem.Google.Scripts.markermanager.js", assembly);
++            yield return new ScriptReference("Artem.Google.Scripts.markerclusterer.js", assembly);
+ #else
+             yield return new ScriptReference("Artem.Google.Scripts.ArtemGoogle.min.js", assembly);
+             yield return new ScriptReference("Artem.Google.Scripts.markermanager_packed.js", assembly);
++            yield return new ScriptReference("Artem.Google.Scripts.markerclusterer_packed.js", assembly);
+ #endif
+         }
+         #endregion
+@@ -199,11 +201,18 @@
+                 csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.ArtemGoogle.js");
+                 if (this.EnableMarkerManager)
+                     csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.markermanager.js");
++
++                if (this.EnableMarkerClusterer)
++                    csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.markerclusterer.js");
+ #else
+                 csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.MicrosoftAjax.js");
+                 csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.ArtemGoogle.min.js");
+                 if (this.EnableMarkerManager)
+                     csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.markermanager_packed.js");
++
++                if (this.EnableMarkerClusterer)
++                    csm.RegisterClientScriptResource(type, "Artem.Google.Scripts.markerclusterer_packed.js");
++
+ #endif
+             }
+         }
+Index: Artem.GoogleMap/UI/GoogleMap.State.cs
+===================================================================
+--- Artem.GoogleMap/UI/GoogleMap.State.cs	(revision 67130)
++++ Artem.GoogleMap/UI/GoogleMap.State.cs	(working copy)
+@@ -127,6 +127,7 @@
+             public bool EnableGoogleBar { get; set; }
+             public bool EnableInfoWindow { get; set; }
+             public bool EnableMarkerManager { get; set; }
++            public bool EnableMarkerClusterer { get; set; }
+             public bool EnablePinchToZoom { get; set; }
+             public bool EnableReverseGeocoding { get; set; }
+             public bool EnableScrollWheelZoom { get; set; }
+@@ -187,6 +188,7 @@
+                 this.EnableGoogleBar = map.EnableGoogleBar;
+                 this.EnableInfoWindow = map.EnableInfoWindow;
+                 this.EnableMarkerManager = map.EnableMarkerManager;
++                this.EnableMarkerClusterer = map.EnableMarkerClusterer;
+                 this.EnablePinchToZoom = map.EnablePinchToZoom;
+                 this.EnableReverseGeocoding = map.EnableReverseGeocoding;
+                 this.EnableScrollWheelZoom = map.EnableScrollWheelZoom;
+@@ -226,6 +228,7 @@
+                 map.EnableGoogleBar = this.EnableGoogleBar;
+                 map.EnableInfoWindow = this.EnableInfoWindow;
+                 map.EnableMarkerManager = this.EnableMarkerManager;
++                map.EnableMarkerClusterer = this.EnableMarkerClusterer; 
+                 map.EnablePinchToZoom = this.EnablePinchToZoom;
+                 map.EnableReverseGeocoding = this.EnableReverseGeocoding;
+                 map.EnableScrollWheelZoom = this.EnableScrollWheelZoom;
+Index: SampleWebSite/controls/SideMenu.ascx
+===================================================================
+--- SampleWebSite/controls/SideMenu.ascx	(revision 67130)
++++ SampleWebSite/controls/SideMenu.ascx	(working copy)
+@@ -29,6 +29,7 @@
+         <li><a href="/marker/InfoContent.aspx">&raquo; InfoContent</a></li>
+         <li><a href="/marker/MarkerStyle.aspx">&raquo; MarkerStyle</a></li>
+         <li><a href="/marker/MarkerManager.aspx">&raquo; MarkerManager</a></li>
++        <li><a href="/marker/MarkerClusterer.aspx">&raquo; MarkerClusterer</a></li>
+     </ul>
+ </div>
+ <div class="sidebar_box">

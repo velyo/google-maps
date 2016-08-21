@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/GoogleMap.master"%>
+
+<asp:Content ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Polygons
+    </h3>
+    <ul>
+        <li><a href="/polygon/Default.aspx">&raquo; Polygon</a></li>
+        <li><a href="/polygon/Circle.aspx">&raquo; Circle</a></li>
+        <li><a href="/polygon/Rectangle.aspx">&raquo; Rectangle</a></li>
+        <li><a href="/polygon/Ground.aspx">&raquo; Ground Overlay</a></li>
+        <li><a href="/polygon/ClientEvents.aspx">&raquo; Client Events</a></li>
+        <li><a href="/polygon/ServerEvents.aspx">&raquo; Server Events</a></li>
+        <li><a href="/polygon/CodeBehind.aspx">&raquo; Code Behind</a></li>
+    </ul>
+</asp:Content>

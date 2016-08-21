@@ -1,0 +1,3 @@
+10613 
+by unger  17.10.2011 at
+9:50 AM Being evaluated  Added support for GeoAddressType "postal_town", otherwise your code sent exceptions on Swedish address lookups for example "Halsovagen 25, Helsingborg". Thanks for a great product otherwise.  
