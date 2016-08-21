@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Web.UI;
 
-[assembly: WebResource("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleStreetViewPanoramaBehavior.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleStreetViewPanoramaBehavior.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
@@ -41,9 +41,9 @@ namespace Velyo.Google.Map.UI
 
             string assembly = this.GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleStreetViewPanoramaBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.StreetView.GoogleStreetViewPanoramaBehavior.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleStreetViewPanoramaBehavior.min.js", assembly);
 #endif
         }
 

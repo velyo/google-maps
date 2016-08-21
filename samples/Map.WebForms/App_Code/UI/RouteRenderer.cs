@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 
@@ -26,7 +26,7 @@ namespace Artem.GoogleMap.WebSite.UI {
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteRenderer"/> class.
         /// </summary>
-        /// <param name="args">The <see cref="Artem.Google.UI.DirectionsChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="args">The <see cref="Velyo.Google.Map.UI.DirectionsChangedEventArgs"/> instance containing the event data.</param>
         public RouteRenderer(DirectionsChangedEventArgs args) {
             this.EventArgs = args;
         }

@@ -10,7 +10,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 
 namespace Artem.GoogleMap.WebSite.Maps {
 

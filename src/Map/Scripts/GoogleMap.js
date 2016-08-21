@@ -17,27 +17,27 @@
 //              http://www.codeplex.com/googlemap/license
 // API:         http://code.google.com/apis/maps/
 
-Type.registerNamespace("Artem.Google"); 
+Type.registerNamespace("Velyo.Google"); 
 
 // Map class
-Artem.Google.Map = function (element) {
+Velyo.Google.Map.UI = function (element) {
     /// <summary>This class represents the client GoogleMap control object.</summary>
-    Artem.Google.Map.initializeBase(this, [element]);
+    Velyo.Google.Map.UI.initializeBase(this, [element]);
 }; 
 
-Artem.Google.Map.prototype = {
+Velyo.Google.Map.UI.prototype = {
 
     initialize: function () {
-        Artem.Google.Map.callBaseMethod(this, 'initialize');
+        Velyo.Google.Map.UI.callBaseMethod(this, 'initialize');
         this.create();
     },
 
     dispose: function () {
         this.detachEvents();
-        Artem.Google.Map.callBaseMethod(this, 'dispose');
+        Velyo.Google.Map.UI.callBaseMethod(this, 'dispose');
     }
 };
-Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
+Velyo.Google.Map.UI.registerClass("Velyo.Google.Map.UI", Sys.UI.Control);
 
 // members
 (function (proto) {
@@ -175,7 +175,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
 
         if (!location) {
             if (this.center)
-                location = Artem.Google.Convert.toLatLng(this.center);
+                location = Velyo.Google.Convert.toLatLng(this.center);
         }
         else {
             this.center = location;
@@ -185,7 +185,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         if (location || this.bounds) {
             var options = {
                 center: location,
-                mapTypeId: Artem.Google.Convert.toMapTypeId(this.mapType),
+                mapTypeId: Velyo.Google.Convert.toMapTypeId(this.mapType),
                 zoom: this.zoom,
                 backgroundColor: this.backgroundColor,
                 disableDefaultUI: this.disableDefaultUI,
@@ -252,7 +252,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 input.onkeypress = function (e) {
                     if (e.keyCode == 13) { // Detect Enter
                         var options = { address: this.value, language: self.language, region: self.region };
-                        Artem.Google.Geocoding.getResults(options, function (results) {
+                        Velyo.Google.Geocoding.getResults(options, function (results) {
                             if (results && results.length)
                                 self.map.fitBounds(results[0].geometry.bounds);
                         });
@@ -270,7 +270,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                     language: this.language,
                     region: this.region
                 };
-                Artem.Google.Geocoding.getAddress(options,
+                Velyo.Google.Geocoding.getAddress(options,
                     Function.createDelegate(this, function (address) { this.address = address; }));
             }
 
@@ -287,7 +287,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
                 language: this.language,
                 region: this.region
             };
-            Artem.Google.Geocoding.getLocation(options, Function.createDelegate(this, this.create));
+            Velyo.Google.Geocoding.getLocation(options, Function.createDelegate(this, this.create));
         }
     };
 
@@ -385,7 +385,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         this.map.setZoom(zoom);
     };
 
-})(Artem.Google.Map.prototype);
+})(Velyo.Google.Map.UI.prototype);
 
 // events
 (function (proto) {
@@ -762,7 +762,7 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         if (handler) handler(this, e);
     }
 
-})(Artem.Google.Map.prototype);
+})(Velyo.Google.Map.UI.prototype);
 
 // server events - entry points
 (function (control) {
@@ -894,12 +894,12 @@ Artem.Google.Map.registerClass("Artem.Google.Map", Sys.UI.Control);
         raiseServerEvent(sender.get_name(), getMapEventArgs(sender, "zoomChanged"));
     };
 
-})(Artem.Google.Map);
+})(Velyo.Google.Map.UI);
 
 // utilities //////////////////////////////////////////////////////////////////
 
 // convert
-Artem.Google.Convert = (function () {
+Velyo.Google.Convert = (function () {
 
     function latlng(point) {
         return (point) ? new google.maps.LatLng(point.lat, point.lng) : null;
@@ -949,7 +949,7 @@ Artem.Google.Convert = (function () {
 })();
 
 // geocoding
-Artem.Google.Geocoding = (function () {
+Velyo.Google.Geocoding = (function () {
 
     var geocoder;
 
@@ -971,11 +971,11 @@ Artem.Google.Geocoding = (function () {
                     callback(address);
                 }
                 catch (ex) {
-                    Artem.Google.Log.error(ex);
+                    Velyo.Google.Log.error(ex);
                 }
             }
             else {
-                Artem.Google.Log.error("Reverse location geocoding failed with status: " + status);
+                Velyo.Google.Log.error("Reverse location geocoding failed with status: " + status);
             }
         });
     }
@@ -998,7 +998,7 @@ Artem.Google.Geocoding = (function () {
                     callback(location);
                 }
                 catch (ex) {
-                    Artem.Google.Log.error(ex);
+                    Velyo.Google.Log.error(ex);
                 }
             }
             else {
@@ -1021,7 +1021,7 @@ Artem.Google.Geocoding = (function () {
                     callback(results);
                 }
                 catch (ex) {
-                    Artem.Google.Log.error(ex);
+                    Velyo.Google.Log.error(ex);
                 }
             }
             else {
@@ -1033,7 +1033,7 @@ Artem.Google.Geocoding = (function () {
     function handleAddressError(status, options, callback) {
 
         if (options.defaultAddress) {
-            Artem.Google.Log.warn(status + " ... applying default address.");
+            Velyo.Google.Log.warn(status + " ... applying default address.");
 
             var request = {
                 address: options.defaultAddress,
@@ -1056,7 +1056,7 @@ Artem.Google.Geocoding = (function () {
             });
         }
         else {
-            Artem.Google.Log.error("Address geocoding failed with status: " + status + "\nDefaultAddress is not set and map was left empty!");
+            Velyo.Google.Log.error("Address geocoding failed with status: " + status + "\nDefaultAddress is not set and map was left empty!");
         }
     }
 
@@ -1064,7 +1064,7 @@ Artem.Google.Geocoding = (function () {
 })();
 
 // log
-Artem.Google.Log = (function () {
+Velyo.Google.Log = (function () {
 
     // methods
 
@@ -1133,7 +1133,7 @@ Artem.Worker = (function () {
 
 // utility functions
 // object merging
-Artem.Google.merge = function (obj1, obj2) {
+Velyo.Google.merge = function (obj1, obj2) {
     var result = {};
     if (obj1)
         for (var name in obj1) result[name] = obj1[name];

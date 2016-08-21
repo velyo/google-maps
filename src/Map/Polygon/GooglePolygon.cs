@@ -8,8 +8,8 @@ using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 
-[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Polygon.GooglePolygonBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GooglePolygonBehavior.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GooglePolygonBehavior.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
@@ -337,9 +337,9 @@ namespace Velyo.Google.Map.UI
 
             string assembly = GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GooglePolygonBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polygon.GooglePolygonBehavior.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GooglePolygonBehavior.min.js", assembly);
 #endif
         }
 

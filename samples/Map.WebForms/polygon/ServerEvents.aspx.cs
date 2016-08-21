@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 
 namespace Artem.GoogleMap.WebSite.Polygons {
 
@@ -27,7 +27,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the click.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleClick(object sender, MouseEventArgs e) {
             this.PrintEvent("Click", e);
         }
@@ -36,7 +36,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the double click.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleDoubleClick(object sender, MouseEventArgs e) {
             this.PrintEvent("DoubleClick", e);
         }
@@ -44,7 +44,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the mouse down.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseDown(object sender, MouseEventArgs e) {
             this.PrintEvent("MouseDown", e);
         }
@@ -54,7 +54,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         ///// Handles the mouse move.
         ///// </summary>
         ///// <param name="sender">The sender.</param>
-        ///// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        ///// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         //protected void HandleMouseMove(object sender, MouseEventArgs e) {
         //    this.PrintEvent("MouseMove", e);
         //}
@@ -63,7 +63,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the mouse out.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseOut(object sender, MouseEventArgs e) {
             this.PrintEvent("MouseOut", e);
         }
@@ -72,7 +72,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the mouse over.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseOver(object sender, MouseEventArgs e) {
             this.PrintEvent("MouseOver", e);
         }
@@ -81,7 +81,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the mouse up.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseUp(object sender, MouseEventArgs e) {
             this.PrintEvent("MouseUp", e);
         }
@@ -90,7 +90,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Handles the right click.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void HandleRightClick(object sender, MouseEventArgs e) {
             this.PrintEvent("RightClick", e);
         }
@@ -99,7 +99,7 @@ namespace Artem.GoogleMap.WebSite.Polygons {
         /// Prints the event.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MouseEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MouseEventArgs"/> instance containing the event data.</param>
         protected void PrintEvent(string name, MouseEventArgs e) {
             lbEvents.Items.Add(
                 string.Format("{0} event was fired (lat: {1}, lng: {2}).",

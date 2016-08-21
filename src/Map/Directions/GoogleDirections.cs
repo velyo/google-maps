@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 
-[assembly: WebResource("Artem.Google.Directions.GoogleDirectionsBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Directions.GoogleDirectionsBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleDirectionsBehavior.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleDirectionsBehavior.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
@@ -374,9 +374,9 @@ namespace Velyo.Google.Map.UI
 
             string assembly = this.GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Directions.GoogleDirectionsBehavior.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleDirectionsBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Directions.GoogleDirectionsBehavior.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleDirectionsBehavior.min.js", assembly);
 #endif
         }
 

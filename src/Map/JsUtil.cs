@@ -9,6 +9,9 @@ using Velyo.Google.Map.Serialization;
 
 namespace Velyo.Google
 {
+    /// <summary>
+    /// Java Script utility methods.
+    /// </summary>
     public static class JsUtil
     {
         static NumberFormatInfo _NumberFormat;

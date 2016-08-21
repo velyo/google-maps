@@ -25,6 +25,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.WebForms", "D:\Projects\my\google-map\samples\Map.WebForms\", "{49695930-3339-49D0-8DAF-E5E1CEC33EBB}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{0660ea3d-b58b-4858-9822-9a6459a4001c}|Velyo.Google.Map.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_62110"
 		Debug.AspNetCompiler.PhysicalPath = "D:\Projects\my\google-map\samples\Map.WebForms\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62110\"
@@ -40,6 +41,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.WebForms", "D:\Projects
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "62110"
+		SlnRelativePath = "D:\Projects\my\google-map\samples\Map.WebForms\"
 	EndProjectSection
 EndProject
 Global

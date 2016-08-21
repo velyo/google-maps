@@ -2,33 +2,35 @@
 ///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Velyo.Google");
 
-Artem.Google.PolygonBehavior = function (element) {
-    Artem.Google.PolygonBehavior.initializeBase(this, [element]);
+Velyo.Google.RectangleBehavior = function (element) {
+    Velyo.Google.RectangleBehavior.initializeBase(this, [element]);
 };
 
-Artem.Google.PolygonBehavior.prototype = {
+Velyo.Google.RectangleBehavior.prototype = {
     initialize: function () {
-        Artem.Google.PolygonBehavior.callBaseMethod(this, 'initialize');
+        Velyo.Google.RectangleBehavior.callBaseMethod(this, 'initialize');
         Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
-        Artem.Google.PolygonBehavior.callBaseMethod(this, 'dispose');
+        Velyo.Google.RectangleBehavior.callBaseMethod(this, 'dispose');
     }
 };
-Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.UI.Behavior);
 
 // members
 (function (proto) {
 
-    // fieds
+    // fields
 
     proto.map = null;
-    proto.polygon = null;
+    proto.rect = null;
 
     // properties
+
+    proto.get_bounds = function () { return this.bounds; };
+    proto.set_bounds = function (value) { this.bounds = value; };
 
     proto.get_clickable = function () { return this.clickable; };
     proto.set_clickable = function (value) { this.clickable = value; };
@@ -44,9 +46,6 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
 
     proto.get_name = function () { return this.name; };
     proto.set_name = function (value) { this.name = value; };
-
-    proto.get_paths = function () { return this.paths; };
-    proto.set_paths = function (value) { this.paths = value; };
 
     proto.get_strokeColor = function () { return this.strokeColor; };
     proto.set_strokeColor = function (value) { this.strokeColor = value; };
@@ -69,8 +68,8 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
     };
 
     proto._detach = function () {
-        if (this.polygon)
-            google.maps.event.clearInstanceListeners(this.polygon);
+        if (this.rect)
+            google.maps.event.clearInstanceListeners(this.rect);
     };
 
     proto.create = function () {
@@ -79,62 +78,51 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
         if (control)
             this.map = control.map;
 
-        var points = Artem.Google.Convert.toLatLngArray(this.paths);
         var options = {
+            bounds: Velyo.Google.Convert.toLatLngBounds(this.bounds),
             clickable: this.clickable,
             fillColor: this.fillColor,
             fillOpacity: this.fillOpacity,
             geodesic: this.geodesic,
             map: this.map,
-            paths: points,
             strokeColor: this.strokeColor,
             strokeOpacity: this.strokeOpacity,
             strokeWeight: this.strokeWeight,
             zIndex: this.zIndex
         };
 
-        this.polygon = new google.maps.Polygon(options);
+        this.rect = new google.maps.Rectangle(options);
         this.composeEvents();
     };
 
     // GoogleMaps API
 
+    proto.getBounds = function () {
+        ///<summary>Returns the bounds of this rectangle.</summary>
+        return this.rect.getBounds();
+    };
+
     proto.getMap = function () {
-        ///<summary>Returns the map on which this poly is attached.</summary>
-        return this.polygon.getMap();
+        ///<summary>Returns the map on which this rectangle is displayed.</summary>
+        return this.rect.getMap();
     };
 
-    proto.getPath = function () {
-        ///<summary>Retrieves the first path.</summary>        
-        return this.polygon.getPath();
-    };
-
-    proto.getPaths = function () {
-        ///<summary>Retrieves the paths for this Polygon.</summary>
-        return this.polygon.getPaths()
+    proto.setBounds = function (value) {
+        ///<summary>Sets the bounds of this rectangle.</summary>
+        this.rect.setBounds(value);
     };
 
     proto.setMap = function (map) {
-        ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        this.polygon.setMap(map);
+        ///<summary>Renders the rectangle on the specified map. If map is set to null, the rectangle will be removed.</summary>
+        this.rect.setMap(map);
     };
 
     proto.setOptions = function (options) {
         ///<summary></summary>
-        this.polygon.setOptions(options);
+        this.rect.setOptions(options);
     };
 
-    proto.setPath = function (path) {
-        ///<summary>Sets the first path. See PolylineOptions for more details.</summary>
-        this.polygon.setPath(path);
-    };
-
-    proto.setPaths = function (paths) {
-        ///<summary>Sets the path for this Polygon.</summary>
-        this.polygon.setPaths(paths);
-    };
-
-})(Artem.Google.PolygonBehavior.prototype);
+})(Velyo.Google.RectangleBehavior.prototype);
 
 // events
 (function (proto) {
@@ -160,6 +148,7 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
         "mouseup": null,
         "rightclick": null
     };
+
     proto.listeners = {
         "click": null,
         "dblclick": null,
@@ -175,14 +164,14 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
 
     proto.composeEvents = function () {
 
-        if (this.polygon) {
+        if (this.rect) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
                     if (!this.listeners[name]) {
                         if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
-                        this.listeners[name] = google.maps.event.addListener(this.polygon, name, this.delegates[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.rect, name, this.delegates[name]);
                     }
                 }
                 else if (this.listeners[name]) {
@@ -290,7 +279,7 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
         if (handler) handler(this, e);
     }
 
-    // mouse right
+    // mouse up
     proto.add_rightClick = function (handler) {
         this.get_events().addHandler("rightclick", handler);
         this.composeEvents();
@@ -304,7 +293,7 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
         if (handler) handler(this, e);
     }
 
-})(Artem.Google.PolygonBehavior.prototype);
+})(Velyo.Google.RectangleBehavior.prototype);
 
 // server events - entry points
 (function (behavior) {
@@ -369,4 +358,6 @@ Artem.Google.PolygonBehavior.registerClass('Artem.Google.PolygonBehavior', Sys.U
             { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "rightClick" });
     };
 
-})(Artem.Google.PolygonBehavior);
+})(Velyo.Google.RectangleBehavior);
+
+Velyo.Google.RectangleBehavior.registerClass('Velyo.Google.RectangleBehavior', Sys.UI.Behavior);

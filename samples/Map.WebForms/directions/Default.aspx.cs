@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 
 namespace Artem.GoogleMap.WebSite.Directions {
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 using System.Web.UI.WebControls;
 
 namespace Artem.GoogleMap.WebSite.Markers {
@@ -42,7 +42,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the map event.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MapEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MapEventArgs"/> instance containing the event data.</param>
         protected void HandleMapEvent(object sender, MapEventArgs e) {
 
             _bounds = e.Bounds;

@@ -1,20 +1,20 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
 ///<reference path="..\Scripts\GoogleMap.js"/>
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Velyo.Google");
 
-Artem.Google.DirectionsBehavior = function (element) {
-    Artem.Google.DirectionsBehavior.initializeBase(this, [element]);
+Velyo.Google.DirectionsBehavior = function (element) {
+    Velyo.Google.DirectionsBehavior.initializeBase(this, [element]);
 }
 
-Artem.Google.DirectionsBehavior.prototype = {
+Velyo.Google.DirectionsBehavior.prototype = {
     initialize: function () {
-        Artem.Google.DirectionsBehavior.callBaseMethod(this, 'initialize');
+        Velyo.Google.DirectionsBehavior.callBaseMethod(this, 'initialize');
         Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
-        Artem.Google.DirectionsBehavior.callBaseMethod(this, 'dispose');
+        Velyo.Google.DirectionsBehavior.callBaseMethod(this, 'dispose');
     }
 };
 
@@ -154,15 +154,15 @@ Artem.Google.DirectionsBehavior.prototype = {
             this.service.route(request, Function.createDelegate(this, handleResponse));
         }
         else {
-            if (!this.origin) Artem.Google.Log.warn("GoogleDirections: origin value is missing!");
-            if (!this.destination) Artem.Google.Log.warn("GoogleDirections: destination value is missing!");
+            if (!this.origin) Velyo.Google.Log.warn("GoogleDirections: origin value is missing!");
+            if (!this.destination) Velyo.Google.Log.warn("GoogleDirections: destination value is missing!");
         }
     };
 
     // private methods
 
     function handleError(status) {
-        Artem.Google.Log.error("Directions routing failed with status: " + status);
+        Velyo.Google.Log.error("Directions routing failed with status: " + status);
     }
 
     function handleResponse(result, status) {
@@ -246,7 +246,7 @@ Artem.Google.DirectionsBehavior.prototype = {
         this.routeIndex = routeIndex;
     };
 
-})(Artem.Google.DirectionsBehavior.prototype);
+})(Velyo.Google.DirectionsBehavior.prototype);
 
 // events
 (function (proto) {
@@ -285,9 +285,9 @@ Artem.Google.DirectionsBehavior.prototype = {
         if (handler) handler(this, args);
     }
 
-})(Artem.Google.DirectionsBehavior.prototype);
+})(Velyo.Google.DirectionsBehavior.prototype);
 
-Artem.Google.DirectionsBehavior.raiseServerChanged = function (sender) {
+Velyo.Google.DirectionsBehavior.raiseServerChanged = function (sender) {
 
     var routes = sender.getDirections().routes;
     var args = { name: "change" };
@@ -332,4 +332,4 @@ Artem.Google.DirectionsBehavior.raiseServerChanged = function (sender) {
     __doPostBack(sender.get_name(), Sys.Serialization.JavaScriptSerializer.serialize(args));
 };
 
-Artem.Google.DirectionsBehavior.registerClass('Artem.Google.DirectionsBehavior', Sys.UI.Behavior);
+Velyo.Google.DirectionsBehavior.registerClass('Velyo.Google.DirectionsBehavior', Sys.UI.Behavior);

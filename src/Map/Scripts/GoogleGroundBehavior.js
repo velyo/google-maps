@@ -2,24 +2,24 @@
 ///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Velyo.Google");
 
-Artem.Google.GroundBehavior = function (element) {
-    Artem.Google.GroundBehavior.initializeBase(this, [element]);
+Velyo.Google.GroundBehavior = function (element) {
+    Velyo.Google.GroundBehavior.initializeBase(this, [element]);
 };
 
-Artem.Google.GroundBehavior.prototype = {
+Velyo.Google.GroundBehavior.prototype = {
     initialize: function () {
-        Artem.Google.GroundBehavior.callBaseMethod(this, 'initialize');
+        Velyo.Google.GroundBehavior.callBaseMethod(this, 'initialize');
         Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
-        Artem.Google.GroundBehavior.callBaseMethod(this, 'dispose');
+        Velyo.Google.GroundBehavior.callBaseMethod(this, 'dispose');
     }
 };
 
-Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.Behavior);
+Velyo.Google.GroundBehavior.registerClass('Velyo.Google.GroundBehavior', Sys.UI.Behavior);
 
 // members
 (function (proto) {
@@ -67,7 +67,7 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
             this.map = control.map;
         this.ground = new google.maps.GroundOverlay(
             url,
-            Artem.Google.Convert.toLatLngBounds(bounds),
+            Velyo.Google.Convert.toLatLngBounds(bounds),
             { clickable: clickable, map: this.map });
         this.composeEvents();
     };
@@ -94,7 +94,7 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
         return this.ground.setMap(map);
     };
 
-})(Artem.Google.GroundBehavior.prototype);
+})(Velyo.Google.GroundBehavior.prototype);
 
 // events
 (function (proto) {
@@ -145,7 +145,7 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
         if (handler) handler(this, e);
     }
 
-})(Artem.Google.GroundBehavior.prototype);
+})(Velyo.Google.GroundBehavior.prototype);
 
 // server events - entry points
 (function (behavior) {
@@ -161,4 +161,4 @@ Artem.Google.GroundBehavior.registerClass('Artem.Google.GroundBehavior', Sys.UI.
             { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "click" });
     };
 
-})(Artem.Google.GroundBehavior);
+})(Velyo.Google.GroundBehavior);

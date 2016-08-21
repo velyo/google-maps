@@ -12,12 +12,13 @@ using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-[assembly: WebResource("Artem.Google.Map.GoogleMap.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Map.GoogleMap.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleMap.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleMap.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
     /// <summary>
+    /// 
     /// </summary>
     [Designer("Artem.Google.UI.GoogleMapDesigner, Artem.Google, Version=6.0.0.0, Culture=neutral, PublicKeyToken=fc8d6190a3aeb01c")]
     [ToolboxData("<{0}:GoogleMap runat=\"server\"></{0}:GoogleMap>")]
@@ -1115,7 +1116,7 @@ namespace Velyo.Google.Map.UI
         /// </returns>
         protected override IEnumerable<ScriptDescriptor> GetScriptDescriptors()
         {
-            var descriptor = new ScriptControlDescriptor("Artem.Google.Map", ClientID);
+            var descriptor = new ScriptControlDescriptor("Velyo.Google.Map.UI", ClientID);
 
             #region properties
 
@@ -1186,97 +1187,97 @@ namespace Velyo.Google.Map.UI
             #region events
 
             if (BoundsChanged != null)
-                descriptor.AddEvent("boundsChanged", "Artem.Google.Map.raiseServerBoundsChanged");
+                descriptor.AddEvent("boundsChanged", "Velyo.Google.Map.UI.raiseServerBoundsChanged");
             else if (OnClientBoundsChanged != null)
                 descriptor.AddEvent("boundsChanged", OnClientBoundsChanged);
 
             if (CenterChanged != null)
-                descriptor.AddEvent("centerChanged", "Artem.Google.Map.raiseServerCenterChanged");
+                descriptor.AddEvent("centerChanged", "Velyo.Google.Map.UI.raiseServerCenterChanged");
             else if (OnClientCenterChanged != null)
                 descriptor.AddEvent("centerChanged", OnClientCenterChanged);
 
             if (Click != null)
-                descriptor.AddEvent("click", "Artem.Google.Map.raiseServerClick");
+                descriptor.AddEvent("click", "Velyo.Google.Map.UI.raiseServerClick");
             else if (OnClientClick != null)
                 descriptor.AddEvent("click", OnClientClick);
 
             if (DoubleClick != null)
-                descriptor.AddEvent("doubleClick", "Artem.Google.Map.raiseServerDoubleClick");
+                descriptor.AddEvent("doubleClick", "Velyo.Google.Map.UI.raiseServerDoubleClick");
             else if (OnClientDoubleClick != null)
                 descriptor.AddEvent("doubleClick", OnClientDoubleClick);
 
             if (Drag != null)
-                descriptor.AddEvent("drag", "Artem.Google.Map.raiseServerDrag");
+                descriptor.AddEvent("drag", "Velyo.Google.Map.UI.raiseServerDrag");
             else if (OnClientDrag != null)
                 descriptor.AddEvent("drag", OnClientDrag);
 
             if (DragEnd != null)
-                descriptor.AddEvent("dragEnd", "Artem.Google.Map.raiseServerDragEnd");
+                descriptor.AddEvent("dragEnd", "Velyo.Google.Map.UI.raiseServerDragEnd");
             else if (OnClientDragEnd != null)
                 descriptor.AddEvent("dragEnd", OnClientDragEnd);
 
             if (DragStart != null)
-                descriptor.AddEvent("dragStart", "Artem.Google.Map.raiseServerDragStart");
+                descriptor.AddEvent("dragStart", "Velyo.Google.Map.UI.raiseServerDragStart");
             else if (OnClientDragStart != null)
                 descriptor.AddEvent("dragStart", OnClientDragStart);
 
             if (HeadingChanged != null)
-                descriptor.AddEvent("headingChanged", "Artem.Google.Map.raiseServerHeadingChanged");
+                descriptor.AddEvent("headingChanged", "Velyo.Google.Map.UI.raiseServerHeadingChanged");
             else if (OnClientHeadingChanged != null)
                 descriptor.AddEvent("headingChanged", OnClientHeadingChanged);
 
             if (Idle != null)
-                descriptor.AddEvent("idle", "Artem.Google.Map.raiseServerIdle");
+                descriptor.AddEvent("idle", "Velyo.Google.Map.UI.raiseServerIdle");
             else if (OnClientIdle != null)
                 descriptor.AddEvent("idle", OnClientIdle);
 
             if (MapTypeChanged != null)
-                descriptor.AddEvent("mapTypeChanged", "Artem.Google.Map.raiseServerMapTypeChanged");
+                descriptor.AddEvent("mapTypeChanged", "Velyo.Google.Map.UI.raiseServerMapTypeChanged");
             else if (OnClientMapTypeChanged != null)
                 descriptor.AddEvent("mapTypeChanged", OnClientMapTypeChanged);
 
             if (MouseMove != null)
-                descriptor.AddEvent("mouseMove", "Artem.Google.Map.raiseServerMouseMove");
+                descriptor.AddEvent("mouseMove", "Velyo.Google.Map.UI.raiseServerMouseMove");
             else if (OnClientMouseMove != null)
                 descriptor.AddEvent("mouseMove", OnClientMouseMove);
 
             if (MouseOut != null)
-                descriptor.AddEvent("mouseOut", "Artem.Google.Map.raiseServerMouseOut");
+                descriptor.AddEvent("mouseOut", "Velyo.Google.Map.UI.raiseServerMouseOut");
             else if (OnClientMouseMove != null)
                 descriptor.AddEvent("mouseOut", OnClientMouseOut);
 
             if (MouseOver != null)
-                descriptor.AddEvent("mouseOver", "Artem.Google.Map.raiseServerMouseOver");
+                descriptor.AddEvent("mouseOver", "Velyo.Google.Map.UI.raiseServerMouseOver");
             else if (OnClientMouseOver != null)
                 descriptor.AddEvent("mouseOver", OnClientMouseOver);
 
             if (ProjectionChanged != null)
-                descriptor.AddEvent("projectionChanged", "Artem.Google.Map.raiseServerProjectionChanged");
+                descriptor.AddEvent("projectionChanged", "Velyo.Google.Map.UI.raiseServerProjectionChanged");
             else if (OnClientProjectionChanged != null)
                 descriptor.AddEvent("projectionChanged", OnClientProjectionChanged);
 
             if (Resize != null)
-                descriptor.AddEvent("resize", "Artem.Google.Map.raiseServerResize");
+                descriptor.AddEvent("resize", "Velyo.Google.Map.UI.raiseServerResize");
             else if (OnClientResize != null)
                 descriptor.AddEvent("resize", OnClientResize);
 
             if (RightClick != null)
-                descriptor.AddEvent("rightClick", "Artem.Google.Map.raiseServerRightClick");
+                descriptor.AddEvent("rightClick", "Velyo.Google.Map.UI.raiseServerRightClick");
             else if (OnClientRightClick != null)
                 descriptor.AddEvent("rightClick", OnClientRightClick);
 
             if (TilesLoaded != null)
-                descriptor.AddEvent("tilesLoaded", "Artem.Google.Map.raiseServerTilesLoaded");
+                descriptor.AddEvent("tilesLoaded", "Velyo.Google.Map.UI.raiseServerTilesLoaded");
             else if (OnClientTilesLoaded != null)
                 descriptor.AddEvent("tilesLoaded", OnClientTilesLoaded);
 
             if (TiltChanged != null)
-                descriptor.AddEvent("tiltChanged", "Artem.Google.Map.raiseServerTiltChanged");
+                descriptor.AddEvent("tiltChanged", "Velyo.Google.Map.UI.raiseServerTiltChanged");
             else if (OnClientTiltChanged != null)
                 descriptor.AddEvent("tiltChanged", OnClientTiltChanged);
 
             if (ZoomChanged != null)
-                descriptor.AddEvent("zoomChanged", "Artem.Google.Map.raiseServerZoomChanged");
+                descriptor.AddEvent("zoomChanged", "Velyo.Google.Map.UI.raiseServerZoomChanged");
             else if (OnClientZoomChanged != null)
                 descriptor.AddEvent("zoomChanged", OnClientZoomChanged);
 
@@ -1295,9 +1296,9 @@ namespace Velyo.Google.Map.UI
         {
             string assembly = GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Map.GoogleMap.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleMap.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Map.GoogleMap.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleMap.min.js", assembly);
 #endif
         }
 

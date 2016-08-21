@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 
 namespace Artem.GoogleMap.WebSite.Markers {
 
@@ -18,7 +18,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the animation changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleAnimationChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("AnimationChanged", e);
         }
@@ -36,7 +36,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the click.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleClick(object sender, MarkerEventArgs e) {
             this.PrintEvent("Click", e);
         }
@@ -45,7 +45,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the clickable changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleClickableChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("ClickableChanged", e);
         }
@@ -54,7 +54,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the cursor changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleCursorChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("CursorChanged", e);
         }
@@ -63,7 +63,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the double click.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleDoubleClick(object sender, MarkerEventArgs e) {
             this.PrintEvent("DoubleClick", e);
         }
@@ -72,7 +72,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the drag.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleDrag(object sender, MarkerEventArgs e) {
             this.PrintEvent("Drag", e);
         }
@@ -81,7 +81,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the drag end.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleDragEnd(object sender, MarkerEventArgs e) {
             this.PrintEvent("DragEnd", e);
         }
@@ -90,7 +90,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the draggable changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleDraggableChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("DraggableChanged", e);
         }
@@ -99,7 +99,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the drag start.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleDragStart(object sender, MarkerEventArgs e) {
             this.PrintEvent("DragStart", e);
         }
@@ -108,7 +108,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the flat changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleFlatChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("FlatChanged", e);
         }
@@ -117,7 +117,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the icon changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleIconChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("IconChanged", e);
         }
@@ -126,7 +126,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the mouse down.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseDown(object sender, MarkerEventArgs e) {
             this.PrintEvent("MouseDown", e);
         }
@@ -135,7 +135,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the mouse out.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseOut(object sender, MarkerEventArgs e) {
             this.PrintEvent("MouseOut", e);
         }
@@ -144,7 +144,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the mouse over.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseOver(object sender, MarkerEventArgs e) {
             this.PrintEvent("MouseOver", e);
         }
@@ -153,7 +153,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the mouse up.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleMouseUp(object sender, MarkerEventArgs e) {
             this.PrintEvent("MouseUp", e);
         }
@@ -162,7 +162,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the position changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandlePositionChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("PositionChanged", e);
         }
@@ -171,7 +171,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the right click.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleRightClick(object sender, MarkerEventArgs e) {
             this.PrintEvent("RightClick", e);
         }
@@ -180,7 +180,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the shadow changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleShadowChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("ShadowChanged", e);
         }
@@ -189,7 +189,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the shape changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleShapeChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("ShapeChanged", e);
         }
@@ -198,7 +198,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the title changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleTitleChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("TitleChanged", e);
         }
@@ -207,7 +207,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the visible changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleVisibleChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("VisibleChanged", e);
         }
@@ -216,7 +216,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Handles the Z index changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void HandleZIndexChanged(object sender, MarkerEventArgs e) {
             this.PrintEvent("ZIndexChanged", e);
         }
@@ -225,7 +225,7 @@ namespace Artem.GoogleMap.WebSite.Markers {
         /// Prints the event.
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <param name="e">The <see cref="Artem.Google.UI.MarkerEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Velyo.Google.Map.UI.MarkerEventArgs"/> instance containing the event data.</param>
         protected void PrintEvent(string name, MarkerEventArgs e) {
             lbEvents.Items.Add(
                 string.Format("{0} event was fired by marker [index: {1}] at position [lat: {2}, lng: {3}].",

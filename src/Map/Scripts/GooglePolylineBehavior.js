@@ -1,21 +1,21 @@
 ﻿///<reference name="MicrosoftAjax.debug.js"/>
-///<reference path="..\Scripts\GoogleMap.js"/>
+///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Velyo.Google");
 
-Artem.Google.CircleBehavior = function (element) {
-    Artem.Google.CircleBehavior.initializeBase(this, [element]);
+Velyo.Google.PolylineBehavior = function (element) {
+    Velyo.Google.PolylineBehavior.initializeBase(this, [element]);
 };
 
-Artem.Google.CircleBehavior.prototype = {
+Velyo.Google.PolylineBehavior.prototype = {
     initialize: function () {
-        Artem.Google.CircleBehavior.callBaseMethod(this, 'initialize');
+        Velyo.Google.PolylineBehavior.callBaseMethod(this, 'initialize');
         Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
-        Artem.Google.CircleBehavior.callBaseMethod(this, 'dispose');
+        Velyo.Google.PolylineBehavior.callBaseMethod(this, 'dispose');
     }
 };
 
@@ -25,21 +25,12 @@ Artem.Google.CircleBehavior.prototype = {
     // fields
 
     proto.map = null;
-    proto.circle = null;
+    proto.polyline = null;
 
     // properties
 
-    proto.get_center = function () { return this.center; };
-    proto.set_center = function (value) { this.center = value; };
-
     proto.get_clickable = function () { return this.clickable; };
     proto.set_clickable = function (value) { this.clickable = value; };
-
-    proto.get_fillColor = function () { return this.fillColor; };
-    proto.set_fillColor = function (value) { this.fillColor = value; };
-
-    proto.get_fillOpacity = function () { return this.fillOpacity; };
-    proto.set_fillOpacity = function (value) { this.fillOpacity = value; };
 
     proto.get_geodesic = function () { return this.geodesic; };
     proto.set_geodesic = function (value) { this.geodesic = value; };
@@ -47,8 +38,8 @@ Artem.Google.CircleBehavior.prototype = {
     proto.get_name = function () { return this.name; };
     proto.set_name = function (value) { this.name = value; };
 
-    proto.get_radius = function () { return this.radius; };
-    proto.set_radius = function (value) { this.radius = value; };
+    proto.get_path = function () { return this.path; };
+    proto.set_path = function (value) { this.path = value; };
 
     proto.get_strokeColor = function () { return this.strokeColor; };
     proto.set_strokeColor = function (value) { this.strokeColor = value; };
@@ -71,79 +62,60 @@ Artem.Google.CircleBehavior.prototype = {
     };
 
     proto._detach = function () {
-        if (this.circle)
-            google.maps.event.clearInstanceListeners(this.circle);
+        if (this.polyline)
+            google.maps.event.clearInstanceListeners(this.polyline);
     };
 
     proto.create = function () {
 
-        if (!this.map) {
-            var control = $find(this.get_element().id);
-            if (control)
-                this.map = control.map;
-        }
+        var control = $find(this.get_element().id);
+        if (control)
+            this.map = control.map;
 
+        var points = Velyo.Google.Convert.toLatLngArray(this.path);
         var options = {
-            center: new google.maps.LatLng(this.center.lat, this.center.lng),
             clickable: this.clickable,
-            fillColor: this.fillColor,
-            fillOpacity: this.fillOpacity,
             geodesic: this.geodesic,
             map: this.map,
-            radius: this.radius,
+            path: points,
             strokeColor: this.strokeColor,
             strokeOpacity: this.strokeOpacity,
             strokeWeight: this.strokeWeight,
             zIndex: this.zIndex
         };
 
-        this.circle = new google.maps.Circle(options);
+        this.polyline = new google.maps.Polyline(options);
         this.composeEvents();
     };
 
     // GoogleMaps API
 
-    proto.getBounds = function () {
-        ///<summary>Gets the LatLngBounds of this Circle.</summary>
-        return this.circle.getBounds();
-    };
-
-    proto.getCenter = function () {
-        ///<summary>Returns the center of this circle.</summary>
-        return this.circle.getCenter();
-    };
-
     proto.getMap = function () {
         ///<summary>Returns the map on which this poly is attached.</summary>
-        return this.circle.getMap();
+        return this.polyline.getMap();
     };
 
-    proto.getRadius = function () {
-        ///<summary>Returns the radius of this circle (in meters).</summary>
-        return this.circle.getRadius();
-    };
-
-    proto.setCenter = function (value) {
-        ///<summary>Sets the center of this circle.</summary>
-        this.circle.setCenter(value);
+    proto.getPath = function () {
+        ///<summary>Retrieves the first path.</summary>
+        return this.polyline.getPath();
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        this.circle.setMap(map);
+        this.polyline.setMap(map);
     };
 
     proto.setOptions = function (options) {
-        ///<summary></summary>
-        this.circle.setOptions(options);
+        ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
+        this.polyline.setOptions(options);
     };
 
-    proto.setRadius = function (value) {
-        ///<summary>Sets the radius of this circle (in meters).</summary>
-        this.circle.setRadius(value);
+    proto.setPath = function (path) {
+        ///<summary>Sets the first path. See PolylineOptions for more details.</summary>
+        this.polyline.setPath(path);
     };
 
-})(Artem.Google.CircleBehavior.prototype);
+})(Velyo.Google.PolylineBehavior.prototype);
 
 // events
 (function (proto) {
@@ -184,14 +156,14 @@ Artem.Google.CircleBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        if (this.circle) {
+        if (this.polyline) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
                     if (!this.listeners[name]) {
                         if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
-                        this.listeners[name] = google.maps.event.addListener(this.circle, name, this.delegates[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.polyline, name, this.delegates[name]);
                     }
                 }
                 else if (this.listeners[name]) {
@@ -313,7 +285,7 @@ Artem.Google.CircleBehavior.prototype = {
         if (handler) handler(this, e);
     }
 
-})(Artem.Google.CircleBehavior.prototype);
+})(Velyo.Google.PolylineBehavior.prototype);
 
 // server events - entry points
 (function (behavior) {
@@ -378,6 +350,6 @@ Artem.Google.CircleBehavior.prototype = {
             { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "rightClick" });
     };
 
-})(Artem.Google.CircleBehavior);
+})(Velyo.Google.PolylineBehavior);
 
-Artem.Google.CircleBehavior.registerClass('Artem.Google.CircleBehavior', Sys.UI.Behavior);
+Velyo.Google.PolylineBehavior.registerClass('Velyo.Google.PolylineBehavior', Sys.UI.Behavior);

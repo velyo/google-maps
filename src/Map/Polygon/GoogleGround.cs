@@ -4,8 +4,8 @@ using System.Web.UI;
 using System.ComponentModel;
 using System.Web.Script.Serialization;
 
-[assembly: WebResource("Artem.Google.Polygon.GoogleGroundBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Polygon.GoogleGroundBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleGroundBehavior.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleGroundBehavior.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
@@ -105,9 +105,9 @@ namespace Velyo.Google.Map.UI
 
             string assembly = GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Polygon.GoogleGroundBehavior.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleGroundBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polygon.GoogleGroundBehavior.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleGroundBehavior.min.js", assembly);
 #endif
         }
 

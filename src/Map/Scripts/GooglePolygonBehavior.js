@@ -2,35 +2,42 @@
 ///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Velyo.Google");
 
-Artem.Google.PolylineBehavior = function (element) {
-    Artem.Google.PolylineBehavior.initializeBase(this, [element]);
+Velyo.Google.PolygonBehavior = function (element) {
+    Velyo.Google.PolygonBehavior.initializeBase(this, [element]);
 };
 
-Artem.Google.PolylineBehavior.prototype = {
+Velyo.Google.PolygonBehavior.prototype = {
     initialize: function () {
-        Artem.Google.PolylineBehavior.callBaseMethod(this, 'initialize');
+        Velyo.Google.PolygonBehavior.callBaseMethod(this, 'initialize');
         Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
-        Artem.Google.PolylineBehavior.callBaseMethod(this, 'dispose');
+        Velyo.Google.PolygonBehavior.callBaseMethod(this, 'dispose');
     }
 };
+Velyo.Google.PolygonBehavior.registerClass('Velyo.Google.PolygonBehavior', Sys.UI.Behavior);
 
 // members
 (function (proto) {
 
-    // fields
+    // fieds
 
     proto.map = null;
-    proto.polyline = null;
+    proto.polygon = null;
 
     // properties
 
     proto.get_clickable = function () { return this.clickable; };
     proto.set_clickable = function (value) { this.clickable = value; };
+
+    proto.get_fillColor = function () { return this.fillColor; };
+    proto.set_fillColor = function (value) { this.fillColor = value; };
+
+    proto.get_fillOpacity = function () { return this.fillOpacity; };
+    proto.set_fillOpacity = function (value) { this.fillOpacity = value; };
 
     proto.get_geodesic = function () { return this.geodesic; };
     proto.set_geodesic = function (value) { this.geodesic = value; };
@@ -38,8 +45,8 @@ Artem.Google.PolylineBehavior.prototype = {
     proto.get_name = function () { return this.name; };
     proto.set_name = function (value) { this.name = value; };
 
-    proto.get_path = function () { return this.path; };
-    proto.set_path = function (value) { this.path = value; };
+    proto.get_paths = function () { return this.paths; };
+    proto.set_paths = function (value) { this.paths = value; };
 
     proto.get_strokeColor = function () { return this.strokeColor; };
     proto.set_strokeColor = function (value) { this.strokeColor = value; };
@@ -62,8 +69,8 @@ Artem.Google.PolylineBehavior.prototype = {
     };
 
     proto._detach = function () {
-        if (this.polyline)
-            google.maps.event.clearInstanceListeners(this.polyline);
+        if (this.polygon)
+            google.maps.event.clearInstanceListeners(this.polygon);
     };
 
     proto.create = function () {
@@ -72,19 +79,21 @@ Artem.Google.PolylineBehavior.prototype = {
         if (control)
             this.map = control.map;
 
-        var points = Artem.Google.Convert.toLatLngArray(this.path);
+        var points = Velyo.Google.Convert.toLatLngArray(this.paths);
         var options = {
             clickable: this.clickable,
+            fillColor: this.fillColor,
+            fillOpacity: this.fillOpacity,
             geodesic: this.geodesic,
             map: this.map,
-            path: points,
+            paths: points,
             strokeColor: this.strokeColor,
             strokeOpacity: this.strokeOpacity,
             strokeWeight: this.strokeWeight,
             zIndex: this.zIndex
         };
 
-        this.polyline = new google.maps.Polyline(options);
+        this.polygon = new google.maps.Polygon(options);
         this.composeEvents();
     };
 
@@ -92,30 +101,40 @@ Artem.Google.PolylineBehavior.prototype = {
 
     proto.getMap = function () {
         ///<summary>Returns the map on which this poly is attached.</summary>
-        return this.polyline.getMap();
+        return this.polygon.getMap();
     };
 
     proto.getPath = function () {
-        ///<summary>Retrieves the first path.</summary>
-        return this.polyline.getPath();
+        ///<summary>Retrieves the first path.</summary>        
+        return this.polygon.getPath();
+    };
+
+    proto.getPaths = function () {
+        ///<summary>Retrieves the paths for this Polygon.</summary>
+        return this.polygon.getPaths()
     };
 
     proto.setMap = function (map) {
         ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        this.polyline.setMap(map);
+        this.polygon.setMap(map);
     };
 
     proto.setOptions = function (options) {
-        ///<summary>Renders this Polyline or Polygon on the specified map. If map is set to null, the Poly will be removed.</summary>
-        this.polyline.setOptions(options);
+        ///<summary></summary>
+        this.polygon.setOptions(options);
     };
 
     proto.setPath = function (path) {
         ///<summary>Sets the first path. See PolylineOptions for more details.</summary>
-        this.polyline.setPath(path);
+        this.polygon.setPath(path);
     };
 
-})(Artem.Google.PolylineBehavior.prototype);
+    proto.setPaths = function (paths) {
+        ///<summary>Sets the path for this Polygon.</summary>
+        this.polygon.setPaths(paths);
+    };
+
+})(Velyo.Google.PolygonBehavior.prototype);
 
 // events
 (function (proto) {
@@ -156,14 +175,14 @@ Artem.Google.PolylineBehavior.prototype = {
 
     proto.composeEvents = function () {
 
-        if (this.polyline) {
+        if (this.polygon) {
             var handler;
             for (var name in handlers) {
                 handler = this.get_events().getHandler(name);
                 if (handler) {
                     if (!this.listeners[name]) {
                         if (!this.delegates[name]) this.delegates[name] = Function.createDelegate(this, handlers[name]);
-                        this.listeners[name] = google.maps.event.addListener(this.polyline, name, this.delegates[name]);
+                        this.listeners[name] = google.maps.event.addListener(this.polygon, name, this.delegates[name]);
                     }
                 }
                 else if (this.listeners[name]) {
@@ -271,7 +290,7 @@ Artem.Google.PolylineBehavior.prototype = {
         if (handler) handler(this, e);
     }
 
-    // mouse up
+    // mouse right
     proto.add_rightClick = function (handler) {
         this.get_events().addHandler("rightclick", handler);
         this.composeEvents();
@@ -285,7 +304,7 @@ Artem.Google.PolylineBehavior.prototype = {
         if (handler) handler(this, e);
     }
 
-})(Artem.Google.PolylineBehavior.prototype);
+})(Velyo.Google.PolygonBehavior.prototype);
 
 // server events - entry points
 (function (behavior) {
@@ -350,6 +369,4 @@ Artem.Google.PolylineBehavior.prototype = {
             { lat: e.latLng.lat(), lng: e.latLng.lng(), name: "rightClick" });
     };
 
-})(Artem.Google.PolylineBehavior);
-
-Artem.Google.PolylineBehavior.registerClass('Artem.Google.PolylineBehavior', Sys.UI.Behavior);
+})(Velyo.Google.PolygonBehavior);

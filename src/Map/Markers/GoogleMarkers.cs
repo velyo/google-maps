@@ -7,8 +7,8 @@ using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 using System.Collections;
 
-[assembly: WebResource("Artem.Google.Markers.GoogleMarkersBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Markers.GoogleMarkersBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleMarkersBehavior.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleMarkersBehavior.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
@@ -686,9 +686,9 @@ namespace Velyo.Google.Map.UI
 
             string assembly = GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Markers.GoogleMarkersBehavior.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleMarkersBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Markers.GoogleMarkersBehavior.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleMarkersBehavior.min.js", assembly);
 #endif
         }
         #endregion

@@ -5,8 +5,8 @@ using System.Drawing;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 
-[assembly: WebResource("Artem.Google.Polygon.GoogleCircleBehavior.js", "text/javascript")]
-[assembly: WebResource("Artem.Google.Polygon.GoogleCircleBehavior.min.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleCircleBehavior.js", "text/javascript")]
+[assembly: WebResource("Velyo.Google.Map.Scripts.GoogleCircleBehavior.min.js", "text/javascript")]
 
 namespace Velyo.Google.Map.UI
 {
@@ -342,9 +342,9 @@ namespace Velyo.Google.Map.UI
 
             string assembly = GetType().Assembly.FullName;
 #if DEBUG
-            yield return new ScriptReference("Artem.Google.Polygon.GoogleCircleBehavior.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleCircleBehavior.js", assembly);
 #else
-            yield return new ScriptReference("Artem.Google.Polygon.GoogleCircleBehavior.min.js", assembly);
+            yield return new ScriptReference("Velyo.Google.Map.Scripts.GoogleCircleBehavior.min.js", assembly);
 #endif
         }
 

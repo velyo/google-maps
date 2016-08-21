@@ -44,9 +44,9 @@
     <div id="bar">
         <div class="wrap">
             <a class="step" href="http://googlemap.codeplex.com/releases" target="_blank">1<span>download</span></a>
-            <a class="step" href="http://googlemap.codeplex.com/wikipage?title=Installation&referringTitle=Documentation"
-                target="_blank">2 <span>setup</span></a> <a class="step" href="http://googlemap.codeplex.com/documentation"
-                    target="_blank">3<span>get started</span></a>
+            <a class="step" href="http://googlemap.codeplex.com/wikipage?title=Installation&referringTitle=Documentation" target="_blank">2 <span>setup</span></a>
+            <a class="step" href="http://googlemap.codeplex.com/documentation" target="_blank">3<span>get started</span></a>
+            <a class="step" href="./docs" target="_blank">4<span>api docs</span></a>
         </div>
     </div>
     <div id="content" class="container_12">
@@ -64,22 +64,20 @@
                 <asp:ContentPlaceHolder ID="side" runat="server">
                 </asp:ContentPlaceHolder>
                 <div style="margin-top: 20px;">
-                    <a href="http://lakequincy.com?" title="Advertise on this site through Lake Quincy Media"
-                        target="_blank">
-                        Advertise on this site through Lake Quincy Media</a>
+                    <%--TODO--%>
                 </div>
             </div>
         </div>
     </div>
     <div id="footer">
         <p class="right">
-            Design by <a href="http://www.solucija.com/">Luka Cvrk</a> &amp; by <a href="http://960.gs/">
+            Design by <a href="http://www.solucija.com/" target="_blank">Luka Cvrk</a> &amp; by <a href="http://960.gs/" target="_blank">
                 Nathan Smith - 960 Grid System</a>
         </p>
         <p>
             &copy; Copyright
             <%= DateTime.Now.Year %>
-            <a href="http://artembg.com/">Velio Ivanov</a>
+            <a href="http://velyo.net/" target="_blank">Velio Ivanov</a>
         </p>
     </div>
     </form>

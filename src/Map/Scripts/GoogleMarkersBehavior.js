@@ -2,20 +2,20 @@
 ///<reference path="..\Map\GoogleMap.js"/>
 ///<reference path="http://maps.googleapis.com/maps/api/js?sensor=false"/>
 
-Type.registerNamespace("Artem.Google");
+Type.registerNamespace("Velyo.Google");
 
-Artem.Google.MarkersBehavior = function (element) {
-    Artem.Google.MarkersBehavior.initializeBase(this, [element]);
+Velyo.Google.MarkersBehavior = function (element) {
+    Velyo.Google.MarkersBehavior.initializeBase(this, [element]);
 };
 
-Artem.Google.MarkersBehavior.prototype = {
+Velyo.Google.MarkersBehavior.prototype = {
     initialize: function () {
-        Artem.Google.MarkersBehavior.callBaseMethod(this, 'initialize');
+        Velyo.Google.MarkersBehavior.callBaseMethod(this, 'initialize');
         Artem.Worker.queue(Function.createDelegate(this, this._attach));
     },
     dispose: function () {
         this._detach();
-        Artem.Google.MarkersBehavior.callBaseMethod(this, 'dispose');
+        Velyo.Google.MarkersBehavior.callBaseMethod(this, 'dispose');
     }
 };
 
@@ -72,7 +72,7 @@ Artem.Google.MarkersBehavior.prototype = {
             }
 
             for (var i = 0; i < this.markerOptions.length; i++) {
-                var marker = Artem.Google.merge(this.groupOptions, this.markerOptions[i]);
+                var marker = Velyo.Google.merge(this.groupOptions, this.markerOptions[i]);
                 marker.map = this.map;
                 marker.index = i;
 
@@ -87,7 +87,7 @@ Artem.Google.MarkersBehavior.prototype = {
                         options.language = control.get_language();
                         options.region = control.get_region();
                     }
-                    Artem.Google.Geocoding.getLocation(options, delegate);
+                    Velyo.Google.Geocoding.getLocation(options, delegate);
                 }
             }
         }
@@ -101,7 +101,7 @@ Artem.Google.MarkersBehavior.prototype = {
 
             gmarker = new google.maps.Marker(marker);
             if (marker.info) {
-                ginfo = new google.maps.InfoWindow(Artem.Google.merge({ content: marker.info }, this.infoOptions));
+                ginfo = new google.maps.InfoWindow(Velyo.Google.merge({ content: marker.info }, this.infoOptions));
                 marker.info = ginfo;
                 google.maps.event.addListener(gmarker, 'click',
                         Function.createDelegate(this,
@@ -129,7 +129,7 @@ Artem.Google.MarkersBehavior.prototype = {
     // TODO GoogleMaps API
 
 
-})(Artem.Google.MarkersBehavior.prototype);
+})(Velyo.Google.MarkersBehavior.prototype);
 
 // events
 (function (proto) {
@@ -551,7 +551,7 @@ Artem.Google.MarkersBehavior.prototype = {
         if (handler) handler(this, { index: index });
     }
 
-})(Artem.Google.MarkersBehavior.prototype);
+})(Velyo.Google.MarkersBehavior.prototype);
 
 // server events - entry points
 (function (behavior) {
@@ -673,6 +673,6 @@ Artem.Google.MarkersBehavior.prototype = {
         raiseServerEvent("zindexChanged", sender, e);
     };
 
-})(Artem.Google.MarkersBehavior);
+})(Velyo.Google.MarkersBehavior);
 
-Artem.Google.MarkersBehavior.registerClass('Artem.Google.MarkersBehavior', Sys.UI.Behavior);
+Velyo.Google.MarkersBehavior.registerClass('Velyo.Google.MarkersBehavior', Sys.UI.Behavior);

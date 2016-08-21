@@ -30,7 +30,7 @@
       <HelpTOCNode Title="TryParsePoint Method (value, lat, lng)" Url="html/45e9abc0-bddc-5fed-d129-639a47b8f74c.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="92764656-b719-4b3e-b50f-06207a6700b1" Title="Artem.Google.UI Namespace" Url="html/d4558c97-af2f-9fa8-74d3-b8e3d1f52063.htm">
+  <HelpTOCNode Id="92764656-b719-4b3e-b50f-06207a6700b1" Title="Velyo.Google.Map.UI Namespace" Url="html/d4558c97-af2f-9fa8-74d3-b8e3d1f52063.htm">
     <HelpTOCNode Id="ea0f3ba3-f038-4f83-9bb1-8c1aeffca969" Title="Bounds Class" Url="html/ee564cc2-e252-7370-0864-66447f06d2af.htm">
       <HelpTOCNode Title="Bounds Constructor " Url="html/5e8994af-4bb8-15a7-bf16-f18c372a9457.htm" />
       <HelpTOCNode Title="FromScriptData Method (scriptObject)" Url="html/140f8059-b0ec-e178-c016-fb1bd9c5b81a.htm" />

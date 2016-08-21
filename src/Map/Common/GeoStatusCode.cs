@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Artem.Google.Map.UI
+namespace Velyo.Google.Map.UI
 {
     /// <summary>
     /// Numeric equivalents for each symbolic constant are specified next to the equal sign.

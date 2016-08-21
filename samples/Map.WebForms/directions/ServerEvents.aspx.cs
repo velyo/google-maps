@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Artem.Google.UI;
+using Velyo.Google.Map.UI;
 using Artem.GoogleMap.WebSite.UI;
 
 namespace Artem.GoogleMap.WebSite.Directions {
