@@ -6,8 +6,8 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97B43B42-C396-4767-92EA-94111BB30286}"
 	ProjectSection(SolutionItems) = preProject
 		GoogleMapKey.snk = GoogleMapKey.snk
-		D:\Projects\my\google-map\LICENSE = D:\Projects\my\google-map\LICENSE
-		D:\Projects\my\google-map\README.md = D:\Projects\my\google-map\README.md
+		..\google-map\LICENSE = ..\google-map\LICENSE
+		..\google-map\README.md = ..\google-map\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{509592F4-7812-4FFA-A250-3E0E372BBBEB}"
@@ -22,26 +22,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{B915
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geocoding.Tests", "test\Geocoding.Tests\Geocoding.Tests.csproj", "{BE6699E0-260C-49E3-9959-6246D40DBFBE}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.WebForms", "D:\Projects\my\google-map\samples\Map.WebForms\", "{49695930-3339-49D0-8DAF-E5E1CEC33EBB}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Map.WebForms(1)", "samples\Map.WebForms\", "{86583AA6-F6CE-488C-BD49-B4C6E8167FD8}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{0660ea3d-b58b-4858-9822-9a6459a4001c}|Velyo.Google.Map.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_62110"
-		Debug.AspNetCompiler.PhysicalPath = "D:\Projects\my\google-map\samples\Map.WebForms\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62110\"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_55159"
+		Debug.AspNetCompiler.PhysicalPath = "samples\Map.WebForms\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55159\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_62110"
-		Release.AspNetCompiler.PhysicalPath = "D:\Projects\my\google-map\samples\Map.WebForms\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62110\"
+		Release.AspNetCompiler.VirtualPath = "/localhost_55159"
+		Release.AspNetCompiler.PhysicalPath = "samples\Map.WebForms\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55159\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "62110"
-		SlnRelativePath = "D:\Projects\my\google-map\samples\Map.WebForms\"
+		VWDPort = "55159"
 	EndProjectSection
 EndProject
 Global
@@ -66,17 +64,17 @@ Global
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49695930-3339-49D0-8DAF-E5E1CEC33EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49695930-3339-49D0-8DAF-E5E1CEC33EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49695930-3339-49D0-8DAF-E5E1CEC33EBB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{49695930-3339-49D0-8DAF-E5E1CEC33EBB}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{86583AA6-F6CE-488C-BD49-B4C6E8167FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86583AA6-F6CE-488C-BD49-B4C6E8167FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86583AA6-F6CE-488C-BD49-B4C6E8167FD8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{86583AA6-F6CE-488C-BD49-B4C6E8167FD8}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BE6699E0-260C-49E3-9959-6246D40DBFBE} = {509592F4-7812-4FFA-A250-3E0E372BBBEB}
-		{49695930-3339-49D0-8DAF-E5E1CEC33EBB} = {B91581E2-AE84-49BC-969F-70E06BE29B39}
+		{86583AA6-F6CE-488C-BD49-B4C6E8167FD8} = {B91581E2-AE84-49BC-969F-70E06BE29B39}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = ArtemGoogle.vsmdi

@@ -1,5 +1,8 @@
 ﻿namespace Velyo.Google.Geocoding
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class JsonGeoData
     {
         /// <summary>

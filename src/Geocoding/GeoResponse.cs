@@ -13,7 +13,7 @@ namespace Velyo.Google.Geocoding
             Status = json.status;
             List<GeoResult> results = new List<GeoResult>();
 
-            if (Status == GeoStatus.OK)
+            if (Status == GeoStatus.Ok)
             {
                 foreach (var r in json.results)
                 {

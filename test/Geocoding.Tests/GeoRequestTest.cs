@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Velyo.Google.Geocoding.Tests
 {
@@ -28,19 +29,35 @@ namespace Velyo.Google.Geocoding.Tests
             }
         }
 
-        
+        [TestMethod]
+        public void GetResponse_ReturnResult()
+        {
+            GeoRequest request = new GeoRequest("plovdiv bulgaria");
+            GeoResponse response = request.GetResponse();
+
+            Assert.IsNotNull(response);
+        }
+
+        public void GetResponse_ReturnResoltAsync()
+        {
+            //var request = new GeoRequest("plovdiv bulgaria");
+            //AsyncCallback callback;
+            //IAsyncResult result = request.BeginGetResponse(callback, null);
+            //callback.EndInvoke(result);
+            //result.AsyncWaitHandle.
+        }
+
         /// <summary>
         /// Gets the response_ address.
         /// </summary>
         [TestMethod]
         public void GetResponse_Address()
         {
-
             GeoRequest request = new GeoRequest("plovdiv bulgaria");
             GeoResponse response = request.GetResponse();
 
             GeoLocation actual = response.Results[0].Geometry.Location;
-            GeoLocation expected = new GeoLocation(42.1438409, 24.7495615);
+            GeoLocation expected = new GeoLocation(42.1354079, 24.7452904);
 
             Assert.AreEqual(expected, actual);
         }
@@ -51,12 +68,11 @@ namespace Velyo.Google.Geocoding.Tests
         [TestMethod]
         public void GetResponse_Location()
         {
-
-            GeoRequest request = new GeoRequest(42.1438409, 24.7495615);
+            GeoRequest request = new GeoRequest(42.1354079, 24.7452904);
             GeoResponse response = request.GetResponse();
 
             string actual = response.Results[0].FormattedAddress;
-            string expected = "ul. Gen. Gurko 13, Plovdiv, Bulgaria";
+            string expected = @"bul. ""Hristo Botev"" 56, 4000 Plovdiv, Bulgaria";
 
             Assert.AreEqual(expected, actual);
         }
@@ -67,10 +83,11 @@ namespace Velyo.Google.Geocoding.Tests
         [TestMethod]
         public void GetResponse_Status_OK()
         {
-
             GeoRequest target = new GeoRequest("plovdiv bulgaria");
             GeoResponse actual = target.GetResponse();
-            GeoStatus expected = GeoStatus.OK;
+
+            GeoStatus expected = GeoStatus.Ok;
+
             Assert.AreEqual(expected, actual.Status);
         }
 
@@ -78,12 +95,13 @@ namespace Velyo.Google.Geocoding.Tests
         /// Test GeoResponse with status <code>ZERO_RESULTS</code>.
         /// </summary>
         [TestMethod]
-        public void GetResponse_Status_ZERO_RESULTS()
+        public void GetResponse_Status_BadRequest()
         {
-
             GeoRequest target = new GeoRequest();
+
             GeoStatus actual = target.GetResponse().Status;
-            GeoStatus expected = GeoStatus.ZERO_RESULTS;
+            GeoStatus expected = GeoStatus.BadRequest;
+
             Assert.AreEqual(expected, actual);
         }
 
@@ -91,19 +109,17 @@ namespace Velyo.Google.Geocoding.Tests
         /// Gets the response_ with_ street_ address.
         /// </summary>
         [TestMethod]
-        public void GetResponse_With_Street_Address()
+        public void GetResponse_With_StreetAddress()
         {
-
             GeoRequest request = new GeoRequest("Alice Springs, Northern Territory, 0870, Australia﻿﻿﻿﻿");
             GeoResponse response = request.GetResponse();
 
-            Assert.AreEqual(GeoStatus.OK, response.Status);
+            Assert.AreEqual(GeoStatus.Ok, response.Status);
 
             request.Address = "4 Cassia Ct, Alice Springs, Northern Territory, 0870, Australia";
             response = request.GetResponse();
 
-            Assert.AreEqual(GeoStatus.OK, response.Status);
-
+            Assert.AreEqual(GeoStatus.Ok, response.Status);
         }
     }
 }

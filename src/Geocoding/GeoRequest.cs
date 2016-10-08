@@ -18,7 +18,7 @@ namespace Velyo.Google.Geocoding
         /// <param name="address">The address.</param>
         public GeoRequest(string address)
         {
-            this.Address = address;
+            Address = address;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Velyo.Google.Geocoding
         /// <param name="location">The location.</param>
         public GeoRequest(GeoLocation location)
         {
-            this.Location = location;
+            Location = location;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Velyo.Google.Geocoding
         /// <param name="longitude">The longitude.</param>
         public GeoRequest(double latitude, double longitude)
         {
-            this.Location = new GeoLocation(latitude, longitude);
+            Location = new GeoLocation(latitude, longitude);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Velyo.Google.Geocoding
         /// </summary>
         /// <param name="address">The address.</param>
         /// <returns></returns>
-        public static GeoRequest Create(string address)
+        static public GeoRequest Create(string address)
         {
             return new GeoRequest(address);
         }
@@ -96,7 +96,7 @@ namespace Velyo.Google.Geocoding
         /// <param name="latitude">The latitude.</param>
         /// <param name="longitude">The longitude.</param>
         /// <returns></returns>
-        public static GeoRequest CreateReverse(double latitude, double longitude)
+        static public GeoRequest CreateReverse(double latitude, double longitude)
         {
             return new GeoRequest(latitude, longitude);
         }
@@ -106,7 +106,7 @@ namespace Velyo.Google.Geocoding
         /// </summary>
         /// <param name="location">The location.</param>
         /// <returns></returns>
-        public static GeoRequest CreateReverse(GeoLocation location)
+        static public GeoRequest CreateReverse(GeoLocation location)
         {
             return new GeoRequest(location);
         }
@@ -119,7 +119,10 @@ namespace Velyo.Google.Geocoding
         /// <returns></returns>
         public IAsyncResult BeginGetResponse(AsyncCallback callback, object state)
         {
-            throw new NotImplementedException();
+            var url = BuildRequestUrl();
+            var request = WebRequest.Create(url);
+
+            return request.BeginGetResponse(callback, request);
         }
 
         /// <summary>
@@ -129,44 +132,19 @@ namespace Velyo.Google.Geocoding
         /// <returns></returns>
         public GeoResponse EndGetResponse(IAsyncResult result)
         {
-            throw new NotImplementedException();
-        }
+            var request = (WebRequest)result.AsyncState;
 
-        /// <summary>
-        /// Gets the raw object.
-        /// </summary>
-        /// <returns></returns>
-        protected JsonGeoData GetJsonObject()
-        {
-
-            StringBuilder url = new StringBuilder(GeoRequest.RequestUrl);
-
-            if (this.Location != null)
+            try
             {
-                url.AppendFormat("latlng={0}", this.Location.ToString());
-            }
-            else
-            {
-                url.AppendFormat("address={0}", HttpUtility.UrlEncode(this.Address));
-            }
-            url.AppendFormat("&sensor={0}", this.IsSensor.ToString().ToLower());
-            if (!string.IsNullOrEmpty(this.Language))
-                url.AppendFormat("&language={0}", HttpUtility.UrlEncode(this.Language));
-            if (!string.IsNullOrEmpty(this.Region))
-                url.AppendFormat("&region={0}", HttpUtility.UrlEncode(this.Region));
-
-            WebRequest request = WebRequest.Create(url.ToString());
-            string responseData;
-            using (WebResponse response = request.GetResponse())
-            {
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                using (var response = request.EndGetResponse(result))
                 {
-                    responseData = reader.ReadToEnd();
+                    return BuildResponse(response);
                 }
             }
-
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            return serializer.Deserialize<JsonGeoData>(responseData);
+            catch (WebException)
+            {
+                return new GeoResponse(new JsonGeoData { status = GeoStatus.BadRequest });
+            }
         }
 
         /// <summary>
@@ -175,7 +153,74 @@ namespace Velyo.Google.Geocoding
         /// <returns></returns>
         public GeoResponse GetResponse()
         {
-            return new GeoResponse(this.GetJsonObject());
+            var url = BuildRequestUrl();
+            var request = WebRequest.Create(url);
+
+            try
+            {
+                using (var response = request.GetResponse())
+                {
+                    return BuildResponse(response);
+                }
+            }
+            catch (WebException)
+            {
+                return new GeoResponse(new JsonGeoData { status = GeoStatus.BadRequest });
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private string BuildRequestUrl()
+        {
+            var buffer = new StringBuilder(RequestUrl);
+
+            if (Location != null)
+            {
+                buffer.AppendFormat("latlng={0}", Location.ToString());
+            }
+            else if (!string.IsNullOrEmpty(Address))
+            {
+                buffer.AppendFormat("address={0}", HttpUtility.UrlEncode(Address));
+            }
+
+            buffer.AppendFormat("&sensor={0}", IsSensor.ToString().ToLower());
+
+            if (!string.IsNullOrEmpty(Language))
+            {
+                buffer.AppendFormat("&language={0}", HttpUtility.UrlEncode(Language));
+            }
+            if (!string.IsNullOrEmpty(Region))
+            {
+                buffer.AppendFormat("&region={0}", HttpUtility.UrlEncode(Region));
+            }
+
+            return buffer.ToString();
+        }
+
+        private GeoResponse BuildResponse(WebResponse response)
+        {
+            JsonGeoData jsonData = null;
+            string responseData = null;
+
+            using (var reader = new StreamReader(response.GetResponseStream()))
+            {
+                responseData = reader.ReadToEnd();
+            }
+
+            if (responseData != null)
+            {
+                var serializer = new JavaScriptSerializer();
+                jsonData = serializer.Deserialize<JsonGeoData>(responseData);
+            }
+            else
+            {
+                jsonData = new JsonGeoData { status = GeoStatus.ZeroResults };
+            }
+
+            return new GeoResponse(jsonData);
         }
     }
 }
