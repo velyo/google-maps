@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97B43B42-C396-4767-92EA-94111BB30286}"
+	ProjectSection(SolutionItems) = preProject
+		GoogleMapKey.snk = GoogleMapKey.snk
+		M:\google-maps\LICENSE = M:\google-maps\LICENSE
+		M:\google-maps\README.md = M:\google-maps\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{509592F4-7812-4FFA-A250-3E0E372BBBEB}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Sample.WebForms", "test\Sample.WebForms\", "{619DD120-9DA0-43FD-A195-7DE5A1626457}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{0660ea3d-b58b-4858-9822-9a6459a4001c}|Velyo.Google.Maps.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62661"
+		Debug.AspNetCompiler.PhysicalPath = "test\Sample.WebForms\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62661\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62661"
+		Release.AspNetCompiler.PhysicalPath = "test\Sample.WebForms\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62661\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62661"
+		SlnRelativePath = "test\Sample.WebForms\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maps", "src\Maps\Maps.csproj", "{0660EA3D-B58B-4858-9822-9A6459A4001C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{619DD120-9DA0-43FD-A195-7DE5A1626457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{619DD120-9DA0-43FD-A195-7DE5A1626457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{619DD120-9DA0-43FD-A195-7DE5A1626457}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{619DD120-9DA0-43FD-A195-7DE5A1626457}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0660EA3D-B58B-4858-9822-9A6459A4001C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{619DD120-9DA0-43FD-A195-7DE5A1626457} = {509592F4-7812-4FFA-A250-3E0E372BBBEB}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = ArtemGoogle.vsmdi
+	EndGlobalSection
+EndGlobal

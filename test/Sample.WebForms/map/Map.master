@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/GoogleMap.master" %>
+
+<asp:Content ContentPlaceHolderID="main" runat="server">
+    <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+
+<asp:Content ID="sideContent" ContentPlaceHolderID="side" runat="server">
+    <h3>
+        Maps
+    </h3>
+    <ul>
+        <li><a href="/map/default.aspx">&raquo; Default</a></li>
+        <li><a href="/map/clientevents.aspx">&raquo; Client Events</a></li>
+        <li><a href="/map/serverevents.aspx">&raquo; Server Events</a></li>
+        <li><a href="/map/databound.aspx">&raquo; Data Bound</a></li>
+        <li><a href="/map/intabpanel.aspx">&raquo; Inside TabPanel</a></li>
+        <li><a href="/map/inupdatepanel.aspx">&raquo; Inside UpdatePanel</a></li>
+        <li><a href="/map/withmenu.aspx">&raquo; With Menu</a></li>
+        <li><a href="/map/searchbox.aspx">&raquo; With SearchBox</a></li>
+        <li><a href="/map/streetview.aspx">&raquo; Street View</a></li>
+    </ul>
+</asp:Content>

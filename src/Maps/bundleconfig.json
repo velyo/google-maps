@@ -1,0 +1,56 @@
+[
+    {
+        "outputFileName": "Directions/GoogleDirectionsBehavior.min.js",
+        "inputFiles": [
+            "Directions/GoogleDirectionsBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Extenders/MarkersExtenderBehavior.min.js",
+        "inputFiles": [
+            "Extenders/MarkersExtenderBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Markers/GoogleMarkersBehavior.min.js",
+        "inputFiles": [
+            "Markers/GoogleMarkersBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Polygon/GoogleCircleBehavior.min.js",
+        "inputFiles": [
+            "Polygon/GoogleCircleBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Polygon/GoogleGroundBehavior.min.js",
+        "inputFiles": [
+            "Polygon/GoogleGroundBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Polygon/GooglePolygonBehavior.min.js",
+        "inputFiles": [
+            "Polygon/GooglePolygonBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Polygon/GoogleRectangleBehavior.min.js",
+        "inputFiles": [
+            "Polygon/GoogleRectangleBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "Polyline/GooglePolylineBehavior.min.js",
+        "inputFiles": [
+            "Polyline/GooglePolylineBehavior.js"
+        ]
+    },
+    {
+        "outputFileName": "StreetView/GoogleStreetViewPanoramaBehavior.min.js",
+        "inputFiles": [
+            "StreetView/GoogleStreetViewPanoramaBehavior.js"
+        ]
+    }
+]
