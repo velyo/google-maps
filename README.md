@@ -1,7 +1,3 @@
 # Google Map Control
 
-[![Build status](https://ci.appveyor.com/api/projects/status/np0krf3jt9g62fbi?svg=true)](https://ci.appveyor.com/project/velyo/google-map)
-[![Join the chat at https://gitter.im/velyo/google-map](https://badges.gitter.im/velyo/google-map.svg)](https://gitter.im/velyo/google-map?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Stories in Ready](https://badge.waffle.io/velyo/google-map.png?label=ready&title=Ready)](https://waffle.io/velyo/google-map)
-
 ASP.NET WebForms controls wraps Google Maps API
